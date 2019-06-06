@@ -59,14 +59,14 @@ module.exports = {
       },
       {
         rel: 'preload',
-        href: '/fonts/montserrat-v13-latin-600.woff',
+        href: '/fonts/montserrat-v13-latin-700.woff',
         type: 'font/woff',
         as: 'font',
         crossorigin: 'crossorigin'
       },
       {
         rel: 'preload',
-        href: '/fonts/montserrat-v13-latin-600.woff2',
+        href: '/fonts/montserrat-v13-latin-700.woff2',
         type: 'font/woff2',
         as: 'font',
         crossorigin: 'crossorigin'
