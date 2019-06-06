@@ -144,6 +144,8 @@ module.exports = {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+    baseURL: process.env.DIRECTUS_URL,
+    credentials: true
   },
 
   /*
