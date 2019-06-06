@@ -116,7 +116,6 @@ module.exports = {
         // Specify relative path to the dist directory and its content type
         resources: [
           { path: '**/*.js', as: 'script' },
-          { path: '**/*.json', as: 'script' },
           // { path: 'images/hero.jpg', as: 'image' },
           { path: 'fonts/*.woff2', as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }
           // { path: 'images/bg-image-narrow.png', as: 'image', media: '(max-width: 600px)', },
