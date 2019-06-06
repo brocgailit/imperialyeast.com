@@ -47,9 +47,7 @@ export default {
     },
     carousel() {
       // TODO: filter this to images
-      return this.attachments
-        .filter(a => a.type.startsWith('image'))
-        .map(a => a.data)
+      return this.attachments.filter(a => a.type.startsWith('image'))
     }
   },
   mounted() {

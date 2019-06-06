@@ -2,7 +2,7 @@
   <div class="carousel">
     <div v-for="(slide, idx) of slides" :key="idx" class="carousel-slide">
       <transition name="fade-in-out">
-        <img v-show="active === idx" :src="slide.url" :alt="slide.title" />
+        <img v-show="active === idx" :src="slide.data.url" :alt="slide.title" />
       </transition>
     </div>
     <div class="carousel-content">
