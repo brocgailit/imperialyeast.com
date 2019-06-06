@@ -1,7 +1,0 @@
-{
-    "terminal.integrated.env.linux": {
-        "FA_NPM_TOKEN": "4F917F21-F116-4D68-93D2-E4B62C951A20",
-        "DIRECTUS_URL": "http://206.189.165.56/_/"
-    },
-    "editor.tabSize": 2
-}
