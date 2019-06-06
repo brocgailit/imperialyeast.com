@@ -31,6 +31,20 @@ module.exports = {
       },
       {
         rel: 'preload',
+        href: '/fonts/oswald-v23-latin-500.woff',
+        type: 'font/woff',
+        as: 'font',
+        crossorigin: 'crossorigin'
+      },
+      {
+        rel: 'preload',
+        href: '/fonts/oswald-v23-latin-500.woff2',
+        type: 'font/woff2',
+        as: 'font',
+        crossorigin: 'crossorigin'
+      },
+      {
+        rel: 'preload',
         href: '/fonts/montserrat-v13-latin-regular.woff',
         type: 'font/woff',
         as: 'font',

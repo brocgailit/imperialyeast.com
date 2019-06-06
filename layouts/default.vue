@@ -7,7 +7,9 @@
       }}</b-button>
     </div>
     <Navbar />
-    <nuxt />
+    <main>
+      <nuxt />
+    </main>
     <PageFooter />
     <a class="scroll-to-top">
       <fa :icon="['fal', 'arrow-up']" size="2x" />
