@@ -30,7 +30,7 @@ export default {
 
 <style lang="scss">
 .nav-logo {
-  width: 151px;
+  width: 160px;
   margin: $size-6 auto;
 }
 .global-nav {
