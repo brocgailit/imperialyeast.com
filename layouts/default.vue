@@ -1,10 +1,15 @@
 <template>
   <div>
     <div v-if="notification" class="notification">
-      {{ notification.text }}
-      <b-button v-if="notification.action" type="is-danger" size="is-small">{{
-        notification.action.label
-      }}</b-button>
+      <div v-html="notification.message" />
+      <nuxt-link
+        v-for="action of notification.actions"
+        :key="action.id"
+        class="button is-danger is-small"
+        :to="action.path"
+      >
+        {{ action.label }}
+      </nuxt-link>
     </div>
     <Navbar />
     <main>
@@ -18,6 +23,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import Navbar from '~/components/Navbar.vue'
 import PageFooter from '~/components/PageFooter.vue'
 export default {
@@ -25,16 +31,10 @@ export default {
     Navbar,
     PageFooter
   },
-  data() {
-    return {
-      notification: {
-        text:
-          'COMMERCIAL PITCHES: A38, A07, G03 and L13 IN-STOCK OR YOUR ORDER SHIPS FREE!',
-        action: {
-          label: 'Learn More'
-        }
-      }
-    }
+  computed: {
+    ...mapState({
+      notification: state => state.notifications[0]
+    })
   }
 }
 </script>
@@ -53,7 +53,7 @@ export default {
   padding: $size-7;
   position: sticky;
   top: 0;
-  button {
+  .button {
     margin: 0 $size-7;
   }
 }
