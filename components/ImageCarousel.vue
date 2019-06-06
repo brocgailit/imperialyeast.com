@@ -2,7 +2,13 @@
   <div class="carousel">
     <div v-for="(slide, idx) of slides" :key="idx" class="carousel-slide">
       <transition name="fade-in-out">
-        <img v-show="active === idx" :src="slide.data.url" :alt="slide.title" />
+        <picture v-show="active === idx">
+          <source :srcset="slide | srcset" sizes="100vw" />
+          <img
+            :src="slide.data.thumbnails.find(t => t.width === 375).url"
+            :alt="slide.title"
+          />
+        </picture>
       </transition>
     </div>
     <div class="carousel-content">
@@ -15,6 +21,13 @@
 import { mapState } from 'vuex'
 
 export default {
+  filters: {
+    srcset(image) {
+      return [375, 1024, 1280, 1920]
+        .map(w => image.data.thumbnails.find(t => t.width === w).url + ` ${w}w`)
+        .join(',')
+    }
+  },
   props: {
     slides: {
       type: Array,
