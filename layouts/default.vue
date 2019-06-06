@@ -1,77 +1,77 @@
 <template>
   <div>
-    <!-- <Navbar /> -->
-    <b-button>Click Me</b-button>
+    <div v-if="notification" class="notification">
+      {{ notification.text }}
+      <b-button v-if="notification.action" type="is-danger" size="is-small">{{
+        notification.action.label
+      }}</b-button>
+    </div>
+    <Navbar />
     <nuxt />
-    <!-- <PageFooter /> -->
+    <PageFooter />
+    <a class="scroll-to-top">
+      <fa :icon="['fal', 'arrow-up']" size="2x" />
+    </a>
   </div>
 </template>
 
+<script>
+import Navbar from '~/components/Navbar.vue'
+import PageFooter from '~/components/PageFooter.vue'
+export default {
+  components: {
+    Navbar,
+    PageFooter
+  },
+  data() {
+    return {
+      notification: {
+        text:
+          'COMMERCIAL PITCHES: A38, A07, G03 and L13 IN-STOCK OR YOUR ORDER SHIPS FREE!',
+        action: {
+          label: 'Learn More'
+        }
+      }
+    }
+  }
+}
+</script>
+
 <style lang="scss">
-html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
+.notification {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background-color: $black;
+  width: 100%;
+  text-align: center;
+  color: $white;
+  font-weight: bold;
+  padding: $size-7;
+  position: sticky;
+  top: 0;
+  button {
+    margin: 0 $size-7;
+  }
 }
 
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  margin: 0;
+.scroll-to-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: $size-1;
+  right: $size-5;
+  border: 3px solid $light;
+  border-radius: 100%;
+  width: 65px;
+  height: 65px;
+  color: $light;
+  transition: 150ms;
+  &:hover {
+    color: $grey;
+    background-color: $light;
+  }
 }
-
-// Import Bulma's core
-@import '~bulma/sass/utilities/_all';
-
-$primary: #a78329;
-
-$colors: (
-  'white': (
-    $white,
-    $black
-  ),
-  'black': (
-    $black,
-    $white
-  ),
-  'light': (
-    $light,
-    $light-invert
-  ),
-  'dark': (
-    $dark,
-    $dark-invert
-  ),
-  'primary': (
-    $primary,
-    $primary-invert
-  ),
-  'info': (
-    $info,
-    $info-invert
-  ),
-  'success': (
-    $success,
-    $success-invert
-  ),
-  'warning': (
-    $warning,
-    $warning-invert
-  ),
-  'danger': (
-    $danger,
-    $danger-invert
-  )
-);
-
-// Import Bulma and Buefy styles
-@import '~bulma';
-@import '~buefy/src/scss/buefy';
 </style>
