@@ -1,7 +1,5 @@
 <template>
   <div>
-    <h1>Pitches for Commercial and Homebrewing</h1>
-    <h2>Organic Yeast Grown in Portland, Oregon</h2>
     <component
       :is="DYNAMIC_COMPONENTS.find(c => c.name === layout.type).ref"
       v-for="layout of page.layouts"
@@ -24,9 +22,7 @@ export default {
     const fields = [
       '*.*',
       'layouts.*.*',
-      'layouts.attachments.directus_files_id.title',
-      'layouts.attachments.directus_files_id.type',
-      'layouts.attachments.directus_files_id.data.*.*'
+      'layouts.attachments.directus_files_id.*'
     ]
     const page = await $axios
       .$get(`items/pages?single=1&slug=${slug}&fields=${fields.join(',')}`)
