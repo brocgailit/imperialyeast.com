@@ -31,10 +31,11 @@ export default {
 <style lang="scss">
 .nav-logo {
   width: 160px;
-  margin: $size-6 auto;
+  margin: $size-5 auto;
 }
 .global-nav {
   text-align: center;
+  margin-bottom: $size-5;
   ul {
     display: flex;
     justify-content: center;
