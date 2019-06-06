@@ -1,19 +1,13 @@
 <template>
-  <section class="container">
-    <div>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green"
-          >Documentation</a
-        >
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-          >GitHub</a
-        >
-      </div>
-    </div>
-  </section>
+  <div>
+    <h1>Pitches for Commercial and Homebrewing</h1>
+    <h2>Organic Yeast Grown in Portland, Oregon</h2>
+    <section class="section">
+      <p>
+        We pack 200 billion cells into every pouch!
+      </p>
+    </section>
+  </div>
 </template>
 
 <script>
