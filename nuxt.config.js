@@ -109,16 +109,6 @@ module.exports = {
           }
         ]
       }
-    ],
-    [
-      'nuxt-netlify-http2-server-push',
-      {
-        // Specify relative path to the dist directory and its content type
-        resources: [
-          { path: '**/*.js', as: 'script' },
-          { path: '**/*.json', as: 'script' }
-        ]
-      }
     ]
   ],
 
