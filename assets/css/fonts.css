@@ -11,6 +11,7 @@
 }
 /* oswald-500 - latin */
 @font-face {
+  font-display: swap;
   font-family: 'Oswald';
   font-style: normal;
   font-weight: 500;
