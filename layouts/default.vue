@@ -41,6 +41,7 @@ export default {
 
 <style lang="scss">
 .notification {
+  z-index: 8675309;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
