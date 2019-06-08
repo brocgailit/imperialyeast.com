@@ -2,18 +2,11 @@
   <div class="carousel">
     <div v-for="(slide, idx) of slides" :key="idx" class="carousel-slide">
       <transition name="fade-in-out">
-        <picture v-show="active === idx">
-          <source
-            :srcset="slide | srcset({ format: 'webp' })"
-            sizes="100vw"
-            type="image/webp"
-          />
-          <source :srcset="slide | srcset" sizes="100vw" :type="slide.type" />
-          <img
-            :src="slide.data.thumbnails.find(t => t.width === 375).url"
-            :alt="slide.title"
-          />
-        </picture>
+        <responsive-image
+          v-show="active === idx"
+          :file="slide.file"
+          :alt="slide.description"
+        />
       </transition>
     </div>
     <div class="carousel-content">
@@ -26,19 +19,6 @@
 import { mapState } from 'vuex'
 
 export default {
-  filters: {
-    srcset(image, options = {}) {
-      const { format, breakpoints } = options
-      return (breakpoints || [375, 1024, 1280, 1920])
-        .map(
-          w =>
-            image.data.thumbnails.find(t => t.width === w).url +
-            (format ? `?format=${format}` : '') +
-            ` ${w}w`
-        )
-        .join(',')
-    }
-  },
   props: {
     slides: {
       type: Array,
@@ -83,21 +63,21 @@ export default {
 .carousel,
 .carousel-content,
 .carousel-slide,
-.carousel-slide img {
+.carousel-slide ::v-deep img {
   width: 100%;
   height: 100%;
 }
+
+::v-deep img {
+  object-fit: cover;
+}
+
 .carousel {
   position: relative;
   min-height: 500px;
   background-color: $black;
 }
 
-.carousel-slide {
-  img {
-    object-fit: cover;
-  }
-}
 .carousel-slide,
 .carousel-content {
   position: absolute;

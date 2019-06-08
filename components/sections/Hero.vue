@@ -40,14 +40,10 @@ export default {
     }
   },
   computed: {
-    attachments() {
-      return this.layout.attachments
-        ? this.layout.attachments.map(a => a.directus_files_id)
-        : []
-    },
     carousel() {
-      // TODO: filter this to images
-      return this.attachments.filter(a => a.type.startsWith('image'))
+      return (this.layout.media || []).filter(
+        m => m.file && m.file.type.startsWith('image')
+      )
     }
   },
   mounted() {

@@ -91,7 +91,12 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [
+    { src: '~/plugins/responsive-image' },
+    { src: '~/plugins/v-lazy-image', ssr: false },
+    { src: '~/plugins/intersection-observer', ssr: false },
+    { src: '~/plugins/vue-observe-visibility', ssr: false }
+  ],
 
   /*
    ** Nuxt.js modules
