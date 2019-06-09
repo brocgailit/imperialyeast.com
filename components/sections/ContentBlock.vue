@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import supportsWebP from 'supports-webp'
 export default {
   props: {
     layout: {
@@ -43,7 +44,8 @@ export default {
   data() {
     return {
       parallaxAnimation: null,
-      parallaxOffset: 0
+      parallaxOffset: 0,
+      supportsWebP: true // TODO: make webp check in clientinit and save in store?
     }
   },
   computed: {
@@ -53,19 +55,22 @@ export default {
       )
     },
     background() {
+      let format
+      if (this.supportsWebP) {
+        format = '?format=webp'
+      }
       return this.layout.background_image
-        ? `url(${
-            this.layout.background_image.data.thumbnails.find(
-              t => t.width === 1920
-            ).url
-          })`
+        ? `url(${this.layout.background_image.data.thumbnails.find(
+            t => t.width === 1920
+          ).url + format})`
         : null
     }
   },
-  mounted() {
+  async mounted() {
     if (this.layout.background_image) {
       this.parallaxAnimation = requestAnimationFrame(this.setScrollParallax)
     }
+    this.supportsWebP = await supportsWebP
   },
   beforeDestroy() {
     cancelAnimationFrame(this.parallaxAnimation)
