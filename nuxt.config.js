@@ -95,7 +95,8 @@ module.exports = {
     { src: '~/plugins/responsive-image' },
     { src: '~/plugins/v-lazy-image', ssr: false },
     { src: '~/plugins/intersection-observer', ssr: false },
-    { src: '~/plugins/vue-observe-visibility', ssr: false }
+    { src: '~/plugins/vue-observe-visibility', ssr: false },
+    { src: '~/plugins/smoothscroll', ssr: false }
   ],
 
   /*

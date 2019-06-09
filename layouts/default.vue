@@ -16,9 +16,9 @@
       <nuxt />
     </main>
     <PageFooter />
-    <a class="scroll-to-top">
-      <fa :icon="['fal', 'arrow-up']" size="2x" />
-    </a>
+    <div class="scroll-top-container">
+      <scroll-top-button />
+    </div>
   </div>
 </template>
 
@@ -26,10 +26,12 @@
 import { mapState } from 'vuex'
 import Navbar from '~/components/Navbar.vue'
 import PageFooter from '~/components/PageFooter.vue'
+import ScrollTopButton from '~/components/ScrollTopButton.vue'
 export default {
   components: {
     Navbar,
-    PageFooter
+    PageFooter,
+    ScrollTopButton
   },
   computed: {
     ...mapState({
@@ -59,22 +61,19 @@ export default {
   }
 }
 
-.scroll-to-top {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.scroll-top-container {
   position: fixed;
   bottom: $size-1;
   right: $size-5;
-  border: 3px solid $light;
-  border-radius: 100%;
-  width: 65px;
-  height: 65px;
-  color: $light;
-  transition: 150ms;
-  &:hover {
-    color: $grey;
-    background-color: $light;
-  }
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: 750ms ease-out;
+}
+.slide-up-enter,
+.slide-up-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
 }
 </style>
