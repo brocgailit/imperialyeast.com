@@ -8,7 +8,7 @@
       class="background-image"
       :style="{
         'background-image': background,
-        transform: 'translateY(calc(-50vh + ' + parallaxOffset + 'px))'
+        transform: 'translateY(calc(-70vh + ' + parallaxOffset + 'px))'
       }"
     />
     <div class="container">
@@ -109,7 +109,7 @@ export default {
 
   &.has-background {
     color: $white;
-    height: 50vh;
+    height: 70vh;
     display: flex;
     justify-content: center;
     align-items: center;
