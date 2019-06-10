@@ -106,6 +106,7 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
+    '@nuxtjs/sitemap',
     '@nuxtjs/style-resources',
     'nuxt-buefy',
     [
@@ -157,6 +158,44 @@ module.exports = {
    */
   styleResources: {
     scss: ['@/assets/scss/component.scss']
+  },
+
+  /*
+   ** Sitemap config
+   */
+  sitemap: {
+    hostname: 'https://imperialyeast.heavycraft.io',
+    gzip: true,
+    exclude: ['/dynamic-components'],
+    defaults: {
+      changefreq: 'daily',
+      priority: 1,
+      lastmod: new Date(),
+      lastmodrealtime: true
+    }
+    /* async routes() {
+      const products = await axios
+        .get(`https://www.brewvana.com/api/website/${process.env.WEBSITE_ID}/product`)
+        .then(res => res.data);
+      const articles = await axios
+        .get(`https://www.brewvana.com/api/website/${process.env.WEBSITE_ID}/article`)
+        .then(res => res.data);
+      const attractions = await axios
+        .get(`https://www.brewvana.com/api/website/${process.env.WEBSITE_ID}/attraction`)
+        .then(res => res.data);
+      return [
+        '/private',
+        '/about',
+        '/faq',
+        '/private',
+        '/contact',
+        '/attractions',
+        '/tours/schedule',
+        ...products.map(product => '/tours/' + product.slug),
+        ...articles.map(article => '/news/' + article.slug),
+        ...attractions.map(attraction => '/attractions/' + attraction.slug)
+      ]; */
+    }
   },
 
   /*

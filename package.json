@@ -18,6 +18,7 @@
     "@fortawesome/pro-light-svg-icons": "^5.9.0",
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/pwa": "^2.6.0",
+    "@nuxtjs/sitemap": "^1.2.0",
     "@nuxtjs/style-resources": "^0.1.2",
     "buefy": "^0.7.7",
     "bulma": "^0.7.5",
