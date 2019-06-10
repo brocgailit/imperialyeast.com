@@ -1,5 +1,12 @@
 <template>
   <section
+    v-observe-visibility="{
+      callback: visibilityChanged,
+      intersection: {
+        rootMargin: '25%'
+      },
+      once: true
+    }"
     class="content-block"
     :class="{ 'has-background': this.layout.background_image }"
   >
@@ -43,6 +50,7 @@ export default {
   },
   data() {
     return {
+      isVisible: false,
       parallaxAnimation: null,
       parallaxOffset: 0,
       supportsWebP: true // TODO: make webp check in clientinit and save in store?
@@ -59,7 +67,7 @@ export default {
       if (this.supportsWebP) {
         format = '?format=webp'
       }
-      return this.layout.background_image
+      return this.layout.background_image && this.isVisible
         ? `url(${this.layout.background_image.data.thumbnails.find(
             t => t.width === 1920
           ).url + format})`
@@ -80,6 +88,9 @@ export default {
       this.parallaxOffset =
         (document.body.scrollTop || document.documentElement.scrollTop) * 0.2
       this.parallaxAnimation = requestAnimationFrame(this.setScrollParallax)
+    },
+    visibilityChanged(isVisible) {
+      this.isVisible = isVisible
     }
   }
 }
