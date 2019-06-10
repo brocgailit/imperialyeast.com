@@ -81,6 +81,7 @@ export default {
 
 <style lang="scss">
 .faq-section {
+  padding-bottom: $size-1;
   .container {
     display: flex;
   }
