@@ -5,17 +5,7 @@
         <div v-show="mounted" class="container">
           <h1>{{ layout.heading }}</h1>
           <h2>{{ layout.subheading }}</h2>
-          <div class="layout-actions">
-            <router-link
-              v-for="action of layout.actions"
-              :key="action.id"
-              :to="action.path"
-              :title="action.title"
-              class="button is-primary is-medium"
-            >
-              {{ action.label }}
-            </router-link>
-          </div>
+          <layout-actions class="layout-actions" :actions="layout.actions" />
         </div>
       </transition>
     </ImageCarousel>

@@ -107,6 +107,7 @@ module.exports = {
    ** Plugins to load before mounting the App
    */
   plugins: [
+    { src: '~/plugins/layout-actions' },
     { src: '~/plugins/responsive-image' },
     { src: '~/plugins/v-lazy-image', ssr: false },
     { src: '~/plugins/intersection-observer', ssr: false },
