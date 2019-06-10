@@ -194,8 +194,8 @@ module.exports = {
         ...products.map(product => '/tours/' + product.slug),
         ...articles.map(article => '/news/' + article.slug),
         ...attractions.map(attraction => '/attractions/' + attraction.slug)
-      ]; */
-    }
+      ];
+    } */
   },
 
   /*
