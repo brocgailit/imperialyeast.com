@@ -9,22 +9,37 @@
     }"
     class="content-block"
     :class="{ 'has-background': layout.background_image }"
+    :style="{
+      'background-color': layout.background_color,
+      color: layout.text_color
+    }"
   >
     <div
       v-if="layout.background_image"
       class="background-image"
       :style="{
         'background-image': background,
-        transform: 'translateY(calc(-70vh + ' + parallaxOffset + 'px))'
+        transform: 'translateY(calc(-66vh + ' + parallaxOffset + 'px))'
       }"
     />
-    <div class="container">
+    <div
+      class="container layout-content"
+      :class="[
+        'is-' + (layout.content_direction || 'column'),
+        { 'has-image': images.length }
+      ]"
+    >
       <article>
         <header>
           <h3>{{ layout.heading }}</h3>
           <h4 v-if="layout.subheading">{{ layout.subheading }}</h4>
         </header>
         <div class="body" v-html="layout.body" />
+        <layout-actions
+          v-if="layout.actions && layout.actions.length"
+          class="layout-actions"
+          :actions="layout.actions"
+        />
       </article>
       <div v-if="images.length" class="image-container">
         <responsive-image
@@ -69,7 +84,7 @@ export default {
       }
       return this.layout.background_image && this.isVisible
         ? `url(${this.layout.background_image.data.thumbnails.find(
-            t => t.width === 1920 // TODO: this should be responsive!
+            t => t.width === 1280 // TODO: this should be responsive!
           ).url + format})`
         : null
     }
@@ -101,6 +116,37 @@ export default {
   position: relative;
   overflow: hidden;
   padding: $size-1;
+
+  .layout-content {
+    display: flex;
+    flex-direction: column-reverse;
+    &.is-row {
+      flex-direction: row-reverse;
+    }
+    &.is-row-reverse {
+      flex-direction: row;
+    }
+
+    &.is-row,
+    &.is-row-reverse {
+      &.has-image {
+        align-items: center;
+      }
+    }
+    &.is-column-reverse {
+      flex-direction: column;
+    }
+    &.has-image {
+      > * {
+        flex: 0 0 50%;
+        padding: $size-5;
+      }
+    }
+    &:not(.has-image) {
+      max-width: $readability-width;
+    }
+  }
+
   header {
     text-align: center;
   }
@@ -125,12 +171,17 @@ export default {
 
   &.has-background {
     color: $white;
-    height: 70vh;
+    height: 66vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    .container {
-      max-width: $readability-width;
+    h3 {
+      font-family: $family-primary;
+      text-transform: uppercase;
+      font-weight: $weight-black;
+    }
+    .body {
+      font-weight: $weight-bold;
     }
   }
 
@@ -139,10 +190,15 @@ export default {
     left: 0;
     top: 0;
     width: 100%;
-    height: 200%;
-    background-position: center;
+    height: 250%;
+    background-position: 50% 33%;
     background-repeat: no-repeat;
     background-size: 125%;
   }
+}
+
+.layout-actions {
+  text-align: center;
+  margin-top: $size-3;
 }
 </style>
