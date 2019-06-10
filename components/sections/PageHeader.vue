@@ -1,28 +1,18 @@
 <template>
   <section
-    v-observe-visibility="{
-      callback: visibilityChanged,
-      intersection: {
-        rootMargin: '25%'
-      },
-      once: true
-    }"
-    class="content-block"
+    class="page-header"
     :class="{ 'has-background': this.layout.background_image }"
   >
     <div
       v-if="this.layout.background_image"
       class="background-image"
-      :style="{
-        'background-image': background,
-        transform: 'translateY(calc(-70vh + ' + parallaxOffset + 'px))'
-      }"
+      :style="{ 'background-image': background }"
     />
     <div class="container">
       <article>
         <header>
-          <h3>{{ layout.heading }}</h3>
-          <h4 v-if="layout.subheading">{{ layout.subheading }}</h4>
+          <h1>{{ layout.heading }}</h1>
+          <h2 v-if="layout.subheading">{{ layout.subheading }}</h2>
         </header>
         <div class="body" v-html="layout.body" />
       </article>
@@ -32,7 +22,6 @@
           :key="image.file.id"
           :file="image.file"
           :alt="image.description"
-          lazy
         />
       </div>
     </div>
@@ -50,9 +39,6 @@ export default {
   },
   data() {
     return {
-      isVisible: false,
-      parallaxAnimation: null,
-      parallaxOffset: 0,
       supportsWebP: true // TODO: make webp check in clientinit and save in store?
     }
   },
@@ -67,7 +53,7 @@ export default {
       if (this.supportsWebP) {
         format = '?format=webp'
       }
-      return this.layout.background_image && this.isVisible
+      return this.layout.background_image
         ? `url(${this.layout.background_image.data.thumbnails.find(
             t => t.width === 1920 // TODO: this should be responsive!
           ).url + format})`
@@ -75,38 +61,22 @@ export default {
     }
   },
   async mounted() {
-    if (this.layout.background_image) {
-      this.parallaxAnimation = requestAnimationFrame(this.setScrollParallax)
-    }
     this.supportsWebP = await supportsWebP
-  },
-  beforeDestroy() {
-    cancelAnimationFrame(this.parallaxAnimation)
-  },
-  methods: {
-    setScrollParallax() {
-      this.parallaxOffset =
-        (document.body.scrollTop || document.documentElement.scrollTop) * 0.2
-      this.parallaxAnimation = requestAnimationFrame(this.setScrollParallax)
-    },
-    visibilityChanged(isVisible) {
-      this.isVisible = isVisible
-    }
   }
 }
 </script>
 
 <style lang="scss">
-.content-block {
+.page-header {
   position: relative;
   overflow: hidden;
   padding: $size-1;
   header {
     text-align: center;
   }
-  h3 {
+  h1 {
     font-family: $family-heading;
-    font-size: $size-2;
+    font-size: $size-1;
   }
   .body {
     .ql-align-center {

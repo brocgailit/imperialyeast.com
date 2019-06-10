@@ -71,6 +71,20 @@ module.exports = {
         type: 'font/woff2',
         as: 'font',
         crossorigin: 'crossorigin'
+      },
+      {
+        rel: 'preload',
+        href: '/fonts/montserrat-v13-latin-900.woff',
+        type: 'font/woff',
+        as: 'font',
+        crossorigin: 'crossorigin'
+      },
+      {
+        rel: 'preload',
+        href: '/fonts/montserrat-v13-latin-900.woff2',
+        type: 'font/woff2',
+        as: 'font',
+        crossorigin: 'crossorigin'
       }
     ]
   },
