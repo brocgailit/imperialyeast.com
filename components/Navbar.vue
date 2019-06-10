@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="header-nav">
     <div class="nav-logo">
       <logo />
     </div>
@@ -39,17 +39,26 @@ export default {
 </script>
 
 <style lang="scss">
+$logo-size: 160px;
+.header-nav {
+  background-color: $white;
+  position: sticky;
+  top: calc(-#{$logo-size} - #{$size-5});
+  z-index: 1080;
+  border-bottom: 1px solid rgba($grey, 0.25);
+}
 .nav-logo {
-  width: 160px;
+  width: $logo-size;
+  height: $logo-size;
   margin: $size-5 auto;
 }
 .global-nav {
   text-align: center;
-  margin-bottom: $size-5;
   ul {
     display: flex;
     justify-content: center;
     li {
+      padding: $size-7 0;
       a {
         text-transform: uppercase;
         color: $black;
@@ -58,7 +67,10 @@ export default {
         padding: $size-7;
         transition: 150ms ease-in-out;
         &:hover {
-          opacity: 0.85;
+          opacity: 0.75;
+        }
+        &.nuxt-link-active {
+          color: $primary;
         }
       }
     }

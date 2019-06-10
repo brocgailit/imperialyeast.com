@@ -1,10 +1,10 @@
 <template>
   <section
     class="page-header"
-    :class="{ 'has-background': this.layout.background_image }"
+    :class="{ 'has-background': layout.background_image }"
   >
     <div
-      v-if="this.layout.background_image"
+      v-if="layout.background_image"
       class="background-image"
       :style="{ 'background-image': background }"
     />

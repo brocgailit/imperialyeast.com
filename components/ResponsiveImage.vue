@@ -51,10 +51,12 @@ export default {
   },
   props: {
     file: {
-      type: Object
+      type: Object,
+      default: () => null
     },
     alt: {
-      type: String
+      type: String,
+      default: ''
     },
     sizes: {
       type: String,
