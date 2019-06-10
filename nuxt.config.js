@@ -1,3 +1,4 @@
+const axios = require('axios')
 const pkg = require('./package')
 
 module.exports = {
@@ -166,36 +167,13 @@ module.exports = {
   sitemap: {
     hostname: 'https://imperialyeast.heavycraft.io',
     gzip: true,
-    exclude: ['/dynamic-components'],
+    exclude: ['/dynamic-components', '/home'],
     defaults: {
       changefreq: 'daily',
       priority: 1,
       lastmod: new Date(),
       lastmodrealtime: true
     }
-    /* async routes() {
-      const products = await axios
-        .get(`https://www.brewvana.com/api/website/${process.env.WEBSITE_ID}/product`)
-        .then(res => res.data);
-      const articles = await axios
-        .get(`https://www.brewvana.com/api/website/${process.env.WEBSITE_ID}/article`)
-        .then(res => res.data);
-      const attractions = await axios
-        .get(`https://www.brewvana.com/api/website/${process.env.WEBSITE_ID}/attraction`)
-        .then(res => res.data);
-      return [
-        '/private',
-        '/about',
-        '/faq',
-        '/private',
-        '/contact',
-        '/attractions',
-        '/tours/schedule',
-        ...products.map(product => '/tours/' + product.slug),
-        ...articles.map(article => '/news/' + article.slug),
-        ...attractions.map(attraction => '/attractions/' + attraction.slug)
-      ];
-    } */
   },
 
   /*
@@ -204,7 +182,21 @@ module.exports = {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
     baseURL: process.env.DIRECTUS_URL,
-    credentials: true
+    credentials: false
+  },
+
+  /*
+   ** Generate options
+   */
+  generate: {
+    routes: async function() {
+      const pages = await axios
+        .get(process.env.DIRECTUS_URL + 'items/pages')
+        .then(res => res.data.data)
+      return pages
+        .filter(page => page.status === 'published')
+        .map(page => '/' + page.slug)
+    }
   },
 
   /*

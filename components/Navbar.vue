@@ -5,14 +5,8 @@
     </div>
     <nav class="global-nav">
       <ul>
-        <li>
-          <nuxt-link to="/">Home</nuxt-link>
-        </li>
-        <li>
-          <nuxt-link to="/">Yeast Strains</nuxt-link>
-        </li>
-        <li>
-          <nuxt-link to="/">FAQs</nuxt-link>
+        <li v-for="link of primaryLinks" :key="link.slug">
+          <nuxt-link :to="link.slug">{{ link.name }}</nuxt-link>
         </li>
       </ul>
     </nav>
@@ -20,10 +14,26 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import Logo from '~/components/Logo.vue'
 export default {
   components: {
     Logo
+  },
+  computed: {
+    ...mapState({
+      pages: state => state.pages
+    }),
+    primaryLinks() {
+      return this.pages
+        ? this.pages.filter(
+            page =>
+              page.status === 'published' &&
+              page.global_navigation &&
+              page.primary
+          )
+        : []
+    }
   }
 }
 </script>
