@@ -25,6 +25,12 @@
         />
       </div>
     </div>
+
+    <layout-actions
+      v-if="layout.actions && layout.actions.length"
+      class="layout-actions"
+      :actions="layout.actions"
+    />
   </section>
 </template>
 
@@ -71,6 +77,9 @@ export default {
   position: relative;
   overflow: hidden;
   padding: $size-1;
+  .container {
+    max-width: $readability-width;
+  }
   header {
     text-align: center;
   }
@@ -79,6 +88,13 @@ export default {
     font-size: $size-1;
   }
   .body {
+    a {
+      font-weight: $weight-bold;
+    }
+    h4 {
+      font-weight: $weight-bold;
+      font-size: $size-4;
+    }
     .ql-align-center {
       text-align: center;
     }
@@ -99,9 +115,6 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    .container {
-      max-width: $readability-width;
-    }
   }
 
   .background-image {
