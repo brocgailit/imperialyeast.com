@@ -6,7 +6,11 @@
         class="scroll-to-top"
         @click="scrollToTop"
       >
-        <fa :icon="['fal', 'arrow-up']" size="2x" />
+        <fa
+          :icon="['fal', 'arrow-up']"
+          size="2x"
+          title="Scroll to Top of Page"
+        />
       </button>
     </no-ssr>
   </transition>
