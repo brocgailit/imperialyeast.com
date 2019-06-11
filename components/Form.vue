@@ -8,25 +8,14 @@
           :style="{ width: field.width + '%' }"
           class="input-container"
         >
-          <b-field :label="field.label">
-            <b-select
-              v-if="field.type === 'select'"
-              v-model="field.value"
-              placeholder="Select an option"
-              :icon="field.icon"
-            >
-              <option v-for="(option, o) in field.placeholder_options" :key="o">
-                {{ option }}
-              </option>
-            </b-select>
-            <b-input
-              v-else
-              v-model="field.value"
-              :required="field.required"
-              :type="field.type"
-              :icon="field.icon"
-            />
-          </b-field>
+          <form-input
+            v-model="field.value"
+            :label="field.label"
+            :type="field.type"
+            :placeholder="field.placeholder_options"
+            :icon="field.icon"
+            :required="field.required"
+          />
         </div>
       </div>
     </fieldset>
@@ -53,7 +42,12 @@
 </template>
 
 <script>
+import FormInput from '~/components/FormInput.vue'
+
 export default {
+  components: {
+    FormInput
+  },
   props: {
     form: {
       type: Object,
@@ -130,6 +124,12 @@ export default {
 .form-actions,
 .error-container {
   padding: 8px;
+}
+
+.error-container {
+  text-align: center;
+  color: $danger;
+  font-size: $size-7;
 }
 
 .confirmation-message ::v-deep {
