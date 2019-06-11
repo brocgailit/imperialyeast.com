@@ -125,6 +125,7 @@ module.exports = {
     '@nuxtjs/sitemap',
     '@nuxtjs/style-resources',
     'nuxt-buefy',
+    'nuxt-leaflet',
     [
       'nuxt-fontawesome',
       {
