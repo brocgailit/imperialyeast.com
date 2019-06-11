@@ -208,7 +208,7 @@ export default {
     position: absolute;
     left: 0;
     top: 0;
-    width: 100%;
+    width: 125%;
     height: 250%;
     background-position: 50% 40%;
     background-repeat: no-repeat;
