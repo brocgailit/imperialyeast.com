@@ -166,6 +166,8 @@ export default {
 
   header {
     text-align: center;
+    margin-bottom: $size-4;
+    line-height: 1.1;
   }
   h3 {
     font-family: $family-heading;
