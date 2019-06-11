@@ -5,7 +5,7 @@
         <l-tile-layer
           url="https://api.maptiler.com/maps/voyager/{z}/{x}/{y}.png?key=wrAjh6ce8ZQM400eeGXR"
         />
-        <l-markercluster>
+        <l-markercluster :options="clusterOptions">
           <l-marker
             v-for="marker of markers"
             :id="marker.id"
@@ -52,6 +52,7 @@ export default {
   },
   data() {
     return {
+      markerIcon: null,
       center: null,
       rotation: 0,
       geolocPosition: undefined,
@@ -67,17 +68,11 @@ export default {
         iconSize: [30, 37], // size of the icon
         iconAnchor: [15, 37], // point of the icon which will correspond to marker's location
         popupAnchor: [0, 0] // point from which the popup should open relative to the iconAnchor
-      }
+      },
+      clusterOptions: {}
     }
   },
   computed: {
-    markerIcon() {
-      if (this.$L) {
-        return this.$L.icon(this.icon)
-      } else {
-        return null
-      }
-    },
     selected() {
       return this.markers.find(m =>
         this.selectedFeatures.some(f => f.id === m.id)
@@ -123,6 +118,20 @@ export default {
       )
     }
   },
+  mounted() {
+    // set options
+    this.markerIcon = this.$L.icon(this.icon)
+    this.clusterOptions = {
+      showCoverageOnHover: false,
+      iconCreateFunction: cluster => {
+        return this.$L.divIcon({
+          html: `<div class="marker-count">${cluster.getChildCount()}</div>`,
+          className: 'marker-cluster',
+          iconSize: new this.$L.Point(40, 49)
+        })
+      }
+    }
+  },
   methods: {
     handleMounted(vlMap) {
       vlMap.refresh()
@@ -132,6 +141,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import 'leaflet.markercluster/dist/MarkerCluster.css';
+@import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 .leaflet-container {
   font-size: $size-6;
   a.leaflet-popup-close-button {
@@ -192,6 +203,34 @@ export default {
         font-size: 11px !important;
       }
     }
+  }
+}
+
+.marker-cluster {
+  .marker-count {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $family-heading;
+    font-size: $size-6;
+    background-color: $white;
+    color: $primary;
+    border: 2px solid $primary;
+    top: -10px;
+    right: -10px;
+  }
+  &:before {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-image: url('/img/map-marker.svg');
   }
 }
 </style>
