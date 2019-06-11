@@ -112,7 +112,8 @@ module.exports = {
     { src: '~/plugins/v-lazy-image', ssr: false },
     { src: '~/plugins/intersection-observer', ssr: false },
     { src: '~/plugins/vue-observe-visibility', ssr: false },
-    { src: '~/plugins/smoothscroll', ssr: false }
+    { src: '~/plugins/smoothscroll', ssr: false },
+    { src: '~/plugins/leaflet-markercluster', ssr: false }
   ],
 
   /*
