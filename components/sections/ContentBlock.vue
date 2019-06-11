@@ -19,7 +19,7 @@
       class="background-image"
       :style="{
         'background-image': background,
-        transform: 'translateY(calc(-66vh + ' + parallaxOffset + 'px))'
+        transform: 'translateY(calc(-50% + ' + parallaxOffset + 'px))'
       }"
     />
     <div
@@ -30,11 +30,11 @@
       ]"
     >
       <article>
-        <header>
+        <header v-if="layout.heading">
           <h3>{{ layout.heading }}</h3>
           <h4 v-if="layout.subheading">{{ layout.subheading }}</h4>
         </header>
-        <div class="body" v-html="layout.body" />
+        <div v-if="layout.body" class="body" v-html="layout.body" />
         <layout-actions
           v-if="layout.actions && layout.actions.length"
           class="layout-actions"
@@ -51,6 +51,18 @@
         />
       </div>
     </div>
+    <ul
+      v-if="layout.bullets && layout.bullets.length"
+      class="bullet-list container"
+    >
+      <li v-for="(bullet, b) of layout.bullets" :key="b" class="bullet">
+        <div class="bullet-icon" :style="{ 'background-color': bullet.color }">
+          <fa :icon="['fal', bullet.icon]" size="4x" />
+        </div>
+        <h4 class="bullet-title">{{ bullet.title }}</h4>
+        <div class="bullet-text" v-html="bullet.text" />
+      </li>
+    </ul>
   </section>
 </template>
 
@@ -84,7 +96,7 @@ export default {
       }
       return this.layout.background_image && this.isVisible
         ? `url(${this.layout.background_image.data.thumbnails.find(
-            t => t.width === 1280 // TODO: this should be responsive!
+            t => t.width === 1920 // TODO: this should be responsive!
           ).url + format})`
         : null
     }
@@ -101,7 +113,7 @@ export default {
   methods: {
     setScrollParallax() {
       this.parallaxOffset =
-        (document.body.scrollTop || document.documentElement.scrollTop) * 0.2
+        (document.body.scrollTop || document.documentElement.scrollTop) * 0.17
       this.parallaxAnimation = requestAnimationFrame(this.setScrollParallax)
     },
     visibilityChanged(isVisible) {
@@ -171,7 +183,7 @@ export default {
 
   &.has-background {
     color: $white;
-    height: 66vh;
+    min-height: 50vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -191,7 +203,7 @@ export default {
     top: 0;
     width: 100%;
     height: 250%;
-    background-position: 50% 33%;
+    background-position: 50% 40%;
     background-repeat: no-repeat;
     background-size: 125%;
   }
@@ -200,5 +212,32 @@ export default {
 .layout-actions {
   text-align: center;
   margin-top: $size-3;
+}
+
+.bullet-list {
+  $bullet-icon-size: 150px;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  .bullet {
+    width: 350px;
+    .bullet-title {
+      font-weight: $weight-bold;
+      font-size: $size-4;
+    }
+    .bullet-text {
+      margin-top: $size-7;
+    }
+    .bullet-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto $size-5;
+      color: $white;
+      width: $bullet-icon-size;
+      height: $bullet-icon-size;
+      border-radius: 100%;
+    }
+  }
 }
 </style>
