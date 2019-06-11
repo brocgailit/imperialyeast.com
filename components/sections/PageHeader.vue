@@ -14,7 +14,11 @@
           <h1>{{ layout.heading }}</h1>
           <h2 v-if="layout.subheading">{{ layout.subheading }}</h2>
         </header>
-        <div class="body" v-html="layout.body" />
+        <div
+          v-if="layout.body"
+          class="body"
+          v-html="layout.body.replace(/\_blank/g, '_self')"
+        />
       </article>
       <div v-if="images.length" class="image-container">
         <responsive-image
@@ -82,10 +86,17 @@ export default {
   }
   header {
     text-align: center;
+    margin-bottom: $size-3;
   }
   h1 {
     font-family: $family-heading;
     font-size: $size-1;
+  }
+  h2 {
+    font-weight: $weight-bold;
+    font-size: $size-4;
+    line-height: 1.1;
+    opacity: 0.85;
   }
   .body {
     a {
