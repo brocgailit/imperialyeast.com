@@ -86,7 +86,6 @@ export default {
   }
   header {
     text-align: center;
-    margin-bottom: $size-3;
   }
   h1 {
     font-family: $family-heading;
@@ -99,6 +98,7 @@ export default {
     opacity: 0.85;
   }
   .body {
+    margin-top: $size-3;
     a {
       font-weight: $weight-bold;
     }
