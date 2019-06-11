@@ -19,7 +19,12 @@ export default {
   },
   async asyncData({ params, $axios }) {
     const { slug } = params
-    const fields = ['*.*', 'layouts.*.*']
+    const fields = [
+      '*.*',
+      'layouts.*.*',
+      'layouts.forms.fields.*',
+      'layouts.forms.*'
+    ]
     const page = await $axios
       .$get(
         `items/pages?single=1&filter[slug]=${slug}&fields=${fields.join(',')}`

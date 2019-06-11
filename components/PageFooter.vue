@@ -22,17 +22,17 @@
     <ul class="footer-social-media">
       <li>
         <a href="https://www.instagram.com" aria-label="instagram">
-          <fa :icon="['fab', 'instagram']" size="lg" />
+          <fa-icon :icon="['fab', 'instagram']" size="lg" />
         </a>
       </li>
       <li>
         <a href="https://www.facebook.com" aria-label="facebook">
-          <fa :icon="['fab', 'facebook']" size="lg" />
+          <fa-icon :icon="['fab', 'facebook']" size="lg" />
         </a>
       </li>
       <li>
         <a href="https://www.youtube.com" aria-label="youtube">
-          <fa :icon="['fab', 'youtube']" size="lg" />
+          <fa-icon :icon="['fab', 'youtube']" size="lg" />
         </a>
       </li>
     </ul>

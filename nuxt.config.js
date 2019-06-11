@@ -128,11 +128,22 @@ module.exports = {
     [
       'nuxt-fontawesome',
       {
-        component: 'fa',
+        component: 'fa-icon',
         imports: [
           {
             set: '@fortawesome/pro-light-svg-icons',
-            icons: ['faArrowUp', 'faFlask', 'faDatabase', 'faCartPlus']
+            icons: [
+              'faArrowUp',
+              'faFlask',
+              'faDatabase',
+              'faCartPlus',
+              'faEnvelope',
+              'faUser',
+              'faPhoneOffice',
+              'faMobileAlt',
+              'faBriefcase',
+              'faExclamationCircle'
+            ]
           },
           {
             set: '@fortawesome/free-brands-svg-icons',
@@ -166,7 +177,9 @@ module.exports = {
    */
   buefy: {
     css: false,
-    materialDesignIcons: false
+    materialDesignIcons: false,
+    defaultIconComponent: 'fa-icon',
+    defaultIconPack: 'fal'
   },
 
   /*

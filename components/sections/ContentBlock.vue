@@ -57,18 +57,29 @@
     >
       <li v-for="(bullet, b) of layout.bullets" :key="b" class="bullet">
         <div class="bullet-icon" :style="{ 'background-color': bullet.color }">
-          <fa :icon="['fal', bullet.icon]" size="4x" />
+          <fa-icon :icon="['fal', bullet.icon]" size="4x" />
         </div>
         <h4 class="bullet-title">{{ bullet.title }}</h4>
         <div class="bullet-text" v-html="bullet.text" />
       </li>
     </ul>
+
+    <div
+      v-if="layout.forms && layout.forms.length"
+      class="form-container container"
+    >
+      <dynamic-form v-for="(form, f) of layout.forms" :key="f" :form="form" />
+    </div>
   </section>
 </template>
 
 <script>
+import DynamicForm from '~/components/Form.vue'
 import supportsWebP from 'supports-webp'
 export default {
+  components: {
+    DynamicForm
+  },
   props: {
     layout: {
       type: Object,
@@ -214,37 +225,40 @@ export default {
     background-repeat: no-repeat;
     background-size: 125%;
   }
-}
 
-.layout-actions {
-  text-align: center;
-  margin-top: $size-3;
-}
+  .layout-actions {
+    text-align: center;
+    margin-top: $size-3;
+  }
 
-.bullet-list {
-  $bullet-icon-size: 150px;
-  display: flex;
-  justify-content: space-around;
-  text-align: center;
-  .bullet {
-    width: 350px;
-    .bullet-title {
-      font-weight: $weight-bold;
-      font-size: $size-4;
+  .bullet-list {
+    $bullet-icon-size: 150px;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    .bullet {
+      width: 350px;
+      .bullet-title {
+        font-weight: $weight-bold;
+        font-size: $size-4;
+      }
+      .bullet-text {
+        margin-top: $size-7;
+      }
+      .bullet-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto $size-5;
+        color: $white;
+        width: $bullet-icon-size;
+        height: $bullet-icon-size;
+        border-radius: 100%;
+      }
     }
-    .bullet-text {
-      margin-top: $size-7;
-    }
-    .bullet-icon {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 0 auto $size-5;
-      color: $white;
-      width: $bullet-icon-size;
-      height: $bullet-icon-size;
-      border-radius: 100%;
-    }
+  }
+  .form-container {
+    max-width: $readability-width;
   }
 }
 </style>

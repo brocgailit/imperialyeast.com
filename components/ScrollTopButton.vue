@@ -6,7 +6,7 @@
         class="scroll-to-top"
         @click="scrollToTop"
       >
-        <fa
+        <fa-icon
           :icon="['fal', 'arrow-up']"
           size="2x"
           title="Scroll to Top of Page"
