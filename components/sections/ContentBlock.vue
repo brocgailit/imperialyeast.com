@@ -94,9 +94,14 @@ export default {
       if (this.supportsWebP) {
         format = '?format=webp'
       }
+
+      const width =
+        typeof window !== 'undefined' && window.matchMedia('(min-width: 769px)')
+          ? 1920
+          : 768
       return this.layout.background_image && this.isVisible
         ? `url(${this.layout.background_image.data.thumbnails.find(
-            t => t.width === 1920 // TODO: this should be responsive!
+            t => t.width === width
           ).url + format})`
         : null
     }
