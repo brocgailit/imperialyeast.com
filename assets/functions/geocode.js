@@ -2,11 +2,6 @@ const https = require('https')
 const { ALGOLIA_KEY, ALGOLIA_ID } = process.env
 
 exports.handler = async (event, context) => {
-  // Only allow POST
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method Not Allowed' }
-  }
-
   const data = JSON.stringify({
     query: event.queryStringParameters.query,
     type: 'city'
