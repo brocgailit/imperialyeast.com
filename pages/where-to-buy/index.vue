@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { debounce } from 'lodash'
+import debounce from 'lodash/debounce'
 import LocationMap from '~/components/Map.vue'
 import { DYNAMIC_COMPONENTS } from '~/assets/script/dynamic-components'
 

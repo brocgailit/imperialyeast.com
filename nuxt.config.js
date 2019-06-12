@@ -218,6 +218,7 @@ module.exports = {
   },
 
   proxy: {
+    '/items': process.env.DIRECTUS_URL,
     '/.netlify': 'http://localhost:9000'
   },
 
@@ -239,21 +240,6 @@ module.exports = {
    ** Build configuration
    */
   build: {
-    babel: {
-      presets({ isServer }) {
-        return [
-          [
-            '@nuxt/babel-preset-app',
-            {
-              targets: isServer
-                ? { node: 'current' }
-                : { browsers: ['last 2 versions'], ie: 10 }
-            }
-          ]
-        ]
-      },
-      plugins: ['lodash']
-    },
     postcss: {
       preset: {
         features: {

@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "cross-env LOGGER_LEVEL=info NODE_ENV=development NUXT_HOST=0.0.0.0 NUXT_PORT=3000 concurrently \"nuxt dev -o\" \"npm run lambda-serve\"",
+    "analyze": "nuxt build -a",
     "build": "nuxt build",
     "start": "cross-env NODE_ENV=production node server/index.js",
     "generate": "nuxt generate",
@@ -22,7 +23,6 @@
     "@nuxtjs/pwa": "^2.6.0",
     "@nuxtjs/sitemap": "^1.2.0",
     "@nuxtjs/style-resources": "^0.1.2",
-    "babel-plugin-lodash": "^3.3.4",
     "buefy": "^0.7.7",
     "bulma": "^0.7.5",
     "cross-env": "^5.2.0",

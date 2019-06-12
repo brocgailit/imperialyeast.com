@@ -3494,7 +3494,7 @@ exports.handler = async (event, context) => {
     query: event.queryStringParameters.query,
     type: 'city',
     countries: 'us',
-    // TODO: jp,au,dk,it,ie,fi,de,mx,nl,nz,no,pl,se,gb
+    // TODO: jp,au,dk,it,ie,fi,de,mx,nl,nz,no,pl,se,gb - switch via geolocation?
     language: 'en'
   };
 
