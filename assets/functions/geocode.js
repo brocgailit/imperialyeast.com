@@ -4,11 +4,12 @@ const { ALGOLIA_KEY, ALGOLIA_ID } = process.env
 exports.handler = async (event, context) => {
   const data = {
     query: event.queryStringParameters.query,
-    type: 'city'
+    type: 'city',
+    language: 'en'
   }
 
   try {
-    const geocode = await axios.post(
+    const { data: geocode } = await axios.post(
       `https://places-dsn.algolia.net/1/places/query`,
       data,
       {
