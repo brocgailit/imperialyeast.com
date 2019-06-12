@@ -23,21 +23,30 @@ exports.handler = async (event, context) => {
       'X-Algolia-API-Key:': ALGOLIA_KEY
     }
   }
-  try {
-    const response = await new Promise((resolve, reject) => {
-      const req = https.request(options, res => {
-        res.on('data', resolve)
+
+  return new Promise((resolve, reject) => {
+    let body
+    const req = https
+      .request(options, res => {
+        res.setEncoding('utf8')
+        if (res.statusCode < 200 || res.statusCode >= 300) {
+          return reject(
+            new Error(
+              `${res.statusCode}: ${res.req.getHeader('host')} ${res.req.path}`
+            )
+          )
+        }
+        res.on('data', chunk => {
+          body += chunk
+        })
+        res.on('end', () => {
+          resolve(JSON.parse(body))
+        })
       })
-      req.on('error', reject)
-    })
-    return {
-      statusCode: 200,
-      body: response
-    }
-  } catch (e) {
-    return {
-      statusCode: 400,
-      body: e.message
-    }
-  }
+      .on('error', e => {
+        reject(Error(e))
+      })
+    req.write(data)
+    req.end()
+  })
 }
