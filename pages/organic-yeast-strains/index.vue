@@ -25,9 +25,14 @@
               :key="strain.key"
               class="strain"
             >
-              <h3 class="strain-name" :style="{ color: group.packaging_color }">
-                {{ strain.product_code }} {{ strain.name }}
-              </h3>
+              <nuxt-link :to="'/organic-yeast-strains/' + strain.slug">
+                <h3
+                  class="strain-name"
+                  :style="{ color: group.packaging_color }"
+                >
+                  {{ strain.product_code }} {{ strain.name }}
+                </h3>
+              </nuxt-link>
               <p class="strain-description">
                 {{ strain.short_description }}
               </p>
