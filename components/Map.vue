@@ -1,9 +1,15 @@
 <template>
   <div :style="{ height: height + 'px', width: width ? width + 'px' : '100%' }">
     <no-ssr>
-      <l-map ref="leaflet" :zoom="zoom" :center="autoCenter">
+      <l-map
+        ref="leaflet"
+        :zoom="zoom"
+        :min-zoom="2"
+        :center="autoCenter"
+        :max-bounds="[[-90, -180], [90, 180]]"
+      >
         <l-tile-layer
-          url="https://api.maptiler.com/maps/voyager/{z}/{x}/{y}.png?key=wrAjh6ce8ZQM400eeGXR"
+          url="https://api.maptiler.com/maps/6f20cc0d-4242-40e6-b6b8-c51e19fab521/{z}/{x}/{y}.png?key=I4ED3WrAmXTdwheK6O5k"
         />
         <l-markercluster :options="clusterOptions">
           <l-marker
