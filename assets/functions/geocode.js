@@ -7,11 +7,26 @@ exports.handler = async (event, context) => {
     type: 'city'
   }
 
-  return axios.post(`https://places-dsn.algolia.net/1/places/query`, data, {
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Algolia-Application-Id': ALGOLIA_ID,
-      'X-Algolia-API-Key': ALGOLIA_KEY
+  try {
+    const geocode = await axios.post(
+      `https://places-dsn.algolia.net/1/places/query`,
+      data,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Algolia-Application-Id': ALGOLIA_ID,
+          'X-Algolia-API-Key': ALGOLIA_KEY
+        }
+      }
+    )
+    return {
+      statusCode: 200,
+      body: JSON.stringify(geocode)
     }
-  })
+  } catch (err) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ error: { message: err.message } })
+    }
+  }
 }
