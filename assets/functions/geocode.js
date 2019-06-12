@@ -11,7 +11,7 @@ exports.handler = async (event, context) => {
     headers: {
       'Content-Type': 'application/json',
       'X-Algolia-Application-Id': ALGOLIA_ID,
-      'X-Algolia-API-Key:': ALGOLIA_KEY
+      'X-Algolia-API-Key': ALGOLIA_KEY
     }
   })
 }
