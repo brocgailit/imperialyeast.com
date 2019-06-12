@@ -13,50 +13,19 @@
           :key="group.id"
           class="strain-group"
         >
-          <h2
-            class="strain-group-name"
-            :style="{ color: group.packaging_color }"
+          <strain-list
+            :strains="group.strains"
+            :header-color="group.packaging_color"
           >
-            {{ name }}
-          </h2>
-          <ul class="strain-list">
-            <li
-              v-for="strain of group.strains"
-              :key="strain.key"
-              class="strain"
-            >
-              <nuxt-link :to="'/organic-yeast-strains/' + strain.slug">
-                <h3
-                  class="strain-name"
-                  :style="{ color: group.packaging_color }"
-                >
-                  {{ strain.product_code }} {{ strain.name }}
-                </h3>
-              </nuxt-link>
-              <p class="strain-description">
-                {{ strain.short_description }}
-              </p>
-              <dl class="strain-detail">
-                <dt class="strain-detail-name">
-                  <abbr title="Temperature">Temp</abbr>:
-                </dt>
-                <dd class="strain-detail-info">
-                  {{ strain.temperature_min }}–{{ strain.temperature_max }}℉
-                  {{ strain.temperature_min | celsius }}–{{
-                    strain.temperature_max | celsius
-                  }}℃
-                </dd>
-                <dt class="strain-detail-name">Flocculation:</dt>
-                <dd class="strain-detail-info">
-                  {{ strain.flocculation | flocculation }}
-                </dd>
-                <dt class="strain-detail-name">Attenuation:</dt>
-                <dd class="strain-detail-info">
-                  {{ strain.attenuation_min }}–{{ strain.attenuation_max }}%
-                </dd>
-              </dl>
-            </li>
-          </ul>
+            <nuxt-link :to="'/organic-yeast-strains/yeast-types/' + group.slug">
+              <h2
+                class="strain-group-name"
+                :style="{ color: group.packaging_color }"
+              >
+                {{ name }}
+              </h2>
+            </nuxt-link>
+          </strain-list>
         </article>
       </div>
     </section>
@@ -64,21 +33,11 @@
 </template>
 
 <script>
+import StrainList from '~/components/StrainList.vue'
 import { DYNAMIC_COMPONENTS } from '~/assets/script/dynamic-components'
 export default {
-  filters: {
-    celsius: f => Math.round(((f - 32) * 5) / 9),
-    flocculation(val) {
-      return [
-        'Very Low',
-        'Low',
-        'Med-Low',
-        'Medium',
-        'Med-High',
-        'High',
-        'Very High'
-      ][val]
-    }
+  components: {
+    StrainList
   },
   data() {
     return {
@@ -95,6 +54,7 @@ export default {
             {},
             strain.strain_type,
             {
+              slug: strain.strain_type.slug,
               strains: [strain]
             }
           )
@@ -126,7 +86,7 @@ export default {
 
 <style lang="scss" scoped>
 .strains {
-  columns: 500px;
+  columns: 400px;
   column-gap: $size-7;
   text-align: center;
   padding-bottom: $size-1;
@@ -134,33 +94,6 @@ export default {
     font-weight: $weight-black;
     font-size: $size-3;
     text-transform: uppercase;
-  }
-  .strain-list {
-    padding: 0 $size-4;
-    break-inside: avoid;
-    page-break-inside: avoid;
-    .strain {
-      margin: $size-7 0;
-      .strain-name {
-        font-weight: $weight-bold;
-        font-size: $size-5;
-      }
-      .strain-description {
-        font-size: $size-6;
-        margin: $size-7 0;
-      }
-      .strain-detail-name,
-      .strain-detail-info {
-        display: inline;
-        text-transform: uppercase;
-        color: $grey;
-        font-family: $family-heading;
-      }
-
-      .strain-detail-name:not(:first-child):before {
-        content: '// ';
-      }
-    }
   }
 }
 </style>
