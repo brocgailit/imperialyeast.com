@@ -3493,7 +3493,8 @@ exports.handler = async (event, context) => {
   const data = {
     query: event.queryStringParameters.query,
     type: 'city',
-    countries: 'us,jp,au,dk,it,ie,fi,de,mx,nl,nz,no,pl,se,gb',
+    countries: 'us',
+    // TODO: jp,au,dk,it,ie,fi,de,mx,nl,nz,no,pl,se,gb
     language: 'en'
   };
 
