@@ -7,6 +7,14 @@
       :layout="layout"
     />
     <section>
+      <b-field>
+        <b-input
+          v-model="search"
+          type="search"
+          icon="search"
+          @input="handleSearchInput"
+        ></b-input>
+      </b-field>
       <div class="purchasing container">
         <location-map :markers="markers" :height="400" :zoom="3" />
       </div>
@@ -15,15 +23,32 @@
 </template>
 
 <script>
+import { debounce } from 'lodash'
 import LocationMap from '~/components/Map.vue'
 import { DYNAMIC_COMPONENTS } from '~/assets/script/dynamic-components'
+
 export default {
   components: {
     LocationMap
   },
   data() {
     return {
-      DYNAMIC_COMPONENTS
+      DYNAMIC_COMPONENTS,
+      search: ''
+    }
+  },
+  methods: {
+    handleSearchInput: debounce(function(event) {
+      this.handleSearch(this.search)
+    }, 300),
+    handleSearch(query) {
+      this.$axios({
+        url: 'functions/geocode',
+        baseURL: '/.netlify/',
+        params: {
+          query
+        }
+      })
     }
   },
   computed: {

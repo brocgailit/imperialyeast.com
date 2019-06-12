@@ -144,7 +144,8 @@ module.exports = {
               'faPhoneOffice',
               'faMobileAlt',
               'faBriefcase',
-              'faExclamationCircle'
+              'faExclamationCircle',
+              'faSearch'
             ]
           },
           {
@@ -212,7 +213,12 @@ module.exports = {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
     baseURL: process.env.DIRECTUS_URL,
-    credentials: false
+    credentials: false,
+    proxy: process.env.NODE_ENV === 'development'
+  },
+
+  proxy: {
+    '/.netlify': 'http://localhost:9000'
   },
 
   /*
@@ -233,6 +239,21 @@ module.exports = {
    ** Build configuration
    */
   build: {
+    babel: {
+      presets({ isServer }) {
+        return [
+          [
+            '@nuxt/babel-preset-app',
+            {
+              targets: isServer
+                ? { node: 'current' }
+                : { browsers: ['last 2 versions'], ie: 10 }
+            }
+          ]
+        ]
+      },
+      plugins: ['lodash']
+    },
     postcss: {
       preset: {
         features: {
