@@ -8,7 +8,12 @@
     />
     <nav class="search-filter container">
       <b-field label="Search">
-        <b-input v-model="search" type="search" icon="search"></b-input>
+        <b-input
+          v-model="search"
+          type="search"
+          icon="search"
+          placeholder="Search yeast names, product codes, descriptions, and keywords"
+        ></b-input>
       </b-field>
       <div class="filter-actions">
         <b-button
