@@ -6,6 +6,11 @@
       :key="layout.id"
       :layout="layout"
     />
+    <nav class="search-filter container">
+      <b-field label="Search">
+        <b-input v-model="search" type="search" icon="search"></b-input>
+      </b-field>
+    </nav>
     <section>
       <div class="strains container">
         <article
@@ -41,12 +46,13 @@ export default {
   },
   data() {
     return {
-      DYNAMIC_COMPONENTS
+      DYNAMIC_COMPONENTS,
+      search: ''
     }
   },
   computed: {
     groups() {
-      return this.strains.reduce((groups, strain) => {
+      return this.filteredStrains.reduce((groups, strain) => {
         if (groups[strain.strain_type.name]) {
           groups[strain.strain_type.name].strains.push(strain)
         } else {
@@ -61,6 +67,32 @@ export default {
         }
         return groups
       }, {})
+    },
+    filteredStrains() {
+      if (!this.search) return this.strains
+      return this.strains.filter(s => {
+        const checks = [
+          'name',
+          'product_code',
+          'short_description',
+          'full_description',
+          'compare_to',
+          'profiles',
+          'species'
+        ]
+        return checks
+          .map(c => {
+            if (!s[c]) return false
+            if (Array.isArray(s[c])) {
+              return s[c]
+                .join()
+                .toLowerCase()
+                .includes(this.search.toLowerCase())
+            }
+            return s[c].toLowerCase().includes(this.search.toLowerCase())
+          })
+          .some(match => match)
+      })
     }
   },
   async asyncData({ params, $axios }) {
@@ -95,5 +127,9 @@ export default {
     font-size: $size-3;
     text-transform: uppercase;
   }
+}
+
+.search-filter {
+  margin-bottom: $size-5;
 }
 </style>
