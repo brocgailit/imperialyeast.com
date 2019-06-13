@@ -10,6 +10,46 @@
       <b-field label="Search">
         <b-input v-model="search" type="search" icon="search"></b-input>
       </b-field>
+      <div class="filter-actions">
+        <b-button
+          type="is-small"
+          @click="showAdvancedFilters = !showAdvancedFilters"
+          >{{ showAdvancedFilters ? 'Hide' : 'Show' }} Advanced</b-button
+        >
+        <b-button type="is-small" @click="clearFilters">Reset</b-button>
+      </div>
+      <div v-if="showAdvancedFilters" class="filters">
+        <b-field label="Flocculation">
+          <vue-slider
+            v-model="flocculation"
+            :min="0"
+            :max="7"
+            :data="flocculationLabels"
+            :interval="1"
+            marks
+            adsorb
+            included
+          ></vue-slider>
+        </b-field>
+        <b-field label="Attenuation">
+          <vue-slider
+            v-model="attenuation"
+            :min="50"
+            :max="100"
+            marks
+            :interval="5"
+            included
+          ></vue-slider>
+        </b-field>
+        <b-field label="Temperature">
+          <vue-slider
+            v-model="temperature"
+            :min="32"
+            :max="100"
+            :marks="{ '0': { label: '32℉' }, '100': { label: '100℉' } }"
+          ></vue-slider>
+        </b-field>
+      </div>
     </nav>
     <section>
       <div class="strains container">
@@ -40,6 +80,13 @@
 <script>
 import StrainList from '~/components/StrainList.vue'
 import { DYNAMIC_COMPONENTS } from '~/assets/script/dynamic-components'
+
+const FILTER_DEFAULTS = {
+  attenuation: [50, 100],
+  temperature: [32, 100],
+  flocculation: ['Very Low', 'Very High']
+}
+
 export default {
   components: {
     StrainList
@@ -47,7 +94,20 @@ export default {
   data() {
     return {
       DYNAMIC_COMPONENTS,
-      search: ''
+      search: '',
+      showAdvancedFilters: false,
+      attenuation: FILTER_DEFAULTS.attenuation,
+      temperature: FILTER_DEFAULTS.temperature,
+      flocculation: FILTER_DEFAULTS.flocculation,
+      flocculationLabels: [
+        'Very Low',
+        'Low',
+        'Medium-Low',
+        'Medium',
+        'Medium-High',
+        'High',
+        'Very High'
+      ]
     }
   },
   computed: {
@@ -69,8 +129,7 @@ export default {
       }, {})
     },
     filteredStrains() {
-      if (!this.search) return this.strains
-      return this.strains.filter(s => {
+      const searched = this.strains.filter(s => {
         const checks = [
           'name',
           'product_code',
@@ -93,6 +152,21 @@ export default {
           })
           .some(match => match)
       })
+
+      const filtered = searched.filter(s => {
+        return (
+          s.flocculation >=
+            this.flocculationLabels.indexOf(this.flocculation[0]) &&
+          s.flocculation <=
+            this.flocculationLabels.indexOf(this.flocculation[1]) &&
+          (s.attenuation_min >= this.attenuation[0] &&
+            s.attenuation_max <= this.attenuation[1]) &&
+          (s.temperature_min >= this.temperature[0] &&
+            s.temperature_max <= this.temperature[1])
+        )
+      })
+
+      return filtered
     }
   },
   async asyncData({ params, $axios }) {
@@ -112,6 +186,14 @@ export default {
       )
       .then(res => res.data)
     return { page, strains }
+  },
+  methods: {
+    clearFilters() {
+      this.search = ''
+      this.attenuation = FILTER_DEFAULTS.attenuation
+      this.temperature = FILTER_DEFAULTS.temperature
+      this.flocculation = FILTER_DEFAULTS.flocculation
+    }
   }
 }
 </script>
@@ -131,5 +213,13 @@ export default {
 
 .search-filter {
   margin-bottom: $size-5;
+  .filters {
+    margin-top: $size-5;
+    border: 1px solid $light;
+    padding: $size-5 $size-1 $size-1;
+    .field:not(:last-child) {
+      margin-bottom: $size-3;
+    }
+  }
 }
 </style>

@@ -113,7 +113,8 @@ module.exports = {
     { src: '~/plugins/intersection-observer', ssr: false },
     { src: '~/plugins/vue-observe-visibility', ssr: false },
     { src: '~/plugins/smoothscroll', ssr: false },
-    { src: '~/plugins/leaflet-markercluster', ssr: false }
+    { src: '~/plugins/leaflet-markercluster', ssr: false },
+    { src: '~/plugins/vue-slider-component', ssr: false }
   ],
 
   /*
