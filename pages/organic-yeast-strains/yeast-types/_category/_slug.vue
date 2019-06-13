@@ -54,9 +54,11 @@
             </dt>
             <dd class="strain-detail-info">
               {{ strain.temperature_min }}–{{ strain.temperature_max }}℉
-              {{ strain.temperature_min | celsius }}–{{
-                strain.temperature_max | celsius
-              }}℃
+              <small
+                >({{ strain.temperature_min | celsius }}–{{
+                  strain.temperature_max | celsius
+                }}℃)</small
+              >
             </dd>
             <dt class="strain-detail-name">Flocculation:</dt>
             <dd class="strain-detail-info">
@@ -66,6 +68,18 @@
             <dd class="strain-detail-info">
               {{ strain.attenuation_min }}–{{ strain.attenuation_max }}%
             </dd>
+            <dt class="strain-detail-name">Alohol Tolerance:</dt>
+            <dd class="strain-detail-info">
+              <span v-if="strain.alcohol_tolerance_min"
+                >{{ strain.alcohol_tolerance_min }}–</span
+              >
+              {{ strain.alcohol_tolerance }}%
+            </dd>
+          </dl>
+
+          <dl v-if="strain.species" class="strain-species">
+            <dt>Species:</dt>
+            <dd>{{ strain.species }}</dd>
           </dl>
         </header>
         <div>
@@ -310,6 +324,20 @@ export default {
       }
     }
 
+    .strain-species {
+      margin-top: $size-3;
+      text-align: center;
+      dt {
+        font-weight: $weight-bold;
+        text-align: center;
+        text-transform: uppercase;
+      }
+      dd {
+        font-size: $size-6;
+        font-style: italic;
+      }
+    }
+
     .strain-detail {
       margin: $size-5 0;
       font-size: $size-6;
@@ -323,6 +351,7 @@ export default {
 
       .strain-detail-name:not(:first-child):before {
         content: '// ';
+        margin: 0 8px;
       }
     }
   }
