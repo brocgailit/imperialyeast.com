@@ -229,7 +229,7 @@ module.exports = {
   generate: {
     routes: async function() {
       const pages = await axios
-        .get(process.env.DIRECTUS_URL + 'items/pages')
+        .get(process.env.DIRECTUS_URL + 'items/pages?filter[status]=published')
         .then(res => res.data.data)
       return pages
         .filter(page => page.status === 'published')

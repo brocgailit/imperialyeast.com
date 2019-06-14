@@ -1,2 +1,28 @@
 @import '~bulma/sass/utilities/_all';
 @import 'variables';
+
+//mixins
+@mixin custom-scrollbar($size, $color, $padding: 8px, $track-color: transparent) {
+  @include desktop {
+    &::-webkit-scrollbar {
+      width: $size + $padding * 2;
+      height: $size + $padding * 2;
+      background-color: rgba(0, 0, 0, 0);
+    }
+        
+    &::-webkit-scrollbar-track {
+        background-color: $track-color;
+    }
+        
+    &::-webkit-scrollbar-thumb {
+      border-radius: ($size / 2) + $padding;
+      background-color: $color;
+      background-clip: padding-box;
+      border: $padding solid rgba(0, 0, 0, 0);
+      box-shadow: inset -1px -1px 0px rgba(0, 0, 0, 0.05), inset 1px 1px 0px rgba(0, 0, 0, 0.05);
+    }
+    &::-webkit-scrollbar-thumb:window-inactive {
+      background-color: desaturate($color, 25%);
+    }
+  }
+}
