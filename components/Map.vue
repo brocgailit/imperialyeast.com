@@ -163,7 +163,7 @@ export default {
 .leaflet-container {
   font-size: $size-6;
   a.leaflet-popup-close-button {
-    padding: 8px 8px 0 0;
+    padding: 0.4em 0.4em 0 0;
     color: $primary;
     font-size: $size-4;
     height: $size-4;

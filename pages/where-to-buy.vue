@@ -6,7 +6,21 @@
       :key="layout.id"
       :layout="layout"
     />
-    <nuxt-child :locations="locations" />
+    <nav class="purchasing-nav container">
+      <ul>
+        <li>
+          <nuxt-link to="/where-to-buy/" class="nav-link">
+            Store Locator
+          </nuxt-link>
+        </li>
+        <li>
+          <nuxt-link to="/where-to-buy/purchase-yeast-online" class="nav-link">
+            Purchase Online
+          </nuxt-link>
+        </li>
+      </ul>
+    </nav>
+    <nuxt-child keep-alive :locations="locations" />
   </div>
 </template>
 
@@ -41,6 +55,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.purchasing-nav {
+  text-align: center;
+  margin-bottom: $size-5;
+  ul {
+    display: flex;
+    justify-content: center;
+  }
+
+  .nav-link {
+    display: inline-block;
+    padding: $size-7 $size-5;
+    color: $dark;
+    border: 1px solid $dark;
+    margin: 0 ($size-7 / 2);
+    &.nuxt-link-exact-active {
+      color: $white;
+      background-color: $primary;
+      border-color: transparent;
+    }
+  }
+}
+
 .strains {
   columns: 500px;
   column-gap: $size-7;

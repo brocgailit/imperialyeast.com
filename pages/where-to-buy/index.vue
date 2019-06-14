@@ -31,8 +31,10 @@
             : 'Showing ' + retailersNearLocation.length
         }}
         retailers within {{ this.radius }} miles of
-        {{ location.locale_names[0] }},
-        {{ location.administrative[0] }}
+        <strong
+          >{{ location.locale_names[0] }},
+          {{ location.administrative[0] }}</strong
+        >
       </p>
       <ul class="retailer-list">
         <li
@@ -179,11 +181,14 @@ export default {
   padding-bottom: $size-1;
   .location-search {
     position: relative;
+    padding: 0 4px;
     flex: 0 0 350px;
     height: 500px;
     overflow-y: scroll;
     @include custom-scrollbar(8px, $primary);
     .location-search-input {
+      background-color: $white;
+      padding-bottom: 2px;
       position: sticky;
       top: 0;
       left: 0;

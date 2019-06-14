@@ -163,7 +163,7 @@
           <h3>Ordering</h3>
           <ul>
             <li>
-              <nuxt-link to="/where-to-buy/purchase-online"
+              <nuxt-link to="/where-to-buy/purchase-yeast-online"
                 >Order Online</nuxt-link
               >
             </li>
