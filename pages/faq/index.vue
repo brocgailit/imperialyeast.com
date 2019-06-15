@@ -59,7 +59,23 @@ export default {
       DYNAMIC_COMPONENTS
     }
   },
-  computed: {},
+  jsonld() {
+    const schema = {
+      '@context': 'http://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: this.faq.map(q => ({
+        '@type': 'Question',
+        name: q.question,
+        dateCreated: q.created_on,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: q.answer,
+          dateCreated: q.modified_on
+        }
+      }))
+    }
+    return schema
+  },
   async asyncData({ params, $axios }) {
     const slug = 'faq'
     const fields = [

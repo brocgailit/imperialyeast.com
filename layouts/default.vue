@@ -27,15 +27,110 @@ import { mapState } from 'vuex'
 import Navbar from '~/components/Navbar.vue'
 import PageFooter from '~/components/PageFooter.vue'
 import ScrollTopButton from '~/components/ScrollTopButton.vue'
+
+/* const DAYS_OF_WEEK = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday'
+]
+ */
 export default {
   components: {
     Navbar,
     PageFooter,
     ScrollTopButton
   },
+  jsonld() {
+    return [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Website',
+        url: this.website.canonical_url
+      },
+      ...this.website.contacts.map(c => ({
+        '@context': 'https://schema.org',
+        '@type': c.type,
+        name: `${this.website.name} - ${c.name}`,
+        // logo: this.website.logo.data.url,
+        /* TODO:
+        image: c.image
+          ? [
+              `https:${this.website.contact.image.file.url}w=1200&h=1200`,
+              `https:${this.website.contact.image.file.url}w=1200&h=800`,
+              `https:${this.website.contact.image.file.url}w=1200&h=675`
+            ]
+          : [], */
+        /* contactPoint: c.contact_points.map(p => ({
+          '@type': 'ContactPoint',
+          telephone: p.telephone,
+          email: p.email,
+          contactType: p.contact_type,
+          areaServed: p.areas_served,
+          availableLanguage: p.available_languages,
+          contactOption: [
+            ...(p.toll_free ? ['TollFree'] : []),
+            ...(p.hearing_impaired_supported
+              ? ['HearingImpairedSupported']
+              : [])
+          ]
+        })), */
+        areaServed: c.areas_served,
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: c.geo.lat,
+          longitude: c.geo.lng
+        },
+        telephone: c.telephone,
+        email: c.email, // TODO: add this!
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: c.street_address,
+          addressLocality: c.address_locality,
+          addressRegion: c.address_region,
+          postalCode: c.postal_code,
+          addressCountry: c.address_country
+        }
+        // sameAs: this.website.social_profiles.map(s => s.url)
+        /* openingHoursSpecification: c.hours
+          ? Object.entries(
+              this.website.contact.hours.reduce((acc, hours) => {
+                DAYS_OF_WEEK.forEach(day => {
+                  const h = hours[day.toLowerCase()]
+                  Object.assign(
+                    acc,
+                    h
+                      ? {
+                          [day]: {
+                            opens: hours.from,
+                            closes: hours.to
+                          }
+                        }
+                      : {}
+                  )
+                })
+                return acc
+              }, {})
+            ).map(entry => {
+              const [d, h] = entry
+              return {
+                '@type': 'OpeningHoursSpecification',
+                closes: h.closes,
+                dayOfWeek: `http://schema.org/${d}`,
+                opens: h.opens
+              }
+            })
+          : [] */
+      }))
+    ]
+  },
   computed: {
     ...mapState({
-      notification: state => state.notifications[0]
+      notification: state => state.notifications[0],
+      website: state => state.website
     })
   }
 }

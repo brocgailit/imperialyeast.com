@@ -1,6 +1,7 @@
 export const state = () => ({
   notifications: [],
-  pages: []
+  pages: [],
+  website: {}
 })
 
 export const mutations = {
@@ -9,19 +10,28 @@ export const mutations = {
   },
   setNotifications: (state, notifications) => {
     state.notifications = notifications
+  },
+  setWebsite: (state, website) => {
+    state.website = website
   }
 }
 
 export const actions = {
   async nuxtServerInit({ commit }, { req }) {
+    // get website settings
+    const { data: website } = await this.$axios.$get(
+      `items/website?single=1&fields=*.*`
+    )
+    commit('setWebsite', website)
+
     // get notifications
-    const notifications = await this.$axios
-      .$get(`items/notifications?fields=*.*,actions.*.*`)
-      .then(res => res.data)
+    const { data: notifications } = await this.$axios.$get(
+      `items/notifications?fields=*.*,actions.*.*`
+    )
     commit('setNotifications', notifications)
 
     // get pages
-    const pages = await this.$axios.$get('items/pages').then(res => res.data)
+    const { data: pages } = await this.$axios.$get('items/pages')
     commit('setPages', pages)
   }
 }
