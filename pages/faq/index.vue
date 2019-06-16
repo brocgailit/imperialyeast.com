@@ -20,7 +20,7 @@
         </article>
         <aside class="howtos">
           <ul class="howto-list">
-            <li v-for="howto of howtos" :key="howto.id" class="howto">
+            <li v-for="(howto, idx) of howtos" :key="howto.id" class="howto">
               <div>
                 <h4 class="howto-name">{{ howto.name }}</h4>
                 <h5 class="howto-description">
@@ -29,6 +29,7 @@
                 <ol class="howto-steps">
                   <li
                     v-for="(step, s) of howto.steps"
+                    :id="'howto' + howto.id + '-step' + (idx + 1)"
                     :key="s"
                     class="howto-step"
                   >
@@ -52,6 +53,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { DYNAMIC_COMPONENTS } from '~/assets/script/dynamic-components'
 export default {
   data() {
@@ -59,21 +61,83 @@ export default {
       DYNAMIC_COMPONENTS
     }
   },
+  computed: {
+    ...mapState({
+      website: state => state.website
+    })
+  },
   jsonld() {
-    const schema = {
-      '@context': 'http://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: this.faq.map(q => ({
-        '@type': 'Question',
-        name: q.question,
-        dateCreated: q.created_on,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: q.answer,
-          dateCreated: q.modified_on
+    const schema = [
+      this.howtos.map(howto => {
+        const image = [...howto.steps]
+          .reverse()
+          .find(s => s.image)
+          .image.data.thumbnails.find(t => t.width > 500)
+        const h = {
+          '@context': 'http://schema.org',
+          '@type': 'HowTo',
+          name: howto.name,
+          description: howto.description,
+          image: {
+            '@type': 'ImageObject',
+            url: image.url
+            // width: image.width
+            // height: image.height
+          },
+          estimatedCost: {
+            '@type': 'MonetaryAmount',
+            currency: 'USD',
+            value: howto.estimated_cost
+          },
+          totalTime: `P${howto.total_time}M`, // TODO: figure how to make ISO strings make sense for all situations
+          step: howto.steps.map((s, i) => {
+            const step = {
+              '@type': 'HowToStep',
+              url: `${this.website.canonical_url}/faq#howto${howto.id}-step${i +
+                1}`,
+              name: s.name,
+              itemListElement: [{ '@type': 'HowToDirection', text: s.text }]
+            }
+            if (s.image) {
+              step.image = {
+                url: s.image.data.thumbnails.find(t => t.width > 500).url
+              }
+            }
+            return step
+          })
         }
-      }))
-    }
+
+        if (howto.tools) {
+          h.tool = howto.tools.map(t => ({
+            '@type': 'HowToTool',
+            name: t
+          }))
+        }
+
+        if (howto.supplies) {
+          h.supply = howto.supplies.map(t => ({
+            '@type': 'HowToSupply',
+            name: t
+          }))
+        }
+
+        return h
+      }),
+      {
+        '@context': 'http://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: this.faq.map(q => ({
+          '@type': 'Question',
+          name: q.question,
+          dateCreated: q.created_on,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: q.answer,
+            dateCreated: q.modified_on
+          }
+        }))
+      }
+    ]
     return schema
   },
   async asyncData({ params, $axios }) {
