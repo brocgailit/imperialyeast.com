@@ -55,16 +55,17 @@ export default {
         '@context': 'https://schema.org',
         '@type': c.type,
         name: `${this.website.name} - ${c.name}`,
-        // logo: this.website.logo.data.url,
-        /* TODO:
+        logo: this.website.logo_square.data.url,
         image: c.image
-          ? [
-              `https:${this.website.contact.image.file.url}w=1200&h=1200`,
-              `https:${this.website.contact.image.file.url}w=1200&h=800`,
-              `https:${this.website.contact.image.file.url}w=1200&h=675`
-            ]
-          : [], */
-        /* contactPoint: c.contact_points.map(p => ({
+          ? c.image.data.thumbnails
+              .filter(t =>
+                [[500, 500], [1024, 768], [1280, 720]].some(
+                  ([w, h]) => t.width === w && t.height === h
+                )
+              )
+              .map(t => t.url)
+          : [],
+        contactPoint: c.contact_points.map(p => ({
           '@type': 'ContactPoint',
           telephone: p.telephone,
           email: p.email,
@@ -77,7 +78,7 @@ export default {
               ? ['HearingImpairedSupported']
               : [])
           ]
-        })), */
+        })),
         areaServed: c.areas_served,
         geo: {
           '@type': 'GeoCoordinates',
@@ -93,37 +94,18 @@ export default {
           addressRegion: c.address_region,
           postalCode: c.postal_code,
           addressCountry: c.address_country
-        }
-        // sameAs: this.website.social_profiles.map(s => s.url)
-        /* openingHoursSpecification: c.hours
-          ? Object.entries(
-              this.website.contact.hours.reduce((acc, hours) => {
-                DAYS_OF_WEEK.forEach(day => {
-                  const h = hours[day.toLowerCase()]
-                  Object.assign(
-                    acc,
-                    h
-                      ? {
-                          [day]: {
-                            opens: hours.from,
-                            closes: hours.to
-                          }
-                        }
-                      : {}
-                  )
-                })
-                return acc
-              }, {})
-            ).map(entry => {
-              const [d, h] = entry
+        },
+        sameAs: this.website.social_profiles.map(s => s.url),
+        openingHoursSpecification: c.hours
+          ? c.hours.map(h => {
               return {
                 '@type': 'OpeningHoursSpecification',
                 closes: h.closes,
-                dayOfWeek: `http://schema.org/${d}`,
+                dayOfWeek: h.days_of_week.filter(d => d),
                 opens: h.opens
               }
             })
-          : [] */
+          : []
       }))
     ]
   },

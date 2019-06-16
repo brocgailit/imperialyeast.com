@@ -20,7 +20,7 @@ export const actions = {
   async nuxtServerInit({ commit }, { req }) {
     // get website settings
     const { data: website } = await this.$axios.$get(
-      `items/website?single=1&fields=*.*`
+      `items/website?single=1&fields=*.*,contacts.*.*`
     )
     commit('setWebsite', website)
 
