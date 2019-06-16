@@ -55,7 +55,8 @@ export default {
         '@context': 'https://schema.org',
         '@type': c.type,
         name: `${this.website.name} - ${c.name}`,
-        logo: this.website.logo_square.data.url,
+        logo: this.website.logo_square.data.thumbnails.find(t => t.width > 500)
+          .url,
         image: c.image
           ? c.image.data.thumbnails
               .filter(t =>
@@ -65,6 +66,9 @@ export default {
               )
               .map(t => t.url)
           : [],
+        priceRange: Array(c.price_range)
+          .fill('$')
+          .join(''),
         contactPoint: c.contact_points.map(p => ({
           '@type': 'ContactPoint',
           telephone: p.telephone,
