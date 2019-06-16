@@ -95,6 +95,7 @@ export default {
           postalCode: c.postal_code,
           addressCountry: c.address_country
         },
+        url: this.website.canonical_url,
         sameAs: this.website.social_profiles.map(s => s.url),
         openingHoursSpecification: c.hours
           ? c.hours.map(h => {
