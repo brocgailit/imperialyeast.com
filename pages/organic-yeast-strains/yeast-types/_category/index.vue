@@ -37,6 +37,37 @@ export default {
   components: {
     StrainList
   },
+  jsonld() {
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Organic Yeast Strains',
+          item: `${this.website.canonical_url}/organic-yeast-strains`
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Yeast Types',
+          item: `${
+            this.website.canonical_url
+          }/organic-yeast-strains/yeast-types`
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: this.type.name,
+          item: `${
+            this.website.canonical_url
+          }/organic-yeast-strains/beer-styles/${this.type.slug}`
+        }
+      ]
+    }
+    return schema
+  },
   async asyncData({ params, $axios }) {
     const { category } = params
     const { data: type } = await $axios.$get(

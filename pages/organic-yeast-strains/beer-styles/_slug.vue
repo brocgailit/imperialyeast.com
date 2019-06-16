@@ -14,9 +14,9 @@
         </li>
         <li class="is-active">
           <nuxt-link
-            :to="'/organic-yeast-strains/beer-styles/'"
+            :to="'/organic-yeast-strains/beer-styles/' + style.slug"
             aria-current="page"
-            >Beer Style</nuxt-link
+            >{{ style.name }}</nuxt-link
           >
         </li>
       </ul>
@@ -42,17 +42,52 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import StrainList from '~/components/StrainList.vue'
 export default {
   components: {
     StrainList
   },
   computed: {
+    ...mapState({
+      website: state => state.website
+    }),
     strains() {
       return this.style.recommended_strains
         ? this.style.recommended_strains.map(s => s.strains_id)
         : []
     }
+  },
+  jsonld() {
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Organic Yeast Strains',
+          item: `${this.website.canonical_url}/organic-yeast-strains`
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Beer Styles',
+          item: `${
+            this.website.canonical_url
+          }/organic-yeast-strains/beer-styles/`
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: this.style.name,
+          item: `${
+            this.website.canonical_url
+          }/organic-yeast-strains/beer-styles/${this.style.slug}`
+        }
+      ]
+    }
+    return schema
   },
   async asyncData({ params, $axios }) {
     const { slug } = params

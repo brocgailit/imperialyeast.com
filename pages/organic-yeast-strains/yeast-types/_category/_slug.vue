@@ -208,6 +208,47 @@ export default {
         : []
     }
   },
+  jsonld() {
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Organic Yeast Strains',
+          item: `${this.website.canonical_url}/organic-yeast-strains`
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Yeast Types',
+          item: `${
+            this.website.canonical_url
+          }/organic-yeast-strains/yeast-types`
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: this.strain.strain_type.name,
+          item: `${
+            this.website.canonical_url
+          }/organic-yeast-strains/beer-styles/${this.strain.strain_type.slug}`
+        },
+        {
+          '@type': 'ListItem',
+          position: 4,
+          name: this.strain.name,
+          item: `${
+            this.website.canonical_url
+          }/organic-yeast-strains/beer-styles/${this.strain.strain_type.slug}/${
+            this.strain.slug
+          }`
+        }
+      ]
+    }
+    return schema
+  },
   async asyncData({ params, $axios }) {
     const { slug } = params
     const fields = [
