@@ -61,10 +61,27 @@ export default {
     font-size: $size-4;
     font-weight: $weight-bold;
     margin-top: $size-3;
+    line-height: 1.1;
   }
 
   .layout-actions {
     margin-top: $size-3;
+  }
+  @include mobile {
+    .container {
+      padding: $size-7;
+      max-width: 100%;
+    }
+    h1 {
+      font-size: $size-2;
+    }
+    h2 {
+      font-size: $size-5;
+    }
+
+    .button {
+      max-width: 100%;
+    }
   }
 }
 
