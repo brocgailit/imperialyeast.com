@@ -232,9 +232,21 @@ module.exports = {
       const pages = await axios
         .get(process.env.DIRECTUS_URL + 'items/pages?filter[status]=published')
         .then(res => res.data.data)
-      return pages
-        .filter(page => page.status === 'published')
-        .map(page => '/' + page.slug)
+      const styles = await axios
+        .get(process.env.DIRECTUS_URL + 'items/beer_styles?filter[status]=published')
+        .then(res => res.data.data)
+      const types = await axios
+        .get(process.env.DIRECTUS_URL + 'items/strain_types?filter[status]=published')
+        .then(res => res.data.data)
+      const strains = await axios
+        .get(process.env.DIRECTUS_URL + 'items/strains?filter[status]=published&fields=*.*')
+        .then(res => res.data.data)
+      return [
+        ...pages.map(page => `/${page.slug}`),
+        ...styles.map(style => `/organic-yeast-strains/beer-styles/${style.slug}`),
+        ...types.map(type => `/organic-yeast-strains/yeast-types/${type.slug}`),
+        ...strains.map(strain => `/organic-yeast-strains/yeast-types/${strain.strain_type.slug}/${strain.slug}`)
+      ]
     }
   },
 
