@@ -5,7 +5,11 @@
         <logo />
       </nuxt-link>
     </div>
-    <nav class="global-nav" :class="{ 'is-open': isOpen }">
+    <nav
+      class="global-nav"
+      :class="{ 'is-open': isOpen }"
+      @click="isOpen = false"
+    >
       <ul>
         <li v-for="link of primaryLinks" :key="link.slug">
           <nuxt-link :to="'/' + (link.slug !== 'home' ? link.slug : '')">{{
