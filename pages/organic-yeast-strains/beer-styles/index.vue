@@ -29,7 +29,13 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
+  computed: {
+    ...mapState({
+      website: state => state.website
+    })
+  },
   jsonld() {
     const schema = {
       '@context': 'https://schema.org',

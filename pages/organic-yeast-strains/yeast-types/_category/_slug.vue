@@ -181,6 +181,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   filters: {
     celsius: f => Math.round(((f - 32) * 5) / 9),
@@ -197,6 +198,9 @@ export default {
     }
   },
   computed: {
+    ...mapState({
+      website: state => state.website
+    }),
     styles() {
       return this.strain.beer_styles
         ? this.strain.beer_styles.map(s => s.beer_styles_id)
