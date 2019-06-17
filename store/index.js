@@ -11,6 +11,9 @@ export const mutations = {
   setNotifications: (state, notifications) => {
     state.notifications = notifications
   },
+  clearNotification: (state, notification) => {
+    state.notifications = state.notifications.filter(n => n !== notification)
+  },
   setWebsite: (state, website) => {
     state.website = website
   }
@@ -33,5 +36,8 @@ export const actions = {
     // get pages
     const { data: pages } = await this.$axios.$get('items/pages')
     commit('setPages', pages)
+  },
+  clearNotification({ commit }, notification) {
+    commit('clearNotification', notification)
   }
 }

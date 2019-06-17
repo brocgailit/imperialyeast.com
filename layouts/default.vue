@@ -1,6 +1,10 @@
 <template>
   <div>
-    <div v-if="notification" class="notification">
+    <div
+      v-if="notification"
+      class="notification"
+      @click="clearNotification(notification)"
+    >
       <div v-html="notification.message" />
       <nuxt-link
         v-for="action of notification.actions"
@@ -129,6 +133,11 @@ export default {
       notification: state => state.notifications[0],
       website: state => state.website
     })
+  },
+  methods: {
+    clearNotification(notification) {
+      this.$store.dispatch('clearNotification', notification)
+    }
   }
 }
 </script>
