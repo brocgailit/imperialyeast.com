@@ -57,8 +57,8 @@ export default {
     overflow: visible;
   }
   #imperial-yeast-text {
-    transform-origin: top center;
-    transform: scale(1.2);
+    transform-origin: center;
+    transform: scale(1.5);
   }
   #yeast-text {
     display: none;
