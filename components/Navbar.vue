@@ -114,8 +114,8 @@ $logo-size: 160px;
       padding: 0;
       outline: none;
       border: none;
-      $height: 32px;
-      $thickness: 5px;
+      $height: 24px;
+      $thickness: 4px;
       position: absolute;
       height: $height;
       width: $height;
@@ -167,18 +167,28 @@ $logo-size: 160px;
       width: 100%;
       height: 100%;
       overflow: visible;
-      &.is-open ul {
-        opacity: 1;
-        display: block;
-        transform: translateY(-50%);
-      }
       ul {
         background-color: $white;
         opacity: 0;
-        transform: translateY(-100%);
+        transform: translateX(-100%);
         transition: 450ms ease-in-out;
         display: flex;
         flex-direction: column;
+        text-align: left;
+        li {
+          padding: 0;
+          border-bottom: 1px solid $light;
+          a {
+            display: inline-block;
+            width: 100%;
+          }
+        }
+      }
+
+      &.is-open ul {
+        opacity: 1;
+        display: block;
+        transform: translateX(0);
       }
     }
   }
