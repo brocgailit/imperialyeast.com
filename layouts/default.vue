@@ -26,6 +26,9 @@
     <div class="scroll-top-container">
       <scroll-top-button />
     </div>
+    <transition name="shade">
+      <div v-if="isShaded" class="shade" @click="closeNavigation" />
+    </transition>
   </div>
 </template>
 
@@ -134,12 +137,16 @@ export default {
   computed: {
     ...mapState({
       notification: state => state.notifications[0],
-      website: state => state.website
+      website: state => state.website,
+      isShaded: state => state.showNavigation
     })
   },
   methods: {
     clearNotification(notification) {
       this.$store.dispatch('clearNotification', notification)
+    },
+    closeNavigation() {
+      this.$store.dispatch('closeNavigation')
     }
   }
 }
@@ -157,6 +164,7 @@ export default {
   text-align: center;
   color: $white;
   font-weight: bold;
+  margin: 0 !important;
   // padding: $size-7;
   position: sticky;
   top: 0;
@@ -179,5 +187,25 @@ export default {
 .slide-up-leave-to {
   opacity: 0;
   transform: translateY(20px);
+}
+
+.shade {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vh;
+  height: 100vh;
+  background-color: $dark;
+  opacity: 0.5;
+  z-index: 1075;
+}
+
+.shade-enter-active,
+.shade-leave-active {
+  transition: opacity 250ms linear;
+}
+.shade-enter,
+.shade-leave-to {
+  opacity: 0;
 }
 </style>

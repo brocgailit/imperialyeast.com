@@ -36,15 +36,22 @@ export default {
   components: {
     Logo
   },
-  data() {
-    return {
-      isOpen: false
-    }
-  },
   computed: {
     ...mapState({
       pages: state => state.pages
     }),
+    isOpen: {
+      get() {
+        return this.$store.state.showNavigation
+      },
+      set(visible) {
+        if (visible) {
+          this.$store.dispatch('openNavigation')
+        } else {
+          this.$store.dispatch('closeNavigation')
+        }
+      }
+    },
     primaryLinks() {
       return this.pages
         ? this.pages.filter(

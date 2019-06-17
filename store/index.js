@@ -1,7 +1,8 @@
 export const state = () => ({
   notifications: [],
   pages: [],
-  website: {}
+  website: {},
+  showNavigation: false
 })
 
 export const mutations = {
@@ -16,6 +17,12 @@ export const mutations = {
   },
   setWebsite: (state, website) => {
     state.website = website
+  },
+  setNavigationVisibility: (state, visible) => {
+    state.showNavigation = visible
+  },
+  toggleNavigationVisibility: state => {
+    state.showNavigation = !state.showNavigation
   }
 }
 
@@ -39,5 +46,11 @@ export const actions = {
   },
   clearNotification({ commit }, notification) {
     commit('clearNotification', notification)
+  },
+  openNavigation({ commit }) {
+    commit('setNavigationVisibility', true)
+  },
+  closeNavigation({ commit }) {
+    commit('setNavigationVisibility', false)
   }
 }
