@@ -243,4 +243,18 @@ export default {
     }
   }
 }
+
+@include mobile {
+  ::v-deep .vue-slider-marks {
+    .vue-slider-mark {
+      display: none;
+      &:first-child {
+        display: block;
+      }
+      &:last-child {
+        display: block;
+      }
+    }
+  }
+}
 </style>
