@@ -179,27 +179,39 @@ export default {
     margin-right: $size-5;
     .faq-list-item {
       margin-bottom: $size-5;
-      &:before {
-        content: 'Q';
-        font-weight: $weight-bold;
-        font-size: $size-4;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        float: left;
-        background-color: $primary;
-        color: $white;
-        border-radius: 5px;
-        width: 50px;
-        height: 50px;
-        margin: 0 $size-7 $size-7;
-      }
 
       .question {
+        display: flex;
+        align-items: center;
         font-weight: $weight-bold;
         font-size: $size-5;
         line-height: 1.1;
         margin-bottom: $size-7;
+        &:before {
+          content: 'Q';
+          font-weight: $weight-bold;
+          font-size: $size-4;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          float: left;
+          background-color: $primary;
+          color: $white;
+          border-radius: 5px;
+          flex: 0 0 50px;
+          width: 50px;
+          height: 50px;
+          margin: 0 $size-7;
+        }
+        &:after {
+          content: '';
+          clear: both;
+          display: table;
+        }
+      }
+
+      .answer {
+        padding: $size-7;
       }
     }
   }
@@ -238,6 +250,12 @@ export default {
           }
         }
       }
+    }
+  }
+
+  @include touch {
+    .container {
+      display: block;
     }
   }
 }
