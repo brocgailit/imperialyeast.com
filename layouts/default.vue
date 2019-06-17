@@ -1,10 +1,6 @@
 <template>
   <div>
-    <div
-      v-if="notification"
-      class="notification"
-      @click="clearNotification(notification)"
-    >
+    <div v-if="notification" class="notification">
       <div v-html="notification.message" />
       <nuxt-link
         v-for="action of notification.actions"
@@ -14,6 +10,13 @@
       >
         {{ action.label }}
       </nuxt-link>
+      <button
+        class="delete"
+        type="button"
+        @click="clearNotification(notification)"
+      >
+        Close
+      </button>
     </div>
     <Navbar />
     <main>
@@ -154,11 +157,11 @@ export default {
   text-align: center;
   color: $white;
   font-weight: bold;
-  padding: $size-7;
+  // padding: $size-7;
   position: sticky;
   top: 0;
   .button {
-    margin: 0 $size-7;
+    margin: 4px $size-7;
   }
 }
 
