@@ -1,7 +1,9 @@
 <template>
   <header class="header-nav">
     <div class="nav-logo">
-      <logo />
+      <nuxt-link to="/">
+        <logo />
+      </nuxt-link>
     </div>
     <nav class="global-nav">
       <ul>
