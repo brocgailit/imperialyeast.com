@@ -227,7 +227,7 @@ export default {
 }
 
 .search-filter {
-  z-index: 1080;
+  z-index: 1070;
   background-color: rgba($white, 0.9);
   backdrop-filter: blur(10px);
   padding: $size-7;
