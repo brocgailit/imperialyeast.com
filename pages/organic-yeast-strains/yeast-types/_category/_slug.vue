@@ -213,7 +213,7 @@ export default {
     }
   },
   jsonld() {
-    const schema = {
+    const breadcrumb = {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       itemListElement: [
@@ -251,7 +251,45 @@ export default {
         }
       ]
     }
-    return schema
+
+    const product = {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      name: this.strain.name,
+      description: this.strain.short_description,
+      sku: this.strain.product_code,
+      brand: {
+        '@type': 'Thing',
+        name: this.website.name
+      },
+      // TODO: reviews!!!
+      // TODO: aggregate ratings!!!
+      offers: {
+        '@type': 'AggregateOffer',
+        lowPrice: this.strain.low_price || this.strain.strain_type.low_price,
+        highPrice: this.strain.high_price || this.strain.strain_type.high_price,
+        priceCurrency: 'USD',
+        offerCount: 1
+      }
+    }
+
+    if (this.strain.gtin) {
+      product.gtin13 = this.strain.gtin.padStart(13, '0')
+    }
+
+    if (this.strain.image || this.strain.strain_type.home_packaging_image) {
+      product.image = (
+        this.strain.image || this.strain.strain_type.home_packaging_image
+      ).data.thumbnails
+        .filter(t =>
+          [[500, 500], [1024, 768], [1280, 720]].some(
+            ([w, h]) => t.width === w && t.height === h
+          )
+        )
+        .map(t => t.url)
+    }
+
+    return [breadcrumb, product]
   },
   async asyncData({ params, $axios }) {
     const { slug } = params
