@@ -32,10 +32,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import StrainList from '~/components/StrainList.vue'
 export default {
   components: {
     StrainList
+  },
+  computed: {
+    ...mapState({
+      website: state => state.website
+    })
   },
   jsonld() {
     const schema = {
