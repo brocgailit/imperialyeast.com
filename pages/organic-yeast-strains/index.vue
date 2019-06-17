@@ -12,7 +12,7 @@
           v-model="search"
           type="search"
           icon="search"
-          placeholder="Search yeast names, product codes, descriptions, and keywords"
+          placeholder="Names, product codes, descriptions, and keywords"
         ></b-input>
       </b-field>
       <div class="filter-actions">
@@ -217,7 +217,13 @@ export default {
 }
 
 .search-filter {
+  z-index: 1080;
+  background-color: rgba($white, 0.9);
+  backdrop-filter: blur(10px);
+  padding: $size-7;
   margin-bottom: $size-5;
+  position: sticky;
+  top: $navbar-height-touch;
   .filters {
     margin-top: $size-5;
     border: 1px solid $light;

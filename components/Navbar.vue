@@ -105,6 +105,7 @@ $logo-size: 160px;
   }
 
   @include touch {
+    height: $navbar-height-touch;
     background-color: rgba($white, 0.95);
     backdrop-filter: blur(15px);
     top: 0;
