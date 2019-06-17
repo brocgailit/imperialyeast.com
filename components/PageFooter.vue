@@ -27,10 +27,10 @@
       </li>
     </ul>
     <p class="copyright-notice">
-      &copy; 2019 Imperial Yeast. All rights reserved.
+      &copy; {{ year }} {{ website.name }}. All rights reserved.
     </p>
     <p class="attribution">
-      Imperial Yeast is certified organic by the
+      {{ website.name }} is certified organic by the
       <a
         href="http://www.usda.gov/wps/portal/usda/usdahome?contentidonly=true&contentid=organic-agriculture.html"
         >USDA</a
@@ -46,8 +46,14 @@
 <script>
 import { mapState } from 'vuex'
 export default {
+  data() {
+    return {
+      year: new Date().getFullYear()
+    }
+  },
   computed: {
     ...mapState({
+      website: state => state.website,
       footerLinks: state =>
         state.pages.filter(
           page => page.status === 'published' && page.footer_navigation
