@@ -177,7 +177,7 @@ $logo-size: 160px;
         background-color: $white;
         opacity: 0;
         transform: translateX(-100%);
-        transition: 450ms ease-in-out;
+        transition: 250ms ease-in-out;
         display: flex;
         flex-direction: column;
         text-align: left;
