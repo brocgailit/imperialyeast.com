@@ -2,20 +2,10 @@
   <footer class="page-footer">
     <nav>
       <ul>
-        <li>
-          <nuxt-link to="/">Home</nuxt-link>
-        </li>
-        <li>
-          <nuxt-link to="/">Home</nuxt-link>
-        </li>
-        <li>
-          <nuxt-link to="/">Home</nuxt-link>
-        </li>
-        <li>
-          <nuxt-link to="/">Home</nuxt-link>
-        </li>
-        <li>
-          <nuxt-link to="/">Home</nuxt-link>
+        <li v-for="link of footerLinks" :key="link.slug">
+          <nuxt-link :to="'/' + (link.slug !== 'home' ? link.slug : '')">{{
+            link.name
+          }}</nuxt-link>
         </li>
       </ul>
     </nav>
@@ -53,6 +43,20 @@
   </footer>
 </template>
 
+<script>
+import { mapState } from 'vuex'
+export default {
+  computed: {
+    ...mapState({
+      footerLinks: state =>
+        state.pages.filter(
+          page => page.status === 'published' && page.footer_navigation
+        )
+    })
+  }
+}
+</script>
+
 <style lang="scss">
 .page-footer {
   width: 100%;
@@ -76,6 +80,7 @@
           text-transform: uppercase;
           font-size: $size-6;
           padding: $size-7;
+          white-space: nowrap;
         }
       }
     }
