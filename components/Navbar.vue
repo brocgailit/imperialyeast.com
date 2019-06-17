@@ -172,7 +172,8 @@ $logo-size: 160px;
       top: 100%;
       left: 0;
       width: 100%;
-      height: 100%;
+      height: 0;
+      pointer-events: none;
       overflow: visible;
       ul {
         background-color: $white;
@@ -186,6 +187,7 @@ $logo-size: 160px;
           padding: 0;
           border-bottom: 1px solid $light;
           a {
+            pointer-events: all;
             display: inline-block;
             width: 100%;
           }
