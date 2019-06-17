@@ -107,7 +107,8 @@ export default {
       }
 
       const width =
-        typeof window !== 'undefined' && window.matchMedia('(min-width: 769px)')
+        typeof window !== 'undefined' &&
+        window.matchMedia('(min-width: 769px)').matches
           ? 1920
           : 768
       return this.layout.background_image && this.isVisible
@@ -118,7 +119,10 @@ export default {
     }
   },
   async mounted() {
-    if (this.layout.background_image) {
+    if (
+      this.layout.background_image &&
+      window.matchMedia('(min-width: 1024px)').matches
+    ) {
       this.parallaxAnimation = requestAnimationFrame(this.setScrollParallax)
     }
     this.supportsWebP = await supportsWebP
@@ -143,7 +147,7 @@ export default {
 .content-block {
   position: relative;
   overflow: hidden;
-  padding: $size-1;
+  padding: $size-1 $size-7;
 
   .layout-content {
     display: flex;
@@ -259,6 +263,15 @@ export default {
   }
   .form-container {
     max-width: $readability-width;
+  }
+
+  @include touch {
+    .background-image {
+      transform: translate(0, 0) !important;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+    }
   }
 }
 </style>
