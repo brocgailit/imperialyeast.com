@@ -3,12 +3,16 @@
     id="imperial-logo"
     xmlns="http://www.w3.org/2000/svg"
     width="100%"
-    viewBox="0 0 765.865 702.522"
+    :viewBox="'0 0 765.865 ' + (crownOnly ? 312 : 702.5)"
     role="img"
     aria-labelledby="logo-title"
   >
     <title id="logo-title">Imperial Organic Yeast Logo</title>
-    <g id="imperial-yeast-text" :class="'has-text-' + textColor">
+    <g
+      v-if="!crownOnly"
+      id="imperial-yeast-text"
+      :class="'has-text-' + textColor"
+    >
       <path
         style="line-height:0%;-inkscape-font-specification:'Alternate Gothic No1 D';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start"
         d="M0 363.982v217.065h30.264V363.982zm56.568 0v217.065h25.385v-153.28l25.383 153.28h13.018l25.382-153.28v153.28h26.035V363.982h-36.447l-21.48 108.045-21.479-108.045zm142.5 0v217.065h30.266v-88.193h4.23c18.225 0 31.567-4.88 39.377-13.993 9.113-10.088 11.391-21.154 11.391-51.093 0-24.082-1.952-33.52-8.46-44.91-9.113-14.97-19.201-18.876-48.165-18.876zm108.176 0v217.065h75.826v-28.313h-45.56v-71.27h29.94V453.15h-29.94v-60.855h42.957v-28.313zm98.766 0v217.065h30.265v-92.098c4.556-.325 5.534-.326 10.74-1.303l17.573 93.4h32.543l-21.152-103.812c12.691-15.946 15.294-25.384 15.294-52.72 0-18.225-2.603-30.266-8.46-40.68-8.462-14.97-20.177-19.852-47.188-19.852zm114.533 0v217.065h30.266V363.982zm81.953 0l-29.615 217.065h29.289l5.207-48.815h27.338l5.531 48.815h29.615L641.55 363.982zm90.148 0v217.065h73.221v-28.313h-42.957V363.982zm-463.31 28.313h4.23c11.065 0 17.248 3.254 19.526 10.414.976 3.58 1.953 14.97 1.953 25.709 0 11.065-.977 22.455-1.953 26.035-2.278 7.16-8.46 10.414-19.526 10.414h-4.23zm206.941 0h4.23c16.273 0 21.153 5.859 21.153 26.361 0 20.177-.324 24.407-1.951 29.614-2.278 6.834-8.136 10.087-19.201 10.087h-4.23zm184.77 11.064l10.414 100.559h-20.826z"
@@ -39,6 +43,10 @@ export default {
     color: {
       type: String,
       default: 'primary'
+    },
+    crownOnly: {
+      type: Boolean,
+      default: false
     }
   }
 }
