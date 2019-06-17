@@ -5,7 +5,7 @@
         <logo />
       </nuxt-link>
     </div>
-    <nav class="global-nav">
+    <nav class="global-nav" :class="{ 'is-open': isOpen }">
       <ul>
         <li v-for="link of primaryLinks" :key="link.slug">
           <nuxt-link :to="'/' + (link.slug !== 'home' ? link.slug : '')">{{
@@ -14,6 +14,14 @@
         </li>
       </ul>
     </nav>
+    <button
+      class="menu-button"
+      :class="{ 'is-open': isOpen }"
+      type="button"
+      @click="isOpen = !isOpen"
+    >
+      <div class="menu-button-stroke" />
+    </button>
   </header>
 </template>
 
@@ -23,6 +31,11 @@ import Logo from '~/components/Logo.vue'
 export default {
   components: {
     Logo
+  },
+  data() {
+    return {
+      isOpen: false
+    }
   },
   computed: {
     ...mapState({
@@ -44,38 +57,128 @@ export default {
 
 <style lang="scss">
 $logo-size: 160px;
+
 .header-nav {
   background-color: $white;
   position: sticky;
   top: calc(-#{$logo-size} - #{$size-5});
   z-index: 1080;
   border-bottom: 1px solid rgba($grey, 0.25);
-}
-.nav-logo {
-  width: $logo-size;
-  height: $logo-size;
-  margin: $size-5 auto;
-}
-.global-nav {
-  text-align: center;
-  ul {
+  .nav-logo {
+    width: $logo-size;
+    height: $logo-size;
+    margin: $size-5 auto;
+  }
+  .global-nav {
+    text-align: center;
+    ul {
+      display: flex;
+      justify-content: center;
+      li {
+        padding: $size-7 0;
+        a {
+          text-transform: uppercase;
+          color: $black;
+          font-weight: $weight-bold;
+          font-size: $size-6;
+          padding: $size-7;
+          transition: 150ms ease-in-out;
+          &:hover {
+            opacity: 0.75;
+          }
+          &.nuxt-link-active {
+            color: $primary;
+          }
+        }
+      }
+    }
+  }
+
+  @include desktop {
+    .menu-button {
+      display: none;
+    }
+  }
+
+  @include touch {
+    top: 0;
     display: flex;
     justify-content: center;
-    li {
-      padding: $size-7 0;
-      a {
-        text-transform: uppercase;
-        color: $black;
-        font-weight: $weight-bold;
-        font-size: $size-6;
-        padding: $size-7;
-        transition: 150ms ease-in-out;
-        &:hover {
-          opacity: 0.75;
+    align-items: center;
+    .nav-logo {
+      width: $logo-size * 0.5;
+      height: $logo-size * 0.5;
+      margin: $size-7 auto;
+    }
+    .menu-button {
+      padding: 0;
+      outline: none;
+      border: none;
+      $height: 32px;
+      $thickness: 5px;
+      position: absolute;
+      height: $height;
+      width: $height;
+      left: $size-2;
+      top: calc(50% - #{$height / 2});
+      background-color: transparent;
+      .menu-button-stroke {
+        position: relative;
+        width: 100%;
+        height: $thickness;
+        &,
+        &:before,
+        &:after {
+          background-color: $grey;
+          transition: 250ms ease-in-out;
         }
-        &.nuxt-link-active {
-          color: $primary;
+        &:before,
+        &:after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
         }
+        &:before {
+          transform: translateY(-$height/2 + $thickness);
+        }
+        &:after {
+          transform: translateY($height/2 - $thickness);
+        }
+      }
+      &.is-open {
+        .menu-button-stroke {
+          background-color: transparent;
+          &:before {
+            transform: translateY(0) rotate(135deg);
+          }
+          &:after {
+            transform: translateY(0) rotate(-135deg);
+          }
+        }
+      }
+    }
+    .global-nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      &.is-open ul {
+        opacity: 1;
+        display: block;
+        transform: translateY(-50%);
+      }
+      ul {
+        background-color: $white;
+        opacity: 0;
+        transform: translateY(-100%);
+        transition: 450ms ease-in-out;
+        display: flex;
+        flex-direction: column;
       }
     }
   }
