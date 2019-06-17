@@ -192,7 +192,7 @@ export default {
       position: sticky;
       top: 0;
       left: 0;
-      z-index: 1080;
+      z-index: 1070;
     }
 
     .retailer-counts {
