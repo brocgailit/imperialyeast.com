@@ -29,6 +29,15 @@
         { 'has-image': images.length }
       ]"
     >
+      <div v-if="images.length" class="image-container">
+        <responsive-image
+          v-for="image of images"
+          :key="image.file.id"
+          :file="image.file"
+          :alt="image.description"
+          lazy
+        />
+      </div>
       <article>
         <header v-if="layout.heading">
           <h3>{{ layout.heading }}</h3>
@@ -41,15 +50,6 @@
           :actions="layout.actions"
         />
       </article>
-      <div v-if="images.length" class="image-container">
-        <responsive-image
-          v-for="image of images"
-          :key="image.file.id"
-          :file="image.file"
-          :alt="image.description"
-          lazy
-        />
-      </div>
     </div>
     <ul
       v-if="layout.bullets && layout.bullets.length"
@@ -150,28 +150,30 @@ export default {
   padding: $size-1 $size-7;
 
   .layout-content {
-    display: flex;
-    flex-direction: column-reverse;
-    &.is-row {
-      flex-direction: row-reverse;
-    }
-    &.is-row-reverse {
-      flex-direction: row;
-    }
-
-    &.is-row,
-    &.is-row-reverse {
-      &.has-image {
-        align-items: center;
-      }
-    }
-    &.is-column-reverse {
+    @include desktop {
+      display: flex;
       flex-direction: column;
-    }
-    &.has-image {
-      > * {
-        flex: 0 0 50%;
-        padding: $size-5;
+      &.is-row {
+        flex-direction: row;
+      }
+      &.is-row-reverse {
+        flex-direction: row;
+      }
+
+      &.is-row,
+      &.is-row-reverse {
+        &.has-image {
+          align-items: center;
+        }
+      }
+      &.is-column-reverse {
+        flex-direction: column-reverse;
+      }
+      &.has-image {
+        > * {
+          flex: 0 0 50%;
+          padding: $size-5;
+        }
       }
     }
     &:not(.has-image) {
@@ -275,9 +277,30 @@ export default {
     .layout-content.has-image > * {
       padding: $size-7;
     }
+
+    .bullet-list {
+      display: block;
+      .bullet {
+        width: 100%;
+        .bullet-title {
+          font-size: $size-5;
+        }
+        .bullet-text {
+          font-size: $size-6;
+        }
+      }
+      .bullet:not(:last-child) {
+        margin-bottom: $size-5;
+      }
+    }
   }
 
   @include touch {
+    .image-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: $size-5;
+    }
     .background-image {
       transform: translate(0, 0) !important;
       width: 100%;
