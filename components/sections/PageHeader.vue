@@ -80,21 +80,23 @@ export default {
 .page-header {
   position: relative;
   overflow: hidden;
-  padding: $size-1;
+  padding: $size-1 $size-7;
   .container {
     max-width: $readability-width;
   }
   header {
     text-align: center;
+    line-height: 1.1;
+    margin-bottom: $size-5;
   }
   h1 {
     font-family: $family-heading;
     font-size: $size-1;
+    margin-bottom: $size-7;
   }
   h2 {
     font-weight: $weight-bold;
     font-size: $size-4;
-    line-height: 1.1;
     opacity: 0.85;
   }
   .body {
@@ -137,6 +139,19 @@ export default {
     background-position: center;
     background-repeat: no-repeat;
     background-size: 125%;
+  }
+
+  @include mobile {
+    padding: $size-3 $size-7;
+    h1 {
+      font-size: $size-2;
+    }
+    h2 {
+      font-size: $size-5;
+    }
+    p {
+      font-size: $size-6;
+    }
   }
 }
 </style>
