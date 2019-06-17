@@ -44,6 +44,16 @@ export default {
     PageFooter,
     ScrollTopButton
   },
+  head() {
+    return {
+      link: [
+        {
+          rel: 'canonical',
+          href: this.website.canonical_url + this.$route.path
+        }
+      ]
+    }
+  },
   jsonld() {
     return [
       {
