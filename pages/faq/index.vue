@@ -68,7 +68,7 @@ export default {
   },
   jsonld() {
     const schema = [
-      this.howtos.map(howto => {
+      ...this.howtos.map(howto => {
         const image = [...howto.steps]
           .reverse()
           .find(s => s.image)
@@ -80,9 +80,9 @@ export default {
           description: howto.description,
           image: {
             '@type': 'ImageObject',
-            url: image.url
-            // width: image.width
-            // height: image.height
+            url: image.url,
+            width: image.width,
+            height: image.height
           },
           estimatedCost: {
             '@type': 'MonetaryAmount',
@@ -99,8 +99,12 @@ export default {
               itemListElement: [{ '@type': 'HowToDirection', text: s.text }]
             }
             if (s.image) {
+              const stepImage = s.image.data.thumbnails.find(t => t.width > 500)
               step.image = {
-                url: s.image.data.thumbnails.find(t => t.width > 500).url
+                '@type': 'ImageObject',
+                url: stepImage.url,
+                width: stepImage.width,
+                height: stepImage.height
               }
             }
             return step
@@ -110,14 +114,14 @@ export default {
         if (howto.tools) {
           h.tool = howto.tools.map(t => ({
             '@type': 'HowToTool',
-            name: t
+            name: t.name
           }))
         }
 
         if (howto.supplies) {
           h.supply = howto.supplies.map(t => ({
             '@type': 'HowToSupply',
-            name: t
+            name: t.name
           }))
         }
 
@@ -132,7 +136,7 @@ export default {
           dateCreated: q.created_on,
           acceptedAnswer: {
             '@type': 'Answer',
-            text: q.answer,
+            text: q.answer.replace(/(<([^>]+)>)/gi, ''),
             dateCreated: q.modified_on
           }
         }))
