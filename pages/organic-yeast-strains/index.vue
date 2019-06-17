@@ -232,8 +232,6 @@ export default {
   backdrop-filter: blur(10px);
   padding: $size-7;
   margin-bottom: $size-5;
-  position: sticky;
-  top: $navbar-height-touch;
   .filters {
     margin-top: $size-5;
     border: 1px solid $light;
@@ -255,6 +253,12 @@ export default {
         display: block;
       }
     }
+  }
+}
+@include touch {
+  .search-filter {
+    position: sticky;
+    top: $navbar-height-touch;
   }
 }
 </style>
