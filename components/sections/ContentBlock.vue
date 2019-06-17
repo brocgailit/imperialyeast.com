@@ -264,6 +264,18 @@ export default {
   .form-container {
     max-width: $readability-width;
   }
+  @include mobile {
+    padding: $size-2 $size-7;
+    header {
+      margin-bottom: $size-7;
+    }
+    h3 {
+      font-size: $size-3;
+    }
+    .layout-content.has-image > * {
+      padding: $size-7;
+    }
+  }
 
   @include touch {
     .background-image {
