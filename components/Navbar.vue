@@ -105,6 +105,8 @@ $logo-size: 160px;
   }
 
   @include touch {
+    background-color: rgba($white, 0.95);
+    backdrop-filter: blur(15px);
     top: 0;
     display: flex;
     justify-content: center;
