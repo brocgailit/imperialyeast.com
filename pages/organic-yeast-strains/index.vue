@@ -1,11 +1,13 @@
 <template>
   <div>
-    <component
-      :is="DYNAMIC_COMPONENTS.find(c => c.name === layout.type).ref"
-      v-for="layout of page.layouts"
-      :key="layout.id"
-      :layout="layout"
-    />
+    <div id="component-container">
+      <component
+        :is="DYNAMIC_COMPONENTS.find(c => c.name === layout.type).ref"
+        v-for="layout of page.layouts"
+        :key="layout.id"
+        :layout="layout"
+      />
+    </div>
     <nav class="search-filter container">
       <b-field label="Search">
         <b-input
@@ -13,6 +15,7 @@
           type="search"
           icon="search"
           placeholder="Names, product codes, descriptions, and keywords"
+          @input="handleSearchInput"
         ></b-input>
       </b-field>
       <div class="filter-actions">
@@ -56,7 +59,7 @@
         </b-field>
       </div>
     </nav>
-    <section>
+    <section id="search-results">
       <div class="strains container">
         <article
           v-for="(group, name) in groups"
@@ -198,6 +201,13 @@ export default {
       this.attenuation = FILTER_DEFAULTS.attenuation
       this.temperature = FILTER_DEFAULTS.temperature
       this.flocculation = FILTER_DEFAULTS.flocculation
+    },
+    handleSearchInput() {
+      // scroll to top of list
+      const { height } = document
+        .getElementById('component-container')
+        .getBoundingClientRect()
+      window.scrollTo(0, height)
     }
   }
 }
