@@ -438,5 +438,14 @@ export default {
       }
     }
   }
+
+  @include mobile {
+    flex-wrap: wrap;
+    padding: 0 $size-7;
+    aside {
+      margin: $size-7 0;
+      flex: 1 0 100%;
+    }
+  }
 }
 </style>
