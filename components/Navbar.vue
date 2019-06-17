@@ -1,7 +1,7 @@
 <template>
   <header class="header-nav">
     <div class="nav-logo">
-      <nuxt-link to="/">
+      <nuxt-link to="/" @click="isOpen = false">
         <logo />
       </nuxt-link>
     </div>
