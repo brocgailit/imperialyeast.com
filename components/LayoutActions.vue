@@ -22,3 +22,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+@include mobile {
+  .button.is-medium {
+    font-size: 1rem;
+  }
+}
+</style>
