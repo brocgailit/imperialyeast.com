@@ -30,8 +30,6 @@
         <b-field label="Flocculation">
           <vue-slider
             v-model="flocculation"
-            :min="0"
-            :max="7"
             :data="flocculationLabels"
             :interval="1"
             marks
@@ -52,8 +50,6 @@
         <b-field label="Temperature">
           <vue-slider
             v-model="temperature"
-            :min="32"
-            :max="100"
             :marks="{ '0': { label: '32℉' }, '100': { label: '100℉' } }"
           ></vue-slider>
         </b-field>
