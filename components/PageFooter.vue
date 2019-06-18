@@ -10,14 +10,18 @@
       </ul>
     </nav>
     <ul class="footer-social-media">
-      <li v-for="profile of website.social_profiles" :key="profile.name">
+      <li v-for="profile of website.social_profiles" :key="profile.platform">
         <a
           :href="profile.url"
           rel="noopener"
           target="_blank"
-          :aria-label="profile.name"
+          :aria-label="profile.platform"
         >
-          <fa-icon :icon="['fab', profile.platform]" size="lg" />
+          <fa-icon
+            :icon="['fab', profile.platform]"
+            size="lg"
+            :title="profile.platform"
+          />
         </a>
       </li>
     </ul>
@@ -82,8 +86,8 @@ export default {
           display: inline-block;
           text-transform: uppercase;
           font-size: $size-6;
-          padding: 0 $size-7;
-          margin: 4px;
+          padding: 4px $size-7;
+          margin: 8px;
           white-space: nowrap;
         }
       }

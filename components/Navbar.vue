@@ -6,11 +6,13 @@
       </nuxt-link>
     </div>
     <nav
+      role="navigation"
+      aria-label="Main"
       class="global-nav"
       :class="{ 'is-open': isOpen }"
       @click="isOpen = false"
     >
-      <ul>
+      <ul id="menu">
         <li v-for="link of primaryLinks" :key="link.slug">
           <nuxt-link :to="'/' + (link.slug !== 'home' ? link.slug : '')">{{
             link.name
@@ -19,12 +21,17 @@
       </ul>
     </nav>
     <button
+      aria-haspopup="true"
+      :aria-expanded="isOpen"
+      aria-controls="menu"
+      aria-label="Navigation"
       class="menu-button"
       :class="{ 'is-open': isOpen }"
       type="button"
       @click="isOpen = !isOpen"
     >
       <div class="menu-button-stroke" />
+      <span class="menu-button-title">Main Menu</span>
     </button>
   </header>
 </template>
@@ -136,6 +143,14 @@ $logo-size: 160px;
       left: $size-2;
       top: calc(50% - #{$height / 2});
       background-color: transparent;
+      .menu-button-title {
+        position: absolute;
+        display: inline-block;
+        overflow: hidden;
+        text-indent: -8675309px;
+        width: 1px;
+        height: 0;
+      }
       .menu-button-stroke {
         position: relative;
         width: 100%;
