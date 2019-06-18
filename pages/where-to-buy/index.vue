@@ -32,8 +32,10 @@
         }}
         retailers within {{ this.radius }} miles of
         <strong
-          >{{ location.locale_names[0] }},
-          {{ location.administrative[0] }}</strong
+          >{{
+            (location.city ? location.city[0] : null) ||
+              location.locale_names[0]
+          }}, {{ location.administrative[0] }}</strong
         >
       </p>
       <ul class="retailer-list">
@@ -114,6 +116,9 @@ export default {
       radius: 50 // miles
     }
   },
+  mounted() {
+    this.getLocationByGeolocation()
+  },
   methods: {
     handleSearchInput: debounce(async function(query) {
       this.loadingSearchResults = true
@@ -126,7 +131,34 @@ export default {
       })
       this.loadingSearchResults = false
       this.searchResults = location.hits
-    }, 300)
+    }, 300),
+    getGeolocation() {
+      const options = {
+        enableHighAccuracy: false,
+        timeout: Infinity,
+        maximumAge: 1000 * 30
+      }
+      return new Promise((resolve, reject) =>
+        navigator.geolocation.getCurrentPosition(resolve, reject, options)
+      )
+    },
+    async getLocationByGeolocation() {
+      try {
+        const { coords } = await this.getGeolocation()
+        const aroundLatLng = `${coords.latitude},${coords.longitude}`
+        const { data: location } = await this.$axios({
+          url: 'functions/reverse-geocode',
+          baseURL: '/.netlify/',
+          params: {
+            aroundLatLng
+          }
+        })
+        console.log()
+        this.location = location.hits[0]
+      } catch (e) {
+        console.warning(e)
+      }
+    }
   },
   computed: {
     zoom() {
