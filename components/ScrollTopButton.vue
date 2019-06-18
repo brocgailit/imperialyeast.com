@@ -51,15 +51,20 @@ export default {
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  border: 3px solid $light;
+  border: 3px solid $grey;
   border-radius: 100%;
   width: 65px;
   height: 65px;
-  color: $light;
+  color: $grey;
   transition: 150ms;
+  cursor: pointer;
   &:hover {
-    color: $grey;
-    background-color: $light;
+    color: $light;
+    background-color: $grey;
+  }
+  > * {
+    display: block;
+    margin: 0 auto;
   }
 }
 </style>

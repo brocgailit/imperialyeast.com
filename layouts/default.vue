@@ -175,6 +175,7 @@ export default {
 
 .scroll-top-container {
   position: fixed;
+  z-index: 8675309;
   bottom: $size-1;
   right: $size-5;
 }
