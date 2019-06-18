@@ -10,19 +10,14 @@
       </ul>
     </nav>
     <ul class="footer-social-media">
-      <li>
-        <a href="https://www.instagram.com" aria-label="instagram">
-          <fa-icon :icon="['fab', 'instagram']" size="lg" />
-        </a>
-      </li>
-      <li>
-        <a href="https://www.facebook.com" aria-label="facebook">
-          <fa-icon :icon="['fab', 'facebook']" size="lg" />
-        </a>
-      </li>
-      <li>
-        <a href="https://www.youtube.com" aria-label="youtube">
-          <fa-icon :icon="['fab', 'youtube']" size="lg" />
+      <li v-for="profile of website.social_profiles" :key="profile.name">
+        <a
+          :href="profile.url"
+          rel="noopener"
+          target="_blank"
+          :aria-label="profile.name"
+        >
+          <fa-icon :icon="['fab', profile.platform]" size="lg" />
         </a>
       </li>
     </ul>

@@ -154,7 +154,7 @@ module.exports = {
             set: '@fortawesome/free-brands-svg-icons',
             icons: [
               'faFacebook',
-              // 'faTwitter',
+              'faTwitter',
               // 'faLinkedin',
               'faInstagram',
               'faYoutube'
