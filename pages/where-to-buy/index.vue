@@ -30,7 +30,7 @@
             ? 'There are no '
             : 'Showing ' + retailersNearLocation.length
         }}
-        retailers within {{ this.radius }} miles of
+        retailers within {{ radius }} miles of
         <strong
           >{{
             (location.city ? location.city[0] : null) ||
