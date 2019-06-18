@@ -150,10 +150,9 @@ export default {
             aroundLatLng
           }
         })
-        console.log()
         this.location = location.hits[0]
       } catch (e) {
-        console.warning(e)
+        console.warn(e)
       }
     }
   },
