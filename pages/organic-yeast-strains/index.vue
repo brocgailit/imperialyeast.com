@@ -59,7 +59,7 @@
         </b-field>
       </div>
     </nav>
-    <section id="search-results">
+    <section class="search-filter-results">
       <div class="strains container">
         <article
           v-for="(group, name) in groups"
@@ -213,16 +213,20 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.strains {
-  columns: 400px;
-  column-gap: $size-7;
-  text-align: center;
-  padding-bottom: $size-1;
-  .strain-group-name {
-    font-weight: $weight-black;
-    font-size: $size-3;
-    text-transform: uppercase;
+<style lang="scss">
+$themeColor: $primary;
+@import '~vue-slider-component/lib/theme/default.scss';
+.search-filter-results {
+  .strains {
+    columns: 400px;
+    column-gap: $size-7;
+    text-align: center;
+    padding-bottom: $size-1;
+    .strain-group-name {
+      font-weight: $weight-black;
+      font-size: $size-3;
+      text-transform: uppercase;
+    }
   }
 }
 
