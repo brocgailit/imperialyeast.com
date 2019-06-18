@@ -116,9 +116,6 @@ export default {
       radius: 50 // miles
     }
   },
-  mounted() {
-    this.getLocationByGeolocation()
-  },
   methods: {
     handleSearchInput: debounce(async function(query) {
       this.loadingSearchResults = true
@@ -203,6 +200,9 @@ export default {
         }
       })
     }
+  },
+  mounted() {
+    this.getLocationByGeolocation()
   }
 }
 </script>
