@@ -151,6 +151,9 @@ export default {
   },
   methods: {
     clearNotification(notification) {
+      if (this.$cookies) {
+        this.$cookies.set('dismissedNotifications', [notification.id])
+      }
       this.$store.dispatch('clearNotification', notification)
     },
     closeNavigation() {

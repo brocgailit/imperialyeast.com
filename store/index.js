@@ -27,7 +27,7 @@ export const mutations = {
 }
 
 export const actions = {
-  async nuxtServerInit({ commit }, { req }) {
+  async nuxtServerInit({ commit }, { app }) {
     // get website settings
     const { data: website } = await this.$axios.$get(
       `items/website?single=1&fields=*.*,contacts.*.*`
@@ -38,7 +38,11 @@ export const actions = {
     const { data: notifications } = await this.$axios.$get(
       `items/notifications?fields=*.*,actions.*.*`
     )
-    commit('setNotifications', notifications)
+    const dismissed = app.$cookies.get('dismissedNotifications') || []
+    commit(
+      'setNotifications',
+      notifications.filter(n => !dismissed.some(d => d === n.id))
+    )
 
     // get pages
     const { data: pages } = await this.$axios.$get('items/pages')

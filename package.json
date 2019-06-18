@@ -25,6 +25,7 @@
     "@nuxtjs/style-resources": "^0.1.2",
     "buefy": "^0.7.7",
     "bulma": "^0.7.5",
+    "cookie-universal-nuxt": "^2.0.16",
     "cross-env": "^5.2.0",
     "express": "^4.16.4",
     "intersection-observer": "^0.7.0",

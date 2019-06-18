@@ -129,6 +129,7 @@ module.exports = {
     '@nuxtjs/style-resources',
     'nuxt-buefy',
     'nuxt-leaflet',
+    'cookie-universal-nuxt',
     [
       'nuxt-fontawesome',
       {
