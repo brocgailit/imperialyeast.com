@@ -80,12 +80,15 @@ export default {
   nav {
     ul {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
       li {
         a {
+          display: inline-block;
           text-transform: uppercase;
           font-size: $size-6;
-          padding: $size-7;
+          padding: 0 $size-7;
+          margin: 4px;
           white-space: nowrap;
         }
       }
