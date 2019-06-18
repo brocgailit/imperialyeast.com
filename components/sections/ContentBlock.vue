@@ -101,10 +101,7 @@ export default {
       )
     },
     background() {
-      let format
-      if (this.supportsWebP) {
-        format = '?format=webp'
-      }
+      const format = this.supportsWebP ? '?format=webp' : ''
 
       const width =
         typeof window !== 'undefined' &&
