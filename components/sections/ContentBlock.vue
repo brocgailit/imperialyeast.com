@@ -203,6 +203,7 @@ export default {
   }
 
   &.has-background {
+    background-color: $dark;
     color: $white;
     min-height: 50vh;
     display: flex;

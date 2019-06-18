@@ -2,7 +2,7 @@
   <header class="header-nav">
     <div class="nav-logo">
       <nuxt-link to="/" @click="isOpen = false">
-        <logo />
+        <logo color="crown" />
       </nuxt-link>
     </div>
     <nav

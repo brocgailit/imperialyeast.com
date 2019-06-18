@@ -103,7 +103,7 @@ export default {
       font-size: $size-7;
       display: inline;
       text-transform: uppercase;
-      color: $grey;
+      color: $dark;
       font-family: $family-heading;
     }
 

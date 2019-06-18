@@ -109,7 +109,7 @@ export default {
         height: $size-2;
         background-color: $light;
         border-radius: 100%;
-        color: $grey;
+        color: $dark;
         &:hover {
           background-color: $primary;
           color: $white;

@@ -11,3 +11,8 @@ abbr {
 .breadcrumb {
     margin-top: $size-5;
 }
+
+.has-text-primary {
+    // Primary in color array is darker... this is mostly for logo consistancy
+    color: $primary !important;
+}

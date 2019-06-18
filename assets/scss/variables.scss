@@ -1,7 +1,12 @@
 
-$primary: #a78329;
+$primary: #927120; //#A8822F;
+$crown: #A8822F;
 $danger: #ce3a1e;
 $black: #272425;
+$grey: #6a6a6a;
+$dark: mix($black, $grey);
+$link: #146bb2;
+$body-color: $black;
 
 $colors: (
   'white': (
@@ -22,6 +27,10 @@ $colors: (
   ),
   'primary': (
     $primary,
+    $primary-invert
+  ),
+  'crown': (
+    $crown,
     $primary-invert
   ),
   'info': (
