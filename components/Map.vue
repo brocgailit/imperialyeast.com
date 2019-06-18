@@ -1,11 +1,15 @@
 <template>
-  <div :style="{ height: height + 'px', width: width ? width + 'px' : '100%' }">
+  <div
+    class="map-container"
+    :style="[{ height: height + 'px', width: width ? width + 'px' : '100%' }]"
+  >
     <no-ssr>
       <l-map
         ref="leaflet"
         :zoom="zoom"
         :min-zoom="2"
         :center="autoCenter"
+        :options="{ dragging: false }"
         :max-bounds="[[-135, -225], [90, 225]]"
       >
         <l-tile-layer
@@ -86,6 +90,12 @@ export default {
     }
   },
   computed: {
+    responsiveHeight() {
+      if (typeof window === 'undefined') return this.height
+      return window.matchMedia('(max-width: 768px)').matches
+        ? this.mobileHeight
+        : this.height
+    },
     autoCenter() {
       function averageGeolocation(coords) {
         if (coords.length === 1) return coords[0]
@@ -160,6 +170,11 @@ export default {
 <style lang="scss">
 @import 'leaflet.markercluster/dist/MarkerCluster.css';
 @import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
+.map-container {
+  @include mobile {
+    max-height: 300px;
+  }
+}
 .leaflet-container {
   font-size: $size-6;
   a.leaflet-popup-close-button {
@@ -208,12 +223,12 @@ export default {
       border-bottom-left-radius: $radius;
       text-align: center;
       address {
-        font-size: $size-7;
+        font-size: $size-6;
       }
       a {
         margin: 8px 0 0;
       }
-      & /deep/ p {
+      & ::v-deep p {
         line-height: 1;
         font-size: 11px !important;
       }

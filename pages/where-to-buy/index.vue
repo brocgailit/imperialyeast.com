@@ -38,7 +38,28 @@
           }}, {{ location.administrative[0] }}</strong
         >
       </p>
-      <ul class="retailer-list">
+      <div v-if="retailersNearLocation" class="view-actions">
+        <b-field position="is-centered">
+          <b-radio-button
+            v-model="tab"
+            size="is-small"
+            native-value="retailer-list"
+          >
+            Location List
+          </b-radio-button>
+          <b-radio-button
+            v-model="tab"
+            size="is-small"
+            native-value="location-map"
+          >
+            Map View
+          </b-radio-button>
+        </b-field>
+      </div>
+      <ul
+        class="retailer-list"
+        :class="{ 'is-visible': tab === 'retailer-list' }"
+      >
         <li
           v-for="retailer of retailersNearLocation"
           :key="retailer.id"
@@ -91,7 +112,7 @@
         </li>
       </ul>
     </div>
-    <div class="location-map">
+    <div class="location-map" :class="{ 'is-visible': tab === 'location-map' }">
       <location-map
         :markers="markers"
         :height="500"
@@ -147,7 +168,8 @@ export default {
       loadingSearchResults: false,
       searchResults: [],
       selected: null,
-      radius: 50 // miles
+      radius: 50, // miles
+      tab: 'retailer-list'
     }
   },
   methods: {
@@ -192,7 +214,7 @@ export default {
   },
   computed: {
     zoom() {
-      return this.center ? 11 : 3
+      return this.center ? 8 : 3
     },
     center() {
       return this.location
@@ -266,12 +288,32 @@ export default {
       text-align: center;
     }
   }
+
+  .view-actions {
+    margin-bottom: $size-5;
+    @include tablet {
+      display: none;
+    }
+  }
+
   .location-map {
+    @include mobile {
+      &:not(.is-visible) {
+        visibility: hidden;
+        height: 0;
+        overflow: visible;
+      }
+    }
     flex-grow: 1;
     width: 100%;
   }
 
   .retailer-list {
+    @include mobile {
+      &:not(.is-visible) {
+        display: none;
+      }
+    }
     .retailer {
       position: relative;
       padding: 8px 2rem 8px 8px;
@@ -323,6 +365,15 @@ export default {
       &:hover {
         background-color: $light;
       }
+    }
+  }
+
+  @include mobile {
+    display: block;
+    .location-search {
+      height: auto;
+      overflow-y: visible;
+      padding: 0 $size-7;
     }
   }
 }
