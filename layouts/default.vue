@@ -134,6 +134,11 @@ export default {
       }))
     ]
   },
+  data() {
+    return {
+      keybuffer: []
+    }
+  },
   computed: {
     ...mapState({
       notification: state => state.notifications[0],
@@ -141,12 +146,42 @@ export default {
       isShaded: state => state.showNavigation
     })
   },
+  mounted() {
+    window.addEventListener('keyup', this.handleKeys)
+  },
   methods: {
     clearNotification(notification) {
       this.$store.dispatch('clearNotification', notification)
     },
     closeNavigation() {
       this.$store.dispatch('closeNavigation')
+    },
+    handleKeys(event) {
+      if (!event.key) return
+      const secret = [
+        'arrowup',
+        'arrowup',
+        'arrowdown',
+        'arrowdown',
+        'arrowleft',
+        'arrowright',
+        'arrowleft',
+        'arrowright',
+        'b',
+        'a',
+        'enter'
+      ]
+      const keybuffer = [...this.keybuffer, event.key.toLowerCase()].slice(
+        -secret.length
+      )
+      if (keybuffer.join('-').indexOf(secret.join('-')) > -1) {
+        const { Clip } = require('phonograph')
+        const clip = new Clip({ url: '/audio/Imperial_March.mp3' })
+        clip.buffer().then(() => {
+          clip.play()
+        })
+      }
+      this.keybuffer = keybuffer
     }
   }
 }
