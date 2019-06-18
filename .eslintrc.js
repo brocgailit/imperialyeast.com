@@ -19,7 +19,7 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
-    'nuxt/no-v-html': 'off',
+    'vue/no-v-html': 'off',
     'nuxt/no-cjs-in-config': 'off',
     'no-console': 'off',
   }

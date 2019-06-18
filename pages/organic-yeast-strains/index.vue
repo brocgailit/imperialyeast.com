@@ -93,7 +93,8 @@ const FILTER_DEFAULTS = {
 
 export default {
   components: {
-    StrainList
+    StrainList,
+    VueSlider: () => import('vue-slider-component')
   },
   data() {
     return {

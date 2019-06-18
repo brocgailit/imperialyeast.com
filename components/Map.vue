@@ -42,7 +42,25 @@
 </template>
 
 <script>
+import { LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet'
+import LMarkercluster from 'vue2-leaflet-markercluster'
+import { Icon, Point, divIcon } from 'leaflet'
+import 'leaflet/dist/leaflet.css'
+delete Icon.Default.prototype._getIconUrl
+
+Icon.Default.mergeOptions({
+  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+  iconUrl: require('leaflet/dist/images/marker-icon.png'),
+  shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+})
 export default {
+  components: {
+    LMap,
+    LTileLayer,
+    LMarker,
+    LPopup,
+    LMarkercluster
+  },
   props: {
     height: {
       type: Number,
@@ -147,17 +165,19 @@ export default {
   },
   mounted() {
     // set options
-    this.markerIcon = this.$L.icon(this.icon)
+    // this.$nextTick(() => {
+    this.markerIcon = new Icon(this.icon)
     this.clusterOptions = {
       showCoverageOnHover: false,
       iconCreateFunction: cluster => {
-        return this.$L.divIcon({
+        return divIcon({
           html: `<div class="marker-count">${cluster.getChildCount()}</div>`,
           className: 'marker-cluster',
-          iconSize: new this.$L.Point(40, 49)
+          iconSize: new Point(40, 49)
         })
       }
     }
+    // })
   },
   methods: {
     handleMounted(vlMap) {

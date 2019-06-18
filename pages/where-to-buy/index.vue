@@ -113,20 +113,24 @@
       </ul>
     </div>
     <div class="location-map" :class="{ 'is-visible': tab === 'location-map' }">
-      <location-map
-        :markers="markers"
-        :height="500"
-        :zoom="zoom"
-        :center="center"
-        :selected="selected"
-      />
+      <no-ssr>
+        <component
+          :is="mapComponent"
+          v-if="mapComponent"
+          :markers="markers"
+          :height="500"
+          :zoom="zoom"
+          :center="center"
+          :selected="selected"
+        />
+      </no-ssr>
     </div>
   </section>
 </template>
 
 <script>
 import debounce from 'lodash/debounce'
-import LocationMap from '~/components/Map.vue'
+// import LocationMap from '~/components/Map.vue'
 
 const distance = (a, b) => {
   if (a.lat === b.lat && a.lng === b.lng) return 0
@@ -147,9 +151,6 @@ const distance = (a, b) => {
 }
 
 export default {
-  components: {
-    LocationMap
-  },
   filters: {
     formatDistance(value) {
       return `${Math.round(value * 10) / 10} mi.`
@@ -163,6 +164,7 @@ export default {
   },
   data() {
     return {
+      mapComponent: null,
       search: '',
       location: null,
       loadingSearchResults: false,
@@ -258,6 +260,7 @@ export default {
   },
   mounted() {
     this.getLocationByGeolocation()
+    this.mapComponent = () => import('~/components/Map.vue')
   }
 }
 </script>

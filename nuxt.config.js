@@ -113,9 +113,7 @@ module.exports = {
     { src: '~/plugins/v-lazy-image', ssr: false },
     { src: '~/plugins/intersection-observer', ssr: false },
     { src: '~/plugins/vue-observe-visibility', ssr: false },
-    { src: '~/plugins/smoothscroll', ssr: false },
-    { src: '~/plugins/leaflet-markercluster', ssr: false },
-    { src: '~/plugins/vue-slider-component', ssr: false }
+    { src: '~/plugins/smoothscroll', ssr: false }
   ],
 
   /*
@@ -128,7 +126,6 @@ module.exports = {
     '@nuxtjs/sitemap',
     '@nuxtjs/style-resources',
     'nuxt-buefy',
-    'nuxt-leaflet',
     'cookie-universal-nuxt',
     [
       'nuxt-fontawesome',
