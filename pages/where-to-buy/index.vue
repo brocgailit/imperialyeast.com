@@ -43,17 +43,51 @@
           v-for="retailer of retailersNearLocation"
           :key="retailer.id"
           class="retailer"
+          :class="{ 'is-selected': selected === retailer.id }"
           @click="selected = retailer.id"
         >
-          <div class="retailer-name">
-            <span class="retailer-distance">
-              {{ retailer.distance | formatDistance }}
-            </span>
-            {{ retailer.name }}
-          </div>
-          <address class="retailer-address">
-            {{ retailer.address }} &bull; {{ retailer.city }}
-          </address>
+          <b-collapse
+            :open="selected === retailer.id"
+            :aria-id="'location-' + retailer.id"
+          >
+            <div
+              slot="trigger"
+              role="button"
+              :aria-controls="'location-' + retailer.id"
+            >
+              <div class="retailer-name">
+                <span class="retailer-distance">
+                  {{ retailer.distance | formatDistance }}
+                </span>
+                {{ retailer.name }}
+              </div>
+              <address class="retailer-address">
+                {{ retailer.address }} &bull; {{ retailer.city }}
+              </address>
+            </div>
+            <div class="retailer-actions">
+              <a
+                rel="noopener"
+                target="_blank"
+                :href="
+                  'https://www.google.com/maps/dir/?api=1&destination=' +
+                    retailer.geolocation.lat +
+                    ',' +
+                    retailer.geolocation.lng
+                "
+                class="button is-primary is-small"
+                >Directions</a
+              >
+              <a
+                v-if="retailer.website"
+                rel="noopener"
+                target="_blank"
+                :href="retailer.website"
+                class="button is-primary is-small"
+                >Website</a
+              >
+            </div>
+          </b-collapse>
         </li>
       </ul>
     </div>
@@ -260,6 +294,10 @@ export default {
       .retailer-address {
         font-size: $size-7;
       }
+      .retailer-actions {
+        text-align: center;
+        padding: $size-7;
+      }
 
       &:after {
         position: absolute;
@@ -268,6 +306,18 @@ export default {
         top: 50%;
         transform: translateY(-50%);
         padding: 8px;
+      }
+      &.is-selected {
+        &,
+        &:hover {
+          border: 1px solid $primary;
+        }
+        &:after {
+          content: '';
+          background-color: $primary;
+          height: 100%;
+          // display: inline-block;
+        }
       }
 
       &:hover {
