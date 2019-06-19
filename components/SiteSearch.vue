@@ -11,7 +11,12 @@
         @input="handleInput"
       />
       <button class="search-toggle" type="button" @click="close">
-        <fa-icon :icon="['fal', 'times']" size="lg" />
+        <fa-icon
+          :icon="['fal', loading ? 'spinner-third' : 'times']"
+          size="lg"
+          :class="{ 'spin-faster': loading }"
+          :spin="loading"
+        />
       </button>
       <transition name="slide-down">
         <ul
@@ -208,5 +213,9 @@ export default {
 .slide-down-leave-to {
   opacity: 0;
   transform: translateY(-50px);
+}
+
+.spin-faster {
+  animation: fa-spin 450ms infinite linear;
 }
 </style>
