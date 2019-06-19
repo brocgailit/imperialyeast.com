@@ -39,7 +39,19 @@
         :class="{ 'has-many': images.length > 1 }"
       >
         <div v-for="image of images" :key="image.file.id">
+          <a
+            v-if="image.attachment && image.attachment.data.url"
+            :href="image.attachment.data.url"
+          >
+            <responsive-image
+              :file="image.file"
+              :alt="image.description"
+              lazy
+              :style="{ flex: '0 0 ' + 100 / images.length + '%' }"
+            />
+          </a>
           <responsive-image
+            v-else
             :file="image.file"
             :alt="image.description"
             lazy
@@ -216,6 +228,12 @@ export default {
     }
     .ql-align-justify {
       text-align: justify;
+    }
+
+    h3,
+    h4,
+    h5 {
+      text-align: center;
     }
   }
 
