@@ -338,6 +338,7 @@ export default {
     }
   }
   .form-container {
+    margin-top: $size-4;
     max-width: $readability-width;
   }
 
