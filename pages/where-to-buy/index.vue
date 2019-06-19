@@ -48,7 +48,7 @@
           Clear Search
         </b-button>
       </div>
-      <div v-if="retailersNearLocation" class="view-actions">
+      <div class="view-actions">
         <b-field position="is-centered">
           <b-radio-button
             v-model="tab"
