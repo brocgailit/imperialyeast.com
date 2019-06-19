@@ -50,8 +50,13 @@ export default {
       website: state => state.website
     })
   },
-  async asyncData({ query, $axios }) {
-    const { q } = query
+  async asyncData({ $axios, req }) {
+    const URLParser = typeof URL !== 'undefined' ? URL : require('url').URL
+    const { searchParams } = new URLParser(
+      req.originalUrl,
+      'https://www.heavycraft.io'
+    )
+    const q = searchParams.get('q')
 
     const createFilterString = fields =>
       fields
