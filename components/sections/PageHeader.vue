@@ -108,6 +108,12 @@ export default {
       font-weight: $weight-bold;
       font-size: $size-4;
     }
+    h3,
+    h4,
+    h5 {
+      text-align: center;
+      margin: $size-7;
+    }
     .ql-align-center {
       text-align: center;
     }
