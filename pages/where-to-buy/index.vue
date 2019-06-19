@@ -38,6 +38,16 @@
           }}, {{ location.administrative[0] }}</strong
         >
       </p>
+      <div v-if="location" class="retailer-list-actions">
+        <b-button
+          size="is-small"
+          type="is-primary"
+          outlined
+          @click="clearLocation"
+        >
+          Clear Search
+        </b-button>
+      </div>
       <div v-if="retailersNearLocation" class="view-actions">
         <b-field position="is-centered">
           <b-radio-button
@@ -212,6 +222,9 @@ export default {
       } catch (e) {
         console.warn(e)
       }
+    },
+    clearLocation() {
+      this.location = null
     }
   },
   computed: {
@@ -289,6 +302,10 @@ export default {
       font-size: $size-6;
       padding: $size-5;
       text-align: center;
+    }
+    .retailer-list-actions {
+      text-align: center;
+      margin-bottom: $size-5;
     }
   }
 
