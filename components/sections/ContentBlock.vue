@@ -38,7 +38,8 @@
         class="image-container"
         :class="{
           'has-many': images.length > 1,
-          'is-full-width': layout.full_width_images
+          'is-full-width': layout.full_width_images,
+          container: !layout.full_width_images
         }"
       >
         <div v-for="image of images" :key="image.file.id">
@@ -179,6 +180,7 @@ export default {
   }
 
   .layout-content {
+    margin: 0 auto;
     article {
       padding: 0 $size-7;
     }
