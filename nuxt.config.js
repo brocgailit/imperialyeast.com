@@ -145,7 +145,8 @@ module.exports = {
               'faMobileAlt',
               'faBriefcase',
               'faExclamationCircle',
-              'faSearch'
+              'faSearch',
+              'faTimes'
             ]
           },
           {

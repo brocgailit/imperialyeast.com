@@ -8,8 +8,8 @@
     <nav
       role="navigation"
       aria-label="Main"
-      class="global-nav"
-      :class="{ 'is-open': isOpen }"
+      class="global-nav container"
+      :class="{ 'is-open': isOpen, 'search-active': showSearch }"
       @click="isOpen = false"
     >
       <ul id="menu">
@@ -18,7 +18,17 @@
             link.name
           }}</nuxt-link>
         </li>
+        <li>
+          <button
+            class="search-toggle"
+            type="button"
+            @click="toggleSearch(true)"
+          >
+            <fa-icon :icon="['fal', 'search']" size="lg" />
+          </button>
+        </li>
       </ul>
+      <site-search :active.sync="showSearch" @change="toggleSearch" />
     </nav>
     <button
       aria-haspopup="true"
@@ -39,9 +49,16 @@
 <script>
 import { mapState } from 'vuex'
 import Logo from '~/components/Logo.vue'
+import SiteSearch from '~/components/SiteSearch.vue'
 export default {
   components: {
-    Logo
+    Logo,
+    SiteSearch
+  },
+  data() {
+    return {
+      showSearch: false
+    }
   },
   computed: {
     ...mapState({
@@ -69,6 +86,15 @@ export default {
           )
         : []
     }
+  },
+  methods: {
+    toggleSearch(show) {
+      if (typeof show === 'undefined') {
+        this.showSearch = !this.showSearch
+        return
+      }
+      this.showSearch = show
+    }
   }
 }
 </script>
@@ -88,8 +114,12 @@ $logo-size: 160px;
     margin: $size-5 auto;
   }
   .global-nav {
+    position: relative;
+    display: flex;
+    justify-content: center;
     text-align: center;
-    ul {
+    #menu {
+      transition: opacity 250ms ease-in-out;
       display: flex;
       justify-content: center;
       li {
@@ -109,6 +139,24 @@ $logo-size: 160px;
           }
         }
       }
+    }
+
+    &.search-active {
+      #menu {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+
+    .search-toggle {
+      background-color: transparent;
+      border: 0;
+      outline: 0;
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
     }
   }
 
@@ -222,6 +270,15 @@ $logo-size: 160px;
         transform: translateX(0);
       }
     }
+  }
+
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 250ms ease-in-out;
+  }
+  .fade-enter,
+  .fade-leave-to {
+    opacity: 0;
   }
 }
 </style>
