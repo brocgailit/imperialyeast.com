@@ -216,6 +216,10 @@ export default {
     font-family: $family-heading;
     font-size: $size-2;
   }
+  h4 {
+    margin-top: $size-5;
+    font-size: $size-5;
+  }
   .body {
     .ql-align-center {
       text-align: center;
@@ -234,6 +238,9 @@ export default {
     h4,
     h5 {
       text-align: center;
+    }
+    p:not(:last-child) {
+      margin-bottom: $size-5;
     }
   }
 
@@ -352,6 +359,10 @@ export default {
       display: flex;
       justify-content: center;
       margin-bottom: $size-5;
+      &,
+      > * {
+        text-align: center;
+      }
     }
     .background-image {
       transform: translate(0, 0) !important;
