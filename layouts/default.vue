@@ -11,7 +11,7 @@
         {{ action.label }}
       </nuxt-link>
       <button
-        class="delete"
+        class="delete has-background-grey"
         type="button"
         @click="clearNotification(notification)"
       >
