@@ -8,7 +8,11 @@
       once: true
     }"
     class="content-block"
-    :class="{ 'has-background': layout.background_image }"
+    :class="{
+      'has-background': layout.background_image,
+      'no-padding-bottom': layout.remove_padding_bottom,
+      'no-padding-top': layout.remove_padding_top
+    }"
     :style="{
       'background-color': layout.background_color,
       color: layout.text_color
@@ -29,14 +33,19 @@
         { 'has-image': images.length }
       ]"
     >
-      <div v-if="images.length" class="image-container">
-        <responsive-image
-          v-for="image of images"
-          :key="image.file.id"
-          :file="image.file"
-          :alt="image.description"
-          lazy
-        />
+      <div
+        v-if="images.length"
+        class="image-container"
+        :class="{ 'has-many': images.length > 1 }"
+      >
+        <div v-for="image of images" :key="image.file.id">
+          <responsive-image
+            :file="image.file"
+            :alt="image.description"
+            lazy
+            :style="{ flex: '0 0 ' + 100 / images.length + '%' }"
+          />
+        </div>
       </div>
       <article>
         <header v-if="layout.heading">
@@ -146,6 +155,14 @@ export default {
   overflow: hidden;
   padding: $size-1 $size-7;
 
+  &.no-padding-bottom {
+    padding-bottom: 0;
+  }
+
+  &.no-padding-top {
+    padding-top: 0;
+  }
+
   .layout-content {
     @include desktop {
       display: flex;
@@ -230,6 +247,20 @@ export default {
     background-size: 125%;
   }
 
+  .image-container {
+    &.has-many {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: nowrap;
+      > * {
+        padding: $size-5;
+        max-width: 200px;
+      }
+    }
+  }
+
   .layout-actions {
     text-align: center;
     margin-top: $size-3;
@@ -264,6 +295,11 @@ export default {
   .form-container {
     max-width: $readability-width;
   }
+
+  picture {
+    display: inline-block;
+  }
+
   @include mobile {
     padding: $size-2 $size-7;
     header {
