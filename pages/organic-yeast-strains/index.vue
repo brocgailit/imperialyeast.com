@@ -321,7 +321,7 @@ $themeColor: $primary;
 }
 
 @include mobile {
-  ::v-deep .vue-slider-marks {
+  .vue-slider-marks {
     .vue-slider-mark {
       display: none;
       &:first-child {
