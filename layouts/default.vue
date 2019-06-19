@@ -152,7 +152,9 @@ export default {
   methods: {
     clearNotification(notification) {
       if (this.$cookies) {
-        this.$cookies.set('dismissedNotifications', [notification.id])
+        this.$cookies.set('dismissedNotifications', [notification.id], {
+          maxAge: 60 * 60 * 24 * 7
+        })
       }
       this.$store.dispatch('clearNotification', notification)
     },
