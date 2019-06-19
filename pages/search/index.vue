@@ -50,13 +50,16 @@ export default {
       website: state => state.website
     })
   },
-  async asyncData({ $axios, req }) {
-    const URLParser = typeof URL !== 'undefined' ? URL : require('url').URL
-    const { searchParams } = new URLParser(
-      req.originalUrl,
-      'https://www.heavycraft.io'
-    )
-    const q = searchParams.get('q')
+  data() {
+    return {
+      searchTerm: '',
+      strains: [],
+      pages: [],
+      locations: []
+    }
+  },
+  async mounted() {
+    const { q } = this.$route.query
 
     const createFilterString = fields =>
       fields
@@ -71,7 +74,7 @@ export default {
       'compare_to'
     ])
 
-    const strains = await $axios
+    const strains = await this.$axios
       .$get(`items/strains?${strainFilters}&filter[status]=published`)
       .then(res => res.data)
 
@@ -83,7 +86,7 @@ export default {
       'postal_code',
       'phone'
     ])
-    const locations = await $axios
+    const locations = await this.$axios
       .$get(
         `items/purchase_locations?${locationFilters}&filter[status]=published`
       )
@@ -91,13 +94,16 @@ export default {
 
     // search pages
     const pageFilters = createFilterString(['name', 'layouts.body'])
-    const pages = await $axios
+    const pages = await this.$axios
       .$get(
         `items/pages?fields=*.*,layouts.*&${pageFilters}&filter[status]=published`
       )
       .then(res => res.data)
 
-    return { searchTerm: q, strains, pages, locations }
+    this.searchTerm = q
+    this.strains = strains
+    this.pages = pages
+    this.locations = locations
   },
   head() {
     return {
