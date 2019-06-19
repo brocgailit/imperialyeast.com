@@ -50,7 +50,8 @@
         <b-field label="Temperature">
           <vue-slider
             v-model="temperature"
-            :marks="{ '0': { label: '32℉' }, '100': { label: '100℉' } }"
+            :min="32"
+            :marks="{ '32': { label: '32℉' }, '100': { label: '100℉' } }"
           ></vue-slider>
         </b-field>
       </div>
