@@ -27,12 +27,91 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
+  computed: {
+    ...mapState({
+      website: state => state.website
+    })
+  },
   async asyncData({ params, $axios }) {
     const types = await $axios
       .$get(`items/strain_types?filter[status]=published&fields=*.*`)
       .then(res => res.data)
     return { types }
+  },
+  head() {
+    return {
+      title: `Types of Yeast Strains | ${this.website.name}`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: `${
+            this.website.name
+          } carries a wide variety of yeast strains for home and pro brewers.`
+        },
+        {
+          hid: 'open-graph-url',
+          property: 'og:url',
+          content: `${this.website.canonical_url}${this.$route.path}`
+        },
+        {
+          hid: 'open-graph-type',
+          property: 'og:type',
+          content: 'website'
+        },
+        {
+          hid: 'open-graph-description',
+          property: 'og:description',
+          content: `${
+            this.website.name
+          } carries a wide variety of yeast strains for home and pro brewers.`
+        },
+        {
+          hid: 'open-graph-title',
+          property: 'og:title',
+          content: 'Types of Yeast Strains'
+        },
+        {
+          hid: 'open-graph-image',
+          property: 'og:image',
+          content: this.website.default_sharing_image.data.url
+        },
+        {
+          hid: 'open-graph-image-alt',
+          property: 'og:image:alt',
+          content: this.website.default_sharing_image.title
+        },
+        {
+          hid: 'twitter-card',
+          property: 'twitter:card',
+          content: 'summary_large_image'
+        },
+        {
+          hid: 'twitter-site',
+          property: 'twitter:site',
+          content: `@${this.website.twitter_handle}`
+        },
+        {
+          hid: 'twitter-description',
+          property: 'twitter:description',
+          content: `${
+            this.website.name
+          } carries a wide variety of yeast strains for home and pro brewers.`
+        },
+        {
+          hid: 'twitter-description',
+          property: 'twitter:title',
+          content: 'Types of Yeast Strains'
+        },
+        {
+          hid: 'twitter-image',
+          property: 'twitter:image',
+          content: this.website.default_sharing_image.data.url
+        }
+      ]
+    }
   }
 }
 </script>

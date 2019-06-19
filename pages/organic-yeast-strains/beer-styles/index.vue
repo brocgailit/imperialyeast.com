@@ -64,6 +64,76 @@ export default {
       `items/beer_styles?filter[status]=published&fields=*.*`
     )
     return { styles }
+  },
+  head() {
+    return {
+      title: `Beer Styles | ${this.website.name}`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content:
+            'Imperial Yeast provides strains for all varieties of beer styles.'
+        },
+        {
+          hid: 'open-graph-url',
+          property: 'og:url',
+          content: `${this.website.canonical_url}${this.$route.path}`
+        },
+        {
+          hid: 'open-graph-type',
+          property: 'og:type',
+          content: 'website'
+        },
+        {
+          hid: 'open-graph-description',
+          property: 'og:description',
+          content:
+            'Imperial Yeast provides strains for all varieties of beer styles.'
+        },
+        {
+          hid: 'open-graph-title',
+          property: 'og:title',
+          content: 'Beer Styles'
+        },
+        {
+          hid: 'open-graph-image',
+          property: 'og:image',
+          content: this.website.default_sharing_image.data.url
+        },
+        {
+          hid: 'open-graph-image-alt',
+          property: 'og:image:alt',
+          content: this.website.default_sharing_image.title
+        },
+        {
+          hid: 'twitter-card',
+          property: 'twitter:card',
+          content: 'summary_large_image'
+        },
+        {
+          hid: 'twitter-site',
+          property: 'twitter:site',
+          content: `@${this.website.twitter_handle}`
+        },
+        {
+          hid: 'twitter-description',
+          property: 'twitter:description',
+          content:
+            'Imperial Yeast provides strains for all varieties of beer styles.'
+        },
+        {
+          hid: 'twitter-description',
+          property: 'twitter:title',
+          content: 'Beer Styles'
+        },
+        {
+          hid: 'twitter-image',
+          property: 'twitter:image',
+          content: this.website.default_sharing_image.data.url
+        }
+      ]
+    }
   }
 }
 </script>

@@ -307,6 +307,75 @@ export default {
       )
       .then(res => res.data)
     return { strain }
+  },
+  head() {
+    return {
+      title: `${this.strain.name} - ${this.strain.product_code} (${
+        this.strain.strain_type.name
+      } Yeast) | ${this.website.name}`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.strain.short_description
+        },
+        {
+          hid: 'open-graph-url',
+          property: 'og:url',
+          content: `${this.website.canonical_url}${this.$route.path}`
+        },
+        {
+          hid: 'open-graph-type',
+          property: 'og:type',
+          content: 'website'
+        },
+        {
+          hid: 'open-graph-description',
+          property: 'og:description',
+          content: this.strain.short_description
+        },
+        {
+          hid: 'open-graph-title',
+          property: 'og:title',
+          content: `${this.strain.name} Yeast Strains`
+        },
+        {
+          hid: 'open-graph-image',
+          property: 'og:image',
+          content: this.website.default_sharing_image.data.url
+        },
+        {
+          hid: 'open-graph-image-alt',
+          property: 'og:image:alt',
+          content: this.website.default_sharing_image.title
+        },
+        {
+          hid: 'twitter-card',
+          property: 'twitter:card',
+          content: 'summary_large_image'
+        },
+        {
+          hid: 'twitter-site',
+          property: 'twitter:site',
+          content: `@${this.website.twitter_handle}`
+        },
+        {
+          hid: 'twitter-description',
+          property: 'twitter:description',
+          content: this.strain.short_description
+        },
+        {
+          hid: 'twitter-description',
+          property: 'twitter:title',
+          content: `${this.strain.name} Yeast Strains`
+        },
+        {
+          hid: 'twitter-image',
+          property: 'twitter:image',
+          content: this.website.default_sharing_image.data.url
+        }
+      ]
+    }
   }
 }
 </script>

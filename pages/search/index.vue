@@ -42,8 +42,14 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   watchQuery: ['q'],
+  computed: {
+    ...mapState({
+      website: state => state.website
+    })
+  },
   async asyncData({ query, $axios }) {
     const { q } = query
 
@@ -87,6 +93,76 @@ export default {
       .then(res => res.data)
 
     return { searchTerm: q, strains, pages, locations }
+  },
+  head() {
+    return {
+      title: `Search for Yeast Strains | ${this.website.name}`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content:
+            'Search the Imperial Yeast website for homebrewing information, yeast strains, purchase locations, and more.'
+        },
+        {
+          hid: 'open-graph-url',
+          property: 'og:url',
+          content: `${this.website.canonical_url}${this.$route.path}`
+        },
+        {
+          hid: 'open-graph-type',
+          property: 'og:type',
+          content: 'website'
+        },
+        {
+          hid: 'open-graph-description',
+          property: 'og:description',
+          content:
+            'Search the Imperial Yeast website for homebrewing information, yeast strains, purchase locations, and more.'
+        },
+        {
+          hid: 'open-graph-title',
+          property: 'og:title',
+          content: 'Search for Yeast Strains'
+        },
+        {
+          hid: 'open-graph-image',
+          property: 'og:image',
+          content: this.website.default_sharing_image.data.url
+        },
+        {
+          hid: 'open-graph-image-alt',
+          property: 'og:image:alt',
+          content: this.website.default_sharing_image.title
+        },
+        {
+          hid: 'twitter-card',
+          property: 'twitter:card',
+          content: 'summary_large_image'
+        },
+        {
+          hid: 'twitter-site',
+          property: 'twitter:site',
+          content: `@${this.website.twitter_handle}`
+        },
+        {
+          hid: 'twitter-description',
+          property: 'twitter:description',
+          content:
+            'Search the Imperial Yeast website for homebrewing information, yeast strains, purchase locations, and more.'
+        },
+        {
+          hid: 'twitter-description',
+          property: 'twitter:title',
+          content: 'Search for Yeast Strains'
+        },
+        {
+          hid: 'twitter-image',
+          property: 'twitter:image',
+          content: this.website.default_sharing_image.data.url
+        }
+      ]
+    }
   }
 }
 </script>

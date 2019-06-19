@@ -1,0 +1,3 @@
+Sitemap: https://www.imperialyeast.com/sitemap.xml
+User-agent: *
+Disallow: /api/
