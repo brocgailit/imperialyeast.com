@@ -1,6 +1,5 @@
-import axios from 'axios'
 const DEFAULT_LIMIT = 20
-export const search = async (q, options) => {
+export async function search(q, options) {
   const createFilterString = fields =>
     fields
       .map((f, i) => `filter[${f}][logical]=or&filter[${f}][contains]=${q}`)
@@ -17,12 +16,10 @@ export const search = async (q, options) => {
     'profiles'
   ])
 
-  const { data: strains } = await axios
-    .get(
-      `/items/strains?fields=*.*&${strainFilters}&filter[status]=published&limit=${limit ||
-        DEFAULT_LIMIT}`
-    )
-    .then(res => res.data)
+  const { data: strains } = await this.$axios.$get(
+    `/items/strains?fields=*.*&${strainFilters}&filter[status]=published&limit=${limit ||
+      DEFAULT_LIMIT}`
+  )
 
   // search locations
   const locationFilters = createFilterString([
@@ -32,12 +29,10 @@ export const search = async (q, options) => {
     'postal_code',
     'phone'
   ])
-  const { data: locations } = await axios
-    .get(
-      `/items/purchase_locations?fields=*.*&${locationFilters}&filter[status]=published&limit=${limit ||
-        DEFAULT_LIMIT}`
-    )
-    .then(res => res.data)
+  const { data: locations } = await this.$axios.$get(
+    `/items/purchase_locations?fields=*.*&${locationFilters}&filter[status]=published&limit=${limit ||
+      DEFAULT_LIMIT}`
+  )
 
   // search pages
   const pageFilters = createFilterString([
@@ -46,12 +41,12 @@ export const search = async (q, options) => {
     'layouts.subheading',
     'keywords'
   ])
-  const { data: pages } = await axios
-    .get(
-      `/items/pages?fields=*.*,layouts.*&${pageFilters}&filter[status]=published&limit=${limit ||
-        DEFAULT_LIMIT}`
-    )
-    .then(res => res.data)
+  const { data: pages } = await this.$axios.$get(
+    `/items/pages?fields=*.*,layouts.*&${pageFilters}&filter[status]=published&limit=${limit ||
+      DEFAULT_LIMIT}`
+  )
+
+  console.log(this)
 
   return { strains, pages, locations }
 }

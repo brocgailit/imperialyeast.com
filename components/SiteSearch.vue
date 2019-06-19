@@ -7,7 +7,7 @@
         v-model="search"
         type="text"
         class="site-search-input"
-        placeholder="Search for Strains and Purchase Locations"
+        placeholder="Search for Strains, Locations, and Resources"
         @input="handleInput"
       />
       <button class="search-toggle" type="button" @click="close">
@@ -109,7 +109,7 @@ export default {
       this.loading = true
       if (this.search.length > 0) {
         try {
-          this.results = await search(this.search, { limit: 3 })
+          this.results = await search.call(this, this.search, { limit: 3 })
           if (!this.search.length) {
             this.results = null
           }
