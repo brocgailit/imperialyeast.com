@@ -27,7 +27,7 @@
       }"
     />
     <div
-      class="container layout-content"
+      class="layout-content"
       :class="[
         'is-' + (layout.content_direction || 'column'),
         { 'has-image': images.length }
@@ -36,7 +36,10 @@
       <div
         v-if="images.length"
         class="image-container"
-        :class="{ 'has-many': images.length > 1 }"
+        :class="{
+          'has-many': images.length > 1,
+          'is-full-width': layout.full_width_images
+        }"
       >
         <div v-for="image of images" :key="image.file.id">
           <a
@@ -59,7 +62,7 @@
           />
         </div>
       </div>
-      <article>
+      <article class="container">
         <header v-if="layout.heading">
           <h3>{{ layout.heading }}</h3>
           <h4 v-if="layout.subheading">{{ layout.subheading }}</h4>
@@ -165,7 +168,7 @@ export default {
 .content-block {
   position: relative;
   overflow: hidden;
-  padding: $size-1 $size-7;
+  padding: $size-1 0;
 
   &.no-padding-bottom {
     padding-bottom: 0;
@@ -176,6 +179,9 @@ export default {
   }
 
   .layout-content {
+    article {
+      padding: 0 $size-7;
+    }
     @include desktop {
       display: flex;
       flex-direction: column;
@@ -284,6 +290,18 @@ export default {
         max-width: 200px;
       }
     }
+
+    &.is-full-width {
+      padding: 0 !important;
+      * {
+        width: 100%;
+      }
+    }
+
+    &,
+    > * {
+      text-align: center;
+    }
   }
 
   .layout-actions {
@@ -326,7 +344,9 @@ export default {
   }
 
   @include mobile {
-    padding: $size-2 $size-7;
+    article {
+      padding: $size-2 $size-7;
+    }
     header {
       margin-bottom: $size-7;
     }
@@ -359,9 +379,8 @@ export default {
       display: flex;
       justify-content: center;
       margin-bottom: $size-5;
-      &,
-      > * {
-        text-align: center;
+      &.is-full-width {
+        margin: 0;
       }
     }
     .background-image {
@@ -369,6 +388,13 @@ export default {
       width: 100%;
       height: 100%;
       background-size: cover;
+    }
+
+    .layout-content {
+      &.is-column-reverse {
+        display: flex;
+        flex-direction: column-reverse;
+      }
     }
   }
 }
