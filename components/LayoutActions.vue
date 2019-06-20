@@ -38,4 +38,9 @@ export default {
     font-size: 1rem;
   }
 }
+.layout-actions {
+  > * {
+    margin: 4px;
+  }
+}
 </style>
