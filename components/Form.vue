@@ -42,11 +42,15 @@
 </template>
 
 <script>
+import { Modal as BModal } from 'buefy/dist/components/modal'
+import { Button as BButton } from 'buefy/dist/components/button'
 import FormInput from '~/components/FormInput.vue'
 
 export default {
   components: {
-    FormInput
+    FormInput,
+    BModal,
+    BButton
   },
   props: {
     form: {

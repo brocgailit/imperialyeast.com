@@ -147,6 +147,8 @@ export default {
     })
   },
   mounted() {
+    const { dom } = require('@fortawesome/fontawesome-svg-core')
+    dom.watch()
     window.addEventListener('keyup', this.handleKeys)
   },
   methods: {

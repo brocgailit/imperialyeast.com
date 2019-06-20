@@ -140,7 +140,11 @@
 
 <script>
 import debounce from 'lodash/debounce'
-// import LocationMap from '~/components/Map.vue'
+import { Button as BButton } from 'buefy/dist/components/button'
+import { Field as BField } from 'buefy/dist/components/field'
+import { Autocomplete as BAutocomplete } from 'buefy/dist/components/autocomplete'
+import { Collapse as BCollapse } from 'buefy/dist/components/collapse'
+import { RadioButton as BRadioButton } from 'buefy/dist/components/radio'
 
 const distance = (a, b) => {
   if (a.lat === b.lat && a.lng === b.lng) return 0
@@ -161,6 +165,13 @@ const distance = (a, b) => {
 }
 
 export default {
+  components: {
+    BButton,
+    BField,
+    BAutocomplete,
+    BCollapse,
+    BRadioButton
+  },
   filters: {
     formatDistance(value) {
       return `${Math.round(value * 10) / 10} mi.`

@@ -78,7 +78,8 @@ module.exports = {
     { src: '~/plugins/v-lazy-image', ssr: false },
     { src: '~/plugins/intersection-observer', ssr: false },
     { src: '~/plugins/vue-observe-visibility', ssr: false },
-    { src: '~/plugins/smoothscroll', ssr: false }
+    { src: '~/plugins/smoothscroll', ssr: false },
+    // { src: '~/plugins/buefy' }
   ],
 
   /*
@@ -90,7 +91,7 @@ module.exports = {
     '@nuxtjs/pwa',
     '@nuxtjs/sitemap',
     '@nuxtjs/style-resources',
-    'nuxt-buefy',
+    // 'nuxt-buefy',
     'cookie-universal-nuxt',
     [
       'nuxt-fontawesome',
@@ -133,12 +134,12 @@ module.exports = {
   /*
    ** Buefy Options
    */
-  buefy: {
+  /* buefy: {
     css: false,
     materialDesignIcons: false,
     defaultIconComponent: 'fa-icon',
     defaultIconPack: 'fal'
-  },
+  }, */
 
   /*
    ** Style Resources

@@ -14,6 +14,7 @@
           v-model="search"
           type="search"
           icon="search"
+          icon-pack="fal"
           placeholder="Names, product codes, descriptions, and keywords"
           @input="handleSearchInput"
         ></b-input>
@@ -85,6 +86,9 @@
 <script>
 import { mapState } from 'vuex'
 import StrainList from '~/components/StrainList.vue'
+import { Field as BField } from 'buefy/dist/components/field'
+import { Input as BInput } from 'buefy/dist/components/input'
+import { Button as BButton } from 'buefy/dist/components/button'
 import { DYNAMIC_COMPONENTS } from '~/assets/script/dynamic-components'
 
 const FILTER_DEFAULTS = {
@@ -96,7 +100,10 @@ const FILTER_DEFAULTS = {
 export default {
   components: {
     StrainList,
-    VueSlider: () => import('vue-slider-component')
+    VueSlider: () => import('vue-slider-component'),
+    BField,
+    BInput,
+    BButton
   },
   data() {
     return {

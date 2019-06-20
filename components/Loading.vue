@@ -8,10 +8,12 @@
 </template>
 
 <script>
+import { Loading as BLoading } from 'buefy/dist/components/loading'
 import Logo from '~/components/Logo.vue'
 export default {
   components: {
-    Logo
+    Logo,
+    BLoading
   },
   data: () => ({
     loading: false
