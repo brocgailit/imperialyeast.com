@@ -1,8 +1,8 @@
 <template>
   <div class="strain-list">
     <slot />
-    <ul>
-      <li v-for="strain of strains" :key="strain.key" class="strain">
+    <transition-group name="flip-list" tag="ul">
+      <li v-for="strain of strains" :key="strain.id" class="strain">
         <nuxt-link
           :to="
             '/organic-yeast-strains/yeast-types/' +
@@ -54,7 +54,7 @@
           >
         </div>
       </li>
-    </ul>
+    </transition-group>
   </div>
 </template>
 
@@ -96,6 +96,7 @@ export default {
     width: 100%;
     flex: 1 0 100%;
     padding: $size-7;
+    transition: all 500ms ease-in-out;
     @include tablet {
       flex: 0 0 50%;
     }
@@ -138,5 +139,18 @@ export default {
       }
     }
   }
+}
+
+.flip-list-move {
+  transition: transform 500ms ease-in-out;
+}
+
+.flip-list-enter, .flip-list-leave-to
+/* .flip-list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.flip-list-leave-active {
+  position: absolute;
 }
 </style>
