@@ -9,7 +9,7 @@
         :zoom="zoom"
         :min-zoom="2"
         :center="autoCenter"
-        :options="{ dragging: false }"
+        :options="{ dragging: enableDragging }"
         :max-bounds="[[-135, -225], [90, 225]]"
       >
         <l-tile-layer
@@ -104,7 +104,8 @@ export default {
         iconAnchor: [15, 37], // point of the icon which will correspond to marker's location
         popupAnchor: [0, -20] // point from which the popup should open relative to the iconAnchor
       },
-      clusterOptions: {}
+      clusterOptions: {},
+      enableDragging: true
     }
   },
   computed: {
@@ -177,6 +178,8 @@ export default {
         })
       }
     }
+
+    this.enableDragging = window.matchMedia('(min-width: 769px)').matches
     // })
   },
   methods: {
