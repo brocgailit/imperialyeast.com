@@ -121,8 +121,11 @@
             <p>Available in Pitch Right Home Brew Pouches</p>
             <responsive-image
               class="home-packaging"
-              :file="strain.strain_type.home_packaging_image"
-              :alt="strain.strain_type.home_packaging_image.description"
+              :file="strain.image || strain.strain_type.home_packaging_image"
+              :alt="
+                strain.image.description ||
+                  strain.strain_type.home_packaging_image.description
+              "
               sizes="150px"
               lazy
             />
