@@ -132,7 +132,7 @@ export default {
       this.loading = true
       if (this.search.length > 0) {
         try {
-          this.results = await search.call(this, this.search, { limit: 3 })
+          this.results = await search.call(this, this.search, { limit: 5 })
           if (!this.search.length) {
             this.results = null
           }
