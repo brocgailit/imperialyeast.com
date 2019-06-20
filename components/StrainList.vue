@@ -42,7 +42,8 @@
         </dl> -->
         <div class="strain-actions">
           <nuxt-link
-            class="has-text-primary is-small"
+            :style="{ color: strain.strain_type.packaging_color }"
+            class="is-small"
             :to="
               '/organic-yeast-strains/yeast-types/' +
                 strain.strain_type.slug +
