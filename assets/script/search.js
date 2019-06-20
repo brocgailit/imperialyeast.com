@@ -47,7 +47,5 @@ export async function search(q, options) {
       DEFAULT_LIMIT}`
   )
 
-  console.log(this)
-
   return { strains, pages, locations }
 }
