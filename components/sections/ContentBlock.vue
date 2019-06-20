@@ -210,7 +210,8 @@ export default {
         }
       }
     }
-    &:not(.has-image) {
+
+    .body {
       max-width: $readability-width;
     }
   }
