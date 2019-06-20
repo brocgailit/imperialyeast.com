@@ -4,11 +4,12 @@
       <fa-icon :icon="['fal', 'search']" size="lg" class="search-icon" />
       <input
         ref="searchInput"
-        v-model="search"
+        :value="search"
         type="text"
         class="site-search-input"
-        placeholder="Search for Strains, Locations, and Resources"
-        @input="handleInput"
+        placeholder="Search for strains &amp; more …"
+        @input="search = $event.target.value"
+        @keyup="handleInput"
       />
       <button class="search-toggle" type="button" @click="close">
         <fa-icon
@@ -19,13 +20,13 @@
         />
       </button>
       <transition name="slide-down">
-        <ul
-          v-if="
-            results && (results.strains || results.locations || results.pages)
-          "
-          class="results"
-          @click="close"
-        >
+        <div v-if="nothingFound" class="results">
+          <span
+            >No results were found for
+            <strong>&ldquo;{{ this.search }}&rdquo;</strong>.</span
+          >
+        </div>
+        <ul v-if="hasSomeResults" class="results" @click="close">
           <li v-if="results.strains && results.strains.length">
             <h3 class="result-type-name">Strains</h3>
             <ul>
@@ -94,6 +95,19 @@ export default {
       results: null
     }
   },
+  computed: {
+    hasSomeResults() {
+      const { strains, locations, pages } = this.results || {}
+      return (
+        (strains && strains.length) ||
+        (locations && locations.length) ||
+        (pages && pages.length)
+      )
+    },
+    nothingFound() {
+      return this.search && !this.loading && !this.hasSomeResults
+    }
+  },
   watch: {
     active(show) {
       if (show) {
@@ -110,7 +124,11 @@ export default {
     close() {
       this.$emit('change', false)
     },
-    handleInput: debounce(async function() {
+    handleInput() {
+      this.loading = true
+      this.handleSearch()
+    },
+    handleSearch: debounce(async function() {
       this.loading = true
       if (this.search.length > 0) {
         try {
@@ -122,10 +140,10 @@ export default {
           this.results = null
         }
       } else {
-        this.results = []
+        this.results = null
       }
       this.loading = false
-    }, 300)
+    }, 400)
   }
 }
 </script>
@@ -146,8 +164,7 @@ export default {
     background-color: $white;
     box-shadow: none;
     border: 0;
-    padding-left: $size-1;
-    margin-right: $size-1;
+    padding: 0 $size-1;
     &,
     &:focus {
       outline: 0;
@@ -168,7 +185,7 @@ export default {
   .results {
     padding: $size-5;
     position: absolute;
-    top: calc(100% + 1px);
+    top: 50px;
     left: 0;
     width: 100%;
     z-index: -1;
@@ -176,6 +193,7 @@ export default {
     border: 1px solid $light;
     box-shadow: 2px 2px 7px rgba($dark, 0.25);
     @include desktop {
+      top: calc(100% + 1px);
       display: flex;
       justify-content: space-around;
       > * {
@@ -198,6 +216,20 @@ export default {
       margin-bottom: $size-7;
     }
   }
+
+  @include mobile {
+    border-bottom: 1px solid $light;
+    .site-search-input {
+      font-size: 16px;
+      padding-right: $size-1;
+    }
+    .search-icon {
+      margin-left: $size-7;
+    }
+    .search-toggle {
+      margin-right: $size-7;
+    }
+  }
 }
 
 .slide-down-enter-active,
@@ -205,14 +237,10 @@ export default {
   transition: 350ms ease-in-out;
   transform: translateY(0);
 }
-.slide-down-enter {
-  opacity: 0 !important;
-  transform: translateY(-50px) !important;
-}
 .slide-down-enter,
 .slide-down-leave-to {
   opacity: 0;
-  transform: translateY(-50px);
+  transform: translateY(-25px);
 }
 
 .spin-faster {

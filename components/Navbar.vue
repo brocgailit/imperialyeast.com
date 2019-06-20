@@ -20,15 +20,19 @@
         </li>
         <li>
           <button
-            class="search-toggle"
+            class="search-toggle is-hidden-touch"
             type="button"
-            @click="toggleSearch(true)"
+            @click.stop="toggleSearch(true)"
           >
             <fa-icon :icon="['fal', 'search']" size="lg" />
           </button>
         </li>
       </ul>
-      <site-search :active.sync="showSearch" @change="toggleSearch" />
+      <site-search
+        :active.sync="showSearch"
+        class="site-search"
+        @change="toggleSearch"
+      />
     </nav>
     <button
       aria-haspopup="true"
@@ -42,6 +46,13 @@
     >
       <div class="menu-button-stroke" />
       <span class="menu-button-title">Main Menu</span>
+    </button>
+    <button
+      class="search-toggle mobile-search-toggle is-hidden-desktop"
+      type="button"
+      @click.stop="toggleSearch(true)"
+    >
+      <fa-icon :icon="['fal', 'search']" size="2x" />
     </button>
   </header>
 </template>
@@ -71,6 +82,7 @@ export default {
       set(visible) {
         if (visible) {
           this.$store.dispatch('openNavigation')
+          this.toggleSearch(false)
         } else {
           this.$store.dispatch('closeNavigation')
         }
@@ -94,6 +106,9 @@ export default {
         return
       }
       this.showSearch = show
+      if (this.showSearch) {
+        this.isOpen = false
+      }
     }
   }
 }
@@ -147,17 +162,17 @@ $logo-size: 160px;
         pointer-events: none;
       }
     }
+  }
 
-    .search-toggle {
-      background-color: transparent;
-      border: 0;
-      outline: 0;
-      cursor: pointer;
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
-    }
+  .search-toggle {
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   @include desktop {
@@ -237,15 +252,23 @@ $logo-size: 160px;
         }
       }
     }
+    .mobile-search-toggle {
+      color: $grey;
+      position: absolute;
+      right: $size-2;
+      top: 50%;
+      padding: 0;
+    }
     .global-nav {
       position: absolute;
       top: 100%;
       left: 0;
       width: 100%;
-      height: 0;
+      // height: 0;
       pointer-events: none;
       overflow: visible;
-      ul {
+      #menu {
+        width: 100%;
         background-color: $white;
         opacity: 0;
         transform: translateX(-100%);
@@ -264,10 +287,23 @@ $logo-size: 160px;
         }
       }
 
-      &.is-open ul {
+      &.is-open #menu {
         opacity: 1;
         display: block;
         transform: translateX(0);
+      }
+
+      .site-search {
+        position: absolute;
+        pointer-events: all;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        .results {
+          max-height: calc(100vh - 50px - #{$navbar-height-touch} - 50px);
+          overflow-y: scroll;
+        }
       }
     }
   }

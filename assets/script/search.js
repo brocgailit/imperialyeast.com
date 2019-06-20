@@ -13,11 +13,12 @@ export async function search(q, options) {
     'short_description',
     'full_description',
     'compare_to',
-    'profiles'
+    'profiles',
+    'similar_strains.similar_strains_id.name'
   ])
 
   const { data: strains } = await this.$axios.$get(
-    `/items/strains?fields=*.*&${strainFilters}&filter[status]=published&limit=${limit ||
+    `/items/strains?fields=*.*,similar_strains.similar_strains_id.name&${strainFilters}&filter[status]=published&limit=${limit ||
       DEFAULT_LIMIT}`
   )
 
