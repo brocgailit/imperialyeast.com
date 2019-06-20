@@ -91,11 +91,12 @@ export default {
   }
   h1 {
     font-family: $family-heading;
+    font-weight: $weight-medium;
     font-size: $size-1;
     margin-bottom: $size-7;
   }
   h2 {
-    font-weight: $weight-bold;
+    font-weight: $weight-black;
     font-size: $size-4;
     opacity: 0.85;
   }
