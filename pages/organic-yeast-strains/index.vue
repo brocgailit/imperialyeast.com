@@ -49,7 +49,7 @@
         <b-field label="Attenuation">
           <vue-slider
             v-model="attenuation"
-            :min="50"
+            :min="65"
             :max="100"
             marks
             :interval="5"
@@ -59,8 +59,8 @@
         <b-field label="Temperature">
           <vue-slider
             v-model="temperature"
-            :min="32"
-            :marks="{ '32': { label: '32℉' }, '100': { label: '100℉' } }"
+            :min="45"
+            :marks="{ '45': { label: '45℉' }, '100': { label: '100℉' } }"
           ></vue-slider>
         </b-field>
       </div>
@@ -186,17 +186,18 @@ export default {
           this.productVariation.some(
             a => s.home_availability === (a === 'home')
           ) || this.productVariation.length === 0
-        return (
-          home &&
+        const floc =
           s.flocculation >=
             this.flocculationLabels.indexOf(this.flocculation[0]) &&
           s.flocculation <=
-            this.flocculationLabels.indexOf(this.flocculation[1]) &&
-          (s.attenuation_min >= this.attenuation[0] &&
-            s.attenuation_max <= this.attenuation[1]) &&
-          (s.temperature_min >= this.temperature[0] &&
-            s.temperature_max <= this.temperature[1])
-        )
+            this.flocculationLabels.indexOf(this.flocculation[1])
+        const atten =
+          this.attenuation[0] <= s.attenuation_max &&
+          this.attenuation[1] >= s.attenuation_min
+        const temp =
+          this.temperature[0] <= s.temperature_max &&
+          this.temperature[1] >= s.temperature_min
+        return home && floc && atten && temp
       })
 
       return filtered
