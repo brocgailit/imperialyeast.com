@@ -1,14 +1,23 @@
 <template>
   <div class="layout-actions">
-    <router-link
-      v-for="action of actions"
-      :key="action.id"
-      :to="action.path"
-      :title="action.title"
-      class="button is-primary is-medium"
-    >
-      {{ action.label }}
-    </router-link>
+    <span v-for="action of actions" :key="action.id">
+      <a
+        v-if="action.attachment"
+        :href="action.attachment.data.url"
+        :title="action.title"
+        :class="{ 'button is-primary is-medium': action.style !== '1' }"
+      >
+        {{ action.label }}
+      </a>
+      <router-link
+        v-else
+        :to="action.path"
+        :title="action.title"
+        :class="{ 'button is-primary is-medium': action.style !== '1' }"
+      >
+        {{ action.label }}
+      </router-link>
+    </span>
   </div>
 </template>
 
