@@ -3,5 +3,25 @@
 @import '~bulma/sass/utilities/_all';
 @import 'variables';
 // Import Bulma and Buefy styles
-@import '~bulma';
-@import '~buefy/src/scss/buefy';
+@import '~bulma/sass/base/_all';
+@import '~bulma/sass/form/_all';
+@import '~bulma/sass/elements/button';
+@import '~bulma/sass/elements/tag';
+@import '~bulma/sass/elements/table';
+@import '~bulma/sass/elements/container';
+@import '~bulma/sass/elements/icon';
+@import '~bulma/sass/elements/other';
+@import '~bulma/sass/elements/notification';
+@import '~bulma/sass/components/dropdown';
+@import '~bulma/sass/components/modal';
+@import '~bulma/sass/components/breadcrumb';
+@import '~buefy/src/scss/utils/_all';
+@import '~buefy/src/scss/components/_autocomplete';
+@import '~buefy/src/scss/components/_checkbox';
+// dropdown?
+@import '~buefy/src/scss/components/_form';
+@import '~buefy/src/scss/components/_icon';
+@import '~buefy/src/scss/components/_loading';
+@import '~buefy/src/scss/components/_radio';
+@import '~buefy/src/scss/components/_select';
+@import '~buefy/src/scss/components/_tag';
