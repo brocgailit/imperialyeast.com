@@ -73,7 +73,7 @@
                 class="strain-group-name"
                 :style="{ color: group.packaging_color }"
               >
-                {{ name }}
+                <span>{{ name }}s</span>
               </h2>
             </nuxt-link>
           </strain-list>
@@ -300,14 +300,33 @@ $themeColor: $primary;
 @import '~vue-slider-component/lib/theme/default.scss';
 .search-filter-results {
   .strains {
-    columns: 400px;
-    column-gap: $size-7;
-    text-align: center;
     padding-bottom: $size-1;
+    .strain-group {
+      margin-bottom: $size-5;
+    }
     .strain-group-name {
+      position: relative;
       font-weight: $weight-black;
       font-size: $size-3;
       text-transform: uppercase;
+      text-align: left;
+      background-color: $white;
+      margin: 0;
+      span {
+        position: relative;
+        z-index: 1;
+        background-color: $white;
+        padding-right: $size-5;
+      }
+      &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 100%;
+        background-color: rgba($grey, 0.25);
+        height: 2px;
+        top: 50%;
+      }
     }
   }
 }

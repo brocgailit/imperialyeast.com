@@ -21,7 +21,7 @@
         <p class="strain-description">
           {{ strain.short_description }}
         </p>
-        <dl class="strain-detail">
+        <!-- <dl class="strain-detail">
           <dt class="strain-detail-name">
             <abbr title="Temperature">Temp</abbr>:
           </dt>
@@ -39,7 +39,7 @@
           <dd class="strain-detail-info">
             {{ strain.attenuation_min }}–{{ strain.attenuation_max }}%
           </dd>
-        </dl>
+        </dl> -->
         <div class="strain-actions">
           <nuxt-link
             class="has-text-primary is-small"
@@ -88,8 +88,21 @@ export default {
   padding: 0 $size-4;
   break-inside: avoid;
   page-break-inside: avoid;
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+  }
   .strain {
-    margin: $size-7 0 $size-3;
+    width: 100%;
+    flex: 1 0 100%;
+    padding: $size-7;
+    @include tablet {
+      flex: 0 0 50%;
+    }
+    @include desktop {
+      flex: 0 0 33%;
+    }
+    margin: 0;
     .strain-name {
       font-weight: $weight-bold;
       font-size: $size-4;
