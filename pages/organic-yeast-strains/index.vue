@@ -26,6 +26,14 @@
           >{{ showAdvancedFilters ? 'Hide' : 'Show' }} Advanced</b-button
         >
         <b-button type="is-small" @click="clearFilters">Reset</b-button>
+        <div class="product-variation-select">
+          <b-checkbox v-model="productVariation" native-value="home">
+            Homebrew
+          </b-checkbox>
+          <b-checkbox v-model="productVariation" native-value="pro">
+            Probrew
+          </b-checkbox>
+        </div>
       </div>
       <div v-if="showAdvancedFilters" class="filters">
         <b-field label="Flocculation">
@@ -88,6 +96,7 @@ import { mapState } from 'vuex'
 import StrainList from '~/components/StrainList.vue'
 import { Field as BField } from 'buefy/dist/components/field'
 import { Input as BInput } from 'buefy/dist/components/input'
+import { Checkbox as BCheckbox } from 'buefy/dist/components/checkbox'
 import { Button as BButton } from 'buefy/dist/components/button'
 import { DYNAMIC_COMPONENTS } from '~/assets/script/dynamic-components'
 
@@ -103,11 +112,13 @@ export default {
     VueSlider: () => import('vue-slider-component'),
     BField,
     BInput,
-    BButton
+    BButton,
+    BCheckbox
   },
   data() {
     return {
       DYNAMIC_COMPONENTS,
+      productVariation: ['home'],
       search: '',
       showAdvancedFilters: false,
       attenuation: FILTER_DEFAULTS.attenuation,
@@ -171,7 +182,12 @@ export default {
       })
 
       const filtered = searched.filter(s => {
+        const home =
+          this.productVariation.some(
+            a => s.home_availability === (a === 'home')
+          ) || this.productVariation.length === 0
         return (
+          home &&
           s.flocculation >=
             this.flocculationLabels.indexOf(this.flocculation[0]) &&
           s.flocculation <=
@@ -344,6 +360,11 @@ $themeColor: $primary;
     .field:not(:last-child) {
       margin-bottom: $size-3;
     }
+  }
+  .product-variation-select {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 0 $size-7;
   }
 }
 
