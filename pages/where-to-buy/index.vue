@@ -123,17 +123,13 @@
       </ul>
     </div>
     <div class="location-map" :class="{ 'is-visible': tab === 'location-map' }">
-      <no-ssr>
-        <component
-          :is="mapComponent"
-          v-if="mapComponent"
-          :markers="markers"
-          :height="500"
-          :zoom="zoom"
-          :center="center"
-          :selected="selected"
-        />
-      </no-ssr>
+      <map-loader
+        :markers="markers"
+        :height="500"
+        :zoom="zoom"
+        :center="center"
+        :selected="selected"
+      />
     </div>
   </section>
 </template>
@@ -145,6 +141,7 @@ import { Field as BField } from 'buefy/dist/components/field'
 import { Autocomplete as BAutocomplete } from 'buefy/dist/components/autocomplete'
 import { Collapse as BCollapse } from 'buefy/dist/components/collapse'
 import { RadioButton as BRadioButton } from 'buefy/dist/components/radio'
+import MapLoader from '~/components/MapLoader.vue'
 
 const distance = (a, b) => {
   if (a.lat === b.lat && a.lng === b.lng) return 0
@@ -170,7 +167,8 @@ export default {
     BField,
     BAutocomplete,
     BCollapse,
-    BRadioButton
+    BRadioButton,
+    MapLoader
   },
   filters: {
     formatDistance(value) {
