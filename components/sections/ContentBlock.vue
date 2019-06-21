@@ -106,6 +106,7 @@
 <script>
 import DynamicForm from '~/components/Form.vue'
 import supportsWebP from 'supports-webp'
+
 export default {
   components: {
     DynamicForm
@@ -260,7 +261,7 @@ export default {
   }
 
   &.has-background {
-    background-color: $dark;
+    background-color: $black;
     color: $white;
     min-height: 50vh;
     display: flex;
@@ -273,6 +274,9 @@ export default {
     }
     .body {
       font-weight: $weight-bold;
+    }
+    a {
+      color: lighten($primary, 30%);
     }
   }
 

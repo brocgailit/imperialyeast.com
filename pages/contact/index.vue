@@ -22,10 +22,33 @@
           >
             <h4>{{ contact.name }}</h4>
             <address class="contact-address">
-              {{ contact.street_address }}
-              {{ contact.address_locality }}, {{ contact.address_region }}
+              {{ contact.street_address }} &bull;
+              {{ contact.address_locality }},
+              {{ contact.address_region }} &bull;
               {{ contact.address_country }}
             </address>
+
+            <div>
+              <h5>Hours</h5>
+              <table
+                v-for="(hours, h) of contact.hours"
+                :key="h"
+                class="contact-hours"
+              >
+                <tbody>
+                  <tr v-for="(day, d) of hours.days_of_week" :key="d">
+                    <th class="contact-hours-day">{{ daysOfWeek[d] }}</th>
+                    <td v-if="day" class="contact-hours-times">
+                      {{ hours.opens | timeTo12 }}—{{ hours.closes | timeTo12 }}
+                    </td>
+                    <td v-else>
+                      Closed
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
             <div
               v-for="(point, p) of contact.contact_points"
               :key="p"
@@ -43,8 +66,7 @@
               class="contact-locations-map"
               :markers="markers"
               :height="500"
-              :zoom="zoom"
-              :center="center"
+              :zoom="9"
             />
           </div>
         </aside>
@@ -57,6 +79,7 @@
 import { mapState } from 'vuex'
 import { DYNAMIC_COMPONENTS } from '~/assets/script/dynamic-components'
 import MapLoader from '~/components/MapLoader.vue'
+import format from 'date-fns/format'
 export default {
   components: {
     MapLoader
@@ -67,11 +90,23 @@ export default {
       const parts = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
       if (!parts) return null
       return ['(', parts[2], ') ', parts[3], '-', parts[4]].join('')
+    },
+    timeTo12(time) {
+      return format(`${format(new Date(), 'YYYY-MM-DD')} ${time}`, 'h:mm A')
     }
   },
   data() {
     return {
-      DYNAMIC_COMPONENTS
+      DYNAMIC_COMPONENTS,
+      daysOfWeek: [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday'
+      ]
     }
   },
   computed: {
@@ -105,10 +140,6 @@ export default {
         }
       })
     }
-  },
-  jsonld() {
-    const schema = []
-    return schema
   },
   async asyncData({ params, $axios }) {
     const slug = 'contact'
@@ -197,6 +228,67 @@ export default {
         }
       ]
     }
+  },
+  jsonld() {
+    return this.website.contacts.map(c => ({
+      '@context': 'https://schema.org',
+      '@type': c.type,
+      name: `${this.website.name} - ${c.name}`,
+      logo: this.website.logo_square.data.thumbnails.find(t => t.width > 500)
+        .url,
+      image: c.image
+        ? c.image.data.thumbnails
+            .filter(t =>
+              [[500, 500], [1024, 768], [1280, 720]].some(
+                ([w, h]) => t.width === w && t.height === h
+              )
+            )
+            .map(t => t.url)
+        : [],
+      priceRange: Array(c.price_range)
+        .fill('$')
+        .join(''),
+      contactPoint: c.contact_points.map(p => ({
+        '@type': 'ContactPoint',
+        telephone: p.telephone,
+        email: p.email,
+        contactType: p.contact_type,
+        areaServed: p.areas_served,
+        availableLanguage: p.available_languages,
+        contactOption: [
+          ...(p.toll_free ? ['TollFree'] : []),
+          ...(p.hearing_impaired_supported ? ['HearingImpairedSupported'] : [])
+        ]
+      })),
+      areaServed: c.areas_served,
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: c.geo.lat,
+        longitude: c.geo.lng
+      },
+      telephone: c.telephone,
+      email: c.email, // TODO: add this!
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: c.street_address,
+        addressLocality: c.address_locality,
+        addressRegion: c.address_region,
+        postalCode: c.postal_code,
+        addressCountry: c.address_country
+      },
+      url: this.website.canonical_url,
+      sameAs: this.website.social_profiles.map(s => s.url),
+      openingHoursSpecification: c.hours
+        ? c.hours.map(h => {
+            return {
+              '@type': 'OpeningHoursSpecification',
+              closes: h.closes,
+              dayOfWeek: h.days_of_week.filter(d => d),
+              opens: h.opens
+            }
+          })
+        : []
+    }))
   }
 }
 </script>
@@ -225,6 +317,12 @@ export default {
       letter-spacing: 0.05em;
       text-transform: uppercase;
     }
+    h5 {
+      margin-top: $size-5;
+      font-size: $size-6;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
     .contact-address {
       font-size: $size-7;
       font-style: normal;
@@ -232,11 +330,18 @@ export default {
     .contact {
       .contact-point {
         margin-top: $size-5;
-        h5 {
-          font-weight: $weight-bold;
-          text-transform: uppercase;
-        }
         .contact-point-phone {
+          white-space: nowrap;
+        }
+      }
+      .contact-hours {
+        width: 100%;
+        font-size: $size-7;
+        text-transform: uppercase;
+        .contact-hours-day {
+          font-weight: $weight-normal;
+        }
+        .contact-hours-times {
           white-space: nowrap;
         }
       }

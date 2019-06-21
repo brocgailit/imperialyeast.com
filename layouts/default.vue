@@ -70,68 +70,7 @@ export default {
         '@context': 'https://schema.org',
         '@type': 'Website',
         url: this.website.canonical_url
-      },
-      ...this.website.contacts.map(c => ({
-        '@context': 'https://schema.org',
-        '@type': c.type,
-        name: `${this.website.name} - ${c.name}`,
-        logo: this.website.logo_square.data.thumbnails.find(t => t.width > 500)
-          .url,
-        image: c.image
-          ? c.image.data.thumbnails
-              .filter(t =>
-                [[500, 500], [1024, 768], [1280, 720]].some(
-                  ([w, h]) => t.width === w && t.height === h
-                )
-              )
-              .map(t => t.url)
-          : [],
-        priceRange: Array(c.price_range)
-          .fill('$')
-          .join(''),
-        contactPoint: c.contact_points.map(p => ({
-          '@type': 'ContactPoint',
-          telephone: p.telephone,
-          email: p.email,
-          contactType: p.contact_type,
-          areaServed: p.areas_served,
-          availableLanguage: p.available_languages,
-          contactOption: [
-            ...(p.toll_free ? ['TollFree'] : []),
-            ...(p.hearing_impaired_supported
-              ? ['HearingImpairedSupported']
-              : [])
-          ]
-        })),
-        areaServed: c.areas_served,
-        geo: {
-          '@type': 'GeoCoordinates',
-          latitude: c.geo.lat,
-          longitude: c.geo.lng
-        },
-        telephone: c.telephone,
-        email: c.email, // TODO: add this!
-        address: {
-          '@type': 'PostalAddress',
-          streetAddress: c.street_address,
-          addressLocality: c.address_locality,
-          addressRegion: c.address_region,
-          postalCode: c.postal_code,
-          addressCountry: c.address_country
-        },
-        url: this.website.canonical_url,
-        sameAs: this.website.social_profiles.map(s => s.url),
-        openingHoursSpecification: c.hours
-          ? c.hours.map(h => {
-              return {
-                '@type': 'OpeningHoursSpecification',
-                closes: h.closes,
-                dayOfWeek: h.days_of_week.filter(d => d),
-                opens: h.opens
-              }
-            })
-          : []
-      }))
+      }
     ]
   },
   data() {
