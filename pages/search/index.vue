@@ -1,49 +1,32 @@
 <template>
   <section class="search-results-section">
     <header class="container">
-      <h1>Search</h1>
-      <h2>
-        Results for <strong>{{ searchTerm }}</strong>
+      <h1>Search Results</h1>
+      <h2 v-if="results">
+        for &ldquo;<strong>{{ searchTerm }}</strong
+        >&rdquo;
       </h2>
+      <div v-else>
+        Loading...
+      </div>
     </header>
     <!-- Results -->
-    <ul class="container">
-      <li v-if="strains.length">
-        <h3 class="result-type-name">Strains</h3>
-        <ul>
-          <li v-for="strain of strains" :key="strain.id">
-            <h4>{{ strain.name }}</h4>
-            <p>{{ strain.short_description }}</p>
-          </li>
-        </ul>
-      </li>
-      <li v-if="locations.length">
-        <h3 class="result-type-name">Where to Buy</h3>
-        <ul>
-          <li v-for="location of locations" :key="location.id">
-            <h4>{{ location.name }}</h4>
-            <p>
-              {{ location.city }}, {{ location.state }} {{ location.region }}
-            </p>
-          </li>
-        </ul>
-      </li>
-      <li v-if="pages.length">
-        <h3 class="result-type-name">Pages</h3>
-        <ul>
-          <li v-for="page of pages" :key="page.id">
-            <h4>{{ page.name }}</h4>
-            <p>{{ page.description }}</p>
-          </li>
-        </ul>
-      </li>
-    </ul>
+    <site-search-results
+      :term="searchTerm"
+      :results="results"
+      class="container"
+      :loading="loading"
+    />
   </section>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import SiteSearchResults from '~/components/SiteSearchResults.vue'
 export default {
+  components: {
+    SiteSearchResults
+  },
   watchQuery: ['q'],
   computed: {
     ...mapState({
@@ -53,13 +36,14 @@ export default {
   data() {
     return {
       searchTerm: '',
-      strains: [],
-      pages: [],
-      locations: []
+      results: null,
+      loading: false
     }
   },
   async mounted() {
     const { q } = this.$route.query
+
+    this.loading = true
 
     const createFilterString = fields =>
       fields
@@ -101,9 +85,8 @@ export default {
       .then(res => res.data)
 
     this.searchTerm = q
-    this.strains = strains
-    this.pages = pages
-    this.locations = locations
+    this.results = { strains, pages, locations }
+    this.loading = false
   },
   head() {
     return {
@@ -180,9 +163,17 @@ export default {
 
 <style lang="scss">
 .search-results-section {
-  .result-type-name {
-    font-family: $family-heading;
-    font-size: $size-3;
+  padding: $size-1 $size-7;
+  header {
+    text-align: center;
+    h1 {
+      font-size: $size-1;
+      font-family: $family-heading;
+    }
+    h2 {
+      text-transform: uppercase;
+      font-size: $size-4;
+    }
   }
 }
 </style>
