@@ -5,7 +5,8 @@ $danger: #ce3a1e;
 $black: #272425;
 $grey: #6a6a6a;
 $dark: mix($black, $grey);
-$link: #146bb2;
+// $link: #146bb2;
+$link: $primary;
 $body-color: $dark;
 
 $colors: (
