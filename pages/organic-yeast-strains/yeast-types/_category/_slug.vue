@@ -37,8 +37,12 @@
     <div class="strain-detail-page">
       <section>
         <header class="container">
-          <h2 :style="{ color: strain.strain_type.packaging_color }">
-            {{ strain.strain_type.name }}
+          <h2>
+            <nuxt-link
+              :to="'../' + strain.strain_type.slug"
+              :style="{ color: strain.strain_type.packaging_color }"
+              >{{ strain.strain_type.name }}</nuxt-link
+            >
           </h2>
           <h1>{{ strain.name }}</h1>
           <div
