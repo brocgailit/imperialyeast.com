@@ -80,10 +80,14 @@ export default {
   },
   computed: {
     ...mapState({
-      notification: state => state.notifications[0],
+      notifications: state => state.notifications,
       website: state => state.website,
       isShaded: state => state.showNavigation
-    })
+    }),
+    notification() {
+      const dismissed = this.$cookies.get('dismissedNotifications') || []
+      return this.notifications.find(n => !dismissed.some(d => d === n.id))
+    }
   },
   mounted() {
     const { dom } = require('@fortawesome/fontawesome-svg-core')

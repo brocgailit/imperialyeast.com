@@ -38,11 +38,7 @@ export const actions = {
     const { data: notifications } = await this.$axios.$get(
       `items/notifications?fields=*.*,actions.*.*`
     )
-    const dismissed = app.$cookies.get('dismissedNotifications') || []
-    commit(
-      'setNotifications',
-      notifications.filter(n => !dismissed.some(d => d === n.id))
-    )
+    commit('setNotifications', notifications)
 
     // get pages
     const { data: pages } = await this.$axios.$get('items/pages')
