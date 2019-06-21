@@ -1,23 +1,25 @@
 <template>
   <div>
-    <div v-if="notification" class="notification">
-      <div v-html="notification.message" />
-      <nuxt-link
-        v-for="action of notification.actions"
-        :key="action.id"
-        class="button is-danger is-small"
-        :to="action.path"
-      >
-        {{ action.label }}
-      </nuxt-link>
-      <button
-        class="delete has-background-grey"
-        type="button"
-        @click="clearNotification(notification)"
-      >
-        Close
-      </button>
-    </div>
+    <transition name="slide-down">
+      <div v-if="notification" class="notification">
+        <div v-html="notification.message" />
+        <nuxt-link
+          v-for="action of notification.actions"
+          :key="action.id"
+          class="button is-danger is-small"
+          :to="action.path"
+        >
+          {{ action.label }}
+        </nuxt-link>
+        <button
+          class="delete has-background-grey"
+          type="button"
+          @click="clearNotification(notification)"
+        >
+          Close
+        </button>
+      </div>
+    </transition>
     <Navbar />
     <main>
       <nuxt />
@@ -75,7 +77,8 @@ export default {
   },
   data() {
     return {
-      keybuffer: []
+      keybuffer: [],
+      notification: null
     }
   },
   computed: {
@@ -83,21 +86,18 @@ export default {
       notifications: state => state.notifications,
       website: state => state.website,
       isShaded: state => state.showNavigation
-    }),
-    notification() {
-      if (this.$cookies) {
-        const dismissed = (
-          this.$cookies.get('dismissedNotifications') || ''
-        ).split(',')
-        return this.notifications.find(n => !dismissed.some(d => +d === n.id))
-      }
-      return null
-    }
+    })
   },
   mounted() {
     const { dom } = require('@fortawesome/fontawesome-svg-core')
     dom.watch()
     window.addEventListener('keyup', this.handleKeys)
+    const dismissed = (this.$cookies.get('dismissedNotifications') || '').split(
+      ','
+    )
+    this.notification = this.notifications.find(
+      n => !dismissed.some(d => +d === n.id)
+    )
   },
   methods: {
     clearNotification(notification) {
@@ -105,6 +105,7 @@ export default {
         this.$cookies.set('dismissedNotifications', [notification.id])
       }
       this.$store.dispatch('clearNotification', notification)
+      this.notification = null
     },
     closeNavigation() {
       this.$store.dispatch('closeNavigation')
@@ -154,7 +155,7 @@ export default {
   font-weight: bold;
   margin: 0 !important;
   // padding: $size-7;
-  position: sticky;
+  position: fixed;
   top: 0;
   .button {
     margin: 4px $size-7;
@@ -176,6 +177,16 @@ export default {
 .slide-up-leave-to {
   opacity: 0;
   transform: translateY(20px);
+}
+
+.slide-down-enter-active,
+.slide-down-leave-active {
+  transition: 750ms ease-out;
+}
+.slide-down-enter,
+.slide-down-leave-to {
+  opacity: 0;
+  transform: translateY(-100%);
 }
 
 .shade {
