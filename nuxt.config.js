@@ -79,6 +79,7 @@ module.exports = {
     { src: '~/plugins/intersection-observer', ssr: false },
     { src: '~/plugins/vue-observe-visibility', ssr: false },
     { src: '~/plugins/smoothscroll', ssr: false },
+    { src: '~/plugins/vue-cookie', ssr: false }
     // { src: '~/plugins/buefy' }
   ],
 
@@ -92,7 +93,6 @@ module.exports = {
     '@nuxtjs/sitemap',
     '@nuxtjs/style-resources',
     // 'nuxt-buefy',
-    'cookie-universal-nuxt',
     [
       'nuxt-fontawesome',
       {

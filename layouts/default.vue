@@ -85,8 +85,13 @@ export default {
       isShaded: state => state.showNavigation
     }),
     notification() {
-      const dismissed = this.$cookies.get('dismissedNotifications') || []
-      return this.notifications.find(n => !dismissed.some(d => d === n.id))
+      if (this.$cookies) {
+        const dismissed = (
+          this.$cookies.get('dismissedNotifications') || ''
+        ).split(',')
+        return this.notifications.find(n => !dismissed.some(d => +d === n.id))
+      }
+      return null
     }
   },
   mounted() {
@@ -97,10 +102,7 @@ export default {
   methods: {
     clearNotification(notification) {
       if (this.$cookies) {
-        this.$cookies.set('dismissedNotifications', [notification.id], {
-          path: '/',
-          maxAge: 60 * 60 * 24 * 7
-        })
+        this.$cookies.set('dismissedNotifications', [notification.id])
       }
       this.$store.dispatch('clearNotification', notification)
     },
