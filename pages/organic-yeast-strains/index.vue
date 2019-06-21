@@ -26,14 +26,14 @@
           >{{ showAdvancedFilters ? 'Hide' : 'Show' }} Advanced</b-button
         >
         <b-button type="is-small" @click="clearFilters">Reset</b-button>
-        <div class="product-variation-select">
+        <!-- <div class="product-variation-select">
           <b-checkbox v-model="productVariation" native-value="home">
             Homebrew
           </b-checkbox>
           <b-checkbox v-model="productVariation" native-value="pro">
             Probrew
           </b-checkbox>
-        </div>
+        </div> -->
       </div>
       <div v-if="showAdvancedFilters" class="filters">
         <b-field label="Flocculation">
