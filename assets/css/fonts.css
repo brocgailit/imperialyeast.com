@@ -1,23 +1,11 @@
 
-/* oswald-regular - latin */
+/* gothic-regular - latin */
 @font-face {
   font-display: swap;
-  font-family: 'Oswald';
+  font-family: 'Gothic';
   font-style: normal;
   font-weight: 400;
-  src: local('Oswald Regular'), url('/fonts/oswald-v23-latin-regular.woff2') format('woff2'),
-    /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url('/fonts/oswald-v23-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-/* oswald-500 - latin */
-@font-face {
-  font-display: swap;
-  font-family: 'Oswald';
-  font-style: normal;
-  font-weight: 500;
-  src: local('Oswald SemiBold'),
-       url('/fonts/oswald-v23-latin-500.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('/fonts/oswald-v23-latin-500.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  src: local('Alternate Gothic No1 D Regular'), url('/fonts/Alternate_Gothic_No1_D_Regular.woff2') format('woff2')
 }
 
 /* montserrat-regular - latin */

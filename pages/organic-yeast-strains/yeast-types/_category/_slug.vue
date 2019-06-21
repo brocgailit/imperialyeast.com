@@ -442,8 +442,7 @@ export default {
       justify-content: center;
       align-items: center;
       font-size: $size-2;
-      line-height: 1;
-      font-family: $family-heading;
+      @include brand-font;
       border: 5px solid $white;
     }
 
@@ -500,10 +499,10 @@ export default {
 
     .strain-detail {
       margin: $size-5 0;
-      font-size: $size-6;
+      font-size: $size-5;
       text-transform: uppercase;
       color: $grey;
-      font-family: $family-heading;
+      @include brand-font;
       .strain-detail-name,
       .strain-detail-info {
         display: inline;

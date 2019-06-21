@@ -168,7 +168,7 @@ export default {
     text-align: center;
     h1 {
       font-size: $size-1;
-      font-family: $family-heading;
+      @include brand-font;
     }
     h2 {
       text-transform: uppercase;

@@ -265,7 +265,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: $family-heading;
+    @include brand-font;
     font-size: $size-6;
     background-color: $white;
     color: $primary;

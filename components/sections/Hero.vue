@@ -48,9 +48,9 @@ export default {
     max-width: $readability-width;
   }
   h1 {
-    font-family: 'Oswald', $family-primary;
+    font-family: 'Gothic', $family-primary;
     font-size: $size-1 * 1.5;
-    line-height: 1.1;
+    line-height: 0.85;
     font-weight: $weight-medium;
     text-transform: uppercase;
     color: $white;
@@ -73,7 +73,7 @@ export default {
       max-width: 100%;
     }
     h1 {
-      font-size: $size-2;
+      font-size: $size-1 * 0.85;
     }
     h2 {
       font-size: $size-5;

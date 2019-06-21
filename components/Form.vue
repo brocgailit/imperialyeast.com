@@ -141,7 +141,7 @@ export default {
   color: $white;
   h2 {
     font-size: $size-1;
-    font-family: $family-heading;
+    @include brand-font;
   }
   h3 {
     font-size: $size-4;

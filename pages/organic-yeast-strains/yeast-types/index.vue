@@ -121,7 +121,7 @@ export default {
   h1 {
     margin: $size-5 0;
     font-size: $size-2;
-    font-family: $family-heading;
+    @include brand-font;
     text-align: center;
   }
   .strain-types {

@@ -131,11 +131,11 @@ export default {
     }
     .strain-detail-name,
     .strain-detail-info {
-      font-size: $size-7;
+      font-size: $size-6;
       display: inline;
       text-transform: uppercase;
       color: $dark;
-      font-family: $family-heading;
+      @include brand-font;
     }
 
     .strain-detail-name:not(:first-child):before {

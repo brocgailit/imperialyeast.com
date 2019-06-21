@@ -229,7 +229,7 @@ export default {
     line-height: 1.1;
   }
   h3 {
-    font-family: $family-heading;
+    @include brand-font;
     font-size: $size-2;
   }
   h4 {

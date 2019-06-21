@@ -175,7 +175,7 @@ export default {
   }
   h1 {
     font-size: $size-2;
-    font-family: $family-heading;
+    @include brand-font;
   }
 
   h2 {

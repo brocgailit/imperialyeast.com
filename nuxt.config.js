@@ -18,18 +18,18 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'preload',
-        href: '/fonts/oswald-v23-latin-regular.woff2',
+        href: '/fonts/Alternate_Gothic_No1_D_Regular.woff2',
         type: 'font/woff2',
         as: 'font',
         crossorigin: 'crossorigin'
       },
-      {
+      /* {
         rel: 'preload',
         href: '/fonts/oswald-v23-latin-500.woff2',
         type: 'font/woff2',
         as: 'font',
         crossorigin: 'crossorigin'
-      },
+      }, */
       {
         rel: 'preload',
         href: '/fonts/montserrat-v13-latin-regular.woff2',

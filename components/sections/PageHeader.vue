@@ -90,14 +90,15 @@ export default {
     margin-bottom: $size-5;
   }
   h1 {
-    font-family: $family-heading;
-    font-weight: $weight-medium;
+    @include brand-font;
     font-size: $size-1;
-    margin-bottom: $size-7;
+    margin-bottom: $size-7 / 2;
   }
   h2 {
     font-weight: $weight-black;
-    font-size: $size-4;
+    font-size: $size-5;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
   }
   .body {
     margin-top: $size-3;

@@ -1,6 +1,13 @@
 @import '~bulma/sass/utilities/_all';
 @import 'variables';
 
+@mixin brand-font() {
+  font-family: $family-heading;
+  font-weight: $weight-normal;
+  text-transform: uppercase;
+  line-height: 0.85;
+}
+
 //mixins
 @mixin custom-scrollbar($size, $color, $padding: 8px, $track-color: transparent) {
   @include desktop {

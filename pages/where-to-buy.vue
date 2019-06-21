@@ -185,7 +185,7 @@ export default {
         display: inline;
         text-transform: uppercase;
         color: $grey;
-        font-family: $family-heading;
+        @include brand-font;
       }
 
       .strain-detail-name:not(:first-child):before {
