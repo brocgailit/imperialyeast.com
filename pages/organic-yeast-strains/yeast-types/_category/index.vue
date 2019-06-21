@@ -162,6 +162,7 @@ export default {
 
 <style lang="scss">
 .strain-type {
+  padding-bottom: $size-1;
   header {
     text-align: center;
     max-width: $readability-width;
