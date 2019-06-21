@@ -17,7 +17,7 @@
             :to="
               '/organic-yeast-strains/yeast-types/' + strain.strain_type.slug
             "
-            >{{ strain.strain_type.name }}</nuxt-link
+            >{{ strain.strain_type.name }}s</nuxt-link
           >
         </li>
         <li class="is-active">
