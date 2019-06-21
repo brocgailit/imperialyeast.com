@@ -275,7 +275,7 @@ export default {
     .body {
       font-weight: $weight-bold;
     }
-    a {
+    a:not(.button) {
       color: lighten($primary, 30%);
     }
   }
