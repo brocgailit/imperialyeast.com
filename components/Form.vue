@@ -147,7 +147,6 @@ export default {
     font-size: $size-4;
     font-family: $family-primary;
     font-weight: $weight-bold;
-    opacity: 0.85;
   }
   p {
     font-size: $size-5;

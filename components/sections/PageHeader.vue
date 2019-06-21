@@ -98,7 +98,6 @@ export default {
   h2 {
     font-weight: $weight-black;
     font-size: $size-4;
-    opacity: 0.85;
   }
   .body {
     margin-top: $size-3;
