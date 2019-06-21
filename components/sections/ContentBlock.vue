@@ -68,7 +68,12 @@
           <h3>{{ layout.heading }}</h3>
           <h4 v-if="layout.subheading">{{ layout.subheading }}</h4>
         </header>
-        <div v-if="layout.body" class="body" v-html="layout.body" />
+        <div
+          v-if="layout.body"
+          class="body"
+          :class="'ql-align-' + (layout.text_align || 'left')"
+          v-html="layout.body"
+        />
         <layout-actions
           v-if="layout.actions && layout.actions.length"
           class="layout-actions"
@@ -231,16 +236,16 @@ export default {
     font-size: $size-5;
   }
   .body {
-    .ql-align-center {
+    &.ql-align-center {
       text-align: center;
     }
-    .ql-align-right {
+    &.ql-align-right {
       text-align: right;
     }
-    .ql-align-left {
+    &.ql-align-left {
       text-align: left;
     }
-    .ql-align-justify {
+    &.ql-align-justify {
       text-align: justify;
     }
 
