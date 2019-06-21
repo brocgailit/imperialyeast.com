@@ -17,14 +17,20 @@
           <nuxt-link
             :to="'/organic-yeast-strains/yeast-types/' + type.slug"
             aria-current="page"
-            >{{ type.name }}</nuxt-link
+            >{{ type.name }}s</nuxt-link
           >
         </li>
       </ul>
     </nav>
     <header class="container" :style="{ color: type.packaging_color }">
-      <h1>{{ type.name }}</h1>
+      <h1>{{ type.name }}s</h1>
+      <h2 class="type-description-short">{{ type.short_description }}</h2>
     </header>
+    <div
+      v-if="type.full_description"
+      class="type-description-full container"
+      v-html="type.full_description"
+    />
     <article class="strains container">
       <strain-list :strains="strains" :header-color="type.packaging_color" />
     </article>
@@ -158,25 +164,25 @@ export default {
 .strain-type {
   header {
     text-align: center;
+    max-width: $readability-width;
+    padding: 0 $size-7;
     h1 {
       font-weight: $weight-black;
       font-size: $size-1;
       text-transform: uppercase;
     }
-  }
-
-  .strains {
-    .strain-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      .strain {
-        text-align: center;
-        flex: 0 0 50%;
-        padding: $size-6;
+    h2 {
+      font-size: $size-5;
+    }
+    @include mobile {
+      h1 {
+        font-size: $size-2;
       }
     }
-    padding-bottom: $size-1;
+  }
+
+  .type-description-full {
+    padding: $size-5 $size-7;
   }
 }
 </style>

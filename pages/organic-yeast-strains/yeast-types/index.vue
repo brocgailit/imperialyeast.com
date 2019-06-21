@@ -1,6 +1,6 @@
 <template>
   <div class="strain-types-select">
-    <h1>Select a Yeast Strain Type:</h1>
+    <h1>Select a Yeast Strain Family:</h1>
     <nav class="container">
       <ul class="strain-types">
         <li
@@ -14,7 +14,7 @@
         >
           <h2>
             <nuxt-link :to="'/organic-yeast-strains/yeast-types/' + type.slug">
-              {{ type.name }}
+              {{ type.name }}s
             </nuxt-link>
           </h2>
           <p>
@@ -118,6 +118,7 @@ export default {
 
 <style lang="scss">
 .strain-types-select {
+  padding: $size-1 $size-7;
   h1 {
     margin: $size-5 0;
     font-size: $size-2;
@@ -138,6 +139,7 @@ export default {
       h2 {
         font-size: $size-2;
         font-weight: $weight-black;
+        text-transform: uppercase;
         a {
           color: $white;
         }
