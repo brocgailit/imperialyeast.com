@@ -113,7 +113,8 @@ module.exports = {
               'faExclamationCircle',
               'faSearch',
               'faTimes',
-              'faSpinnerThird'
+              'faSpinnerThird',
+              'faCheck'
             ]
           },
           {

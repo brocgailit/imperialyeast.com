@@ -16,6 +16,15 @@
             :style="{ color: strain.strain_type.packaging_color }"
           >
             {{ strain.product_code }} {{ strain.name }}
+            <b-tooltip label="Guaranteed In-Stock" position="is-top" animated>
+              <fa-layers v-if="strain.guaranteed_in_stock">
+                <fa-icon :icon="['fal', 'flask']" />
+                <fa-icon
+                  :icon="['fal', 'check']"
+                  transform="shrink-4 right-3 down-2"
+                />
+              </fa-layers>
+            </b-tooltip>
           </h3>
         </nuxt-link>
         <p class="strain-description">
@@ -60,7 +69,14 @@
 </template>
 
 <script>
+import { FontAwesomeLayers as FaLayers } from '@fortawesome/vue-fontawesome'
+import { Tooltip as BTooltip } from 'buefy/dist/components/tooltip'
+
 export default {
+  components: {
+    FaLayers,
+    BTooltip
+  },
   filters: {
     celsius: f => Math.round(((f - 32) * 5) / 9),
     flocculation(val) {
