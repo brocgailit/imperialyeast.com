@@ -8,6 +8,7 @@
           :key="action.id"
           class="button is-danger is-small"
           :to="action.path"
+          @click="clearNotification(notification)"
         >
           {{ action.label }}
         </nuxt-link>
