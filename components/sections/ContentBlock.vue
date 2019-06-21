@@ -212,6 +212,7 @@ export default {
     }
 
     .body {
+      margin: 0 auto;
       max-width: $readability-width;
     }
   }
