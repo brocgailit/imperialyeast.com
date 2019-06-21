@@ -94,7 +94,6 @@ export default {
     clearNotification(notification) {
       if (this.$cookies) {
         this.$cookies.set('dismissedNotifications', [notification.id], {
-          secure: true,
           path: '/',
           maxAge: 60 * 60 * 24 * 7
         })
