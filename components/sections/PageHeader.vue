@@ -17,6 +17,7 @@
         <div
           v-if="layout.body"
           class="body"
+          :class="'ql-align-' + (layout.text_align || 'left')"
           v-html="layout.body.replace(/\_blank/g, '_self')"
         />
       </article>
