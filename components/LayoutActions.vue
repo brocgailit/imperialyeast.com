@@ -5,18 +5,23 @@
         v-if="action.attachment"
         :href="action.attachment.data.url"
         :title="action.title"
-        :class="{ 'button is-primary is-medium': action.style !== '1' }"
+        :class="{
+          'button is-primary is-medium': action.style !== '1'
+        }"
       >
-        {{ action.label }}
+        <span class="icon is-small">
+          <fa-icon :icon="['fal', 'arrow-to-bottom']" />
+        </span>
+        <span>{{ action.label }}</span>
       </a>
-      <router-link
+      <nuxt-link
         v-else
         :to="action.path"
         :title="action.title"
         :class="{ 'button is-primary is-medium': action.style !== '1' }"
       >
         {{ action.label }}
-      </router-link>
+      </nuxt-link>
     </span>
   </div>
 </template>
