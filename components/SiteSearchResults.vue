@@ -10,7 +10,18 @@
       <li v-if="results.strains && results.strains.length">
         <h3 class="result-type-name">Strains</h3>
         <ul>
-          <li v-for="strain of results.strains" :key="strain.id">
+          <li
+            v-for="strain of results.strains"
+            :key="strain.id"
+            @click="
+              $router.push(
+                '/organic-yeast-strains/yeast-types/' +
+                  strain.strain_type.slug +
+                  '/' +
+                  strain.slug
+              )
+            "
+          >
             <h4>
               <nuxt-link
                 :to="
@@ -46,7 +57,11 @@
       <li v-if="results.pages && results.pages.length">
         <h3 class="result-type-name">Pages</h3>
         <ul>
-          <li v-for="page of results.pages" :key="page.id">
+          <li
+            v-for="page of results.pages"
+            :key="page.id"
+            @click="$router.push('/' + page.slug)"
+          >
             <h4>
               <nuxt-link :to="'/' + page.slug">
                 {{ page.name }}
