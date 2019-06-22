@@ -114,7 +114,8 @@ module.exports = {
               'faSearch',
               'faTimes',
               'faSpinnerThird',
-              'faCheck'
+              'faCheck',
+              'faArrowToBottom'
             ]
           },
           {
