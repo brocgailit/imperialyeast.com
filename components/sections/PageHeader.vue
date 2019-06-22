@@ -116,16 +116,16 @@ export default {
       text-align: center;
       margin: $size-7;
     }
-    .ql-align-center {
+    &.ql-align-center {
       text-align: center;
     }
-    .ql-align-right {
+    &.ql-align-right {
       text-align: right;
     }
-    .ql-align-left {
+    &.ql-align-left {
       text-align: left;
     }
-    .ql-align-justify {
+    &.ql-align-justify {
       text-align: justify;
     }
   }

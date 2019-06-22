@@ -127,8 +127,9 @@
               class="home-packaging"
               :file="strain.image || strain.strain_type.home_packaging_image"
               :alt="
-                strain.image.description ||
-                  strain.strain_type.home_packaging_image.description
+                strain.image
+                  ? strain.image.description
+                  : strain.strain_type.home_packaging_image.description
               "
               sizes="150px"
               lazy
