@@ -199,6 +199,7 @@ export default {
   }
 }
 .leaflet-container {
+  z-index: 0; // avoid overlapping with modals
   font-size: $size-6;
   a.leaflet-popup-close-button {
     padding: 0.4em 0.4em 0 0;
