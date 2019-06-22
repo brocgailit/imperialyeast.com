@@ -205,12 +205,7 @@ export default {
   },
   async asyncData({ params, $axios }) {
     const slug = 'organic-yeast-strains'
-    const fields = [
-      '*.*',
-      'layouts.*.*',
-      'layouts.forms.fields.*',
-      'layouts.forms.*'
-    ]
+    const fields = ['*.*', 'layouts.*.*']
     const strains = await $axios
       .$get(`items/strains?filter[status]=published&fields=*.*,strain_type.*`)
       .then(res => res.data)

@@ -41,12 +41,7 @@ export default {
   },
   async asyncData({ params, $axios }) {
     const slug = 'where-to-buy'
-    const fields = [
-      '*.*',
-      'layouts.*.*',
-      'layouts.forms.fields.*',
-      'layouts.forms.*'
-    ]
+    const fields = ['*.*', 'layouts.*.*']
     const locations = await $axios
       .$get(`items/purchase_locations?filter[status]=published`)
       .then(res => res.data)

@@ -12,7 +12,7 @@
             v-model="field.value"
             :label="field.label"
             :type="field.type"
-            :placeholder="field.placeholder_options"
+            :placeholder="(field.placeholder_options || '').split(',')"
             :icon="field.icon"
             :required="field.required"
           />

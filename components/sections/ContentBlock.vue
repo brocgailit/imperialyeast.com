@@ -94,11 +94,8 @@
       </li>
     </ul>
 
-    <div
-      v-if="layout.forms && layout.forms.length"
-      class="form-container container"
-    >
-      <dynamic-form v-for="(form, f) of layout.forms" :key="f" :form="form" />
+    <div v-if="layout.form" class="form-container container">
+      <dynamic-form :form="layout.form" />
     </div>
   </section>
 </template>

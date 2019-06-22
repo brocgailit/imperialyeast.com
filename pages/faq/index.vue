@@ -146,12 +146,7 @@ export default {
   },
   async asyncData({ params, $axios }) {
     const slug = 'faq'
-    const fields = [
-      '*.*',
-      'layouts.*.*',
-      'layouts.forms.fields.*',
-      'layouts.forms.*'
-    ]
+    const fields = ['*.*', 'layouts.*.*']
     const faq = await $axios
       .$get(`items/frequent_questions?filter[status]=published&fields=*.*`)
       .then(res => res.data)
