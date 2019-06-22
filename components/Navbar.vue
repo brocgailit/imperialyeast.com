@@ -302,7 +302,7 @@ $logo-size: 160px;
         left: 0;
         width: 100%;
         height: 50px;
-        .results {
+        .site-search-results {
           max-height: calc(100vh - 50px - #{$navbar-height-touch} - 50px);
           overflow-y: scroll;
         }

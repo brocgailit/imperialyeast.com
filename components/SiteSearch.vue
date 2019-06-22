@@ -23,7 +23,7 @@
         :term="search"
         :loading="loading"
         :results="results"
-        transition="slide-down"
+        transition="slide-down-search"
         @click.native="close"
       />
     </div>
@@ -153,13 +153,13 @@ export default {
   }
 }
 
-.slide-down-enter-active,
-.slide-down-leave-active {
+.slide-down-search-enter-active,
+.slide-down-search-leave-active {
   transition: 350ms ease-in-out;
   transform: translateY(0);
 }
-.slide-down-enter,
-.slide-down-leave-to {
+.slide-down-search-enter,
+.slide-down-search-leave-to {
   opacity: 0;
   transform: translateY(-25px);
 }
