@@ -175,7 +175,7 @@ export default {
   @include mobile {
     padding: $size-3 $size-7;
     h1 {
-      font-size: $size-2;
+      font-size: $size-1 * 0.85;
     }
     h2 {
       font-size: $size-5;
