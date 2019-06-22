@@ -87,12 +87,11 @@
                 {{ strain.alcohol_tolerance }}%
               </dd>
             </dl>
-
-            <dl v-if="strain.species" class="strain-species">
-              <dt>Species:</dt>
-              <dd>{{ strain.species }}</dd>
-            </dl>
           </div>
+          <dl v-if="strain.species" class="strain-species">
+            <dt>Species:</dt>
+            <dd>{{ strain.species }}</dd>
+          </dl>
         </header>
         <div>
           <p class="strain-description-short">
