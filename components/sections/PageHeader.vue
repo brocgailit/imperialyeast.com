@@ -1,7 +1,15 @@
 <template>
   <section
     class="page-header"
-    :class="{ 'has-background': layout.background_image }"
+    :class="{
+      'has-background': layout.background_image,
+      'no-padding-bottom': layout.remove_padding_bottom,
+      'no-padding-top': layout.remove_padding_top
+    }"
+    :style="{
+      'background-color': layout.background_color || 'none',
+      color: layout.text_color || 'currentColor'
+    }"
   >
     <div
       v-if="layout.background_image"
@@ -88,7 +96,6 @@ export default {
   header {
     text-align: center;
     line-height: 1.1;
-    margin-bottom: $size-5;
   }
   h1 {
     @include brand-font;
@@ -106,13 +113,18 @@ export default {
     a {
       font-weight: $weight-bold;
     }
-    h4 {
-      font-weight: $weight-bold;
-      font-size: $size-4;
+    h3 {
+      font-size: $size-5;
+    }
+    h5 {
+      font-size: $size-6;
     }
     h3,
     h4,
     h5 {
+      font-weight: $weight-black;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
       text-align: center;
       margin: $size-7;
     }
@@ -128,6 +140,9 @@ export default {
     &.ql-align-justify {
       text-align: justify;
     }
+    p:not(:last-child) {
+      margin-bottom: $size-5;
+    }
   }
 
   &.has-background {
@@ -136,6 +151,14 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  &.no-padding-bottom {
+    padding-bottom: 0;
+  }
+
+  &.no-padding-top {
+    padding-top: 0;
   }
 
   .background-image {
