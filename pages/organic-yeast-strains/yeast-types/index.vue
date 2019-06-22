@@ -127,8 +127,10 @@ export default {
   }
   .strain-types {
     text-align: center;
-    display: flex;
-    flex-wrap: wrap;
+    @include desktop {
+      display: flex;
+      flex-wrap: wrap;
+    }
     .strain-type {
       cursor: pointer;
       flex: 1 0 calc(50% - #{$size-7 * 2});
@@ -139,6 +141,7 @@ export default {
       h2 {
         font-size: $size-2;
         font-weight: $weight-black;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
         a {
           color: $white;
@@ -147,6 +150,22 @@ export default {
 
       &:hover {
         transform: translateY(-5px);
+      }
+    }
+  }
+  @include mobile {
+    padding: $size-5 $size-7;
+    h1 {
+      font-size: $size-3;
+    }
+    .strain-types {
+      .strain-type {
+        h2 {
+          font-size: $size-4;
+        }
+        p {
+          font-size: $size-6;
+        }
       }
     }
   }
