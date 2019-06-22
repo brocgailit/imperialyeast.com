@@ -123,10 +123,11 @@ $logo-size: 160px;
   top: calc(-#{$logo-size} - #{$size-5});
   z-index: 1080;
   border-bottom: 1px solid rgba($grey, 0.25);
+  padding-top: $size-5;
   .nav-logo {
     width: $logo-size;
     height: $logo-size;
-    margin: $size-5 auto;
+    margin: 0 auto $size-5;
   }
   .global-nav {
     position: relative;
@@ -185,6 +186,7 @@ $logo-size: 160px;
     height: $navbar-height-touch;
     background-color: rgba($white, 0.95);
     backdrop-filter: blur(15px);
+    padding-top: 0;
     top: 0;
     display: flex;
     justify-content: center;
