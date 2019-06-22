@@ -244,7 +244,9 @@ export default {
   }
   .faq-list {
     flex-grow: 1;
-    margin-right: $size-5;
+    @include desktop {
+      margin-right: $size-5;
+    }
     .faq-list-item {
       margin-bottom: $size-5;
 
