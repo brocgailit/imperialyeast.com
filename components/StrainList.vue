@@ -105,10 +105,6 @@ export default {
   padding: 0 $size-4;
   break-inside: avoid;
   page-break-inside: avoid;
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-  }
   .strain {
     width: 100%;
     flex: 1 0 100%;
@@ -155,6 +151,16 @@ export default {
         }
       }
     }
+  }
+  @include desktop {
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+  @include mobile {
+    padding: 0;
   }
 }
 
