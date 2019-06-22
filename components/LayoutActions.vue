@@ -45,6 +45,7 @@ export default {
 }
 .layout-actions {
   > * {
+    display: inline-block;
     margin: 4px;
   }
 }
