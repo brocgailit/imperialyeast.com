@@ -35,12 +35,18 @@
           </b-checkbox>
         </div> -->
       </div>
-      <div v-if="showAdvancedFilters" class="filters">
+      <div
+        v-if="showAdvancedFilters"
+        class="filters"
+        style="pointer-events: all"
+      >
         <b-field label="Flocculation">
           <vue-slider
             v-model="flocculation"
             :data="flocculationLabels"
             :interval="1"
+            :dot-size="[24, 24]"
+            :event-type="sliderEventType"
             marks
             adsorb
             included
@@ -51,6 +57,8 @@
             v-model="attenuation"
             :min="65"
             :max="100"
+            :dot-size="[24, 24]"
+            :event-type="sliderEventType"
             marks
             :interval="5"
             included
@@ -60,6 +68,8 @@
           <vue-slider
             v-model="temperature"
             :min="45"
+            :dot-size="[24, 24]"
+            :event-type="sliderEventType"
             :marks="{ '45': { label: '45℉' }, '100': { label: '100℉' } }"
           ></vue-slider>
         </b-field>
@@ -117,6 +127,7 @@ export default {
   },
   data() {
     return {
+      sliderEventType: 'touch',
       DYNAMIC_COMPONENTS,
       productVariation: ['home'],
       search: '',
@@ -134,6 +145,11 @@ export default {
         'Very High'
       ]
     }
+  },
+  mounted() {
+    this.sliderEventType = window.matchMedia('(max-width: 768px)').matches
+      ? 'touch'
+      : 'mouse'
   },
   computed: {
     ...mapState({
@@ -156,6 +172,7 @@ export default {
         return groups
       }, {})
     },
+    // Debounce the things
     filteredStrains() {
       const searched = this.strains.filter(s => {
         const checks = [
@@ -354,8 +371,14 @@ $themeColor: $primary;
     margin-top: $size-5;
     border: 1px solid $light;
     padding: $size-5 $size-1 $size-1;
+    .label {
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: $size-7;
+      text-align: center;
+    }
     .field:not(:last-child) {
-      margin-bottom: $size-3;
+      margin-bottom: $size-2;
     }
   }
   .product-variation-select {
@@ -382,6 +405,16 @@ $themeColor: $primary;
   .search-filter {
     position: sticky;
     top: $navbar-height-touch;
+    .filters {
+      padding: $size-5 $size-2 $size-2;
+      .label {
+        margin: 0;
+        font-size: $size-7;
+      }
+      .vue-slider-mark-label {
+        font-size: $size-7;
+      }
+    }
   }
 }
 </style>
