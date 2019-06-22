@@ -160,6 +160,9 @@ export default {
   }
   @include mobile {
     padding: 0;
+    .strain .strain-name {
+      font-size: $size-5;
+    }
   }
 }
 
