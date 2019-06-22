@@ -52,39 +52,47 @@
             {{ strain.product_code }}
           </div>
 
-          <dl class="strain-detail">
-            <dt class="strain-detail-name">
-              <abbr title="Temperature">Temp</abbr>:
-            </dt>
-            <dd class="strain-detail-info">
-              {{ strain.temperature_min }}–{{ strain.temperature_max }}℉
-              <small
-                >({{ strain.temperature_min | celsius }}–{{
-                  strain.temperature_max | celsius
-                }}℃)</small
-              >
-            </dd>
-            <dt class="strain-detail-name">Flocculation:</dt>
-            <dd class="strain-detail-info">
-              {{ strain.flocculation | flocculation }}
-            </dd>
-            <dt class="strain-detail-name">Attenuation:</dt>
-            <dd class="strain-detail-info">
-              {{ strain.attenuation_min }}–{{ strain.attenuation_max }}%
-            </dd>
-            <dt class="strain-detail-name">Alohol Tolerance:</dt>
-            <dd class="strain-detail-info">
-              <span v-if="strain.alcohol_tolerance_min"
-                >{{ strain.alcohol_tolerance_min }}–</span
-              >
-              {{ strain.alcohol_tolerance }}%
-            </dd>
-          </dl>
+          <div class="strain-details">
+            <dl class="strain-detail">
+              <dt class="strain-detail-name">
+                <abbr title="Temperature">Temp</abbr>:
+              </dt>
+              <dd class="strain-detail-info">
+                {{ strain.temperature_min }}–{{ strain.temperature_max }}℉
+                <small
+                  >({{ strain.temperature_min | celsius }}–{{
+                    strain.temperature_max | celsius
+                  }}℃)</small
+                >
+              </dd>
+            </dl>
+            <dl class="strain-detail">
+              <dt class="strain-detail-name">Flocculation:</dt>
+              <dd class="strain-detail-info">
+                {{ strain.flocculation | flocculation }}
+              </dd>
+            </dl>
+            <dl class="strain-detail">
+              <dt class="strain-detail-name">Attenuation:</dt>
+              <dd class="strain-detail-info">
+                {{ strain.attenuation_min }}–{{ strain.attenuation_max }}%
+              </dd>
+            </dl>
+            <dl class="strain-detail">
+              <dt class="strain-detail-name">Alohol Tolerance:</dt>
+              <dd class="strain-detail-info">
+                <span v-if="strain.alcohol_tolerance_min"
+                  >{{ strain.alcohol_tolerance_min }}–</span
+                >
+                {{ strain.alcohol_tolerance }}%
+              </dd>
+            </dl>
 
-          <dl v-if="strain.species" class="strain-species">
-            <dt>Species:</dt>
-            <dd>{{ strain.species }}</dd>
-          </dl>
+            <dl v-if="strain.species" class="strain-species">
+              <dt>Species:</dt>
+              <dd>{{ strain.species }}</dd>
+            </dl>
+          </div>
         </header>
         <div>
           <p class="strain-description-short">
@@ -433,6 +441,11 @@ export default {
         font-weight: $weight-black;
         font-size: $size-1;
       }
+      @include mobile {
+        h1 {
+          font-size: $size-3;
+        }
+      }
     }
 
     .strain-code {
@@ -501,21 +514,25 @@ export default {
         font-style: italic;
       }
     }
-
-    .strain-detail {
+    .strain-details {
       margin: $size-5 0;
-      font-size: $size-5;
-      text-transform: uppercase;
-      color: $grey;
-      @include brand-font;
-      .strain-detail-name,
-      .strain-detail-info {
-        display: inline;
-      }
+      .strain-detail {
+        display: inline-block;
+        text-transform: uppercase;
+        color: $grey;
+        @include brand-font;
+        .strain-detail-name,
+        .strain-detail-info {
+          display: inline;
+        }
 
-      .strain-detail-name:not(:first-child):before {
-        content: '// ';
-        margin: 0 8px;
+        &:not(:last-child):after {
+          content: '// ';
+          margin: 0 4px;
+        }
+        @include tablet {
+          font-size: $size-5;
+        }
       }
     }
   }
