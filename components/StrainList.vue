@@ -156,7 +156,6 @@ export default {
     ul {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
     }
   }
   @include mobile {

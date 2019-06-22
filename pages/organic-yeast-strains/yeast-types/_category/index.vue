@@ -182,6 +182,10 @@ export default {
     }
   }
 
+  .strain-list ul {
+    justify-content: center;
+  }
+
   .type-description-full {
     padding: $size-5 $size-7;
   }
