@@ -317,6 +317,7 @@ $themeColor: $primary;
       margin-bottom: $size-5;
     }
     .strain-group-name {
+      padding-left: $size-7;
       position: relative;
       font-weight: $weight-black;
       font-size: $size-3;
@@ -333,8 +334,8 @@ $themeColor: $primary;
       &:after {
         content: '';
         position: absolute;
-        left: 0;
-        width: 100%;
+        left: $size-7;
+        width: calc(100% - #{$size-7 * 2});
         background-color: rgba($grey, 0.25);
         height: 2px;
         top: 50%;
