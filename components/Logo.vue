@@ -64,9 +64,9 @@ export default {
   #imperial-logo {
     overflow: visible;
   }
+  #imperial-crown,
   #imperial-yeast-text {
-    transform-origin: center;
-    transform: scale(1.5);
+    transform: translateY(10%);
   }
   #yeast-text {
     display: none;
