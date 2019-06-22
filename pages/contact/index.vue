@@ -20,47 +20,51 @@
             :key="contact.id"
             class="contact"
           >
-            <h4>{{ contact.name }}</h4>
-            <address class="contact-address">
-              {{ contact.street_address }} &bull;
-              {{ contact.address_locality }},
-              {{ contact.address_region }} &bull;
-              {{ contact.address_country }}
-            </address>
+            <div class="contact-information">
+              <h4>{{ contact.name }}</h4>
+              <address class="contact-address">
+                {{ contact.street_address }} &bull;
+                {{ contact.address_locality }},
+                {{ contact.address_region }} &bull;
+                {{ contact.address_country }}
+              </address>
 
-            <div>
-              <h5>Hours</h5>
-              <table
-                v-for="(hours, h) of contact.hours"
-                :key="h"
-                class="contact-hours"
+              <div>
+                <h5>Hours</h5>
+                <table
+                  v-for="(hours, h) of contact.hours"
+                  :key="h"
+                  class="contact-hours"
+                >
+                  <tbody>
+                    <tr v-for="(day, d) of hours.days_of_week" :key="d">
+                      <th class="contact-hours-day">{{ daysOfWeek[d] }}</th>
+                      <td v-if="day" class="contact-hours-times">
+                        {{ hours.opens | timeTo12 }}—{{
+                          hours.closes | timeTo12
+                        }}
+                      </td>
+                      <td v-else>
+                        Closed
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div
+                v-for="(point, p) of contact.contact_points"
+                :key="p"
+                class="contact-point"
               >
-                <tbody>
-                  <tr v-for="(day, d) of hours.days_of_week" :key="d">
-                    <th class="contact-hours-day">{{ daysOfWeek[d] }}</th>
-                    <td v-if="day" class="contact-hours-times">
-                      {{ hours.opens | timeTo12 }}—{{ hours.closes | timeTo12 }}
-                    </td>
-                    <td v-else>
-                      Closed
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <div
-              v-for="(point, p) of contact.contact_points"
-              :key="p"
-              class="contact-point"
-            >
-              <h5>{{ point.contact_type }}</h5>
-              <a :href="'mailto:' + point.email">
-                {{ point.email }}
-              </a>
-              <span class="contact-point-phone">{{
-                point.telephone | formatPhone
-              }}</span>
+                <h5>{{ point.contact_type }}</h5>
+                <a :href="'mailto:' + point.email">
+                  {{ point.email }}
+                </a>
+                <span class="contact-point-phone">{{
+                  point.telephone | formatPhone
+                }}</span>
+              </div>
             </div>
             <map-loader
               class="contact-locations-map"
@@ -293,17 +297,6 @@ export default {
   background-color: $light;
 }
 .contact-container {
-  @include desktop {
-    display: flex;
-    .contact-sections {
-      flex-grow: 1;
-    }
-    .contact-section {
-      max-width: 400px;
-      flex: 0 0 400px;
-      padding: $size-1 $size-7;
-    }
-  }
   .contact-section {
     color: $dark;
     h4 {
@@ -318,31 +311,58 @@ export default {
       text-transform: uppercase;
       font-weight: bold;
     }
-    .contact-address {
-      font-size: $size-7;
-      font-style: normal;
-    }
     .contact {
-      .contact-point {
-        margin-top: $size-5;
-        .contact-point-phone {
-          white-space: nowrap;
+      .contact-information {
+        padding: 0 $size-7;
+        .contact-address {
+          font-size: $size-7;
+          font-style: normal;
+        }
+        .contact-point {
+          margin-top: $size-5;
+          .contact-point-phone {
+            white-space: nowrap;
+          }
+        }
+        .contact-hours {
+          width: 100%;
+          font-size: $size-7;
+          text-transform: uppercase;
+          .contact-hours-day {
+            font-weight: $weight-normal;
+          }
+          .contact-hours-times {
+            white-space: nowrap;
+          }
         }
       }
-      .contact-hours {
-        width: 100%;
-        font-size: $size-7;
-        text-transform: uppercase;
-        .contact-hours-day {
-          font-weight: $weight-normal;
-        }
-        .contact-hours-times {
-          white-space: nowrap;
-        }
+      .contact-locations-map {
+        margin-top: $size-5;
       }
     }
-    .contact-locations-map {
-      margin-top: $size-5;
+  }
+  @include desktop {
+    display: flex;
+    .contact-sections {
+      flex-grow: 1;
+    }
+    .contact-section {
+      max-width: 400px;
+      flex: 0 0 400px;
+      padding: $size-1 $size-7;
+    }
+  }
+  @include touch {
+    .contact-information {
+      text-align: center;
+      .contact-hours {
+        width: auto !important;
+        margin: 0 auto;
+        font-size: $size-6 !important;
+        .contact-hours-day {
+          padding-right: $size-7;
+        }
+      }
     }
   }
 }

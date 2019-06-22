@@ -30,7 +30,10 @@
       class="layout-content"
       :class="[
         'is-' + (layout.content_direction || 'column'),
-        { 'has-image': images.length }
+        {
+          'has-image': images.length,
+          'has-image-fullwidth': layout.full_width_images
+        }
       ]"
     >
       <div
@@ -38,7 +41,6 @@
         class="image-container"
         :class="{
           'has-many': images.length > 1,
-          'is-full-width': layout.full_width_images,
           container: !layout.full_width_images
         }"
       >
@@ -218,6 +220,37 @@ export default {
       margin: 0 auto;
       max-width: $readability-width;
     }
+
+    &.has-image.has-image-fullwidth {
+      .image-container {
+        padding: 0 !important;
+        * {
+          width: 100%;
+        }
+      }
+      &.is-column {
+        .body {
+          padding-top: $size-1;
+        }
+      }
+      &.is-column-reverse {
+        .body {
+          padding-bottom: $size-1;
+        }
+      }
+      @include touch {
+        &.is-column {
+          .body {
+            padding-top: $size-3;
+          }
+        }
+        &.is-column-reverse {
+          .body {
+            padding-bottom: $size-3;
+          }
+        }
+      }
+    }
   }
 
   header {
@@ -227,11 +260,13 @@ export default {
   }
   h3 {
     @include brand-font;
-    font-size: $size-2;
+    font-size: $size-1 * 0.85;
   }
   h4 {
-    margin-top: $size-5;
+    margin-top: $size-7 / 2;
     font-size: $size-5;
+    font-weight: $weight-bold;
+    text-transform: uppercase;
   }
   .body {
     &.ql-align-center {
@@ -265,9 +300,10 @@ export default {
     justify-content: center;
     align-items: center;
     h3 {
-      font-family: $family-primary;
-      text-transform: uppercase;
-      font-weight: $weight-black;
+      font-size: $size-1;
+      @include mobile {
+        font-size: $size-2;
+      }
     }
     .body {
       font-weight: $weight-bold;
@@ -298,13 +334,6 @@ export default {
       > * {
         padding: $size-5;
         max-width: 200px;
-      }
-    }
-
-    &.is-full-width {
-      padding: 0 !important;
-      * {
-        width: 100%;
       }
     }
 
@@ -352,7 +381,39 @@ export default {
   }
 
   picture {
-    display: inline-block;
+    display: block;
+    img {
+      display: table;
+    }
+  }
+
+  @include touch {
+    padding: $size-3 0;
+    .image-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: $size-5;
+    }
+
+    .has-image-fullwidth {
+      .image-container {
+        margin: 0;
+      }
+    }
+
+    .background-image {
+      transform: translate(0, 0) !important;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+    }
+
+    .layout-content {
+      &.is-column-reverse {
+        display: flex;
+        flex-direction: column-reverse;
+      }
+    }
   }
 
   @include mobile {
@@ -363,7 +424,11 @@ export default {
       margin-bottom: $size-7;
     }
     h3 {
-      font-size: $size-3;
+      font-size: $size-2;
+    }
+    h4 {
+      font-size: $size-5;
+      margin-top: 0;
     }
     .layout-content.has-image > * {
       padding: $size-7;
@@ -382,30 +447,6 @@ export default {
       }
       .bullet:not(:last-child) {
         margin-bottom: $size-5;
-      }
-    }
-  }
-
-  @include touch {
-    .image-container {
-      display: flex;
-      justify-content: center;
-      margin-bottom: $size-5;
-      &.is-full-width {
-        margin: 0;
-      }
-    }
-    .background-image {
-      transform: translate(0, 0) !important;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-    }
-
-    .layout-content {
-      &.is-column-reverse {
-        display: flex;
-        flex-direction: column-reverse;
       }
     }
   }
