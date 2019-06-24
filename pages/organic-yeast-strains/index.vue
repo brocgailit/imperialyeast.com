@@ -374,13 +374,15 @@ $themeColor: $primary;
 .search-filter {
   z-index: 1070;
   background-color: rgba($white, 0.9);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(3px);
   padding: $size-7;
   margin-bottom: $size-5;
   .filters {
+    transform-origin: top left;
     position: absolute;
     top: 100%;
-    background-color: $white;
+    background-color: rgba($white, 0.8);
+    backdrop-filter: blur(3px);
     left: $size-7;
     width: calc(100% - #{$size-7 * 2});
     border: 1px solid $light;
@@ -401,10 +403,11 @@ $themeColor: $primary;
       left: 0;
       border: 0;
       outline: 0;
-      background-color: lighten($light, 2%);
+      background-color: lighten($light, 1%);
       margin: 0 auto;
       display: block;
       border-top: 1px solid $light;
+      padding: 4px;
       color: $primary;
       cursor: pointer;
       &:hover {
@@ -458,10 +461,12 @@ $themeColor: $primary;
 
 .fade-filters-enter-active,
 .fade-filters-leave-active {
-  transition: opacity 150ms linear;
+  transition: 150ms ease-in-out;
+  transform: scale(1);
 }
 .fade-filters-enter,
 .fade-filters-leave-to {
   opacity: 0;
+  transform: scale(0.5) translateY(-2rem);
 }
 </style>
