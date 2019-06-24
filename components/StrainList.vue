@@ -15,14 +15,15 @@
             class="strain-name"
             :style="{ color: strain.strain_type.packaging_color }"
           >
-            {{ strain.product_code }} {{ strain.name }}
+            <span>{{ strain.product_code }} {{ strain.name }}</span>
             <b-tooltip
               v-if="strain.guaranteed_in_stock"
+              style="vertical-align: middle"
               label="Guaranteed In-Stock"
               position="is-top"
               animated
             >
-              <fa-icon :icon="['fal', 'shipping-fast']" />
+              <fa-icon :icon="['fal', 'shipping-fast']" size="sm" />
             </b-tooltip>
           </h3>
         </nuxt-link>
