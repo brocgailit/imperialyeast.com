@@ -9,8 +9,9 @@
       />
     </div>
     <nav class="search-filter container">
-      <b-field label="Search">
+      <b-field label="SEARCH" label-for="strain-search" custom-class="is-small">
         <b-input
+          id="strain-search"
           v-model="search"
           type="search"
           icon="search"
@@ -435,6 +436,10 @@ $themeColor: $primary;
   .search-filter {
     position: sticky;
     top: $navbar-height-touch;
+    border: 1px solid darken($light, 2%);
+    border-width: 1px 0;
+    margin-top: $size-7;
+    background-color: lighten($light, 2%);
     .filters {
       padding: $size-5 $size-2 $size-2;
       .label {
