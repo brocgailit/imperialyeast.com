@@ -442,6 +442,9 @@ $themeColor: $primary;
     background-color: lighten($light, 2%);
     .filters {
       padding: $size-5 $size-2 $size-2;
+      .field:not(:last-child) {
+        margin-bottom: $size-6;
+      }
       .label {
         margin: 0;
         font-size: $size-7;
