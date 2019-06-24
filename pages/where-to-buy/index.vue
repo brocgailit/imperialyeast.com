@@ -1,13 +1,13 @@
 <template>
   <section class="location-search-container container">
     <div class="location-search">
-      <b-field
-        class="location-search-input"
-        custom-class="is-small"
-        label="Find a homebrew yeast retailer near you:"
-      >
+      <h3>
+        Find a homebrew yeast retailer near you
+      </h3>
+      <b-field class="location-search-input" custom-class="is-small">
         <b-autocomplete
           v-model="search"
+          class="location-search-autocomplete"
           :data="searchResults"
           placeholder="Search by City or Zip"
           field="locale_names[0]"
@@ -23,6 +23,11 @@
             No results for {{ search }}
           </template>
         </b-autocomplete>
+        <div class="control">
+          <b-button type="is-primary" @click="getLocationByGeolocation">
+            <fa-icon :icon="['fal', 'location']" title="Get Geolocation" />
+          </b-button>
+        </div>
       </b-field>
       <p v-if="location" class="retailer-counts">
         {{
@@ -238,7 +243,12 @@ export default {
   },
   computed: {
     zoom() {
-      return this.center && this.location ? 8 : 3
+      const zoom =
+        typeof window !== 'undefined' &&
+        window.matchMedia('(max-width: 768px)').matches
+          ? 3
+          : 4
+      return this.center && this.location ? 8 : zoom
     },
     center() {
       return this.location
@@ -281,7 +291,7 @@ export default {
     }
   },
   mounted() {
-    this.getLocationByGeolocation()
+    // this.getLocationByGeolocation()
     this.mapComponent = () => import('~/components/Map.vue')
   }
 }
@@ -305,6 +315,10 @@ export default {
       top: 0;
       left: 0;
       z-index: 1070;
+      /* .geolocate-button {
+        position: absolute;
+        right: 0;
+      } */
     }
 
     .retailer-counts {
