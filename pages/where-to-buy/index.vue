@@ -218,13 +218,14 @@ export default {
       this.searchResults = location.hits
     }, 300),
     getGeolocation() {
-      const options = {
+      /* const options = {
         enableHighAccuracy: false,
         timeout: Infinity,
         maximumAge: 1000 * 30
-      }
+      } */
       return new Promise((resolve, reject) =>
-        navigator.geolocation.getCurrentPosition(resolve, reject, options)
+        // navigator.geolocation.getCurrentPosition(resolve, reject, options)
+        navigator.geolocation.getCurrentPosition(resolve, reject)
       )
     },
     async getLocationByGeolocation() {
