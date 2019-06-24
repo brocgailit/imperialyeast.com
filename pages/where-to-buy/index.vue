@@ -190,7 +190,7 @@ export default {
       searchResults: [],
       selected: null,
       radius: 50, // miles
-      tab: 'retailer-list'
+      tab: 'location-map'
     }
   },
   methods: {
@@ -398,6 +398,7 @@ export default {
   }
 
   @include mobile {
+    padding-bottom: 0;
     display: block;
     .location-search {
       height: auto;
