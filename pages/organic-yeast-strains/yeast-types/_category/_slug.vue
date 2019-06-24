@@ -470,7 +470,7 @@ export default {
     .strain-description-short {
       font-size: $size-5;
       text-align: center;
-      margin: $size-1 0;
+      margin: $size-2 0;
     }
     .strain-description-full {
       font-size: $size-6;
