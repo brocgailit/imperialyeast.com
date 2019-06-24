@@ -139,6 +139,8 @@ export default {
       }
       .contact-point-phone {
         font-size: $size-4;
+        font-weight: $weight-black;
+        letter-spacing: 0.05em;
       }
       a {
         font-size: $size-7;
