@@ -308,7 +308,7 @@ export default {
     }
 
     .retailer-counts {
-      font-size: $size-6;
+      font-size: $size-7;
       padding: $size-5;
       text-align: center;
     }
@@ -359,7 +359,7 @@ export default {
         float: right;
       }
       .retailer-name {
-        font-size: $size-6;
+        font-size: $size-7;
         font-weight: $weight-bold;
       }
       .retailer-address {

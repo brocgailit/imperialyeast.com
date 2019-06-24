@@ -122,7 +122,7 @@ export default {
       font-size: $size-4;
     }
     .strain-description {
-      font-size: $size-6;
+      font-size: $size-7;
       margin-bottom: $size-7;
     }
     .strain-detail-name,

@@ -150,43 +150,4 @@ export default {
     }
   }
 }
-
-.strains {
-  columns: 500px;
-  column-gap: $size-7;
-  text-align: center;
-  padding-bottom: $size-1;
-  .strain-group-name {
-    font-weight: $weight-black;
-    font-size: $size-3;
-    text-transform: uppercase;
-  }
-  .strain-list {
-    padding: 0 $size-4;
-    break-inside: avoid;
-    page-break-inside: avoid;
-    .strain {
-      margin: $size-7 0;
-      .strain-name {
-        font-weight: $weight-bold;
-        font-size: $size-5;
-      }
-      .strain-description {
-        font-size: $size-6;
-        margin: $size-7 0;
-      }
-      .strain-detail-name,
-      .strain-detail-info {
-        display: inline;
-        text-transform: uppercase;
-        color: $grey;
-        @include brand-font;
-      }
-
-      .strain-detail-name:not(:first-child):before {
-        content: '// ';
-      }
-    }
-  }
-}
 </style>

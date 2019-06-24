@@ -98,7 +98,7 @@ export default {
   width: 100%;
   background-color: $black;
   color: $light;
-  padding: $size-3;
+  padding: $size-3 $size-7;
   a {
     color: $white;
     font-weight: $weight-bold;
@@ -116,7 +116,7 @@ export default {
         a {
           display: inline-block;
           text-transform: uppercase;
-          font-size: $size-6;
+          font-size: $size-7;
           padding: 4px $size-7;
           margin: 8px;
           white-space: nowrap;
@@ -141,7 +141,7 @@ export default {
         font-size: $size-4;
       }
       a {
-        font-size: $size-6;
+        font-size: $size-7;
       }
     }
   }

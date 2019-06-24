@@ -307,7 +307,7 @@ export default {
     }
     h5 {
       margin-top: $size-5;
-      font-size: $size-6;
+      font-size: $size-7;
       text-transform: uppercase;
       font-weight: bold;
     }

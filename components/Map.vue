@@ -200,7 +200,7 @@ export default {
 }
 .leaflet-container {
   z-index: 0; // avoid overlapping with modals
-  font-size: $size-6;
+  font-size: $size-7;
   a.leaflet-popup-close-button {
     padding: 0.4em 0.4em 0 0;
     color: $primary;
@@ -247,7 +247,7 @@ export default {
       border-bottom-left-radius: $radius;
       text-align: center;
       address {
-        font-size: $size-6;
+        font-size: $size-7;
       }
       a {
         margin: 8px 0 0;
@@ -267,7 +267,7 @@ export default {
     align-items: center;
     justify-content: center;
     @include brand-font;
-    font-size: $size-6;
+    font-size: $size-7;
     background-color: $white;
     color: $primary;
     border: 2px solid $primary;
