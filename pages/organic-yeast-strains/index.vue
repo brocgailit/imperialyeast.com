@@ -35,45 +35,54 @@
           </b-checkbox>
         </div> -->
       </div>
-      <div
-        v-if="showAdvancedFilters"
-        class="filters"
-        style="pointer-events: all"
-      >
-        <b-field label="Flocculation">
-          <vue-slider
-            v-model="flocculation"
-            :data="flocculationLabels"
-            :interval="1"
-            :dot-size="[24, 24]"
-            :event-type="sliderEventType"
-            marks
-            adsorb
-            included
-          ></vue-slider>
-        </b-field>
-        <b-field label="Attenuation">
-          <vue-slider
-            v-model="attenuation"
-            :min="65"
-            :max="100"
-            :dot-size="[24, 24]"
-            :event-type="sliderEventType"
-            marks
-            :interval="5"
-            included
-          ></vue-slider>
-        </b-field>
-        <b-field label="Temperature">
-          <vue-slider
-            v-model="temperature"
-            :min="45"
-            :dot-size="[24, 24]"
-            :event-type="sliderEventType"
-            :marks="{ '45': { label: '45℉' }, '100': { label: '100℉' } }"
-          ></vue-slider>
-        </b-field>
-      </div>
+      <transition name="fade-filters">
+        <div
+          v-if="showAdvancedFilters"
+          class="filters"
+          style="pointer-events: all"
+        >
+          <b-field label="Flocculation">
+            <vue-slider
+              v-model="flocculation"
+              :data="flocculationLabels"
+              :interval="1"
+              :dot-size="[24, 24]"
+              :event-type="sliderEventType"
+              marks
+              adsorb
+              included
+            ></vue-slider>
+          </b-field>
+          <b-field label="Attenuation">
+            <vue-slider
+              v-model="attenuation"
+              :min="65"
+              :max="100"
+              :dot-size="[24, 24]"
+              :event-type="sliderEventType"
+              marks
+              :interval="5"
+              included
+            ></vue-slider>
+          </b-field>
+          <b-field label="Temperature">
+            <vue-slider
+              v-model="temperature"
+              :min="45"
+              :dot-size="[24, 24]"
+              :event-type="sliderEventType"
+              :marks="{ '45': { label: '45℉' }, '100': { label: '100℉' } }"
+            ></vue-slider>
+          </b-field>
+          <button
+            type="button"
+            class="close-button"
+            @click="showAdvancedFilters = false"
+          >
+            <fa-icon :icon="['fal', 'chevron-up']" size="2x" title="Close" />
+          </button>
+        </div>
+      </transition>
     </nav>
     <section class="search-filter-results">
       <div class="strains container">
@@ -368,7 +377,11 @@ $themeColor: $primary;
   padding: $size-7;
   margin-bottom: $size-5;
   .filters {
-    margin-top: $size-5;
+    position: absolute;
+    top: 100%;
+    background-color: $white;
+    left: $size-7;
+    width: calc(100% - #{$size-7 * 2});
     border: 1px solid $light;
     padding: $size-5 $size-1 $size-1;
     .label {
@@ -379,6 +392,23 @@ $themeColor: $primary;
     }
     .field:not(:last-child) {
       margin-bottom: $size-2;
+    }
+    .close-button {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      border: 0;
+      outline: 0;
+      background-color: lighten($light, 2%);
+      margin: 0 auto;
+      display: block;
+      border-top: 1px solid $light;
+      color: $primary;
+      cursor: pointer;
+      &:hover {
+        background-color: $light;
+      }
     }
   }
   .product-variation-select {
@@ -416,5 +446,14 @@ $themeColor: $primary;
       }
     }
   }
+}
+
+.fade-filters-enter-active,
+.fade-filters-leave-active {
+  transition: opacity 150ms linear;
+}
+.fade-filters-enter,
+.fade-filters-leave-to {
+  opacity: 0;
 }
 </style>
