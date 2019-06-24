@@ -86,7 +86,9 @@ export default {
       `items/strain_types?single=1&filter[slug]=${category}`
     )
     const { data: strains } = await $axios.$get(
-      `items/strains?filter[strain_type]=${type.id}&fields=*.*,beer_styles.*.*`
+      `items/strains?filter[status]=published&filter[strain_type]=${
+        type.id
+      }&fields=*.*,beer_styles.*.*`
     )
     return { strains, type }
   },
