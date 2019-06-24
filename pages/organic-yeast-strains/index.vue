@@ -15,7 +15,7 @@
           type="search"
           icon="search"
           icon-pack="fal"
-          placeholder="Names, product codes, descriptions, and keywords"
+          placeholder="Names, descriptions, and keywords"
           @input="handleSearchInput"
         ></b-input>
       </b-field>
