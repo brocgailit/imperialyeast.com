@@ -136,7 +136,7 @@ export default {
       const width =
         typeof window !== 'undefined' &&
         window.matchMedia('(min-width: 769px)').matches
-          ? 1920
+          ? 1600 // 1600x1600 square
           : 768
       return this.layout.background_image && this.isVisible
         ? `url(${this.layout.background_image.data.thumbnails.find(
@@ -317,7 +317,7 @@ export default {
     position: absolute;
     left: 0;
     top: 0;
-    width: 125%;
+    width: 100%;
     height: 250%;
     background-position: 50% 40%;
     background-repeat: no-repeat;
