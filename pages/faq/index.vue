@@ -257,6 +257,7 @@ export default {
         font-size: $size-5;
         line-height: 1.1;
         margin-bottom: $size-7;
+        padding-right: $size-7;
         &:before {
           content: 'Q';
           font-weight: $weight-bold;
@@ -324,8 +325,20 @@ export default {
   }
 
   @include touch {
+    padding-bottom: 0;
     .container {
       display: block;
+    }
+    .faq-list {
+      .faq-list-item {
+        .question {
+          font-size: $size-6;
+          margin-bottom: 0;
+        }
+        .answer {
+          font-size: $size-7;
+        }
+      }
     }
   }
 }
