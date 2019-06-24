@@ -293,13 +293,11 @@ export default {
 </script>
 
 <style lang="scss">
-.contact-page-contents {
-  background-color: $light;
-}
 .contact-container {
   .contact-section {
     color: $dark;
     h4 {
+      color: $black;
       font-size: $size-5;
       font-weight: $weight-black;
       letter-spacing: 0.05em;
