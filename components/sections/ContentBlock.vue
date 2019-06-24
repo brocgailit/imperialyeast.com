@@ -427,7 +427,7 @@ export default {
       font-size: $size-2;
     }
     h4 {
-      font-size: $size-5;
+      font-size: $size-6;
       margin-top: 0;
     }
     .layout-content.has-image > * {
