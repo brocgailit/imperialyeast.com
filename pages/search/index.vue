@@ -55,7 +55,8 @@ export default {
       'name',
       'short_description',
       'full_description',
-      'compare_to'
+      'compare_to',
+      'profiles'
     ])
 
     const strains = await this.$axios
@@ -165,6 +166,7 @@ export default {
 .search-results-section {
   padding: $size-1 $size-7;
   header {
+    color: $black;
     text-align: center;
     h1 {
       font-size: $size-1;

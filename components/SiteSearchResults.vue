@@ -1,6 +1,6 @@
 <template>
   <transition :name="transition">
-    <div v-if="nothingFound" class="site-search-results">
+    <div v-if="nothingFound" class="site-search-results no-results">
       <span
         >No results were found for
         <strong>&ldquo;{{ this.term }}&rdquo;</strong>.</span
@@ -115,6 +115,9 @@ export default {
 .site-search-results {
   padding: $size-5;
   width: 100%;
+  &.no-results {
+    text-align: center;
+  }
   @include desktop {
     display: flex;
     justify-content: space-around;

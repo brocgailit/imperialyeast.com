@@ -119,7 +119,11 @@
                 :key="p"
                 type="is-primary"
               >
-                {{ profile }}
+                <nuxt-link
+                  :to="'/search?q=' + profile"
+                  class="has-text-white"
+                  >{{ profile }}</nuxt-link
+                >
               </b-tag>
             </b-taglist>
           </div>
