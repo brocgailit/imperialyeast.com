@@ -144,7 +144,7 @@ $logo-size: 160px;
           text-transform: uppercase;
           color: $black;
           font-weight: $weight-bold;
-          font-size: $size-6;
+          font-size: $size-7;
           padding: $size-6 $size-5;
           transition: 150ms ease-in-out;
           &:hover {
