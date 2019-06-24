@@ -1,17 +1,19 @@
 <template>
   <section class="location-search-container container">
     <div class="location-search">
-      <h3>
-        Find a homebrew yeast retailer near you
-      </h3>
+      <label class="location-search-label" for="location-autocomplete">
+        Find a homebrew yeast retailer near you.
+      </label>
       <b-field class="location-search-input" custom-class="is-small">
         <b-autocomplete
+          id="location-autocomplete"
           v-model="search"
           class="location-search-autocomplete"
           :data="searchResults"
           placeholder="Search by City or Zip"
           field="locale_names[0]"
           :loading="loadingSearchResults"
+          expanded
           @typing="handleSearchInput"
           @select="option => (location = option)"
         >
@@ -319,6 +321,14 @@ export default {
         position: absolute;
         right: 0;
       } */
+    }
+
+    .location-search-label {
+      text-align: center;
+      font-size: $size-7;
+      display: block;
+      font-weight: $weight-bold;
+      padding-bottom: $size-7;
     }
 
     .retailer-counts {
