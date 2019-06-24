@@ -179,7 +179,7 @@ export default {
       }
     }
 
-    this.enableDragging = window.matchMedia('(min-width: 769px)').matches
+    // this.enableDragging = window.matchMedia('(min-width: 769px)').matches
     // })
   },
   methods: {
