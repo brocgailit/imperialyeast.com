@@ -9,6 +9,29 @@
         </li>
       </ul>
     </nav>
+    <div class="contact-details">
+      <div
+        v-for="contact of website.contacts"
+        :key="contact.id"
+        class="contact"
+      >
+        <div class="contact-information">
+          <div
+            v-for="(point, p) of contact.contact_points"
+            :key="p"
+            class="contact-point"
+          >
+            <h5>{{ point.contact_type }}</h5>
+            <span class="contact-point-phone">{{
+              point.telephone | formatPhone
+            }}</span>
+            <a :href="'mailto:' + point.email">
+              {{ point.email }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
     <ul class="footer-social-media">
       <li v-for="profile of website.social_profiles" :key="profile.platform">
         <a
@@ -45,6 +68,14 @@
 <script>
 import { mapState } from 'vuex'
 export default {
+  filters: {
+    formatPhone(number) {
+      const cleaned = ('' + number).replace(/\D/g, '')
+      const parts = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
+      if (!parts) return null
+      return ['(', parts[2], ') ', parts[3], '-', parts[4]].join('')
+    }
+  },
   data() {
     return {
       year: new Date().getFullYear()
@@ -93,6 +124,28 @@ export default {
       }
     }
   }
+
+  .contact-details {
+    margin: $size-5 auto;
+    text-align: center;
+    .contact-point {
+      & > * {
+        display: block;
+      }
+      h5 {
+        font-weight: $weight-bold;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+      .contact-point-phone {
+        font-size: $size-4;
+      }
+      a {
+        font-size: $size-6;
+      }
+    }
+  }
+
   .footer-social-media {
     display: flex;
     justify-content: center;
