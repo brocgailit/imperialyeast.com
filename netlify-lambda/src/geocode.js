@@ -16,7 +16,7 @@ exports.handler = async (event, context) => {
     type: 'city',
     hitsPerPage: 5,
     aroundLatLngViaIP: false,
-    countries: 'us', // TODO: jp,au,dk,it,ie,fi,de,mx,nl,nz,no,pl,se,gb - switch via geolocation?
+    countries: 'us,ca', // TODO: jp,au,dk,it,ie,fi,de,mx,nl,nz,no,pl,se,gb - switch via geolocation?
     language: 'en'
   }
 
