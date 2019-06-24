@@ -117,7 +117,8 @@ module.exports = {
               'faCheck',
               'faArrowToBottom',
               'faChevronUp',
-              'faShippingFast'
+              'faShippingFast',
+              'faLocation'
             ]
           },
           {
