@@ -115,7 +115,9 @@ module.exports = {
               'faTimes',
               'faSpinnerThird',
               'faCheck',
-              'faArrowToBottom'
+              'faArrowToBottom',
+              'faChevronUp',
+              'faShippingFast'
             ]
           },
           {
