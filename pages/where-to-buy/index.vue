@@ -238,12 +238,12 @@ export default {
   },
   computed: {
     zoom() {
-      return this.center ? 8 : 3
+      return this.center && this.location ? 8 : 3
     },
     center() {
       return this.location
         ? [this.location._geoloc.lat, this.location._geoloc.lng]
-        : null
+        : [39.5, -98.35]
     },
     retailersNearLocation() {
       if (!this.locations || !this.location) return null
