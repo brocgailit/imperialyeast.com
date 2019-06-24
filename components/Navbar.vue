@@ -194,7 +194,14 @@ $logo-size: 160px;
     .nav-logo {
       width: $logo-size * 0.5;
       height: $logo-size * 0.5;
-      margin: $size-7 auto;
+      margin: 0;
+      &,
+      a {
+        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
     .menu-button {
       padding: 0;
