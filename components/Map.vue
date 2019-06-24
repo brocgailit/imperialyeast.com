@@ -232,7 +232,7 @@ export default {
       border-top-left-radius: $radius;
       justify-content: space-between;
       align-items: center;
-      background-color: $dark;
+      background-color: $black;
       font-weight: $weight-bold;
       color: $white;
       * {
