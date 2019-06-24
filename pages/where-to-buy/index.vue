@@ -26,7 +26,11 @@
           </template>
         </b-autocomplete>
         <div class="control">
-          <b-button type="is-primary" @click="getLocationByGeolocation">
+          <b-button
+            style="padding: 0 1em"
+            type="is-primary"
+            @click="getLocationByGeolocation"
+          >
             <fa-icon :icon="['fal', 'location']" title="Get Geolocation" />
           </b-button>
         </div>
