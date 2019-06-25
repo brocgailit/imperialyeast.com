@@ -31,5 +31,7 @@
     &::-webkit-scrollbar-thumb:window-inactive {
       background-color: desaturate($color, 25%);
     }
+    scrollbar-width: thin;
+    scrollbar-color: $color $track-color;
   }
 }
