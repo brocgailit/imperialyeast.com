@@ -51,17 +51,7 @@
     <p class="copyright-notice">
       &copy; {{ year }} {{ website.name }}. All rights reserved.
     </p>
-    <p class="attribution">
-      {{ website.name }} is certified organic by the
-      <a
-        href="http://www.usda.gov/wps/portal/usda/usdahome?contentidonly=true&contentid=organic-agriculture.html"
-        >USDA</a
-      >
-      and
-      <a href="http://tilth.org/">Oregon Tilth.</a><br />
-      Photos by PDX Foto | Site by
-      <a href="https://www.heavycraft.io">Heavy Craft</a>
-    </p>
+    <div class="attribution" v-html="website.footer_attribution" />
   </footer>
 </template>
 
