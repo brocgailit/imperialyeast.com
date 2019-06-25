@@ -105,7 +105,7 @@
 
           <p v-if="strain.guaranteed_in_stock" class="strain-instock">
             <nuxt-link to="/in-stock-or-your-order-ships-free"
-              >Guaranteed In Stock or your order ships FREE!</nuxt-link
+              >Guaranteed In Stock</nuxt-link
             >
           </p>
 
