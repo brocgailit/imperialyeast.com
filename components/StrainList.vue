@@ -19,7 +19,7 @@
             <b-tooltip
               v-if="strain.guaranteed_in_stock"
               style="vertical-align: middle"
-              label="Guaranteed In-Stock"
+              label="Guaranteed In Stock"
               position="is-top"
               animated
             >
