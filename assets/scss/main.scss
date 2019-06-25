@@ -4,6 +4,19 @@
     letter-spacing: 0.03em;
 }
 
+a:focus, a:active,
+button,
+input[type="reset"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+select::-moz-focus-inner,
+input[type="file"] > input[type="button"]::-moz-focus-inner {
+    outline: none !important;
+}
+a {
+    border: none;
+}
+
 abbr {
     text-decoration: none;
 }
