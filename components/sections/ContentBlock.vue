@@ -344,6 +344,21 @@ export default {
     }
   }
 
+  .is-column:not(.has-image-fullwidth),
+  .is-column-reverse:not(.has-image-fullwidth) {
+    .image-container:not(.has-many) {
+      picture {
+        img {
+          max-height: 400px;
+          width: auto;
+        }
+        @include mobile {
+          max-height: 300px;
+        }
+      }
+    }
+  }
+
   .layout-actions {
     text-align: center;
     margin-top: $size-3;
