@@ -132,23 +132,30 @@
       <aside>
         <div class="strain-availability">
           <h3>Availability</h3>
-          <div v-if="strain.home_availability">
-            <p>Available in Pitch Right Home Brew Pouches</p>
-            <responsive-image
-              class="home-packaging"
-              :file="strain.image || strain.strain_type.home_packaging_image"
-              :alt="
-                strain.image
-                  ? strain.image.description
-                  : strain.strain_type.home_packaging_image.description
-              "
-              sizes="150px"
-              lazy
-            />
-          </div>
-          <p v-else>
-            Commercial Strain Only
-          </p>
+          <ul>
+            <li>
+              <fa-icon :icon="['fal', 'check']" />
+              Commercial pitches, 1L and larger
+            </li>
+            <li v-if="strain.home_availability">
+              <fa-icon :icon="['fal', 'check']" />
+              Pitch Right Home Brew Pouches
+              <responsive-image
+                class="home-packaging"
+                :file="strain.image || strain.strain_type.home_packaging_image"
+                :alt="
+                  strain.image
+                    ? strain.image.description
+                    : strain.strain_type.home_packaging_image.description
+                "
+                sizes="150px"
+                lazy
+              />
+            </li>
+            <li v-else>
+              Commercial Strain Only
+            </li>
+          </ul>
         </div>
         <div v-if="styles.length">
           <h3>Recommended Beer Styles</h3>
