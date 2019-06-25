@@ -172,6 +172,11 @@ export default {
     background-size: 125%;
   }
 
+  .layout-actions {
+    text-align: center;
+    margin-top: $size-3;
+  }
+
   @include mobile {
     padding: $size-3 $size-7;
     h1 {
