@@ -3,19 +3,21 @@
     <slot />
     <transition-group name="flip-list" tag="ul">
       <li v-for="strain of strains" :key="strain.id" class="strain">
-        <nuxt-link
-          :to="
-            '/organic-yeast-strains/yeast-types/' +
-              strain.strain_type.slug +
-              '/' +
-              strain.slug
-          "
+        <h3
+          class="strain-name"
+          :style="{ color: strain.strain_type.packaging_color }"
         >
-          <h3
-            class="strain-name"
-            :style="{ color: strain.strain_type.packaging_color }"
+          <nuxt-link
+            :to="
+              '/organic-yeast-strains/yeast-types/' +
+                strain.strain_type.slug +
+                '/' +
+                strain.slug
+            "
           >
             <span>{{ strain.product_code }} {{ strain.name }}</span>
+          </nuxt-link>
+          <nuxt-link to="/in-stock-or-your-order-ships-free">
             <b-tooltip
               v-if="strain.guaranteed_in_stock"
               style="vertical-align: middle"
@@ -25,8 +27,8 @@
             >
               <fa-icon :icon="['fal', 'shipping-fast']" size="sm" />
             </b-tooltip>
-          </h3>
-        </nuxt-link>
+          </nuxt-link>
+        </h3>
         <p class="strain-description">
           {{ strain.short_description }}
         </p>
