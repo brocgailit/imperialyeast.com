@@ -173,7 +173,7 @@
                     strain.slug
                 "
               >
-                {{ strain.name }}
+                {{ strain.product_code }} {{ strain.name }}
               </nuxt-link>
             </li>
           </ul>
