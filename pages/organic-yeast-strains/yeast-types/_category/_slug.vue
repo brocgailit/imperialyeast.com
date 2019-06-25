@@ -58,11 +58,12 @@
                 <abbr title="Temperature">Temp</abbr>:
               </dt>
               <dd class="strain-detail-info">
-                {{ strain.temperature_min }}–{{ strain.temperature_max }}°F
+                {{ strain.temperature_min }}–{{ strain.temperature_max
+                }}<span class="degrees">F</span>
                 <small
                   >({{ strain.temperature_min | celsius }}–{{
                     strain.temperature_max | celsius
-                  }}°C)</small
+                  }}<span class="degrees">C</span>)</small
                 >
               </dd>
             </dl>
@@ -526,6 +527,21 @@ export default {
     }
     .strain-details {
       margin: $size-5 0;
+      .degrees {
+        &:before {
+          display: inline-block;
+          content: '°';
+          font-size: 90%;
+          font-family: $family-primary;
+          font-weight: $weight-bold;
+          vertical-align: top;
+          padding: 1px 0 0 1px;
+        }
+      }
+      small .degrees:before {
+        font-size: 85%;
+        padding-top: 2px;
+      }
       .strain-detail {
         display: inline-block;
         text-transform: uppercase;
