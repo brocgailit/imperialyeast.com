@@ -72,8 +72,9 @@
               :min="45"
               :dot-size="[24, 24]"
               :event-type="sliderEventType"
-              :marks="{ '45': { label: '45℉' }, '100': { label: '100℉' } }"
+              :marks="{ '45': { label: '45°F' }, '100': { label: '100°F' } }"
             ></vue-slider>
+            <!-- 7.2 C / 37.8  -->
           </b-field>
           <button
             type="button"

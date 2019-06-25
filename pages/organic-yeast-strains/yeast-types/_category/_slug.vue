@@ -58,11 +58,11 @@
                 <abbr title="Temperature">Temp</abbr>:
               </dt>
               <dd class="strain-detail-info">
-                {{ strain.temperature_min }}–{{ strain.temperature_max }}℉
+                {{ strain.temperature_min }}–{{ strain.temperature_max }}°F
                 <small
                   >({{ strain.temperature_min | celsius }}–{{
                     strain.temperature_max | celsius
-                  }}℃)</small
+                  }}°C)</small
                 >
               </dd>
             </dl>

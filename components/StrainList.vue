@@ -35,10 +35,10 @@
             <abbr title="Temperature">Temp</abbr>:
           </dt>
           <dd class="strain-detail-info">
-            {{ strain.temperature_min }}–{{ strain.temperature_max }}℉
+            {{ strain.temperature_min }}–{{ strain.temperature_max }}°F
             {{ strain.temperature_min | celsius }}–{{
               strain.temperature_max | celsius
-            }}℃
+            }}°C
           </dd>
           <dt class="strain-detail-name">Flocculation:</dt>
           <dd class="strain-detail-info">
