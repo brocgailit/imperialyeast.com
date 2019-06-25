@@ -291,7 +291,6 @@ export default {
     flex: 0 0 33%;
 
     .howto-list {
-      background-color: $light;
       padding: $size-5;
     }
 

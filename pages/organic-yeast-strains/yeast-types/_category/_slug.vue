@@ -419,7 +419,6 @@ export default {
   aside {
     padding: $size-5;
     margin: 0 $size-5;
-    background-color: $light;
     flex: 0 0 350px;
     h3 {
       letter-spacing: 0.1em;
