@@ -61,7 +61,16 @@
               :max="100"
               :dot-size="[24, 24]"
               :event-type="sliderEventType"
-              marks
+              :marks="{
+                '65': { label: '65%' },
+                '70': { label: '70%' },
+                '75': { label: '75%' },
+                '80': { label: '80%' },
+                '85': { label: '85%' },
+                '90': { label: '90%' },
+                '95': { label: '95%' },
+                '100': { label: '100%' }
+              }"
               :interval="5"
               included
             ></vue-slider>
