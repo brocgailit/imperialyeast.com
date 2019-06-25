@@ -120,6 +120,9 @@ export default {
     .strain-name {
       font-weight: $weight-bold;
       font-size: $size-4;
+      a {
+        color: currentColor;
+      }
     }
     .strain-description {
       font-size: $size-7;
