@@ -1,11 +1,12 @@
 <template>
   <div class="carousel">
     <div v-for="(slide, idx) of slides" :key="idx" class="carousel-slide">
-      <transition name="fade-in-out">
+      <transition v-if="loadAll || idx === active" name="fade-in-out">
         <responsive-image
           v-show="active === idx"
           :file="slide.file"
           :alt="slide.description"
+          lazy
         />
       </transition>
     </div>
@@ -26,13 +27,14 @@ export default {
     },
     duration: {
       type: Number,
-      default: 2000
+      default: 5000
     }
   },
   data() {
     return {
       active: 0,
-      interval: null
+      interval: null,
+      loadAll: false
     }
   },
   computed: {
@@ -41,6 +43,7 @@ export default {
     })
   },
   mounted() {
+    setTimeout(() => (this.loadAll = true), this.duration - 1000)
     this.interval = setInterval(() => this.next(), this.duration)
   },
   beforeDestroy() {
