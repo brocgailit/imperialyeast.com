@@ -321,7 +321,7 @@ export default {
     height: 250%;
     background-position: 50% 40%;
     background-repeat: no-repeat;
-    background-size: 125%;
+    background-size: 100%;
     opacity: 0.35;
   }
 
