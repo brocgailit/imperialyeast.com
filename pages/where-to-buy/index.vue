@@ -35,6 +35,10 @@
           </b-button>
         </div>
       </b-field>
+      <p v-if="!location" class="placeholder-text">
+        Search for a local home brew shop near your city by name or zipcode or
+        browse our interactive distribution map.
+      </p>
       <p v-if="location" class="retailer-counts">
         {{
           !(retailersNearLocation && retailersNearLocation.length)
@@ -334,6 +338,12 @@ export default {
       display: block;
       font-weight: $weight-bold;
       padding-bottom: $size-7;
+    }
+
+    .placeholder-text {
+      text-align: center;
+      padding: $size-5;
+      font-size: $size-5;
     }
 
     .retailer-counts {
