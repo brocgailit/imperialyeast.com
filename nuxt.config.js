@@ -56,7 +56,7 @@ module.exports = {
       },
       {
         rel: 'preconnect',
-        href: '//imperialyeast-api.heavycraft.io'
+        href: '//content.imperialyeast.com'
       }
     ]
   },
