@@ -130,11 +130,7 @@ export default {
         -secret.length
       )
       if (keybuffer.join('-').indexOf(secret.join('-')) > -1) {
-        const { Clip } = require('phonograph')
-        const clip = new Clip({ url: '/audio/Imperial_March.mp3' })
-        clip.buffer().then(() => {
-          clip.play()
-        })
+        window.location = 'https://www.youtube.com/watch?v=-bzWSJG93P8'
       }
       this.keybuffer = keybuffer
     }
