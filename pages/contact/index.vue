@@ -61,9 +61,15 @@
                 <a :href="'mailto:' + point.email">
                   {{ point.email }}
                 </a>
-                <span class="contact-point-phone">{{
+                <span v-if="!shouldLinkPhone" class="contact-point-phone">{{
                   point.telephone | formatPhone
                 }}</span>
+                <a
+                  v-else
+                  class="contact-point-phone"
+                  :href="'tel:' + point.telephone"
+                  >{{ point.telephone | formatPhone }}</a
+                >
               </div>
             </div>
             <map-loader
@@ -124,6 +130,11 @@ export default {
     },
     layouts() {
       return this.page.layouts.filter(l => l !== this.header)
+    },
+    shouldLinkPhone() {
+      return typeof window !== 'undefined'
+        ? window.matchMedia('(max-width: 768px)').matches
+        : false
     },
     markers() {
       return this.website.contacts.map(location => {
