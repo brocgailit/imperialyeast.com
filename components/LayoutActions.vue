@@ -4,6 +4,7 @@
       <a
         v-if="action.attachment"
         target="_blank"
+        rel="noopener"
         :href="action.attachment.data.url"
         :title="action.title"
         :class="{

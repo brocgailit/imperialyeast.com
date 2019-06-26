@@ -48,6 +48,7 @@
           <a
             v-if="image.attachment && image.attachment.data.url"
             target="_blank"
+            rel="noopener"
             :href="image.attachment.data.url"
           >
             <responsive-image
