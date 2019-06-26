@@ -171,7 +171,7 @@ module.exports = {
    ** Sitemap config
    */
   sitemap: {
-    hostname: 'https://imperialyeast.heavycraft.io',
+    hostname: 'https://www.imperialyeast.com',
     gzip: true,
     exclude: ['/dynamic-components', '/home'],
     defaults: {
