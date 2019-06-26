@@ -35,10 +35,6 @@
           </b-button>
         </div>
       </b-field>
-      <p v-if="!location" class="placeholder-text is-hidden-touch">
-        Search for a local home brew shop near your city by name or zipcode or
-        browse our interactive distribution map.
-      </p>
       <p v-if="location" class="retailer-counts">
         {{
           !(retailersNearLocation && retailersNearLocation.length)
