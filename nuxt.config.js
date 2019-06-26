@@ -92,6 +92,13 @@ module.exports = {
     '@nuxtjs/pwa',
     '@nuxtjs/sitemap',
     '@nuxtjs/style-resources',
+    [
+      '@nuxtjs/google-tag-manager',
+      {
+        id: process.env.GOOGLE_TAG_MANAGER_ID,
+        pageTracking: true
+      }
+    ],
     // 'nuxt-buefy',
     [
       'nuxt-fontawesome',
