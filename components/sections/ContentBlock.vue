@@ -45,11 +45,25 @@
         }"
       >
         <div v-for="image of images" :key="image.file.id">
+          <nuxt-link
+            v-if="image.link && image.link.indexOf('http') < 0"
+            :to="image.link"
+            :aria-label="image.description"
+          >
+            <responsive-image
+              :file="image.file"
+              :alt="image.description"
+              lazy
+              :style="{ flex: '0 0 ' + 100 / images.length + '%' }"
+            />
+          </nuxt-link>
           <a
-            v-if="image.attachment && image.attachment.data.url"
+            v-else-if="
+              (image.attachment && image.attachment.data.url) || image.link
+            "
             target="_blank"
             rel="noopener"
-            :href="image.attachment.data.url"
+            :href="image.attachment ? image.attachment.data.url : image.link"
             :aria-label="image.description"
           >
             <responsive-image
