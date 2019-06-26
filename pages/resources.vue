@@ -270,6 +270,7 @@ export default {
   display: flex;
   .resources-main-content {
     flex-grow: 1;
+    padding: 0 $size-7;
     @include desktop {
       margin-right: $size-5;
     }
@@ -290,6 +291,12 @@ export default {
         }
       }
     }
+  }
+}
+
+@include touch {
+  .resources-section {
+    display: block;
   }
 }
 
