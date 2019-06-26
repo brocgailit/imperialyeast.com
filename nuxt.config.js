@@ -23,13 +23,6 @@ module.exports = {
         as: 'font',
         crossorigin: 'crossorigin'
       },
-      /* {
-        rel: 'preload',
-        href: '/fonts/oswald-v23-latin-500.woff2',
-        type: 'font/woff2',
-        as: 'font',
-        crossorigin: 'crossorigin'
-      }, */
       {
         rel: 'preload',
         href: '/fonts/montserrat-v13-latin-regular.woff2',
@@ -50,6 +43,20 @@ module.exports = {
         type: 'font/woff2',
         as: 'font',
         crossorigin: 'crossorigin'
+      },
+      {
+        rel: 'preconnect',
+        href: '//stats.g.doubleclick.net',
+        crossorigin: 'crossorigin'
+      },
+      {
+        rel: 'preconnect',
+        href: '//www.google-analytics.com',
+        crossorigin: 'crossorigin'
+      },
+      {
+        rel: 'preconnect',
+        href: '//imperialyeast-api.heavycraft.io'
       }
     ]
   },
