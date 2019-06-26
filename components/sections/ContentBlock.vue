@@ -14,7 +14,6 @@
       'no-padding-top': layout.remove_padding_top
     }"
     :style="{
-      'background-color': layout.background_color,
       color: layout.text_color
     }"
   >
