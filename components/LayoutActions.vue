@@ -3,6 +3,7 @@
     <span v-for="action of actions" :key="action.id">
       <a
         v-if="action.attachment"
+        target="_blank"
         :href="action.attachment.data.url"
         :title="action.title"
         :class="{

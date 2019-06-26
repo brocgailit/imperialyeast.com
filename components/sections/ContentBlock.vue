@@ -47,6 +47,7 @@
         <div v-for="image of images" :key="image.file.id">
           <a
             v-if="image.attachment && image.attachment.data.url"
+            target="_blank"
             :href="image.attachment.data.url"
           >
             <responsive-image
