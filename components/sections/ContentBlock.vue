@@ -50,6 +50,7 @@
             target="_blank"
             rel="noopener"
             :href="image.attachment.data.url"
+            :aria-label="image.description"
           >
             <responsive-image
               :file="image.file"
