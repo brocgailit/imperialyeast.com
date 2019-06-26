@@ -111,7 +111,8 @@
                 class="strain-group-name"
                 :style="{ color: group.packaging_color }"
               >
-                <span>{{ name }}s</span>
+                <span v-if="group.name_plural">{{ group.name_plural }}</span>
+                <span v-else>{{ name }}s</span>
               </h2>
             </nuxt-link>
           </strain-list>
@@ -185,6 +186,7 @@ export default {
             strain.strain_type,
             {
               slug: strain.strain_type.slug,
+              name_plural: strain.strain_type.name_plural,
               strains: [strain]
             }
           )

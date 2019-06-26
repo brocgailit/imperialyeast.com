@@ -17,8 +17,12 @@
             :to="
               '/organic-yeast-strains/yeast-types/' + strain.strain_type.slug
             "
-            >{{ strain.strain_type.name }}s</nuxt-link
           >
+            <span v-if="strain.strain_type.name_plural">{{
+              strain.strain_type.name_plural
+            }}</span>
+            <span v-else>{{ strain.strain_type.name }}s</span>
+          </nuxt-link>
         </li>
         <li class="is-active">
           <nuxt-link

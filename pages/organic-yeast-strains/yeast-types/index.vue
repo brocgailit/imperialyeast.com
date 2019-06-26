@@ -14,7 +14,8 @@
         >
           <h2>
             <nuxt-link :to="'/organic-yeast-strains/yeast-types/' + type.slug">
-              {{ type.name }}s
+              <span v-if="type.name_plural">{{ type.name_plural }}</span>
+              <span v-else>{{ type.name }}s</span>
             </nuxt-link>
           </h2>
           <p>
