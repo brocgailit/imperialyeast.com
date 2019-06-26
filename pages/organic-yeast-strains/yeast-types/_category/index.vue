@@ -25,7 +25,8 @@
       </ul>
     </nav>
     <header class="container" :style="{ color: type.packaging_color }">
-      <h1>{{ type.name }}s</h1>
+      <h1 v-if="type.name_plural">{{ type.name_plural }}</h1>
+      <h1 v-else>{{ type.name }}s</h1>
       <h2 class="type-description-short">{{ type.short_description }}</h2>
     </header>
     <div
