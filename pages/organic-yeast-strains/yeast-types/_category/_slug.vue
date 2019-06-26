@@ -195,7 +195,7 @@
           <ul>
             <li>
               <nuxt-link to="/where-to-buy/purchase-yeast-online"
-                >Order Online</nuxt-link
+                >Online Retailers</nuxt-link
               >
             </li>
             <li>
