@@ -21,6 +21,9 @@ export default {
     )
 
     return { menu }
+  },
+  fetch({ params, redirect }) {
+    redirect(307, '/resources/faq')
   }
 }
 </script>
@@ -35,6 +38,11 @@ export default {
   }
 }
 .resources-home {
+  a {
+    &:hover {
+      color: darken($primary, 3%);
+    }
+  }
   h3 {
     position: relative;
     @include brand-font;
