@@ -35,7 +35,7 @@
           </b-button>
         </div>
       </b-field>
-      <p v-if="!location" class="placeholder-text">
+      <p v-if="!location" class="placeholder-text is-hidden-touch">
         Search for a local home brew shop near your city by name or zipcode or
         browse our interactive distribution map.
       </p>
