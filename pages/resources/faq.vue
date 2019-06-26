@@ -192,9 +192,6 @@ export default {
 
   @include touch {
     padding-bottom: 0;
-    .container {
-      display: block;
-    }
     .faq-list {
       .faq-list-item {
         .question {
