@@ -384,7 +384,7 @@ $themeColor: $primary;
 }
 
 .search-filter {
-  z-index: 1070;
+  z-index: 2;
   background-color: rgba($white, 0.9);
   backdrop-filter: blur(3px);
   padding: $size-7;

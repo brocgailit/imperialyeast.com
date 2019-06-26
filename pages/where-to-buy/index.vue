@@ -325,7 +325,7 @@ export default {
       position: sticky;
       top: 0;
       left: 0;
-      z-index: 1070;
+      z-index: 2;
       /* .geolocate-button {
         position: absolute;
         right: 0;
