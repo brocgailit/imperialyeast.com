@@ -52,7 +52,7 @@
       type="button"
       @click.stop="toggleSearch(true)"
     >
-      <fa-icon :icon="['fal', 'search']" size="2x" />
+      <fa-icon :icon="['fal', 'search']" size="2x" title="Toggle Search" />
     </button>
   </header>
 </template>
