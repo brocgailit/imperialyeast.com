@@ -5,7 +5,7 @@
       :sizes="sizes"
       type="image/webp"
     />
-    <source :srcset="file | srcset" sizes="100vw" :type="file.type" />
+    <source :srcset="file | srcset" :sizes="sizes" :type="file.type" />
     <img
       :src="file.data.thumbnails.find(t => t.width === 375).url"
       :alt="alt || file.title"
@@ -13,6 +13,7 @@
   </picture>
   <no-ssr v-else>
     <v-lazy-image
+      style="min-height: 1px;"
       use-picture
       :alt="alt || file.title"
       :src="file.data.thumbnails.find(t => t.width === 375).url"
