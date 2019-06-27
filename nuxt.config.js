@@ -224,6 +224,13 @@ module.exports = {
   },
 
   /*
+   ** Render configuration
+   */
+  render: {
+    resourceHints: false
+  },
+
+  /*
    ** Build configuration
    */
   build: {
