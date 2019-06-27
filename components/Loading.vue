@@ -30,6 +30,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~buefy/src/scss/components/_loading';
 @keyframes spin {
   from {
     transform: rotate(0deg);

@@ -305,6 +305,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import '~bulma/sass/components/dropdown';
+@import '~buefy/src/scss/components/_radio';
+@import '~buefy/src/scss/components/_autocomplete';
 .location-search-container {
   display: flex;
   padding-bottom: $size-1;

@@ -417,6 +417,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import '~bulma/sass/elements/tag';
+@import '~buefy/src/scss/components/_tag';
+
 .strain-detail-page {
   display: flex;
   padding-bottom: $size-1;

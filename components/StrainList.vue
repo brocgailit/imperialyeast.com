@@ -101,6 +101,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~buefy/src/scss/components/_tooltip';
 .strain-list {
   padding: 0 $size-4;
   break-inside: avoid;
