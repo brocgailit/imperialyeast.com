@@ -39,6 +39,7 @@
     "nuxt-fontawesome": "^0.4.0",
     "nuxt-jsonld": "^1.4.0",
     "nuxt-netlify-http2-server-push": "^0.1.2",
+    "nuxt-polyfill": "^1.0.3",
     "sass-loader": "^7.1.0",
     "smoothscroll-polyfill": "^0.4.4",
     "supports-webp": "^2.0.1",

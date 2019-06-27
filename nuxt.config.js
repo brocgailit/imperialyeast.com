@@ -84,12 +84,29 @@ module.exports = {
     { src: '~/plugins/layout-actions' },
     { src: '~/plugins/responsive-image' },
     { src: '~/plugins/v-lazy-image', ssr: false },
-    { src: '~/plugins/intersection-observer', ssr: false },
     { src: '~/plugins/vue-observe-visibility', ssr: false },
-    { src: '~/plugins/smoothscroll', ssr: false },
     { src: '~/plugins/vue-cookie', ssr: false }
     // { src: '~/plugins/buefy' }
   ],
+
+  /*
+   ** Polyfills
+   */
+  polyfill: {
+    features: [
+      {
+        require: 'intersection-observer',
+        detect: () => 'IntersectionObserver' in window
+      },
+      {
+        require: 'smoothscroll-polyfill',
+        detect: () =>
+          'scrollBehavior' in document.documentElement.style &&
+          window.__forceSmoothScrollPolyfill__ !== true,
+        install: smoothscroll => smoothscroll.polyfill()
+      }
+    ]
+  },
 
   /*
    ** Nuxt.js modules
@@ -148,7 +165,8 @@ module.exports = {
           }
         ]
       }
-    ]
+    ],
+    'nuxt-polyfill'
   ],
 
   /*
