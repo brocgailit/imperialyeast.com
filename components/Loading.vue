@@ -1,7 +1,7 @@
 <template>
   <b-loading is-full-page :active.sync="loading" :can-cancel="false">
-    <div class="loading">
-      <div class="spinner" />
+    <div class="loading-container">
+      <div class="loading-spinner" />
       <Logo crown-only />
     </div>
   </b-loading>
@@ -29,7 +29,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~buefy/src/scss/components/_loading';
 @keyframes spin {
   from {
@@ -40,7 +40,7 @@ export default {
   }
 }
 
-.loading {
+.loading-container {
   position: relative;
   display: flex;
   align-items: center;
@@ -49,7 +49,7 @@ export default {
   height: 100px;
 }
 
-.spinner {
+.loading-spinner {
   position: absolute;
   top: 0;
   left: 0;
