@@ -188,13 +188,13 @@ module.exports = {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    baseURL: process.env.DIRECTUS_URL,
+    baseURL: process.env.DIRECTUS_URL + '/_/',
     credentials: false,
     proxy: process.env.NODE_ENV === 'development'
   },
 
   proxy: {
-    '/items': process.env.DIRECTUS_URL,
+    '/items': process.env.DIRECTUS_URL + '/_/',
     '/.netlify': 'http://localhost:9000'
   },
 
@@ -204,16 +204,16 @@ module.exports = {
   generate: {
     routes: async function() {
       const pages = await axios
-        .get(process.env.DIRECTUS_URL + 'items/pages?filter[status]=published')
+        .get(process.env.DIRECTUS_URL + '/_/items/pages?filter[status]=published')
         .then(res => res.data.data)
       const styles = await axios
-        .get(process.env.DIRECTUS_URL + 'items/beer_styles?filter[status]=published')
+        .get(process.env.DIRECTUS_URL + '/_/items/beer_styles?filter[status]=published')
         .then(res => res.data.data)
       const types = await axios
-        .get(process.env.DIRECTUS_URL + 'items/strain_types?filter[status]=published')
+        .get(process.env.DIRECTUS_URL + '/_/items/strain_types?filter[status]=published')
         .then(res => res.data.data)
       const strains = await axios
-        .get(process.env.DIRECTUS_URL + 'items/strains?filter[status]=published&fields=*.*')
+        .get(process.env.DIRECTUS_URL + '/_/items/strains?filter[status]=published&fields=*.*')
         .then(res => res.data.data)
       return [
         ...pages.map(page => `/${page.slug}`),
@@ -222,6 +222,13 @@ module.exports = {
         ...strains.map(strain => `/organic-yeast-strains/yeast-types/${strain.strain_type.slug}/${strain.slug}`)
       ]
     }
+  },
+
+  /*
+   ** Environment Variables
+   */
+  env: {
+    DIRECTUS_URL: process.env.DIRECTUS_URL
   },
 
   /*

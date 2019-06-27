@@ -35,13 +35,11 @@ export default {
       const { format, breakpoints, quality, fit } = options
       return (breakpoints || DEFAULT_BREAKPOINTS)
         .map(w => {
-          const URLParser =
-            typeof URL !== 'undefined' ? URL : require('url').URL
-          const { url, width, height } = image.data.thumbnails.find(
+          const { width, height } = image.data.thumbnails.find(
             t => t.width === w
           ) // TODO: find nearest breakpoint
-          const path = `//${
-            new URLParser(url).hostname
+          const path = `${
+            process.env.DIRECTUS_URL
           }/thumbnail/_/${width}/${height}/${fit || 'contain'}/${quality ||
             'better'}/${image.filename}`
           return path + (format ? `?format=${format}` : '') + ` ${width}w`
