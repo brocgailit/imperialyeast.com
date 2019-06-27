@@ -6,7 +6,6 @@
           v-show="active === idx"
           :file="slide.file"
           :alt="slide.description"
-          lazy
         />
       </transition>
     </div>
