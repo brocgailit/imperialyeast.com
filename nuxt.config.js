@@ -43,8 +43,8 @@ module.exports = {
         type: 'font/woff2',
         as: 'font',
         crossorigin: 'crossorigin'
-      },
-      {
+      }
+      /* {
         rel: 'preconnect',
         href: '//stats.g.doubleclick.net',
         crossorigin: 'crossorigin'
@@ -57,7 +57,7 @@ module.exports = {
       {
         rel: 'preconnect',
         href: '//content.imperialyeast.com'
-      }
+      } */
     ]
   },
 
