@@ -1,6 +1,6 @@
 <template>
   <section class="hero-carousel">
-    <ImageCarousel :slides="carousel" :duration="3500">
+    <ImageCarousel :slides="carousel" :duration="7000">
       <transition name="slide-up">
         <div v-show="mounted" class="container">
           <h1>{{ layout.heading }}</h1>
