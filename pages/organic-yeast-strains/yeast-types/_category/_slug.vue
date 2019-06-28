@@ -84,7 +84,7 @@
               </dd>
             </dl>
             <dl class="strain-detail">
-              <dt class="strain-detail-name">Alohol Tolerance:</dt>
+              <dt class="strain-detail-name">Alcohol Tolerance:</dt>
               <dd class="strain-detail-info">
                 <span v-if="strain.alcohol_tolerance_min"
                   >{{ strain.alcohol_tolerance_min }}–</span
