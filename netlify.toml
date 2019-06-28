@@ -4,3 +4,7 @@
   from = "/faq"
   to = "/resources/faq"
   status = 301
+[[redirects]]
+  from = "/contact-2"
+  to = "/contact"
+  status = 301
