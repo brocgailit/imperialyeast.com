@@ -62,7 +62,10 @@ export default {
       link: [
         {
           rel: 'canonical',
-          href: this.website.canonical_url + this.$route.path + '/'
+          href:
+            this.website.canonical_url + this.$route.path + this.$route.path
+              ? '/'
+              : ''
         }
       ]
     }
