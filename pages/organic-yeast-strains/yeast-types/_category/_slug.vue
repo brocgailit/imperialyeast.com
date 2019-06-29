@@ -346,6 +346,12 @@ export default {
   },
   head() {
     return {
+      link: [
+        {
+          rel: 'canonical',
+          href: this.website.canonical_url + this.$route.path + '/'
+        }
+      ],
       title: `${this.strain.name} - ${this.strain.product_code} (${
         this.strain.strain_type.name
       } Yeast) | ${this.website.name}`,

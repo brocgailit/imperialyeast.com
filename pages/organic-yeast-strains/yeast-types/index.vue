@@ -43,6 +43,12 @@ export default {
   },
   head() {
     return {
+      link: [
+        {
+          rel: 'canonical',
+          href: this.website.canonical_url + this.$route.path + '/'
+        }
+      ],
       title: `Types of Yeast Strains | ${this.website.name}`,
       meta: [
         {

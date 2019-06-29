@@ -97,6 +97,12 @@ export default {
   },
   head() {
     return {
+      link: [
+        {
+          rel: 'canonical',
+          href: this.website.canonical_url + this.$route.path + '/'
+        }
+      ],
       title: `${this.type.name} Yeast Strains | ${this.website.name}`,
       meta: [
         {
