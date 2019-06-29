@@ -192,7 +192,6 @@ module.exports = {
   sitemap: {
     hostname: 'https://www.imperialyeast.com',
     gzip: true,
-    exclude: ['/dynamic-components', '/home'],
     defaults: {
       changefreq: 'daily',
       priority: 1,
@@ -200,10 +199,17 @@ module.exports = {
       lastmodrealtime: true
     },
     filter({ routes }) {
-      return routes.map(route => {
-        route.url = `${route.url}/`
-        return route.url
-      })
+      const filters = ['/home']
+      return routes
+        .filter(route => filters.every(f => f !== route.url))
+        .map(route => {
+          if (route.url !== '/') {
+            route.url = `${route.url}/`
+            return route.url
+          } else {
+            return ''
+          }
+        })
     }
   },
 
