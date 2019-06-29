@@ -181,11 +181,6 @@ export default {
 
     // this.enableDragging = window.matchMedia('(min-width: 769px)').matches
     // })
-  },
-  methods: {
-    handleMounted(vlMap) {
-      vlMap.refresh()
-    }
   }
 }
 </script>
