@@ -198,6 +198,12 @@ module.exports = {
       priority: 1,
       lastmod: new Date(),
       lastmodrealtime: true
+    },
+    filter({ routes }) {
+      return routes.map(route => {
+        route.url = `${route.url}/`
+        return route.url
+      })
     }
   },
 
