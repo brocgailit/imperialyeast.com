@@ -37,7 +37,7 @@ export default {
       link: [
         {
           rel: 'canonical',
-          href: this.website.canonical_url + this.$route.path + '/'
+          href: this.website.canonical_url
         }
       ],
       title: `${this.page.title} | ${this.website.name}`,
