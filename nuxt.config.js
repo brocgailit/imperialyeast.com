@@ -199,7 +199,7 @@ module.exports = {
       lastmodrealtime: true
     },
     filter({ routes }) {
-      const filters = ['/home']
+      const filters = ['/home', '/resources']
       return routes
         .filter(route => filters.every(f => f !== route.url))
         .map(route => {
