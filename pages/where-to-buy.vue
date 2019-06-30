@@ -14,7 +14,7 @@
           </nuxt-link>
         </li>
         <li>
-          <nuxt-link to="/where-to-buy/purchase-yeast-online" class="nav-link">
+          <nuxt-link to="/where-to-buy/purchase-yeast-online/" class="nav-link">
             Purchase Online
           </nuxt-link>
         </li>

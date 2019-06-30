@@ -12,12 +12,13 @@
               '/organic-yeast-strains/yeast-types/' +
                 strain.strain_type.slug +
                 '/' +
-                strain.slug
+                strain.slug +
+                '/'
             "
           >
             <span>{{ strain.product_code }} {{ strain.name }}</span>
           </nuxt-link>
-          <nuxt-link to="/in-stock-or-your-order-ships-free">
+          <nuxt-link to="/in-stock-or-your-order-ships-free/">
             <b-tooltip
               v-if="strain.guaranteed_in_stock"
               style="vertical-align: middle"

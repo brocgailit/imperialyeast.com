@@ -9,11 +9,15 @@
           class="strain-type"
           :style="{ 'background-color': type.packaging_color }"
           @click="
-            $router.push('/organic-yeast-strains/yeast-types/' + type.slug)
+            $router.push(
+              '/organic-yeast-strains/yeast-types/' + type.slug + '/'
+            )
           "
         >
           <h2>
-            <nuxt-link :to="'/organic-yeast-strains/yeast-types/' + type.slug">
+            <nuxt-link
+              :to="'/organic-yeast-strains/yeast-types/' + type.slug + '/'"
+            >
               <span v-if="type.name_plural">{{ type.name_plural }}</span>
               <span v-else>{{ type.name }}s</span>
             </nuxt-link>

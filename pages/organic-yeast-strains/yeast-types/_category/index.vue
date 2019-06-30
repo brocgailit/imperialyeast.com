@@ -3,13 +3,13 @@
     <nav class="breadcrumb is-centered is-small" aria-label="breadcrumbs">
       <ul>
         <li>
-          <nuxt-link to="/organic-yeast-strains"
+          <nuxt-link to="/organic-yeast-strains/"
             >Organic Yeast Strains</nuxt-link
           >
         </li>
 
         <li>
-          <nuxt-link to="/organic-yeast-strains/yeast-types"
+          <nuxt-link to="/organic-yeast-strains/yeast-types/"
             >Yeast Types</nuxt-link
           >
         </li>

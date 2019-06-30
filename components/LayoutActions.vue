@@ -18,7 +18,7 @@
       </a>
       <nuxt-link
         v-else
-        :to="action.path"
+        :to="action.path + '/'"
         :title="action.title"
         :class="{ 'button is-primary is-medium': action.style !== '1' }"
       >

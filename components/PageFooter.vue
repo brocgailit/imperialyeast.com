@@ -3,9 +3,10 @@
     <nav>
       <ul>
         <li v-for="link of footerLinks" :key="link.slug">
-          <nuxt-link :to="'/' + (link.slug !== 'home' ? link.slug : '')">{{
-            link.name
-          }}</nuxt-link>
+          <nuxt-link
+            :to="'/' + (link.slug !== 'home' ? link.slug + '/' : '')"
+            >{{ link.name }}</nuxt-link
+          >
         </li>
       </ul>
     </nav>

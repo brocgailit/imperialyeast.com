@@ -28,7 +28,8 @@
                   '/organic-yeast-strains/yeast-types/' +
                     strain.strain_type.slug +
                     '/' +
-                    strain.slug
+                    strain.slug +
+                    '/'
                 "
                 >{{ strain.product_code }} {{ strain.name }}</nuxt-link
               >
@@ -63,7 +64,7 @@
             @click="$router.push('/' + page.slug)"
           >
             <h4>
-              <nuxt-link :to="'/' + page.slug">
+              <nuxt-link :to="'/' + page.slug + '/'">
                 {{ page.name }}
               </nuxt-link>
             </h4>

@@ -46,7 +46,7 @@
         <div v-for="image of images" :key="image.file.id">
           <nuxt-link
             v-if="image.link && image.link.indexOf('http') < 0"
-            :to="image.link"
+            :to="image.link + '/'"
             :aria-label="image.description"
           >
             <responsive-image

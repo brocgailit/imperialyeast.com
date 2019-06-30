@@ -7,7 +7,7 @@
           v-for="action of notification.actions"
           :key="action.id"
           class="button is-danger is-small"
-          :to="action.path"
+          :to="action.path + '/'"
           @click="clearNotification(notification)"
         >
           {{ action.label }}

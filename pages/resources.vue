@@ -7,7 +7,7 @@
     <!-- <nav class="resources-nav container">
       <ul>
         <li>
-          <nuxt-link to="/resources/faq">
+          <nuxt-link to="/resources/faq/">
             Frequently Asked Questions
           </nuxt-link>
         </li>

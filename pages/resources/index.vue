@@ -1,7 +1,7 @@
 <template>
   <section class="resources-home">
     <article v-for="(item, i) of menu.items" :key="i">
-      <nuxt-link :to="item.path">
+      <nuxt-link :to="item.path + '/'">
         <h3>
           <span>{{ item.title }}</span>
         </h3>

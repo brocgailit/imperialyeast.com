@@ -3,19 +3,21 @@
     <nav class="breadcrumb is-centered is-small" aria-label="breadcrumbs">
       <ul>
         <li>
-          <nuxt-link to="/organic-yeast-strains"
+          <nuxt-link to="/organic-yeast-strains/"
             >Organic Yeast Strains</nuxt-link
           >
         </li>
         <li>
-          <nuxt-link to="/organic-yeast-strains/yeast-types"
+          <nuxt-link to="/organic-yeast-strains/yeast-types/"
             >Yeast Types</nuxt-link
           >
         </li>
         <li>
           <nuxt-link
             :to="
-              '/organic-yeast-strains/yeast-types/' + strain.strain_type.slug
+              '/organic-yeast-strains/yeast-types/' +
+                strain.strain_type.slug +
+                '/'
             "
           >
             <span v-if="strain.strain_type.name_plural">{{
@@ -30,7 +32,8 @@
               '/organic-yeast-strains/yeast-types/' +
                 strain.strain_type.slug +
                 '/' +
-                strain.slug
+                strain.slug +
+                '/'
             "
             aria-current="page"
             >{{ strain.name }}</nuxt-link
@@ -43,7 +46,7 @@
         <header class="container">
           <h2>
             <nuxt-link
-              :to="'../' + strain.strain_type.slug"
+              :to="'../' + strain.strain_type.slug + '/'"
               :style="{ color: strain.strain_type.packaging_color }"
               >{{ strain.strain_type.name }}</nuxt-link
             >
@@ -182,7 +185,8 @@
                   '/organic-yeast-strains/yeast-types/' +
                     strain.strain_type.slug +
                     '/' +
-                    strain.slug
+                    strain.slug +
+                    '/'
                 "
               >
                 {{ strain.product_code }} {{ strain.name }}
@@ -194,15 +198,15 @@
           <h3>Ordering</h3>
           <ul>
             <li>
-              <nuxt-link to="/where-to-buy/purchase-yeast-online"
+              <nuxt-link to="/where-to-buy/purchase-yeast-online/"
                 >Online Retailers</nuxt-link
               >
             </li>
             <li>
-              <nuxt-link to="/where-to-buy">Find a Retailer</nuxt-link>
+              <nuxt-link to="/where-to-buy/">Find a Retailer</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/contact">Commercial Accounts</nuxt-link>
+              <nuxt-link to="/contact/">Commercial Accounts</nuxt-link>
             </li>
           </ul>
         </div>

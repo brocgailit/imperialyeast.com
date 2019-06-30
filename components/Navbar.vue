@@ -14,9 +14,10 @@
     >
       <ul id="menu">
         <li v-for="link of primaryLinks" :key="link.slug">
-          <nuxt-link :to="'/' + (link.slug !== 'home' ? link.slug : '')">{{
-            link.name
-          }}</nuxt-link>
+          <nuxt-link
+            :to="'/' + (link.slug !== 'home' ? link.slug + '/' : '')"
+            >{{ link.name }}</nuxt-link
+          >
         </li>
         <li>
           <button

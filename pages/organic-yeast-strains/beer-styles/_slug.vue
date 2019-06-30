@@ -3,7 +3,7 @@
     <nav class="breadcrumb is-centered is-small" aria-label="breadcrumbs">
       <ul>
         <li>
-          <nuxt-link to="/organic-yeast-strains"
+          <nuxt-link to="/organic-yeast-strains/"
             >Organic Yeast Strains</nuxt-link
           >
         </li>
@@ -14,7 +14,7 @@
         </li>
         <li class="is-active">
           <nuxt-link
-            :to="'/organic-yeast-strains/beer-styles/' + style.slug"
+            :to="'/organic-yeast-strains/beer-styles/' + style.slug + '/'"
             aria-current="page"
             >{{ style.name }}</nuxt-link
           >
