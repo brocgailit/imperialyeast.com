@@ -60,7 +60,8 @@
               '/organic-yeast-strains/yeast-types/' +
                 strain.strain_type.slug +
                 '/' +
-                strain.slug
+                strain.slug +
+                '/'
             "
             :title="'Learn more about ' + strain.name"
             >View Strain</nuxt-link

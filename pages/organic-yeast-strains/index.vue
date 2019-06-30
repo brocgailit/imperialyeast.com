@@ -106,7 +106,9 @@
             :strains="group.strains"
             :header-color="group.packaging_color"
           >
-            <nuxt-link :to="'/organic-yeast-strains/yeast-types/' + group.slug">
+            <nuxt-link
+              :to="'/organic-yeast-strains/yeast-types/' + group.slug + '/'"
+            >
               <h2
                 class="strain-group-name"
                 :style="{ color: group.packaging_color }"
