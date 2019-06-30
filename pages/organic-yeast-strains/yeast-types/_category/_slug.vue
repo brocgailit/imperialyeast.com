@@ -128,7 +128,7 @@
                 type="is-primary"
               >
                 <nuxt-link
-                  :to="'/search?q=' + profile"
+                  :to="'/search/?q=' + profile"
                   class="has-text-white"
                   >{{ profile }}</nuxt-link
                 >

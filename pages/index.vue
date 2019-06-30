@@ -26,7 +26,9 @@ export default {
       potentialAction: [
         {
           '@type': 'SearchAction',
-          target: `${this.website.canonical_url}/search?q={search_term_string}`,
+          target: `${
+            this.website.canonical_url
+          }/search/?q={search_term_string}`,
           'query-input': 'required name=search_term_string'
         }
       ]
