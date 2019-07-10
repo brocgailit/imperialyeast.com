@@ -102,7 +102,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~buefy/src/scss/components/_tooltip';
 .strain-list {
   padding: 0 $size-4;
