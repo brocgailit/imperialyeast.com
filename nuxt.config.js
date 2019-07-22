@@ -80,7 +80,7 @@ module.exports = {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    { src: '~/plugins/social-sharing' },
+    { src: '~/plugins/social-sharing', ssr: true },
     { src: '~/plugins/nuxt-jsonld' },
     { src: '~/plugins/layout-actions' },
     { src: '~/plugins/responsive-image' },
