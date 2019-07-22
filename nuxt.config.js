@@ -80,6 +80,7 @@ module.exports = {
    ** Plugins to load before mounting the App
    */
   plugins: [
+    { src: '~/plugins/social-sharing' },
     { src: '~/plugins/nuxt-jsonld' },
     { src: '~/plugins/layout-actions' },
     { src: '~/plugins/responsive-image' },
@@ -150,7 +151,8 @@ module.exports = {
               'faArrowToBottom',
               'faChevronUp',
               'faShippingFast',
-              'faLocation'
+              'faLocation',
+              'faCommentAltLines'
             ]
           },
           {
@@ -158,9 +160,10 @@ module.exports = {
             icons: [
               'faFacebook',
               'faTwitter',
-              // 'faLinkedin',
+              'faLinkedin',
               'faInstagram',
-              'faYoutube'
+              'faYoutube',
+              'faReddit'
             ]
           }
         ]
