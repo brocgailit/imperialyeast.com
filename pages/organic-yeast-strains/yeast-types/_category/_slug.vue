@@ -210,37 +210,38 @@
             </li>
           </ul>
         </div>
-
-        <social-sharing
-          :url="website.canonical_url + $route.path"
-          :title="strain.name"
-          :description="strain.description"
-          :quote="strain.name + ' — ' + strain.short_description"
-          :hashtags="strain.profiles.join(',')"
-          :twitter-user="website.twitter_handle"
-          inline-template
-        >
-          <div class="social-sharing-container">
-            <h3>Share</h3>
-            <div class="social-sharing-buttons">
-              <network network="facebook">
-                <fa-icon :icon="['fab', 'facebook']" size="2x" />
-              </network>
-              <network network="twitter">
-                <fa-icon :icon="['fab', 'twitter']" size="2x" />
-              </network>
-              <network network="linkedin">
-                <fa-icon :icon="['fab', 'linkedin']" size="2x" />
-              </network>
-              <network network="reddit">
-                <fa-icon :icon="['fab', 'reddit']" size="2x" />
-              </network>
-              <network network="sms" class="is-hidden-desktop">
-                <fa-icon :icon="['fal', 'comment-alt-lines']" size="2x" />
-              </network>
+        <no-ssr>
+          <social-sharing
+            :url="website.canonical_url + $route.path"
+            :title="strain.name"
+            :description="strain.description"
+            :quote="strain.name + ' — ' + strain.short_description"
+            :hashtags="strain.profiles.join(',')"
+            :twitter-user="website.twitter_handle"
+            inline-template
+          >
+            <div class="social-sharing-container">
+              <h3>Share</h3>
+              <div class="social-sharing-buttons">
+                <network network="facebook">
+                  <fa-icon :icon="['fab', 'facebook']" size="2x" />
+                </network>
+                <network network="twitter">
+                  <fa-icon :icon="['fab', 'twitter']" size="2x" />
+                </network>
+                <network network="linkedin">
+                  <fa-icon :icon="['fab', 'linkedin']" size="2x" />
+                </network>
+                <network network="reddit">
+                  <fa-icon :icon="['fab', 'reddit']" size="2x" />
+                </network>
+                <network network="sms" class="is-hidden-desktop">
+                  <fa-icon :icon="['fal', 'comment-alt-lines']" size="2x" />
+                </network>
+              </div>
             </div>
-          </div>
-        </social-sharing>
+          </social-sharing>
+        </no-ssr>
       </aside>
     </div>
   </div>
