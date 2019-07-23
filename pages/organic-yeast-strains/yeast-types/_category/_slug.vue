@@ -248,13 +248,8 @@
 </template>
 
 <script>
-import { Tag as BTag, Taglist as BTaglist } from 'buefy/dist/components/tag'
 import { mapState } from 'vuex'
 export default {
-  components: {
-    BTag,
-    BTaglist
-  },
   filters: {
     celsius: f => Math.round(((f - 32) * 5) / 9),
     flocculation(val) {

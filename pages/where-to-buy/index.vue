@@ -147,11 +147,6 @@
 
 <script>
 import debounce from 'lodash/debounce'
-import { Button as BButton } from 'buefy/dist/components/button'
-import { Field as BField } from 'buefy/dist/components/field'
-import { Autocomplete as BAutocomplete } from 'buefy/dist/components/autocomplete'
-import { Collapse as BCollapse } from 'buefy/dist/components/collapse'
-import { RadioButton as BRadioButton } from 'buefy/dist/components/radio'
 import MapLoader from '~/components/MapLoader.vue'
 
 const distance = (a, b) => {
@@ -174,11 +169,6 @@ const distance = (a, b) => {
 
 export default {
   components: {
-    BButton,
-    BField,
-    BAutocomplete,
-    BCollapse,
-    BRadioButton,
     MapLoader
   },
   filters: {

@@ -15,7 +15,6 @@
       v-model="model"
       placeholder="Select an option"
       :icon="icon"
-      icon-pack="fal"
     >
       <option v-for="(option, o) in placeholder" :key="o">
         {{ option }}
@@ -27,23 +26,12 @@
       :required="required"
       :type="type"
       :icon="icon"
-      icon-pack="fal"
     />
   </b-field>
 </template>
 
 <script>
-import { Checkbox as BCheckbox } from 'buefy/dist/components/checkbox'
-import { Select as BSelect } from 'buefy/dist/components/select'
-import { Field as BField } from 'buefy/dist/components/field'
-import { Input as BInput } from 'buefy/dist/components/input'
 export default {
-  components: {
-    BCheckbox,
-    BSelect,
-    BField,
-    BInput
-  },
   props: {
     value: {
       type: [String, Number, Array],

@@ -152,7 +152,9 @@ module.exports = {
               'faChevronUp',
               'faShippingFast',
               'faLocation',
-              'faCommentAltLines'
+              'faCommentAltLines',
+              'faMinus',
+              'faPlus'
             ]
           },
           {
@@ -169,18 +171,19 @@ module.exports = {
         ]
       }
     ],
-    'nuxt-polyfill'
+    'nuxt-polyfill',
+    'nuxt-buefy'
   ],
 
   /*
    ** Buefy Options
    */
-  /* buefy: {
+  buefy: {
     css: false,
     materialDesignIcons: false,
     defaultIconComponent: 'fa-icon',
     defaultIconPack: 'fal'
-  }, */
+  },
 
   /*
    ** Style Resources

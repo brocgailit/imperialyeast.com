@@ -73,12 +73,7 @@
 </template>
 
 <script>
-import { Tooltip as BTooltip } from 'buefy/dist/components/tooltip'
-
 export default {
-  components: {
-    BTooltip
-  },
   filters: {
     celsius: f => Math.round(((f - 32) * 5) / 9),
     flocculation(val) {
