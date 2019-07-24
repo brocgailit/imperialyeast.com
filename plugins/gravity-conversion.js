@@ -1,7 +1,9 @@
 import Vue from 'vue'
 
 Vue.filter('platoToSG', plato => {
-  return Math.round((1 + plato / (258.6 - (plato / 258.2) * 227.1)) * 100) / 100
+  return (
+    Math.round((1 + plato / (258.6 - (plato / 258.2) * 227.1)) * 1000) / 1000
+  )
 })
 
 Vue.filter('sgToPlato', sg => {
