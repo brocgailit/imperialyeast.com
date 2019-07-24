@@ -86,7 +86,8 @@ module.exports = {
     { src: '~/plugins/responsive-image' },
     { src: '~/plugins/v-lazy-image', ssr: false },
     { src: '~/plugins/vue-observe-visibility', ssr: false },
-    { src: '~/plugins/vue-cookie', ssr: false }
+    { src: '~/plugins/vue-cookie', ssr: false },
+    { src: '~/plugins/gravity-conversion' }
     // { src: '~/plugins/buefy' }
   ],
 

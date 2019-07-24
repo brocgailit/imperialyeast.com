@@ -1,0 +1,118 @@
+<template>
+  <div class="panel">
+    <div class="panel-heading">
+      <h3>Gravity Conversion</h3>
+    </div>
+    <div class="panel-block">
+      <form @submit.prevent>
+        <b-field
+          label="Plato"
+          data-unit
+          :style="{ '--unit': '\'°P\'' }"
+          horizontal
+        >
+          <b-numberinput v-model="plato" :step="0.1" :min="0.1" expanded />
+        </b-field>
+        <b-field
+          label="Specific Gravity"
+          data-unit
+          :style="{ '--unit': '\'SG\'' }"
+          horizontal
+        >
+          <b-numberinput
+            v-model="specificGravity"
+            :step="0.001"
+            :min="0.1"
+            expanded
+          />
+        </b-field>
+      </form>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      values: {
+        plato: 15,
+        specificGravity: 1.061
+      }
+    }
+  },
+  computed: {
+    plato: {
+      get() {
+        return this.values.plato
+      },
+      set(p) {
+        this.values.plato = p
+        this.values.specificGravity = this.$options.filters.platoToSG(p)
+      }
+    },
+    specificGravity: {
+      get() {
+        return this.values.specificGravity
+      },
+      set(sg) {
+        this.values.specificGravity = sg
+        this.values.plato = this.$options.filters.sgToPlato(sg)
+      }
+    }
+  }
+  /* watch: {
+    plato(p) {
+      this.specificGravity = this.$options.filters.platoToSG(p)
+    },
+    specificGravity(sg) {
+      this.plato = this.$options.filters.sgToPlato(sg)
+    }
+  } */
+}
+</script>
+
+<style lang="scss">
+.panel {
+  .panel-heading {
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    h3 {
+      font-weight: $weight-black;
+      letter-spacing: 0.05em;
+    }
+  }
+  .panel-block {
+    form,
+    .field {
+      width: 100%;
+    }
+    @include tablet {
+      .field-label {
+        flex-grow: 2 !important;
+      }
+    }
+  }
+
+  .field[data-unit] {
+    // p is used for buttons here so target div
+    div.control {
+      position: relative;
+      display: inline-block;
+      &:before {
+        display: block;
+        content: var(--unit);
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        max-width: 150px;
+        z-index: 1;
+        font-size: $size-8;
+        padding-right: $size-8;
+      }
+    }
+  }
+}
+</style>
