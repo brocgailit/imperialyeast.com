@@ -151,6 +151,7 @@ module.exports = {
               'faCheck',
               'faArrowToBottom',
               'faChevronUp',
+              'faChevronRight',
               'faShippingFast',
               'faLocation',
               'faCommentAltLines',

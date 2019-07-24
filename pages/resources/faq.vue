@@ -11,10 +11,24 @@
         <article class="faqs">
           <ul class="faq-list">
             <li v-for="item of faq" :key="item.id" class="faq-list-item">
-              <h3 class="question">
-                {{ item.question }}
-              </h3>
-              <div class="answer" v-html="item.answer" />
+              <b-collapse :open="false" :aria-id="'question' + item.id">
+                <div
+                  slot="trigger"
+                  slot-scope="props"
+                  class="question-header"
+                  :aria-controls="'question' + item.id"
+                >
+                  <h3 class="question">
+                    {{ item.question }}
+                  </h3>
+                  <fa-icon
+                    class="toggle-icon"
+                    :icon="['fal', 'chevron-right']"
+                    :class="{ 'fa-rotate-90': props.open }"
+                  />
+                </div>
+                <div class="answer" v-html="item.answer" />
+              </b-collapse>
             </li>
           </ul>
         </article>
@@ -158,6 +172,19 @@ export default {
     }
     .faq-list-item {
       margin-bottom: $size-5;
+      border-bottom: 1px solid $grey;
+
+      .question-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: $size-7;
+        cursor: pointer;
+      }
+
+      .toggle-icon {
+        transition: 250ms ease-in-out;
+      }
 
       .question {
         display: flex;
@@ -165,7 +192,6 @@ export default {
         font-weight: $weight-bold;
         font-size: $size-5;
         line-height: 1.1;
-        margin-bottom: $size-7;
         padding-right: $size-7;
         &:before {
           content: 'Q';
@@ -191,7 +217,7 @@ export default {
       }
 
       .answer {
-        padding: $size-7;
+        padding: $size-7 $size-7 $size-4;
       }
     }
   }
