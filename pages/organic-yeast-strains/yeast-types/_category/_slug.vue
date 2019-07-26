@@ -410,7 +410,7 @@ export default {
         {
           hid: 'open-graph-title',
           property: 'og:title',
-          content: `${this.strain.name} Yeast Strains`
+          content: `${this.website.name} ${this.strain.product_code} ${this.strain.name}`
         },
         {
           hid: 'open-graph-image',
