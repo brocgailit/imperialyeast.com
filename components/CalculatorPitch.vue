@@ -35,8 +35,9 @@
           :style="{ '--unit': '\'' + units[mode].batchSize + '\'' }"
           horizontal
         >
-          <b-numberinput
+          <b-input
             v-model="values.batchSize"
+            type="number"
             :step="0.1"
             :min="0"
             expanded
@@ -48,8 +49,9 @@
           :style="{ '--unit': '\'' + units[mode].gravity + '\'' }"
           horizontal
         >
-          <b-numberinput
+          <b-input
             v-model="values.gravity"
+            type="number"
             :step="mode === 'commercial' ? 1 : 0.001"
             :min="0"
             expanded
@@ -62,7 +64,13 @@
           :style="{ '--unit': '\'' + units[mode].pitchRate + '\'' }"
           horizontal
         >
-          <b-numberinput v-model="pitchRate" :step="0.1" :min="0" expanded />
+          <b-input
+            v-model="pitchRate"
+            type="number"
+            :step="0.1"
+            :min="0"
+            expanded
+          />
         </b-field>
         <b-field
           v-else
@@ -71,17 +79,38 @@
           :style="{ '--unit': '\'' + units[mode].pitchSize + '\'' }"
           horizontal
         >
-          <b-numberinput v-model="pitchSize" :step="0.1" :min="0" expanded />
+          <b-input
+            v-model="pitchSize"
+            type="number"
+            :step="0.1"
+            :min="0"
+            expanded
+          />
+        </b-field>
+
+        <b-field
+          v-if="type === 'size'"
+          label="Pitch Size"
+          horizontal
+          class="calculation-result"
+        >
+          <p class="control is-expanded">
+            <span class="result">{{ pitchSize }}</span>
+            {{ units[mode].pitchSize }}
+          </p>
+        </b-field>
+        <b-field
+          v-else
+          label="Pitch Rate"
+          horizontal
+          class="calculation-result"
+        >
+          <p class="control is-expanded">
+            <span class="result">{{ pitchRate }}</span>
+            {{ units[mode].pitchRate }}
+          </p>
         </b-field>
       </form>
-    </div>
-    <div class="panel-block">
-      <b-field v-if="type === 'size'" label="Target Pitch Size" horizontal>
-        <p class="control">{{ pitchSize }} {{ units[mode].pitchSize }}</p>
-      </b-field>
-      <b-field v-else label="Target Pitch Rate" horizontal>
-        <p class="control">{{ pitchRate }} {{ units[mode].pitchRate }}</p>
-      </b-field>
     </div>
   </div>
 </template>
@@ -212,14 +241,29 @@ export default {
     }
   }
   .panel-block {
-    form,
-    .field {
+    justify-content: center;
+    input[type='number'],
+    .control {
       width: 100%;
+      max-width: 250px;
     }
+
     @include tablet {
       .field-label {
         flex-grow: 2 !important;
       }
+    }
+  }
+
+  .calculation-result {
+    border-top: 1px solid rgba($grey, 0.5);
+    padding-top: $size-7;
+    .control {
+      font-size: $size-7;
+    }
+    .result {
+      font-size: $size-6;
+      font-weight: $weight-bold;
     }
   }
 

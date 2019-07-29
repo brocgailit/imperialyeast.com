@@ -11,7 +11,13 @@
           :style="{ '--unit': '\'°P\'' }"
           horizontal
         >
-          <b-numberinput v-model="plato" :step="0.1" :min="0" expanded />
+          <b-input
+            v-model="plato"
+            type="number"
+            :step="0.1"
+            :min="0"
+            expanded
+          />
         </b-field>
         <b-field
           label="Specific Gravity"
@@ -19,8 +25,9 @@
           :style="{ '--unit': '\'SG\'' }"
           horizontal
         >
-          <b-numberinput
+          <b-input
             v-model="specificGravity"
+            type="number"
             :step="0.001"
             :min="0"
             expanded
@@ -84,16 +91,9 @@ export default {
     }
   }
   .panel-block {
-    form,
-    .field {
-      width: 100%;
-    }
-    .b-numberinput {
-      max-width: 325px;
-    }
     @include tablet {
       .field-label {
-        flex-grow: 2 !important;
+        flex-grow: 3 !important;
       }
     }
   }
@@ -103,6 +103,12 @@ export default {
     div.control {
       position: relative;
       display: inline-block;
+      input {
+        background-color: transparent;
+      }
+      input:focus {
+        background-color: rgba($white, 0.85) !important;
+      }
       &:before {
         display: block;
         content: var(--unit);
@@ -111,7 +117,7 @@ export default {
         top: 50%;
         transform: translateY(-50%);
         max-width: 150px;
-        z-index: 1;
+        z-index: -1;
         font-size: $size-8;
         padding-right: $size-8;
       }
