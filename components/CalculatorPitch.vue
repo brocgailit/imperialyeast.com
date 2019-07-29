@@ -1,5 +1,8 @@
 <template>
   <div class="panel">
+    <div class="panel-heading panel-subheading">
+      <h4>{{ mode === 'home' ? 'Homebrew' : 'Commercial' }}</h4>
+    </div>
     <div class="panel-heading">
       <h3>Yeast Pitch calculator</h3>
       <b-field>
@@ -233,6 +236,18 @@ export default {
     h3 {
       font-weight: $weight-black;
       letter-spacing: 0.05em;
+    }
+  }
+
+  .panel-subheading {
+    background-color: $dark;
+    border-color: $dark;
+    color: $white;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    * {
+      font-weight: $weight-bold;
+      font-size: $size-7;
     }
   }
   .panel-tabs {
