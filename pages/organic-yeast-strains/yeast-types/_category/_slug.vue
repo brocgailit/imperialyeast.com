@@ -213,7 +213,9 @@
         <no-ssr>
           <social-sharing
             :url="website.canonical_url + $route.path"
-            :title="strain.name"
+            :title="
+              website.name + ' ' + strain.product_code + ' ' + strain.name
+            "
             :description="strain.description"
             :quote="strain.name + ' — ' + strain.short_description"
             :hashtags="strain.profiles.join(',')"
@@ -235,8 +237,11 @@
                 <network network="reddit">
                   <fa-icon :icon="['fab', 'reddit']" size="2x" />
                 </network>
-                <network network="sms" class="is-hidden-desktop">
+                <!-- <network network="sms" class="is-hidden-desktop">
                   <fa-icon :icon="['fal', 'comment-alt-lines']" size="2x" />
+                </network> -->
+                <network network="email">
+                  <fa-icon :icon="['fal', 'envelope']" size="2x" />
                 </network>
               </div>
             </div>
@@ -410,7 +415,9 @@ export default {
         {
           hid: 'open-graph-title',
           property: 'og:title',
-          content: `${this.website.name} ${this.strain.product_code} ${this.strain.name}`
+          content: `${this.website.name} ${this.strain.product_code} ${
+            this.strain.name
+          }`
         },
         {
           hid: 'open-graph-image',
