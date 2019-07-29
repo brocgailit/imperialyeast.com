@@ -63,13 +63,7 @@ export default {
 @include touch {
   #imperial-logo {
     overflow: visible;
-  }
-  #imperial-crown,
-  #imperial-yeast-text {
-    transform: translateY(10%);
-  }
-  #yeast-text {
-    display: none;
+    transform: scale(0.9);
   }
 }
 </style>
