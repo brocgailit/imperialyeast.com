@@ -38,7 +38,7 @@
           <b-numberinput
             v-model="values.batchSize"
             :step="0.1"
-            :min="0.1"
+            :min="0"
             expanded
           />
         </b-field>
@@ -51,7 +51,7 @@
           <b-numberinput
             v-model="values.gravity"
             :step="mode === 'commercial' ? 1 : 0.001"
-            :min="0.1"
+            :min="0"
             expanded
           />
         </b-field>
@@ -62,7 +62,7 @@
           :style="{ '--unit': '\'' + units[mode].pitchRate + '\'' }"
           horizontal
         >
-          <b-numberinput v-model="pitchRate" :step="0.1" :min="0.1" expanded />
+          <b-numberinput v-model="pitchRate" :step="0.1" :min="0" expanded />
         </b-field>
         <b-field
           v-else
@@ -71,7 +71,7 @@
           :style="{ '--unit': '\'' + units[mode].pitchSize + '\'' }"
           horizontal
         >
-          <b-numberinput v-model="pitchSize" :step="0.1" :min="0.1" expanded />
+          <b-numberinput v-model="pitchSize" :step="0.1" :min="0" expanded />
         </b-field>
       </form>
     </div>

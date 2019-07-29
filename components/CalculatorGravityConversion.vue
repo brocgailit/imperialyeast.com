@@ -11,7 +11,7 @@
           :style="{ '--unit': '\'°P\'' }"
           horizontal
         >
-          <b-numberinput v-model="plato" :step="0.1" :min="0.1" expanded />
+          <b-numberinput v-model="plato" :step="0.1" :min="0" expanded />
         </b-field>
         <b-field
           label="Specific Gravity"
@@ -22,7 +22,7 @@
           <b-numberinput
             v-model="specificGravity"
             :step="0.001"
-            :min="0.1"
+            :min="0"
             expanded
           />
         </b-field>
@@ -87,6 +87,9 @@ export default {
     form,
     .field {
       width: 100%;
+    }
+    .b-numberinput {
+      max-width: 325px;
     }
     @include tablet {
       .field-label {
