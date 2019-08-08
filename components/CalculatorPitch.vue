@@ -127,9 +127,9 @@ export default {
       type: 'size',
       values: {
         batchSize: 5,
-        gravity: 1.06,
-        pitchRate: 12,
-        pitchSize: 17.1
+        gravity: 1.052,
+        pitchRate: 0.8,
+        pitchSize: 1
       },
       units: {
         home: {
