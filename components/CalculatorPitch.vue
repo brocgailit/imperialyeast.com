@@ -54,8 +54,9 @@
         >
           <b-input
             v-model="values.gravity"
+            v-show-decimals="units[mode].decimals"
             type="number"
-            :step="mode === 'commercial' ? 1 : 0.001"
+            :step="mode === 'commercial' ? 0.1 : 0.001"
             :min="0"
             :max="units[mode].maxGravity"
             expanded
@@ -120,7 +121,30 @@
 </template>
 
 <script>
+const showDecimals = {
+  name: 'show-decimals',
+  bind(el, binding) {
+    const input = el.querySelector('input')
+    input._handleBlur = event => {
+      event.target.value = (+event.target.value).toFixed(event.target._decimals)
+    }
+    input._decimals = binding.value
+    input.addEventListener('blur', input._handleBlur, true)
+  },
+  update(el, binding) {
+    const input = el.querySelector('input')
+    input._decimals = binding.value
+    input.removeEventListener('blur', input._handleBlur, true)
+    input.addEventListener('blur', input._handleBlur, true)
+  },
+  unbind(el) {
+    const input = el.querySelector('input')
+    input.removeEventListener('blur', input._handleBlur, true)
+  }
+}
+
 export default {
+  directives: { showDecimals },
   data() {
     return {
       mode: 'home',
@@ -136,6 +160,7 @@ export default {
           batchSize: 'gallons',
           gravity: 'SG',
           maxGravity: 1.129,
+          decimals: 3,
           pitchRate: 'million cells per mL/P',
           pitchSize: 'Pitch Right Pouches'
         },
@@ -143,6 +168,7 @@ export default {
           batchSize: 'bbls',
           gravity: '°P',
           maxGravity: 30,
+          decimals: 1,
           pitchRate: 'million cells per mL/P',
           pitchSize: 'Imperial Yeast Liters'
         }
@@ -198,6 +224,15 @@ export default {
       },
       set(size) {
         this.values.pitchSize = size
+      }
+    },
+    masks() {
+      return {
+        numeral: {
+          numeral: true,
+          numeralDecimalScale: () => (this.mode === 'home' ? 3 : 1),
+          completeDecimalsOnBlur: true
+        }
       }
     }
   },
