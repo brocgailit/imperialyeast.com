@@ -71,7 +71,7 @@
           <b-input
             v-model="pitchRate"
             type="number"
-            :step="0.1"
+            :step="0.01"
             :min="0"
             expanded
           />
@@ -86,7 +86,7 @@
           <b-input
             v-model="pitchSize"
             type="number"
-            :step="0.1"
+            :step="0.01"
             :min="0"
             expanded
           />
