@@ -2,7 +2,7 @@
   <div class="layout-actions">
     <span v-for="action of actions" :key="action.id">
       <a
-        v-if="action.attachment"
+        v-if="action.attachment && action.attachment.data"
         target="_blank"
         rel="noopener"
         :href="action.attachment.data.url"
