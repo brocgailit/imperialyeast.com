@@ -57,6 +57,7 @@
             type="number"
             :step="mode === 'commercial' ? 1 : 0.001"
             :min="0"
+            :max="units[mode].maxGravity"
             expanded
           />
         </b-field>
@@ -134,12 +135,14 @@ export default {
         home: {
           batchSize: 'gallons',
           gravity: 'SG',
+          maxGravity: 1.129,
           pitchRate: 'million cells per mL/P',
           pitchSize: 'Pitch Right Pouches'
         },
         commercial: {
           batchSize: 'bbls',
           gravity: '°P',
+          maxGravity: 30,
           pitchRate: 'million cells per mL/P',
           pitchSize: 'Imperial Yeast Liters'
         }
