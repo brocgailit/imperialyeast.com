@@ -1,7 +1,7 @@
 <template>
   <div class="panel">
     <div class="panel-heading">
-      <h3>Gravity Conversion</h3>
+      <h3>Plato and Specific Gravity Conversion</h3>
     </div>
     <div class="panel-block">
       <form @submit.prevent>
