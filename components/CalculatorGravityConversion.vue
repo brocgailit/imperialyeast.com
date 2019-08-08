@@ -16,6 +16,7 @@
             type="number"
             :step="0.1"
             :min="0"
+            :max="30"
             expanded
           />
         </b-field>
@@ -30,6 +31,7 @@
             type="number"
             :step="0.001"
             :min="0"
+            :max="1.129"
             expanded
           />
         </b-field>
