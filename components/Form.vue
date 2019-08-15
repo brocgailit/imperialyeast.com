@@ -79,6 +79,14 @@ export default {
         .then(res => {
           this.loading = false
           this.showConfirmation = true
+          // Send fake page view
+          this.$gtm.pushEvent({
+            event: 'nuxtRoute',
+            pageType: 'PageView',
+            pageUrl: `${this.$route.path}/thank-you`,
+            routeName: 'confirmation'
+          });
+          // this.$fb.track('Contact');
           setTimeout(() => {
             this.showConfirmation = false
           }, 7000)
