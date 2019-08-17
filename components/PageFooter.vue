@@ -2,63 +2,68 @@
   <footer class="page-footer">
     <nav>
       <ul>
-        <li v-for="link of footerLinks" :key="link.slug">
+        <li v-for="link of menu.items" :key="link.value.page._id">
           <nuxt-link
-            :to="'/' + (link.slug !== 'home' ? link.slug + '/' : '')"
-            >{{ link.name }}</nuxt-link
+            :to="
+              '/' +
+                (link.value.page._id !== website.homepage._id
+                  ? link.value.page.name_slug + '/'
+                  : '')
+            "
+            >{{ link.value.title }}</nuxt-link
           >
         </li>
       </ul>
     </nav>
-    <div class="contact-details">
-      <div
-        v-for="contact of website.contacts"
-        :key="contact.id"
-        class="contact"
-      >
+    <div v-if="website.organization" class="contact-details">
+      <div class="contact">
         <div class="contact-information">
           <div
-            v-for="(point, p) of contact.contact_points"
+            v-for="(point, p) of website.organization.contactPoints"
             :key="p"
             class="contact-point"
           >
-            <h5>{{ point.contact_type }}</h5>
+            <h5>{{ point.value.contactType }}</h5>
             <span v-if="!shouldLinkPhone" class="contact-point-phone">{{
-              point.telephone | formatPhone
+              point.value.telephone | formatPhone
             }}</span>
             <a
               v-else
               class="contact-point-phone"
-              :href="'tel:' + point.telephone"
-              >{{ point.telephone | formatPhone }}</a
+              :href="'tel:' + point.value.telephone"
+              >{{ point.value.telephone | formatPhone }}</a
             >
-            <a :href="'mailto:' + point.email">
-              {{ point.email }}
+            <a v-if="point.value.email" :href="'mailto:' + point.value.email">
+              {{ point.value.email }}
             </a>
           </div>
         </div>
       </div>
     </div>
     <ul class="footer-social-media">
-      <li v-for="profile of website.social_profiles" :key="profile.platform">
+      <li
+        v-for="profile of (website.organization || website.author).profiles"
+        :key="profile.value.platform"
+      >
         <a
-          :href="profile.url"
+          :href="profile.value.url"
           rel="noopener"
           target="_blank"
-          :aria-label="profile.platform"
+          :aria-label="profile.value.platform"
         >
           <fa-icon
-            :icon="['fab', profile.platform]"
+            :icon="['fab', profile.value.platform]"
             size="lg"
-            :title="profile.platform"
+            :title="profile.value.platform"
           />
         </a>
       </li>
     </ul>
     <p class="copyright-notice">
-      &copy; {{ year }} {{ website.name }}. All rights reserved.
+      &copy; {{ year }} {{ (website.organization || website.author).name }}. All
+      rights reserved.
     </p>
-    <div class="attribution" v-html="website.footer_attribution" />
+    <div class="attribution" v-html="website.footer" />
   </footer>
 </template>
 
@@ -82,10 +87,7 @@ export default {
   computed: {
     ...mapState({
       website: state => state.website,
-      footerLinks: state =>
-        state.pages.filter(
-          page => page.status === 'published' && page.footer_navigation
-        )
+      menu: state => state.menu.footer
     }),
     shouldLinkPhone() {
       return typeof window !== 'undefined'

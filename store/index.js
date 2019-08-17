@@ -42,7 +42,7 @@ export const actions = {
       populate: 6, // include subs
       rspc: 1,
       filter: {
-        $or: [{ _id: website.mainMenu._id }, { _id: website.mainMenu._id }]
+        $or: [{ _id: website.mainMenu._id }, { _id: website.footerMenu._id }]
       }
     })
     commit('setMenu', {
