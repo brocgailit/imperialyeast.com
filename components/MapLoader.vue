@@ -14,6 +14,7 @@
 
 <script>
 export default {
+  name: 'LeafletMapLoader',
   props: {
     height: {
       type: Number,

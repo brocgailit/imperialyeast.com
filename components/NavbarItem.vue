@@ -40,7 +40,7 @@
 
 <script>
 export default {
-  name: 'NavigationItem',
+  name: 'NavbarItem',
   props: {
     item: {
       type: Object,

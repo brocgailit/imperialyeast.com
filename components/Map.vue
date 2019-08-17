@@ -52,6 +52,7 @@ Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 })
 export default {
+  name: 'LeafletMap',
   components: {
     LMap,
     LTileLayer,

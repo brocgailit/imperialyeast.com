@@ -14,6 +14,7 @@ import Star from '~/components/StarRatingStar.vue'
 import * as TWEEN from '@tweenjs/tween.js'
 
 export default {
+  name: 'StarRating',
   components: {
     Star
   },

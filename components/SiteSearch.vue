@@ -35,6 +35,7 @@ import debounce from 'lodash/debounce'
 import { search } from '~/assets/script/search'
 import SiteSearchResults from '~/components/SiteSearchResults.vue'
 export default {
+  name: 'SiteSearch',
   components: {
     SiteSearchResults
   },

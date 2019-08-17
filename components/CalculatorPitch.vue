@@ -144,6 +144,7 @@ const showDecimals = {
 }
 
 export default {
+  name: 'CalculatorPitch',
   directives: { showDecimals },
   data() {
     return {

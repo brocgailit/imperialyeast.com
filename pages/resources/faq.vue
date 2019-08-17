@@ -12,6 +12,7 @@
 <script>
 import { page } from '~/assets/script/mixins'
 export default {
+  name: 'FAQPage',
   mixins: [page],
   async asyncData({ params, $axios }) {
     const slug = 'faq'

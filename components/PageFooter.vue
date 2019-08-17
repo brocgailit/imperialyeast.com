@@ -65,6 +65,7 @@
 <script>
 import { mapState } from 'vuex'
 export default {
+  name: 'PageFooter',
   filters: {
     formatPhone(number) {
       const cleaned = ('' + number).replace(/\D/g, '')

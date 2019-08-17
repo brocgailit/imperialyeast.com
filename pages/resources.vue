@@ -35,6 +35,7 @@
 import { page } from '~/assets/script/mixins'
 
 export default {
+  name: 'ResourcesPage',
   mixins: [page],
   computed: {
     header() {

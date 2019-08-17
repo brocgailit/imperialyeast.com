@@ -18,6 +18,7 @@ import { page } from '~/assets/script/mixins'
 import CalculatorPitch from '~/components/CalculatorPitch.vue'
 import CalculatorGravityConversion from '~/components/CalculatorGravityConversion.vue'
 export default {
+  name: 'calculators',
   components: {
     CalculatorPitch,
     CalculatorGravityConversion

@@ -30,6 +30,7 @@
 
 <script>
 export default {
+  name: 'LayoutActions',
   props: {
     actions: {
       type: Array,

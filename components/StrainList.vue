@@ -12,6 +12,7 @@
 <script>
 import StrainCard from '~/components/StrainCard.vue'
 export default {
+  name: 'StrainList',
   components: {
     StrainCard
   },

@@ -64,6 +64,7 @@ import Logo from '~/components/Logo.vue'
 import SiteSearch from '~/components/SiteSearch.vue'
 import NavbarItem from '~/components/NavbarItem.vue'
 export default {
+  name: 'Navbar',
   components: {
     Logo,
     SiteSearch,

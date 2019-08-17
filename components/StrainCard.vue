@@ -68,6 +68,7 @@
 
 <script>
 export default {
+  name: 'StrainCard',
   props: {
     strain: {
       type: Object,

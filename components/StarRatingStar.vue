@@ -24,6 +24,7 @@
 
 <script>
 export default {
+  name: 'StarRatingStar',
   props: {
     percent: {
       type: Number,

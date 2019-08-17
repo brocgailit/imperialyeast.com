@@ -12,13 +12,13 @@
         <ul>
           <li
             v-for="strain of results.strains"
-            :key="strain.id"
+            :key="strain._id"
             @click="
               $router.push(
                 '/organic-yeast-strains/yeast-types/' +
-                  strain.strain_type.slug +
+                  strain.type.name_slug +
                   '/' +
-                  strain.slug
+                  strain.name_slug
               )
             "
           >
@@ -26,15 +26,15 @@
               <nuxt-link
                 :to="
                   '/organic-yeast-strains/yeast-types/' +
-                    strain.strain_type.slug +
+                    strain.type.name_slug +
                     '/' +
                     strain.slug +
                     '/'
                 "
-                >{{ strain.product_code }} {{ strain.name }}</nuxt-link
+                >{{ strain.productCode }} {{ strain.name }}</nuxt-link
               >
             </h4>
-            <p>{{ strain.short_description }}</p>
+            <p>{{ strain.shortDescription }}</p>
           </li>
         </ul>
       </li>
@@ -43,14 +43,21 @@
         <ul>
           <li v-for="location of results.locations" :key="location.id">
             <h4>
-              <a :href="location.website" rel="noopener" target="_blank">{{
+              <a :href="location.url" rel="noopener" target="_blank">{{
                 location.name
               }}</a>
             </h4>
-            <address>
-              {{ location.address }}
-              <span v-if="city">{{ location.city }}, {{ location.state }}</span>
-              {{ location.region }}
+            <address v-if="location.address">
+              {{ location.address.streetAddress }}
+              <span
+                v-if="
+                  location.address.addressLocality &&
+                    location.address.addressRegion
+                "
+              >
+                {{ location.address.addressLocality }},
+                {{ location.address.addressRegion }}
+              </span>
             </address>
           </li>
         </ul>
@@ -78,6 +85,7 @@
 
 <script>
 export default {
+  name: 'SiteSearchResults',
   props: {
     results: {
       type: Object,

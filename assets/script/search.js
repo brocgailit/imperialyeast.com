@@ -1,51 +1,64 @@
-const DEFAULT_LIMIT = 20
-export async function search(q, options) {
+export async function search(q, options = {}) {
   const createFilterString = fields =>
-    fields
-      .map((f, i) => `filter[${f}][logical]=or&filter[${f}][contains]=${q}`)
-      .join('&')
-
-  const { limit } = options
+    fields.reduce(
+      (acc, f, i) =>
+        Object.assign(acc, { [`filter[$or][${i}][${f}][$regex]`]: q }),
+      {}
+    )
 
   // search strains
   const strainFilters = createFilterString([
     'name',
-    'short_description',
-    'full_description',
-    'compare_to',
-    'profiles',
-    'similar_strains.similar_strains_id.name'
+    'shortDescription',
+    'fullDescription',
+    'compareTo',
+    'profiles'
   ])
 
-  const { data: strains } = await this.$axios.$get(
-    `/items/strains?fields=*.*,similar_strains.similar_strains_id.name&${strainFilters}&filter[status]=published&limit=${limit ||
-      DEFAULT_LIMIT}`
-  )
+  const strains = await this.$axios.$get('/collections/get/strains', {
+    params: Object.assign(
+      {},
+      options,
+      {
+        simple: true,
+        'filter[public]': true
+      },
+      strainFilters
+    )
+  })
 
   // search locations
   const locationFilters = createFilterString([
     'name',
-    'city',
-    'state',
-    'postal_code',
+    'address.addressLocality',
+    'address.addressRegion',
+    'address.postalCode',
     'phone'
   ])
-  const { data: locations } = await this.$axios.$get(
-    `/items/purchase_locations?fields=*.*&${locationFilters}&filter[status]=published&limit=${limit ||
-      DEFAULT_LIMIT}`
-  )
+  const locations = await this.$axios.$get('/collections/get/organizations', {
+    params: Object.assign(
+      {},
+      options,
+      {
+        simple: true,
+        'filter[map]': true
+      },
+      locationFilters
+    )
+  })
 
   // search pages
-  const pageFilters = createFilterString([
-    'name',
-    'layouts.heading',
-    'layouts.subheading',
-    'keywords'
-  ])
-  const { data: pages } = await this.$axios.$get(
-    `/items/pages?fields=*.*,layouts.*&${pageFilters}&filter[status]=published&limit=${limit ||
-      DEFAULT_LIMIT}`
-  )
+  const pageFilters = createFilterString(['name', 'description', 'keywords'])
+  const pages = await this.$axios.$get('/collections/get/pages', {
+    params: Object.assign(
+      {},
+      options,
+      {
+        simple: true
+      },
+      pageFilters
+    )
+  })
 
   return { strains, pages, locations }
 }

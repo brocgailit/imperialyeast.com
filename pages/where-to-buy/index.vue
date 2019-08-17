@@ -169,6 +169,7 @@ const distance = (a, b) => {
 }
 
 export default {
+  name: 'WhereToBuyDetailPage',
   components: {
     MapLoader
   },

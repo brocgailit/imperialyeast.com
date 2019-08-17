@@ -22,6 +22,7 @@ export default {
 
     return { menu }
   }, */
+  name: 'ResourcesDefaultPage',
   fetch({ params, redirect }) {
     redirect(307, '/resources/faq')
   }
