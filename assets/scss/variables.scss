@@ -79,8 +79,14 @@ $button-padding-horizontal: 1.5em;
 $readability-width: 900px;
 $navbar-height-touch: 85px;
 
-$widescreen-enabled: false;
-// $fullhd-enabled: false;
+
+$gap: 32px;
+$tablet: 769px;
+$desktop: 960px + (2 * $gap);
+$widescreen: 1152px + (2 * $gap);
+// $fullhd: 1344px + (2 * $gap);
+// $widescreen-enabled: false;
+$fullhd-enabled: false;
 
 /* 
 Controls
