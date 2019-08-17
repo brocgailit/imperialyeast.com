@@ -108,5 +108,11 @@ export default {
   .title {
     color: $white;
   }
+  a {
+    color: lighten($primary, 20%);
+    &:hover {
+      opacity: 0.85;
+    }
+  }
 }
 </style>
