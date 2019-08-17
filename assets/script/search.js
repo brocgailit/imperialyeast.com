@@ -1,66 +1,48 @@
 export async function search(q, options = {}) {
-  const createFilterString = fields =>
-    fields.reduce(
-      (acc, f, i) =>
-        Object.assign(acc, { [`filter[$or][${i}][${f}][$regex]`]: q }),
-      {}
-    )
-
   // search strains
-  const strainFilters = createFilterString([
-    'name',
-    'shortDescription',
-    'fullDescription',
-    'compareTo',
-    'profiles'
-  ])
-
-  const strains = await this.$axios.$get('/collections/get/strains', {
-    params: Object.assign(
-      {},
-      options,
-      {
-        simple: true,
-        'filter[public]': true,
-        rspc: 1
-      },
-      strainFilters
-    )
+  const strains = await this.$axios.$post('/collections/get/strains', {
+    simple: 1,
+    filter: {
+      public: true,
+      $or: [
+        { name: { $regex: q } },
+        { shortDescription: { $regex: q } },
+        { fullDescription: { $regex: q } },
+        { compareTo: q },
+        { profiles: q }
+      ]
+    },
+    populate: 2,
+    rspc: 1
   })
 
   // search locations
-  const locationFilters = createFilterString([
-    'name',
-    'address.addressLocality',
-    'address.addressRegion',
-    'address.postalCode',
-    'phone'
-  ])
-  const locations = await this.$axios.$get('/collections/get/organizations', {
-    params: Object.assign(
-      {},
-      options,
-      {
-        simple: true,
-        'filter[map]': true,
-        rspc: 1
-      },
-      locationFilters
-    )
+  const locations = await this.$axios.$post('/collections/get/organizations', {
+    simple: true,
+    filter: {
+      map: true,
+      $or: [
+        { name: { $regex: q } },
+        { 'address.addressLocality': { $regex: q } },
+        { 'address.addressRegion': { $regex: q } },
+        { 'address.postalCode': { $regex: q } },
+        { phone: { $regex: q } }
+      ]
+    },
+    rspc: 1
   })
 
   // search pages
-  const pageFilters = createFilterString(['name', 'description', 'keywords'])
-  const pages = await this.$axios.$get('/collections/get/pages', {
-    params: Object.assign(
-      {},
-      options,
-      {
-        simple: true,
-        rspc: 1
-      },
-      pageFilters
-    )
+  const pages = await this.$axios.$post('/collections/get/pages', {
+    simple: true,
+    rspc: 1,
+    filter: {
+      $or: [
+        { name: { $regex: q } },
+        { description: { $regex: q } },
+        { keywords: q }
+      ]
+    }
   })
 
   return { strains, pages, locations }
