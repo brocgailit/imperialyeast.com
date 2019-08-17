@@ -121,7 +121,7 @@ export default {
         max-width: 150px;
         z-index: -1;
         font-size: $size-8;
-        padding-right: $size-8;
+        padding-right: $size-7;
       }
     }
   }

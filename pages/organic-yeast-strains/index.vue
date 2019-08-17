@@ -2,7 +2,7 @@
   <div>
     <div id="component-container">
       <component
-        :is="DYNAMIC_COMPONENTS.find(c => c.name === layout.type).ref"
+        :is="COMPONENTS.find(c => c.name === layout.component).ref"
         v-for="layout of page.layouts"
         :key="layout.id"
         :layout="layout"
@@ -101,18 +101,12 @@
           :key="group.id"
           class="strain-group"
         >
-          <strain-list
-            :strains="group.strains"
-            :header-color="group.packaging_color"
-          >
+          <strain-list :strains="group.strains" :header-color="group.color">
             <nuxt-link
               :to="'/organic-yeast-strains/yeast-types/' + group.slug + '/'"
             >
-              <h2
-                class="strain-group-name"
-                :style="{ color: group.packaging_color }"
-              >
-                <span v-if="group.name_plural">{{ group.name_plural }}</span>
+              <h2 class="strain-group-name" :style="{ color: group.color }">
+                <span v-if="group.namePlural">{{ group.namePlural }}</span>
                 <span v-else>{{ name }}s</span>
               </h2>
             </nuxt-link>
@@ -124,9 +118,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { page } from '~/assets/script/mixins'
 import StrainList from '~/components/StrainList.vue'
-import { DYNAMIC_COMPONENTS } from '~/assets/script/dynamic-components'
 
 const FILTER_DEFAULTS = {
   attenuation: [50, 100],
@@ -135,14 +128,15 @@ const FILTER_DEFAULTS = {
 }
 
 export default {
+  name: 'YeastStrainsPage',
   components: {
     StrainList,
     VueSlider: () => import('vue-slider-component')
   },
+  mixins: [page],
   data() {
     return {
       sliderEventType: 'touch',
-      DYNAMIC_COMPONENTS,
       productVariation: ['home'],
       search: '',
       showAdvancedFilters: false,
@@ -160,29 +154,17 @@ export default {
       ]
     }
   },
-  mounted() {
-    this.sliderEventType = window.matchMedia('(max-width: 768px)').matches
-      ? 'touch'
-      : 'mouse'
-  },
   computed: {
-    ...mapState({
-      website: state => state.website
-    }),
     groups() {
       return this.filteredStrains.reduce((groups, strain) => {
-        if (groups[strain.strain_type.name]) {
-          groups[strain.strain_type.name].strains.push(strain)
+        if (groups[strain.type.name]) {
+          groups[strain.type.name].strains.push(strain)
         } else {
-          groups[strain.strain_type.name] = Object.assign(
-            {},
-            strain.strain_type,
-            {
-              slug: strain.strain_type.slug,
-              name_plural: strain.strain_type.name_plural,
-              strains: [strain]
-            }
-          )
+          groups[strain.type.name] = Object.assign({}, strain.type, {
+            slug: strain.type.slug,
+            name_plural: strain.type.name_plural,
+            strains: [strain]
+          })
         }
         return groups
       }, {})
@@ -192,10 +174,10 @@ export default {
       const searched = this.strains.filter(s => {
         const checks = [
           'name',
-          'product_code',
-          'short_description',
-          'full_description',
-          'compare_to',
+          'productCode',
+          'shortDescription',
+          'fullDescription',
+          'compareTo',
           'profiles',
           'species'
         ]
@@ -215,20 +197,20 @@ export default {
 
       const filtered = searched.filter(s => {
         const home =
-          this.productVariation.some(
-            a => s.home_availability === (a === 'home')
-          ) || this.productVariation.length === 0
+          this.productVariation.some(a => s.consumer === (a === 'home')) ||
+          this.productVariation.length === 0
+        const flocLevel = this.flocculationLabels
+          .map(l => l.toLowerCase())
+          .indexOf(s.flocculation.toLowerCase())
         const floc =
-          s.flocculation >=
-            this.flocculationLabels.indexOf(this.flocculation[0]) &&
-          s.flocculation <=
-            this.flocculationLabels.indexOf(this.flocculation[1])
+          flocLevel >= this.flocculationLabels.indexOf(this.flocculation[0]) &&
+          flocLevel <= this.flocculationLabels.indexOf(this.flocculation[1])
         const atten =
-          this.attenuation[0] <= s.attenuation_max &&
-          this.attenuation[1] >= s.attenuation_min
+          this.attenuation[0] <= s.attenuation.max &&
+          this.attenuation[1] >= s.attenuation.min
         const temp =
-          this.temperature[0] <= s.temperature_max &&
-          this.temperature[1] >= s.temperature_min
+          this.temperature[0] <= s.temperature.max &&
+          this.temperature[1] >= s.temperature.min
         return home && floc && atten && temp
       })
 
@@ -237,16 +219,27 @@ export default {
   },
   async asyncData({ params, $axios }) {
     const slug = 'organic-yeast-strains'
-    const fields = ['*.*', 'layouts.*.*']
-    const strains = await $axios
-      .$get(`items/strains?filter[status]=published&fields=*.*,strain_type.*`)
-      .then(res => res.data)
-    const page = await $axios
-      .$get(
-        `items/pages?single=1&filter[slug]=${slug}&fields=${fields.join(',')}`
-      )
-      .then(res => res.data)
+    const strains = await $axios.$get('/collections/get/strains', {
+      params: {
+        simple: true,
+        'filter[public]': true,
+        populate: 2
+      }
+    })
+    const [page] = await $axios.$get(`collections/get/pages`, {
+      params: {
+        'filter[name_slug]': slug,
+        limit: 1,
+        simple: true,
+        populate: 12
+      }
+    })
     return { page, strains }
+  },
+  mounted() {
+    this.sliderEventType = window.matchMedia('(max-width: 768px)').matches
+      ? 'touch'
+      : 'mouse'
   },
   methods: {
     clearFilters() {
@@ -261,85 +254,6 @@ export default {
         .getElementById('component-container')
         .getBoundingClientRect()
       window.scrollTo(0, height)
-    }
-  },
-  head() {
-    return {
-      link: [
-        {
-          rel: 'canonical',
-          href: this.website.canonical_url + this.$route.path + '/'
-        }
-      ],
-      title: `${this.page.title} | ${this.website.name}`,
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: this.page.description
-        },
-        {
-          hid: 'open-graph-url',
-          property: 'og:url',
-          content: `${this.website.canonical_url}${this.$route.path}`
-        },
-        {
-          hid: 'open-graph-type',
-          property: 'og:type',
-          content: 'website'
-        },
-        {
-          hid: 'open-graph-description',
-          property: 'og:description',
-          content: this.page.description
-        },
-        {
-          hid: 'open-graph-title',
-          property: 'og:title',
-          content: this.page.title
-        },
-        {
-          hid: 'open-graph-image',
-          property: 'og:image',
-          content: this.page.social_sharing_image
-            ? this.page.social_sharing_image.data.url
-            : this.website.default_sharing_image.data.url
-        },
-        {
-          hid: 'open-graph-image-alt',
-          property: 'og:image:alt',
-          content: this.page.social_sharing_image
-            ? this.page.social_sharing_image.title
-            : this.website.default_sharing_image.title
-        },
-        {
-          hid: 'twitter-card',
-          property: 'twitter:card',
-          content: 'summary_large_image'
-        },
-        {
-          hid: 'twitter-site',
-          property: 'twitter:site',
-          content: `@${this.website.twitter_handle}`
-        },
-        {
-          hid: 'twitter-description',
-          property: 'twitter:description',
-          content: this.page.description
-        },
-        {
-          hid: 'twitter-description',
-          property: 'twitter:title',
-          content: this.page.title
-        },
-        {
-          hid: 'twitter-image',
-          property: 'twitter:image',
-          content: this.page.social_sharing_image
-            ? this.page.social_sharing_image.data.url
-            : this.website.default_sharing_image.data.url
-        }
-      ]
     }
   }
 }

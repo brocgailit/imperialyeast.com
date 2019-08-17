@@ -80,14 +80,17 @@ module.exports = {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    { src: '~/plugins/social-sharing', ssr: true },
-    { src: '~/plugins/nuxt-jsonld' },
+    { src: '~/plugins/axios-headers' },
+    { src: '~/plugins/gravity-conversion' },
+    { src: '~/plugins/imgix-asset' },
     { src: '~/plugins/layout-actions' },
+    { src: '~/plugins/nuxt-jsonld' },
     { src: '~/plugins/responsive-image' },
+    { src: '~/plugins/dynamic-button' },
+    { src: '~/plugins/social-sharing', ssr: true },
     { src: '~/plugins/v-lazy-image', ssr: false },
-    { src: '~/plugins/vue-observe-visibility', ssr: false },
     { src: '~/plugins/vue-cookie', ssr: false },
-    { src: '~/plugins/gravity-conversion' }
+    { src: '~/plugins/vue-observe-visibility', ssr: false }
     // { src: '~/plugins/buefy' }
   ],
 
@@ -126,7 +129,6 @@ module.exports = {
         pageTracking: true
       }
     ],
-    // 'nuxt-buefy',
     [
       'nuxt-fontawesome',
       {
@@ -137,12 +139,13 @@ module.exports = {
             icons: [
               'faArrowUp',
               'faFlask',
+              'faFilePdf',
               'faDatabase',
               'faCartPlus',
               'faEnvelope',
               'faUser',
               'faPhoneOffice',
-              'faMobileAlt',
+              'faPhone',
               'faBriefcase',
               'faExclamationCircle',
               'faSearch',
@@ -225,14 +228,16 @@ module.exports = {
    ** Axios module configuration
    */
   axios: {
-    // See https://github.com/nuxt-community/axios-module#options
-    baseURL: process.env.DIRECTUS_URL + '/_/',
+    baseURL: process.env.COCKPIT_URL + '/api/',
     credentials: false,
     proxy: process.env.NODE_ENV === 'development'
   },
 
   proxy: {
-    '/items': process.env.DIRECTUS_URL + '/_/',
+    '/singletons': process.env.COCKPIT_URL + '/api/',
+    '/collections': process.env.COCKPIT_URL + '/api/',
+    '/cockpit': process.env.COCKPIT_URL + '/api/',
+    '/forms': process.env.COCKPIT_URL + '/api/',
     '/.netlify': 'http://localhost:9000'
   },
 
@@ -241,23 +246,36 @@ module.exports = {
    */
   generate: {
     routes: async function() {
+      const baseURL = process.env.COCKPIT_URL + '/api/collections/get/'
       const pages = await axios
-        .get(process.env.DIRECTUS_URL + '/_/items/pages?filter[status]=published')
+        .get(baseURL + 'pages') // TODO: filter published
         .then(res => res.data.data)
       const styles = await axios
-        .get(process.env.DIRECTUS_URL + '/_/items/beer_styles?filter[status]=published')
+        .get(baseURL + 'beerStyles') // TODO: filter published
         .then(res => res.data.data)
       const types = await axios
-        .get(process.env.DIRECTUS_URL + '/_/items/strain_types?filter[status]=published')
+        .get(baseURL + 'strainTypes')
         .then(res => res.data.data)
       const strains = await axios
-        .get(process.env.DIRECTUS_URL + '/_/items/strains?filter[status]=published&fields=*.*')
+        .get(baseURL + 'strains', {
+          params: {
+            populate: 3
+          }
+        })
         .then(res => res.data.data)
       return [
         ...pages.map(page => `/${page.slug}`),
-        ...styles.map(style => `/organic-yeast-strains/beer-styles/${style.slug}`),
-        ...types.map(type => `/organic-yeast-strains/yeast-types/${type.slug}`),
-        ...strains.map(strain => `/organic-yeast-strains/yeast-types/${strain.strain_type.slug}/${strain.slug}`)
+        ...styles.map(
+          style => `/organic-yeast-strains/beer-styles/${style.name_slug}`
+        ),
+        ...types.map(
+          type => `/organic-yeast-strains/yeast-types/${type.name_slug}`
+        ),
+        ...strains.map(
+          strain =>
+            `/organic-yeast-strains/yeast-types/${strain.category.name_slug}/` +
+            strain.name_slug
+        )
       ]
     }
   },
@@ -266,7 +284,10 @@ module.exports = {
    ** Environment Variables
    */
   env: {
-    DIRECTUS_URL: process.env.DIRECTUS_URL
+    COCKPIT_URL: process.env.COCKPIT_URL,
+    COCKPIT_TOKEN: process.env.COCKPIT_TOKEN,
+    COCKPIT_CDN: process.env.COCKPIT_CDN,
+    COCKPIT_ASSETS: process.env.COCKPIT_ASSETS
   },
 
   /*

@@ -7,23 +7,23 @@
           v-for="type of types"
           :key="type.id"
           class="strain-type"
-          :style="{ 'background-color': type.packaging_color }"
+          :style="{ 'background-color': type.color }"
           @click="
             $router.push(
-              '/organic-yeast-strains/yeast-types/' + type.slug + '/'
+              '/organic-yeast-strains/yeast-types/' + type.name_slug + '/'
             )
           "
         >
           <h2>
             <nuxt-link
-              :to="'/organic-yeast-strains/yeast-types/' + type.slug + '/'"
+              :to="'/organic-yeast-strains/yeast-types/' + type.name_slug + '/'"
             >
-              <span v-if="type.name_plural">{{ type.name_plural }}</span>
+              <span v-if="type.namePlural">{{ type.namePlural }}</span>
               <span v-else>{{ type.name }}s</span>
             </nuxt-link>
           </h2>
           <p>
-            {{ type.short_description }}
+            {{ type.shortDescription }}
           </p>
         </li>
       </ul>
@@ -40,9 +40,12 @@ export default {
     })
   },
   async asyncData({ params, $axios }) {
-    const types = await $axios
-      .$get(`items/strain_types?filter[status]=published&fields=*.*`)
-      .then(res => res.data)
+    const types = await $axios.$get('/collections/get/strainTypes', {
+      params: {
+        simple: true,
+        populate: 2
+      }
+    })
     return { types }
   },
   head() {
@@ -50,7 +53,7 @@ export default {
       link: [
         {
           rel: 'canonical',
-          href: this.website.canonical_url + this.$route.path + '/'
+          href: this.website.canonicalURL + this.$route.path + '/'
         }
       ],
       title: `Types of Yeast Strains | ${this.website.name}`,
@@ -65,7 +68,7 @@ export default {
         {
           hid: 'open-graph-url',
           property: 'og:url',
-          content: `${this.website.canonical_url}${this.$route.path}`
+          content: `${this.website.canonicalURL}${this.$route.path}`
         },
         {
           hid: 'open-graph-type',
@@ -84,16 +87,16 @@ export default {
           property: 'og:title',
           content: 'Types of Yeast Strains'
         },
-        {
+        /* {
           hid: 'open-graph-image',
           property: 'og:image',
-          content: this.website.default_sharing_image.data.url
+          content: this.website.featuredImage.data.url
         },
         {
           hid: 'open-graph-image-alt',
           property: 'og:image:alt',
-          content: this.website.default_sharing_image.title
-        },
+          content: this.website.featuredImage.title
+        }, */
         {
           hid: 'twitter-card',
           property: 'twitter:card',
@@ -102,7 +105,7 @@ export default {
         {
           hid: 'twitter-site',
           property: 'twitter:site',
-          content: `@${this.website.twitter_handle}`
+          content: `@${this.website.twitter}`
         },
         {
           hid: 'twitter-description',
@@ -115,12 +118,12 @@ export default {
           hid: 'twitter-description',
           property: 'twitter:title',
           content: 'Types of Yeast Strains'
-        },
-        {
+        }
+        /* {
           hid: 'twitter-image',
           property: 'twitter:image',
-          content: this.website.default_sharing_image.data.url
-        }
+          content: this.website.featuredImage.data.url
+        } */
       ]
     }
   }

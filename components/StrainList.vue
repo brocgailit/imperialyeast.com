@@ -2,25 +2,22 @@
   <div class="strain-list">
     <slot />
     <transition-group name="flip-list" tag="ul">
-      <li v-for="strain of strains" :key="strain.id" class="strain">
-        <h3
-          class="strain-name"
-          :style="{ color: strain.strain_type.packaging_color }"
-        >
+      <li v-for="strain of strains" :key="strain.name_slug" class="strain">
+        <h3 class="strain-name" :style="{ color: strain.type.color }">
           <nuxt-link
             :to="
               '/organic-yeast-strains/yeast-types/' +
-                strain.strain_type.slug +
+                strain.type.name_slug +
                 '/' +
-                strain.slug +
+                strain.name_slug +
                 '/'
             "
           >
-            <span>{{ strain.product_code }} {{ strain.name }}</span>
+            <span>{{ strain.productCode }} {{ strain.name }}</span>
           </nuxt-link>
           <nuxt-link to="/in-stock-or-your-order-ships-free/">
             <b-tooltip
-              v-if="strain.guaranteed_in_stock"
+              v-if="strain.instock"
               style="vertical-align: middle"
               label="Guaranteed In Stock"
               position="is-top"
@@ -31,7 +28,7 @@
           </nuxt-link>
         </h3>
         <p class="strain-description">
-          {{ strain.short_description }}
+          {{ strain.shortDescription }}
         </p>
         <!-- <dl class="strain-detail">
           <dt class="strain-detail-name">
@@ -54,13 +51,13 @@
         </dl> -->
         <div class="strain-actions">
           <nuxt-link
-            :style="{ color: strain.strain_type.packaging_color }"
+            :style="{ color: strain.type.color }"
             class="is-small"
             :to="
               '/organic-yeast-strains/yeast-types/' +
-                strain.strain_type.slug +
+                strain.type.name_slug +
                 '/' +
-                strain.slug +
+                strain.name_slug +
                 '/'
             "
             :title="'Learn more about ' + strain.name"

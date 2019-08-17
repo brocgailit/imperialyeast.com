@@ -16,23 +16,23 @@
           <nuxt-link
             :to="
               '/organic-yeast-strains/yeast-types/' +
-                strain.strain_type.slug +
+                strain.type.name_slug +
                 '/'
             "
           >
-            <span v-if="strain.strain_type.name_plural">{{
-              strain.strain_type.name_plural
+            <span v-if="strain.type.namePlural">{{
+              strain.type.namePlural
             }}</span>
-            <span v-else>{{ strain.strain_type.name }}s</span>
+            <span v-else>{{ strain.type.name }}s</span>
           </nuxt-link>
         </li>
         <li class="is-active">
           <nuxt-link
             :to="
               '/organic-yeast-strains/yeast-types/' +
-                strain.strain_type.slug +
+                strain.type.name_slug +
                 '/' +
-                strain.slug +
+                strain.name_slug +
                 '/'
             "
             aria-current="page"
@@ -46,17 +46,17 @@
         <header class="container">
           <h2>
             <nuxt-link
-              :to="'../' + strain.strain_type.slug + '/'"
-              :style="{ color: strain.strain_type.packaging_color }"
-              >{{ strain.strain_type.name }}</nuxt-link
+              :to="'../' + strain.type.name_slug + '/'"
+              :style="{ color: strain.type.color }"
+              >{{ strain.type.name }}</nuxt-link
             >
           </h2>
           <h1>{{ strain.name }}</h1>
           <div
             class="strain-code"
-            :style="{ 'background-color': strain.strain_type.packaging_color }"
+            :style="{ 'background-color': strain.type.color }"
           >
-            {{ strain.product_code }}
+            {{ strain.productCode }}
           </div>
 
           <div class="strain-details">
@@ -65,11 +65,11 @@
                 <abbr title="Temperature">Temp</abbr>:
               </dt>
               <dd class="strain-detail-info">
-                {{ strain.temperature_min }}–{{ strain.temperature_max
+                {{ strain.temperature.min }}–{{ strain.temperature.max
                 }}<span class="degrees">F</span>
                 <small
-                  >({{ strain.temperature_min | celsius }}–{{
-                    strain.temperature_max | celsius
+                  >({{ strain.temperature.min | celsius }}–{{
+                    strain.temperature.max | celsius
                   }}<span class="degrees">C</span>)</small
                 >
               </dd>
@@ -83,16 +83,16 @@
             <dl class="strain-detail">
               <dt class="strain-detail-name">Attenuation:</dt>
               <dd class="strain-detail-info">
-                {{ strain.attenuation_min }}–{{ strain.attenuation_max }}%
+                {{ strain.attenuation.min }}–{{ strain.attenuation.max }}%
               </dd>
             </dl>
             <dl class="strain-detail">
               <dt class="strain-detail-name">Alcohol Tolerance:</dt>
               <dd class="strain-detail-info">
-                <span v-if="strain.alcohol_tolerance_min"
-                  >{{ strain.alcohol_tolerance_min }}–</span
+                <span v-if="strain.alcoholTolerance.min"
+                  >{{ strain.alcoholTolerance.min }}–</span
                 >
-                {{ strain.alcohol_tolerance }}%
+                {{ strain.alcoholTolerance.max }}%
               </dd>
             </dl>
           </div>
@@ -103,15 +103,15 @@
         </header>
         <div>
           <p class="strain-description-short">
-            {{ strain.short_description }}
+            {{ strain.shortDescription }}
           </p>
 
           <div
             class="strain-description-full"
-            v-html="strain.full_description"
+            v-html="strain.fullDescription"
           />
 
-          <p v-if="strain.guaranteed_in_stock" class="strain-instock">
+          <p v-if="strain.instock" class="strain-instock">
             <nuxt-link to="/in-stock-or-your-order-ships-free"
               >Guaranteed In Stock</nuxt-link
             >
@@ -145,16 +145,14 @@
               <fa-icon :icon="['fal', 'check']" />
               Commercial pitches, 1L and larger
             </li>
-            <li v-if="strain.home_availability">
+            <li v-if="strain.consumer">
               <fa-icon :icon="['fal', 'check']" />
               Pitch Right Home Brew Pouches
               <responsive-image
                 class="home-packaging"
-                :file="strain.image || strain.strain_type.home_packaging_image"
+                :path="(strain.image || strain.type.image).path"
                 :alt="
-                  strain.image
-                    ? strain.image.description
-                    : strain.strain_type.home_packaging_image.description
+                  strain.image ? strain.image.title : strain.type.image.title
                 "
                 sizes="150px"
                 lazy
@@ -170,7 +168,7 @@
           <ul>
             <li v-for="style of styles" :key="style.id">
               <nuxt-link
-                :to="'/organic-yeast-strains/beer-styles/' + style.slug"
+                :to="'/organic-yeast-strains/beer-styles/' + style.name_slug"
                 >{{ style.name }}</nuxt-link
               >
             </li>
@@ -183,13 +181,13 @@
               <nuxt-link
                 :to="
                   '/organic-yeast-strains/yeast-types/' +
-                    strain.strain_type.slug +
+                    strain.type.name_slug +
                     '/' +
-                    strain.slug +
+                    strain.name_slug +
                     '/'
                 "
               >
-                {{ strain.product_code }} {{ strain.name }}
+                {{ strain.productCode }} {{ strain.name }}
               </nuxt-link>
             </li>
           </ul>
@@ -212,14 +210,12 @@
         </div>
         <no-ssr>
           <social-sharing
-            :url="website.canonical_url + $route.path"
-            :title="
-              website.name + ' ' + strain.product_code + ' ' + strain.name
-            "
+            :url="website.canonicalURL + $route.path"
+            :title="website.name + ' ' + strain.productCode + ' ' + strain.name"
             :description="strain.description"
-            :quote="strain.name + ' — ' + strain.short_description"
-            :hashtags="strain.profiles.join(',')"
-            :twitter-user="website.twitter_handle"
+            :quote="strain.name + ' — ' + strain.shortDescription"
+            :hashtags="strain.profiles ? strain.profiles.join(',') : null"
+            :twitter-user="website.twitter"
             inline-template
           >
             <div class="social-sharing-container">
@@ -293,32 +289,30 @@ export default {
           '@type': 'ListItem',
           position: 1,
           name: 'Organic Yeast Strains',
-          item: `${this.website.canonical_url}/organic-yeast-strains`
+          item: `${this.website.canonicalURL}/organic-yeast-strains`
         },
         {
           '@type': 'ListItem',
           position: 2,
           name: 'Yeast Types',
-          item: `${
-            this.website.canonical_url
-          }/organic-yeast-strains/yeast-types`
+          item: `${this.website.canonicalURL}/organic-yeast-strains/yeast-types`
         },
         {
           '@type': 'ListItem',
           position: 3,
-          name: this.strain.strain_type.name,
+          name: this.strain.type.name,
           item: `${
-            this.website.canonical_url
-          }/organic-yeast-strains/beer-styles/${this.strain.strain_type.slug}`
+            this.website.canonicalURL
+          }/organic-yeast-strains/beer-styles/${this.strain.type.name_slug}`
         },
         {
           '@type': 'ListItem',
           position: 4,
           name: this.strain.name,
           item: `${
-            this.website.canonical_url
-          }/organic-yeast-strains/beer-styles/${this.strain.strain_type.slug}/${
-            this.strain.slug
+            this.website.canonicalURL
+          }/organic-yeast-strains/beer-styles/${this.strain.type.name_slug}/${
+            this.strain.name_slug
           }`
         }
       ]
@@ -328,8 +322,8 @@ export default {
       '@context': 'https://schema.org',
       '@type': 'Product',
       name: this.strain.name,
-      description: this.strain.short_description,
-      sku: this.strain.product_code,
+      description: this.strain.shortDescription,
+      sku: this.strain.productCode,
       brand: {
         '@type': 'Thing',
         name: this.website.name
@@ -338,8 +332,8 @@ export default {
       // TODO: aggregate ratings!!!
       offers: {
         '@type': 'AggregateOffer',
-        lowPrice: this.strain.low_price || this.strain.strain_type.low_price,
-        highPrice: this.strain.high_price || this.strain.strain_type.high_price,
+        lowPrice: this.strain.low_price || this.strain.type.low_price,
+        highPrice: this.strain.high_price || this.strain.type.high_price,
         priceCurrency: 'USD',
         offerCount: 1
       }
@@ -349,35 +343,27 @@ export default {
       product.gtin13 = this.strain.gtin.padStart(13, '0')
     }
 
-    if (this.strain.image || this.strain.strain_type.home_packaging_image) {
-      product.image = (
-        this.strain.image || this.strain.strain_type.home_packaging_image
-      ).data.thumbnails
-        .filter(t =>
-          [[500, 500], [1024, 768], [1280, 720]].some(
-            ([w, h]) => t.width === w && t.height === h
-          )
+    if (this.strain.image || this.strain.type.image) {
+      product.image = [[500, 500], [1024, 768], [1280, 720]].map(([w, h]) =>
+        this.$options.filters.asset(
+          (this.strain.image || this.strain.type.image).path,
+          { w, h, fit: 'crop' }
         )
-        .map(t => t.url)
+      )
     }
 
     return [breadcrumb, product]
   },
   async asyncData({ params, $axios }) {
     const { slug } = params
-    const fields = [
-      '*.*',
-      'strain_type.*',
-      'beer_styles.beer_styles_id.*',
-      'similar_strains.similar_strains_id.*',
-      'similar_strains.similar_strains_id.strain_type.slug',
-      'strain_type.home_packaging_image.*'
-    ]
-    const strain = await $axios
-      .$get(
-        `items/strains?single=1&filter[slug]=${slug}&fields=${fields.join(',')}`
-      )
-      .then(res => res.data)
+    const [strain] = await $axios.$get('/collections/get/strains', {
+      params: {
+        simple: true,
+        populate: 2,
+        limit: 1,
+        'filter[name_slug]': slug
+      }
+    })
     return { strain }
   },
   head() {
@@ -385,22 +371,22 @@ export default {
       link: [
         {
           rel: 'canonical',
-          href: this.website.canonical_url + this.$route.path + '/'
+          href: this.website.canonicalURL + this.$route.path + '/'
         }
       ],
-      title: `${this.strain.name} - ${this.strain.product_code} (${
-        this.strain.strain_type.name
+      title: `${this.strain.name} - ${this.strain.productCode} (${
+        this.strain.type.name
       } Yeast) | ${this.website.name}`,
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: this.strain.short_description
+          content: this.strain.shortDescription
         },
         {
           hid: 'open-graph-url',
           property: 'og:url',
-          content: `${this.website.canonical_url}${this.$route.path}`
+          content: `${this.website.canonicalURL}${this.$route.path}`
         },
         {
           hid: 'open-graph-type',
@@ -410,24 +396,24 @@ export default {
         {
           hid: 'open-graph-description',
           property: 'og:description',
-          content: this.strain.short_description
+          content: this.strain.shortDescription
         },
         {
           hid: 'open-graph-title',
           property: 'og:title',
-          content: `${this.website.name} ${this.strain.product_code} ${
+          content: `${this.website.name} ${this.strain.productCode} ${
             this.strain.name
           }`
         },
         {
           hid: 'open-graph-image',
           property: 'og:image',
-          content: this.website.default_sharing_image.data.url
+          content: this.$options.filters.asset(this.strain.image.path)
         },
         {
           hid: 'open-graph-image-alt',
           property: 'og:image:alt',
-          content: this.website.default_sharing_image.title
+          content: this.strain.image.title
         },
         {
           hid: 'twitter-card',
@@ -437,12 +423,12 @@ export default {
         {
           hid: 'twitter-site',
           property: 'twitter:site',
-          content: `@${this.website.twitter_handle}`
+          content: `@${this.website.twitter}`
         },
         {
           hid: 'twitter-description',
           property: 'twitter:description',
-          content: this.strain.short_description
+          content: this.strain.shortDescription
         },
         {
           hid: 'twitter-description',
@@ -452,7 +438,7 @@ export default {
         {
           hid: 'twitter-image',
           property: 'twitter:image',
-          content: this.website.default_sharing_image.data.url
+          content: this.$options.filters.asset(this.strain.image.path)
         }
       ]
     }

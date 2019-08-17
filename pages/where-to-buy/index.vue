@@ -83,19 +83,19 @@
       >
         <li
           v-for="retailer of retailersNearLocation"
-          :key="retailer.id"
+          :key="retailer._id"
           class="retailer"
-          :class="{ 'is-selected': selected === retailer.id }"
-          @click="selected = retailer.id"
+          :class="{ 'is-selected': selected === retailer._id }"
+          @click="selected = retailer._id"
         >
           <b-collapse
-            :open="selected === retailer.id"
-            :aria-id="'location-' + retailer.id"
+            :open="selected === retailer._id"
+            :aria-id="'location-' + retailer._id"
           >
             <div
               slot="trigger"
               role="button"
-              :aria-controls="'location-' + retailer.id"
+              :aria-controls="'location-' + retailer._id"
             >
               <div class="retailer-name">
                 <span class="retailer-distance">
@@ -104,7 +104,8 @@
                 {{ retailer.name }}
               </div>
               <address class="retailer-address">
-                {{ retailer.address }} &bull; {{ retailer.city }}
+                {{ retailer.address.streetAddress }} &bull;
+                {{ retailer.address.addressLocality }}
               </address>
             </div>
             <div class="retailer-actions">
@@ -113,18 +114,18 @@
                 target="_blank"
                 :href="
                   'https://www.google.com/maps/dir/?api=1&destination=' +
-                    retailer.geolocation.lat +
+                    retailer.geo.lat +
                     ',' +
-                    retailer.geolocation.lng
+                    retailer.geo.lng
                 "
                 class="button is-primary is-small"
                 >Directions</a
               >
               <a
-                v-if="retailer.website"
+                v-if="retailer.url"
                 rel="noopener"
                 target="_blank"
-                :href="retailer.website"
+                :href="retailer.url"
                 class="button is-primary is-small"
                 >Website</a
               >
@@ -255,10 +256,10 @@ export default {
     retailersNearLocation() {
       if (!this.locations || !this.location) return null
       return this.locations
-        .filter(l => l.geolocation)
+        .filter(l => l.geo)
         .map(l =>
           Object.assign({}, l, {
-            distance: distance(l.geolocation, this.location._geoloc)
+            distance: distance(l.geo, this.location._geoloc)
           })
         )
         .filter(l => l.distance < this.radius)
@@ -268,19 +269,20 @@ export default {
     },
     markers() {
       return (this.retailersNearLocation || this.locations).map(location => {
-        const { name, address, city, geolocation, website } = location
-        const { lat, lng } = geolocation || [0, 0]
+        const { name, address, geo, url } = location
+        const { lat, lng } = geo || [0, 0]
+        const { streetAddress, addressLocality } = address
         return {
-          id: location.id,
+          id: location._id,
           coords: [lat, lng],
           popup: {
             title: name,
             content: `
                 <address>
-                  ${address} &bull; ${city}
+                  ${streetAddress} &bull; ${addressLocality}
                 </address>
                 <a rel="noopener" target="_blank" href="https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}" class="button is-primary is-small">Directions</a>
-                <a rel="noopener" target="_blank" href="${website}" class="button is-primary is-small">Website</a>
+                <a rel="noopener" target="_blank" href="${url}" class="button is-primary is-small">Website</a>
               `
           }
         }

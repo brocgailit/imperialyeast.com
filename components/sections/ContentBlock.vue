@@ -163,7 +163,7 @@ export default {
   },
   async mounted() {
     if (
-      this.layout.background_image &&
+      this.background &&
       window.matchMedia('(min-width: 1024px)').matches
     ) {
       this.parallaxAnimation = requestAnimationFrame(this.setScrollParallax)

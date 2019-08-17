@@ -1,19 +1,19 @@
 <template>
   <section class="resources-home">
-    <article v-for="(item, i) of menu.items" :key="i">
+    <!-- <article v-for="(item, i) of menu.items" :key="i">
       <nuxt-link :to="item.path + '/'">
         <h3>
           <span>{{ item.title }}</span>
         </h3>
       </nuxt-link>
       <div v-html="item.description" />
-    </article>
+    </article> -->
   </section>
 </template>
 
 <script>
 export default {
-  async asyncData({ params, $axios }) {
+  /* async asyncData({ params, $axios }) {
     const slug = 'resources'
     const fields = ['*.*']
     const { data: menu } = await $axios.$get(
@@ -21,7 +21,7 @@ export default {
     )
 
     return { menu }
-  },
+  }, */
   fetch({ params, redirect }) {
     redirect(307, '/resources/faq')
   }

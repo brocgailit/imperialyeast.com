@@ -1,14 +1,14 @@
 <template>
   <div>
     <component
-      :is="DYNAMIC_COMPONENTS.find(c => c.name === header.type).ref"
+      :is="COMPONENTS.find(c => c.name === header.type).ref"
       :layout="header"
     />
     <div class="contact-page-contents">
       <div class="contact-container container">
         <div class="contact-sections">
           <component
-            :is="DYNAMIC_COMPONENTS.find(c => c.name === layout.type).ref"
+            :is="COMPONENTS.find(c => c.name === layout.type).ref"
             v-for="layout of layouts"
             :key="layout.id"
             :layout="layout"
@@ -87,7 +87,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import { DYNAMIC_COMPONENTS } from '~/assets/script/dynamic-components'
+import { COMPONENTS } from '~/assets/script/components'
 import MapLoader from '~/components/MapLoader.vue'
 import format from 'date-fns/format'
 export default {
@@ -107,7 +107,7 @@ export default {
   },
   data() {
     return {
-      DYNAMIC_COMPONENTS,
+      COMPONENTS,
       daysOfWeek: [
         'Sunday',
         'Monday',

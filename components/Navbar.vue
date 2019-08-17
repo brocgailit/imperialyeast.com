@@ -13,11 +13,11 @@
       @click="isOpen = false"
     >
       <ul id="menu">
-        <li v-for="link of primaryLinks" :key="link.slug">
-          <nuxt-link
-            :to="'/' + (link.slug !== 'home' ? link.slug + '/' : '')"
-            >{{ link.name }}</nuxt-link
-          >
+        <li
+          v-for="(item, i) of menus.main.items"
+          :key="item.value.page._id + i"
+        >
+          <navbar-item :item="item" />
         </li>
         <li>
           <button
@@ -62,10 +62,12 @@
 import { mapState } from 'vuex'
 import Logo from '~/components/Logo.vue'
 import SiteSearch from '~/components/SiteSearch.vue'
+import NavbarItem from '~/components/NavbarItem.vue'
 export default {
   components: {
     Logo,
-    SiteSearch
+    SiteSearch,
+    NavbarItem
   },
   data() {
     return {
@@ -74,7 +76,7 @@ export default {
   },
   computed: {
     ...mapState({
-      pages: state => state.pages
+      menus: state => state.menu
     }),
     isOpen: {
       get() {
@@ -135,12 +137,14 @@ $logo-size: 160px;
     display: flex;
     justify-content: center;
     text-align: center;
+    margin: 0 auto;
+    max-width: 1200px;
     #menu {
       transition: opacity 250ms ease-in-out;
       display: flex;
       justify-content: center;
       li {
-        padding: $size-7 0;
+        // padding: $size-7 0;
         a {
           text-transform: uppercase;
           color: $black;
@@ -180,6 +184,9 @@ $logo-size: 160px;
   @include desktop {
     .menu-button {
       display: none;
+    }
+    .global-nav {
+      padding: 0 $size-7;
     }
   }
 

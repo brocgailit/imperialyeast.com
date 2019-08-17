@@ -12,9 +12,7 @@
         :options="{ dragging: enableDragging }"
         :max-bounds="[[-135, -225], [90, 225]]"
       >
-        <l-tile-layer
-          url="https://api.maptiler.com/maps/6f20cc0d-4242-40e6-b6b8-c51e19fab521/{z}/{x}/{y}.png?key=I4ED3WrAmXTdwheK6O5k"
-        />
+        <l-tile-layer :url="$store.state.website.map" />
         <l-markercluster :options="clusterOptions">
           <l-marker
             v-for="marker of markers"
@@ -199,7 +197,7 @@ export default {
   a.leaflet-popup-close-button {
     padding: 0.4em 0.4em 0 0;
     color: $primary;
-    font-size: $size-4;
+    font-size: $size-5;
     height: $size-4;
     width: $size-4;
   }

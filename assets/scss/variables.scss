@@ -8,6 +8,7 @@ $dark: mix($black, $grey);
 // $link: #146bb2;
 $link: $primary;
 $body-color: $dark;
+// $body-background-color: $black;
 
 $colors: (
   'white': (
@@ -58,10 +59,16 @@ $family-primary: $family-sans-serif;
 
 $weight-black: 900;
 
-$size-1: 4rem;
+$size-1: 5rem;
+$size-2: 4rem;
+$size-3: 3rem;
+$size-4: 2.25rem;
+$size-5: 1.5rem;
 $size-6: 1rem;
-$size-7: 0.8rem;
-$size-8: 0.7rem;
+$size-7: 0.9rem;
+$size-8: 0.75rem;
+
+$sizes: $size-1 $size-2 $size-3 $size-4 $size-5 $size-6 $size-7 $size-8;
 
 $radius-small: 0px;
 $radius: 0px;
@@ -70,5 +77,61 @@ $radius-large: 0px;
 $button-padding-horizontal: 1.5em;
 
 $readability-width: 900px;
-
 $navbar-height-touch: 85px;
+
+$widescreen-enabled: false;
+// $fullhd-enabled: false;
+
+/* 
+Controls
+https://bulma.io/documentation/form/general/#variables
+*/
+$control-radius: 0;
+$control-radius-small: 0;
+$label-color: $grey-darker;
+$label-weight: $weight-normal;
+$help-size: $size-7;
+
+/* 
+Title
+https://bulma.io/documentation/elements/title/#variables
+*/
+
+$title-family: 'Gothic', $family-sans-serif;
+$title-weight: 400;
+$title-size: $size-3;
+$title-line-height: 0.9;
+
+/*
+Navbar
+https://bulma.io/documentation/components/navbar/#variables
+*/
+
+$navbar-background-color: $black;
+$navbar-height: 5rem;
+$navbar-item-color: $light;
+$navbar-item-img-max-height: 2rem;
+$navbar-item-hover-color: $black;
+$navbar-item-hover-background-color: darken($white, 5%);
+$navbar-item-active-color: $grey;
+$navbar-item-active-background-color: darken($white, 5%);
+$navbar-burger-color: $light;
+$navbar-padding-vertical: 1rem;
+$navbar-padding-horizontal: 2rem;
+
+/* 
+Footer
+https://bulma.io/documentation/layout/footer/#variables
+*/
+
+$footer-background-color: $black;
+$footer-padding: 3rem 1.5rem 6rem;
+
+/*
+Sections
+https://bulma.io/documentation/layout/section/#variables
+*/
+
+$section-padding: 4rem 1.5rem;
+$section-padding-medium: 9rem 1.5rem;
+$section-padding-large: 18rem 1.5rem;

@@ -29,3 +29,11 @@ abbr {
     // Primary in color array is darker... this is mostly for logo consistancy
     color: $primary !important;
 }
+
+.title, .subtitle {
+    text-transform: uppercase;
+}
+
+.title, .subtitle {
+    text-align: center;
+}
