@@ -28,7 +28,7 @@
         </div>
       </fieldset>
       <div class="form-actions">
-        <b-button native-type="submit" type="is-success" :loading="loading">
+        <b-button native-type="submit" type="is-primary" :loading="loading">
           {{ layout.settings.submitLabel || 'Submit' }}
         </b-button>
       </div>
