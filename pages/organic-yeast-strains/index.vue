@@ -103,7 +103,9 @@
         >
           <strain-list :strains="group.strains" :header-color="group.color">
             <nuxt-link
-              :to="'/organic-yeast-strains/yeast-types/' + group.slug + '/'"
+              :to="
+                '/organic-yeast-strains/yeast-types/' + group.name_slug + '/'
+              "
             >
               <h2 class="strain-group-name" :style="{ color: group.color }">
                 <span v-if="group.namePlural">{{ group.namePlural }}</span>
