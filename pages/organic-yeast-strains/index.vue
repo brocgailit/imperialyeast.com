@@ -306,6 +306,7 @@ $themeColor: $primary;
   backdrop-filter: blur(3px);
   padding: $size-7;
   margin-bottom: $size-5;
+  margin-top: -$size-4;
   .filters {
     transform-origin: top left;
     position: absolute;
