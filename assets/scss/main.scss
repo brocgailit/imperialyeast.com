@@ -1,3 +1,16 @@
+:root {
+    --primary: #{$primary};
+    --crown: #{$crown};
+    --black: #{$black};
+    --grey: #{$grey};
+    --dark: #{$dark};
+    --link: #{$link};
+    --danger: #{$danger};
+    --info: #{$info};
+    --warning: #{$warning};
+    --success: #{$success};
+}
+
 .button {
     text-transform: uppercase;
     font-weight: $weight-bold;

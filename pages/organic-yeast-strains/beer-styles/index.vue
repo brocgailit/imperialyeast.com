@@ -18,8 +18,10 @@
     </nav>
     <article>
       <ul>
-        <li v-for="style of styles" :key="style.id">
-          <nuxt-link :to="'/organic-yeast-strains/beer-styles/' + style.slug">
+        <li v-for="style of styles" :key="style._id">
+          <nuxt-link
+            :to="'/organic-yeast-strains/beer-styles/' + style.name_slug"
+          >
             {{ style.name }}
           </nuxt-link>
         </li>
@@ -45,14 +47,14 @@ export default {
           '@type': 'ListItem',
           position: 1,
           name: 'Organic Yeast Strains',
-          item: `${this.website.canonical_url}/organic-yeast-strains`
+          item: `${this.website.canonicalURL}/organic-yeast-strains`
         },
         {
           '@type': 'ListItem',
           position: 2,
           name: 'Beer Styles',
           item: `${
-            this.website.canonical_url
+            this.website.canonicalURL
           }/organic-yeast-strains/beer-styles/`
         }
       ]
@@ -60,9 +62,11 @@ export default {
     return schema
   },
   async asyncData({ params, $axios }) {
-    const { data: styles } = await $axios.$get(
-      `items/beer_styles?filter[status]=published&fields=*.*`
-    )
+    const styles = await $axios.$get('/collections/get/beerStyles', {
+      params: {
+        simple: true
+      }
+    })
     return { styles }
   },
   head() {
@@ -70,7 +74,7 @@ export default {
       link: [
         {
           rel: 'canonical',
-          href: this.website.canonical_url + this.$route.path + '/'
+          href: this.website.canonicalURL + this.$route.path + '/'
         }
       ],
       title: `Beer Styles | ${this.website.name}`,
@@ -84,7 +88,7 @@ export default {
         {
           hid: 'open-graph-url',
           property: 'og:url',
-          content: `${this.website.canonical_url}${this.$route.path}`
+          content: `${this.website.canonicalURL}${this.$route.path}`
         },
         {
           hid: 'open-graph-type',
@@ -102,16 +106,16 @@ export default {
           property: 'og:title',
           content: 'Beer Styles'
         },
-        {
+        /* {
           hid: 'open-graph-image',
           property: 'og:image',
           content: this.website.default_sharing_image.data.url
-        },
-        {
+        }, */
+        /* {
           hid: 'open-graph-image-alt',
           property: 'og:image:alt',
           content: this.website.default_sharing_image.title
-        },
+        }, */
         {
           hid: 'twitter-card',
           property: 'twitter:card',
@@ -120,7 +124,7 @@ export default {
         {
           hid: 'twitter-site',
           property: 'twitter:site',
-          content: `@${this.website.twitter_handle}`
+          content: `@${this.website.twitter}`
         },
         {
           hid: 'twitter-description',
@@ -132,12 +136,12 @@ export default {
           hid: 'twitter-description',
           property: 'twitter:title',
           content: 'Beer Styles'
-        },
-        {
+        }
+        /* {
           hid: 'twitter-image',
           property: 'twitter:image',
           content: this.website.default_sharing_image.data.url
-        }
+        } */
       ]
     }
   }

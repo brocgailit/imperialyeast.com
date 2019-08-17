@@ -24,6 +24,7 @@
     "@nuxtjs/pwa": "^2.6.0",
     "@nuxtjs/sitemap": "^1.2.0",
     "@nuxtjs/style-resources": "^0.1.2",
+    "@tweenjs/tween.js": "^17.4.0",
     "buefy": "^0.8.2",
     "bulma": "^0.7.5",
     "cross-env": "^5.2.0",
