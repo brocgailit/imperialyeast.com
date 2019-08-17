@@ -108,14 +108,15 @@ export default {
 .howto-list {
   padding: $size-5;
   .howto-name {
-    font-weight: $weight-bold;
+    // font-weight: $weight-bold;
+    text-transform: uppercase;
     color: $grey;
     line-height: 1;
   }
   .howto-description {
-    margin-top: $size-5;
+    margin-top: $size-7;
     color: $black;
-    font-size: $size-4;
+    font-size: $size-5;
     line-height: 1.1;
     font-weight: $weight-bold;
   }
