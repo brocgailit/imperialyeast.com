@@ -18,7 +18,7 @@ import { page } from '~/assets/script/mixins'
 import CalculatorPitch from '~/components/CalculatorPitch.vue'
 import CalculatorGravityConversion from '~/components/CalculatorGravityConversion.vue'
 export default {
-  name: 'calculators',
+  name: 'Calculators',
   components: {
     CalculatorPitch,
     CalculatorGravityConversion
@@ -31,7 +31,8 @@ export default {
         'filter[name_slug]': slug,
         limit: 1,
         simple: true,
-        populate: 12
+        populate: 12,
+        rspc: 1
       }
     })
     return { page }

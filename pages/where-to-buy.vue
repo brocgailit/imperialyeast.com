@@ -35,7 +35,8 @@ export default {
     const locations = await $axios.$get(`collections/get/organizations`, {
       params: {
         'filter[map]': true,
-        simple: true
+        simple: true,
+        rspc: 1
       }
     })
     const [page] = await $axios.$get(`collections/get/pages`, {
@@ -43,7 +44,8 @@ export default {
         'filter[name_slug]': slug,
         limit: 1,
         simple: true,
-        populate: 12
+        populate: 12,
+        rspc: 1
       }
     })
     return { page, locations }

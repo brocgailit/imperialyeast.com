@@ -89,14 +89,16 @@ export default {
         simple: true,
         populate: 2,
         limit: 1,
-        'filter[name_slug]': category
+        'filter[name_slug]': category,
+        rspc: 1
       }
     })
     const strains = await $axios.$get('/collections/get/strains', {
       params: {
         simple: true,
         populate: 2,
-        'filter[type._id]': type._id
+        'filter[type._id]': type._id,
+        rspc: 1
       }
     })
     return { strains, type }

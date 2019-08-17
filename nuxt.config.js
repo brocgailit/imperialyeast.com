@@ -248,19 +248,21 @@ module.exports = {
     routes: async function() {
       const baseURL = process.env.COCKPIT_URL + '/api/collections/get/'
       const pages = await axios
-        .get(baseURL + 'pages', { params: { simple: true } }) // TODO: filter published
+        .get(baseURL + 'pages', { params: { simple: true, rspc: 1 } }) // TODO: filter published
         .then(res => res.data)
       const styles = await axios
-        .get(baseURL + 'beerStyles', { params: { simple: true } }) // TODO: filter published
+        .get(baseURL + 'beerStyles', { params: { simple: true, rspc: 1 } }) // TODO: filter published
         .then(res => res.data)
       const types = await axios
-        .get(baseURL + 'strainTypes', { params: { simple: true } })
+        .get(baseURL + 'strainTypes', { params: { simple: true, rspc: 1 } })
         .then(res => res.data)
       const strains = await axios
         .get(baseURL + 'strains', {
           params: {
             populate: 3,
-            simple: true
+            'filter[public]': true,
+            simple: true,
+            rspc: 1
           }
         })
         .then(res => res.data)

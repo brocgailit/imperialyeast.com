@@ -64,7 +64,8 @@ export default {
   async asyncData({ params, $axios }) {
     const styles = await $axios.$get('/collections/get/beerStyles', {
       params: {
-        simple: true
+        simple: true,
+        rspc: 1
       }
     })
     return { styles }

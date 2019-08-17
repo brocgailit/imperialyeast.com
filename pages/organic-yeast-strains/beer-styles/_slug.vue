@@ -126,7 +126,8 @@ export default {
         simple: true,
         limit: 1,
         populate: 5,
-        'filter[name_slug]': slug
+        'filter[name_slug]': slug,
+        rspc: 1
       }
     })
     return { style }

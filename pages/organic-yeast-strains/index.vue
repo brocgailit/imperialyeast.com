@@ -223,7 +223,8 @@ export default {
       params: {
         simple: true,
         'filter[public]': true,
-        populate: 2
+        populate: 2,
+        rspc: 1
       }
     })
     const [page] = await $axios.$get(`collections/get/pages`, {
@@ -231,7 +232,8 @@ export default {
         'filter[name_slug]': slug,
         limit: 1,
         simple: true,
-        populate: 12
+        populate: 12,
+        rspc: 1
       }
     })
     return { page, strains }

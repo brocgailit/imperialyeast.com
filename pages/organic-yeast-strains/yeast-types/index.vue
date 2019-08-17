@@ -43,7 +43,8 @@ export default {
     const types = await $axios.$get('/collections/get/strainTypes', {
       params: {
         simple: true,
-        populate: 2
+        populate: 2,
+        rspc: 1
       }
     })
     return { types }

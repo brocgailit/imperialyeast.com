@@ -21,7 +21,8 @@ export async function search(q, options = {}) {
       options,
       {
         simple: true,
-        'filter[public]': true
+        'filter[public]': true,
+        rspc: 1
       },
       strainFilters
     )
@@ -41,7 +42,8 @@ export async function search(q, options = {}) {
       options,
       {
         simple: true,
-        'filter[map]': true
+        'filter[map]': true,
+        rspc: 1
       },
       locationFilters
     )
@@ -54,7 +56,8 @@ export async function search(q, options = {}) {
       {},
       options,
       {
-        simple: true
+        simple: true,
+        rspc: 1
       },
       pageFilters
     )

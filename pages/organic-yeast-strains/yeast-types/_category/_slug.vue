@@ -361,7 +361,8 @@ export default {
         simple: true,
         populate: 2,
         limit: 1,
-        'filter[name_slug]': slug
+        'filter[name_slug]': slug,
+        rspc: 1
       }
     })
     return { strain }

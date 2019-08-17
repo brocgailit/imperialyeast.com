@@ -36,7 +36,8 @@ export const actions = {
     const website = await this.$axios.$get(`/singletons/get/website`, {
       params: {
         simple: true,
-        populate: 3
+        populate: 3,
+        rspc: 1
       }
     })
     commit('setWebsite', website)
@@ -47,7 +48,8 @@ export const actions = {
         simple: true,
         populate: 6, // include subs
         'filter[$or][0][_id]': website.mainMenu._id,
-        'filter[$or][1][_id]': website.footerMenu._id
+        'filter[$or][1][_id]': website.footerMenu._id,
+        rspc: 1
       }
     })
     commit('setMenu', {

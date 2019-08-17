@@ -54,7 +54,8 @@ export default {
         'filter[name_slug]': slug,
         limit: 1,
         simple: true,
-        populate: 12
+        populate: 12,
+        rspc: 1
       }
     })
     return { page }
