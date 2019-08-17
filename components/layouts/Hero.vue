@@ -77,8 +77,39 @@ export default {
 </script>
 
 <style lang="scss">
-.hero .hero-body .components {
-  max-width: $readability-width;
-  margin: 0 auto;
+.hero {
+  position: relative;
+  &.is-white {
+    .hero-body {
+      padding-bottom: 0;
+    }
+    & + .section {
+      padding-top: 0;
+    }
+  }
+  .hero-background {
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .hero-body {
+    .components {
+      max-width: $readability-width;
+      margin: 0 auto;
+    }
+    .actions {
+      display: flex;
+      justify-content: center;
+    }
+  }
 }
 </style>
