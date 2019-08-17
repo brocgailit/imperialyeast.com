@@ -248,21 +248,22 @@ module.exports = {
     routes: async function() {
       const baseURL = process.env.COCKPIT_URL + '/api/collections/get/'
       const pages = await axios
-        .get(baseURL + 'pages') // TODO: filter published
-        .then(res => res.data.data)
+        .get(baseURL + 'pages', { params: { simple: true } }) // TODO: filter published
+        .then(res => res.data)
       const styles = await axios
-        .get(baseURL + 'beerStyles') // TODO: filter published
-        .then(res => res.data.data)
+        .get(baseURL + 'beerStyles', { params: { simple: true } }) // TODO: filter published
+        .then(res => res.data)
       const types = await axios
-        .get(baseURL + 'strainTypes')
-        .then(res => res.data.data)
+        .get(baseURL + 'strainTypes', { params: { simple: true } })
+        .then(res => res.data)
       const strains = await axios
         .get(baseURL + 'strains', {
           params: {
-            populate: 3
+            populate: 3,
+            simple: true
           }
         })
-        .then(res => res.data.data)
+        .then(res => res.data)
       return [
         ...pages.map(page => `/${page.slug}`),
         ...styles.map(
@@ -273,7 +274,7 @@ module.exports = {
         ),
         ...strains.map(
           strain =>
-            `/organic-yeast-strains/yeast-types/${strain.category.name_slug}/` +
+            `/organic-yeast-strains/yeast-types/${strain.type.name_slug}/` +
             strain.name_slug
         )
       ]
