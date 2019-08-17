@@ -4,13 +4,12 @@
       <div v-if="notification" class="notification">
         <div v-html="notification.message" />
         <nuxt-link
-          v-for="action of notification.actions"
-          :key="action.id"
           class="button is-danger is-small"
-          :to="action.path + '/'"
+          :to="notification.action.path + '/'"
+          :title="notification.action.title"
           @click="clearNotification(notification)"
         >
-          {{ action.label }}
+          {{ notification.action.label }}
         </nuxt-link>
         <button
           class="delete has-background-grey"
@@ -87,7 +86,7 @@ export default {
       ','
     )
     this.notification = this.notifications.find(
-      n => !dismissed.some(d => +d === n.id)
+      n => !dismissed.some(d => +d === n._id)
     )
   },
   methods: {
@@ -95,7 +94,7 @@ export default {
       if (this.$cookies) {
         this.$cookies.set(
           'dismissedNotifications',
-          [notification.id],
+          [notification._id],
           60 * 60 * 24 * 30
         )
       }
