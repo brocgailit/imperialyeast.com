@@ -85,13 +85,13 @@ export default {
         display: flex;
         align-items: center;
         font-weight: $weight-bold;
-        font-size: $size-5;
+        font-size: $size-6;
         line-height: 1.1;
         padding-right: $size-7;
         &:before {
           content: 'Q';
           font-weight: $weight-bold;
-          font-size: $size-4;
+          font-size: $size-5;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -99,9 +99,9 @@ export default {
           background-color: $primary;
           color: $white;
           border-radius: 5px;
-          flex: 0 0 50px;
-          width: 50px;
-          height: 50px;
+          flex: 0 0 40px;
+          width: 40px;
+          height: 40px;
           margin: 0 $size-7;
         }
         &:after {
