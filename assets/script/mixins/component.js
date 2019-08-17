@@ -1,6 +1,6 @@
 import supportsWebP from 'supports-webp'
 
-export const component = {
+export default {
   data() {
     return {
       supportsWebP: true

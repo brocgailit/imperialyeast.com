@@ -1,7 +1,7 @@
 import { mapState } from 'vuex'
 import { COMPONENTS } from '~/assets/script/components'
 
-export const page = {
+export default {
   data() {
     return {
       COMPONENTS
@@ -100,7 +100,8 @@ export const page = {
     const options = {
       limit: 1,
       simple: true,
-      populate: 12
+      populate: 12,
+      rspc: 1
     }
     if (!slug) {
       options['filter[_id]'] = store.state.website.homepage._id

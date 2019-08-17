@@ -1,4 +1,4 @@
-export const scrollToAnchor = {
+export default {
   methods: {
     scrollToAnchor(anchor) {
       const a = document.querySelector(anchor)
