@@ -6,23 +6,13 @@
       :key="layout.id"
       :layout="layout"
     />
-    <section class="calculators-section">
-      <calculator-pitch />
-      <calculator-gravity-conversion />
-    </section>
   </div>
 </template>
 
 <script>
 import { page } from '~/assets/script/mixins'
-import CalculatorPitch from '~/components/CalculatorPitch.vue'
-import CalculatorGravityConversion from '~/components/CalculatorGravityConversion.vue'
 export default {
   name: 'Calculators',
-  components: {
-    CalculatorPitch,
-    CalculatorGravityConversion
-  },
   mixins: [page],
   async asyncData({ params, $axios }) {
     const slug = 'calculators'
@@ -39,13 +29,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.calculators-section {
-  padding-bottom: $size-1;
-
-  @include touch {
-    padding-bottom: 0;
-  }
-}
-</style>

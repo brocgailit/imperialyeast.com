@@ -4,7 +4,7 @@
       <h4>{{ mode === 'home' ? 'Homebrew' : 'Commercial' }}</h4>
     </div>
     <div class="panel-heading">
-      <h3>Yeast Pitch calculator</h3>
+      <h3>{{ layout.settings.title }}</h3>
       <b-field>
         <b-switch
           v-model="mode"
@@ -121,6 +121,8 @@
 </template>
 
 <script>
+import { component } from '~/assets/script/mixins'
+
 const showDecimals = {
   name: 'show-decimals',
   bind(el, binding) {
@@ -146,6 +148,7 @@ const showDecimals = {
 export default {
   name: 'CalculatorPitch',
   directives: { showDecimals },
+  mixins: [component],
   data() {
     return {
       mode: 'home',
@@ -258,6 +261,12 @@ export default {
         this.values.batchSize = Math.ceil(10 * this.values.batchSize * 31) / 10
       }
     }
+  },
+  created() {
+    const { batchSize, gravity, pitchRate } = this.layout.settings.defaults
+    if (batchSize) this.values.batchSize = batchSize
+    if (gravity) this.values.gravity = gravity
+    if (pitchRate) this.values.pitchRate = pitchRate
   }
 }
 </script>

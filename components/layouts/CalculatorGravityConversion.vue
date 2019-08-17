@@ -1,7 +1,7 @@
 <template>
   <div class="panel">
     <div class="panel-heading">
-      <h3>Plato and Specific Gravity Conversion</h3>
+      <h3>{{ layout.settings.title }}</h3>
     </div>
     <div class="panel-block">
       <form @submit.prevent>
@@ -41,8 +41,10 @@
 </template>
 
 <script>
+import { component } from '~/assets/script/mixins'
 export default {
   name: 'CalculatorGravityConversion',
+  mixins: [component],
   data() {
     return {
       values: {
@@ -70,15 +72,10 @@ export default {
         this.values.plato = this.$options.filters.sgToPlato(sg)
       }
     }
+  },
+  created() {
+    this.plato = this.layout.settings.default
   }
-  /* watch: {
-    plato(p) {
-      this.specificGravity = this.$options.filters.platoToSG(p)
-    },
-    specificGravity(sg) {
-      this.plato = this.$options.filters.sgToPlato(sg)
-    }
-  } */
 }
 </script>
 

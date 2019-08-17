@@ -16,6 +16,8 @@ import ContactPerson from '~/components/layouts/ContactPerson.vue'
 import HowTo from '~/components/layouts/HowTo.vue'
 import Downloads from '~/components/layouts/Downloads.vue'
 import FAQList from '~/components/layouts/FAQList.vue'
+import CalculatorGravityConversion from '~/components/layouts/CalculatorGravityConversion.vue'
+import CalculatorPitch from '~/components/layouts/CalculatorPitch.vue'
 
 const COMPONENTS = [
   { name: 'image', ref: Image },
@@ -35,7 +37,9 @@ const COMPONENTS = [
   { name: 'personContact', ref: ContactPerson },
   { name: 'howto', ref: HowTo },
   { name: 'downloads', ref: Downloads },
-  { name: 'faq', ref: FAQList }
+  { name: 'faq', ref: FAQList },
+  { name: 'gravityConversion', ref: CalculatorGravityConversion },
+  { name: 'pitchCalculator', ref: CalculatorPitch }
 ]
 
 export { COMPONENTS }
