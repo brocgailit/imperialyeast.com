@@ -50,3 +50,9 @@ abbr {
 .title, .subtitle {
     text-align: center;
 }
+
+.title + .title {
+    margin-top: -1.25rem;
+    font-family: $family-primary;
+    font-size: 1.5em;
+}

@@ -42,7 +42,7 @@ export default {
 <style lang="scss">
 @import '~buefy/src/scss/components/_tooltip';
 .strain-list {
-  padding: 0 $size-4;
+  padding: 0 $size-6;
   break-inside: avoid;
   page-break-inside: avoid;
   .strain {

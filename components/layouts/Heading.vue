@@ -32,7 +32,7 @@ h2 {
   font-size: $size-2;
 }
 h3 {
-  font-size: $size-3;
+  font-size: $size-3 * 1.25;
 }
 h4 {
   font-size: $size-4;

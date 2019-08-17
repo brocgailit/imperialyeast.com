@@ -482,16 +482,16 @@ export default {
       line-height: 1.1;
       h2 {
         font-weight: $weight-black;
-        font-size: $size-4;
+        font-size: $size-5;
         text-transform: uppercase;
       }
       h1 {
         font-weight: $weight-black;
-        font-size: $size-1;
+        font-size: $size-2;
       }
       @include mobile {
         h1 {
-          font-size: $size-3;
+          font-size: $size-4;
         }
       }
     }
@@ -507,7 +507,7 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: $size-2;
+      font-size: $size-3;
       @include brand-font;
       border: 5px solid $white;
     }

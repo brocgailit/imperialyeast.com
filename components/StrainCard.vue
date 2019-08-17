@@ -86,7 +86,7 @@ export default {
 .strain-card {
   .strain-name {
     font-weight: $weight-bold;
-    font-size: $size-4;
+    font-size: $size-5;
     a {
       color: currentColor;
     }

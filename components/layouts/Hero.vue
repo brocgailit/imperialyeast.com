@@ -109,6 +109,15 @@ export default {
       display: flex;
       justify-content: center;
     }
+
+    @include mobile {
+      .title {
+        font-size: $size-2;
+      }
+      .subtitle {
+        font-size: $size-6;
+      }
+    }
   }
 }
 </style>
