@@ -1,15 +1,11 @@
 export const state = () => ({
   notifications: [],
-  pages: [],
   menu: {},
   website: {},
   showNavigation: false
 })
 
 export const mutations = {
-  setPages: (state, pages) => {
-    state.pages = pages
-  },
   setNotifications: (state, notifications) => {
     state.notifications = notifications
   },
@@ -33,23 +29,20 @@ export const mutations = {
 export const actions = {
   async nuxtServerInit({ commit }, { app }) {
     // get website settings
-    const website = await this.$axios.$get(`/singletons/get/website`, {
-      params: {
-        simple: true,
-        populate: 3,
-        rspc: 1
-      }
+    const website = await this.$axios.$post(`/singletons/get/website`, {
+      simple: true,
+      populate: 3,
+      rspc: 1
     })
     commit('setWebsite', website)
 
     // get main menu
-    const menus = await this.$axios.$get(`/collections/get/menus`, {
-      params: {
-        simple: true,
-        populate: 6, // include subs
-        'filter[$or][0][_id]': website.mainMenu._id,
-        'filter[$or][1][_id]': website.footerMenu._id,
-        rspc: 1
+    const menus = await this.$axios.$post(`/collections/get/menus`, {
+      simple: true,
+      populate: 6, // include subs
+      rspc: 1,
+      filter: {
+        $or: [{ _id: website.mainMenu._id }, { _id: website.mainMenu._id }]
       }
     })
     commit('setMenu', {
@@ -58,14 +51,14 @@ export const actions = {
     })
 
     // get notifications
-    /* const { data: notifications } = await this.$axios.$get(
-      `items/notifications?fields=*.*,actions.*.*`
+    const notifications = await this.$axios.$post(
+      `/collections/get/notifications`,
+      {
+        simple: true,
+        rspc: 1
+      }
     )
-    commit('setNotifications', notifications) */
-
-    // get pages
-    /* const { data: pages } = await this.$axios.$get('items/pages')
-    commit('setPages', pages) */
+    commit('setNotifications', notifications)
   },
   clearNotification({ commit }, notification) {
     commit('clearNotification', notification)
