@@ -24,7 +24,7 @@
         <h2 class="subtitle">
           {{ layout.settings.subtitle }}
         </h2>
-        <div class="components">
+        <div v-if="layout.children" class="components">
           <component
             :is="COMPONENTS.find(c => c.name === layout.component).ref"
             v-for="(layout, l) of layout.children"
@@ -80,10 +80,7 @@ export default {
 .hero {
   position: relative;
   &.is-white {
-    .hero-body {
-      padding-bottom: 0;
-    }
-    & + .section {
+    & + * {
       padding-top: 0;
     }
   }
@@ -103,8 +100,10 @@ export default {
   }
   .hero-body {
     .components {
-      max-width: $readability-width;
       margin: 0 auto;
+      & + * {
+        margin-top: $size-5;
+      }
     }
     .actions {
       display: flex;
