@@ -2,7 +2,7 @@
   <div class="strain-list">
     <slot />
     <transition-group name="flip-list" tag="ul">
-      <li v-for="strain of strains" :key="strain.name_slug" class="strain">
+      <li v-for="strain of strains" :key="strain._id" class="strain">
         <strain-card :strain="strain" />
       </li>
     </transition-group>
