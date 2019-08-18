@@ -148,16 +148,21 @@ export default {
     }
     .strain-type {
       cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       flex: 1 0 calc(50% - #{$size-7 * 2});
       margin: $size-7;
       padding: $size-3 $size-5;
       color: $white;
       transition: transform 150ms ease-in-out;
       h2 {
-        font-size: $size-2;
+        font-size: $size-3;
         font-weight: $weight-black;
         letter-spacing: 0.1em;
         text-transform: uppercase;
+        line-height: 1.1;
         a {
           color: $white;
         }
