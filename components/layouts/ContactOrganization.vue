@@ -61,7 +61,7 @@
 
           <a class="contact-email" href="mailto:">{{ point.value.email }}</a>
 
-          <dl class="contact-features">
+          <!-- <dl class="contact-features">
             <dt class="contact-feature-title">Languages:</dt>
             <dd class="contact-feature">
               {{ point.value.availableLanguage.join(', ') }}
@@ -73,7 +73,7 @@
             <dd class="contact-feature">
               {{ point.value.hearingImpairedSupported ? 'YES' : 'NO' }}
             </dd>
-          </dl>
+          </dl> -->
         </div>
       </div>
     </div>
@@ -217,6 +217,7 @@ export default {
 <style lang="scss">
 .organization-contact {
   .contact-address {
+    text-align: center;
     font-style: normal;
     font-size: $size-6;
     .title {
@@ -224,8 +225,9 @@ export default {
     }
   }
   .contact-hours {
-    margin: $size-5 0;
+    margin: $size-5 auto;
     .title {
+      text-align: center;
       font-size: $size-5 * 1.2;
       padding-bottom: $size-7;
     }
@@ -237,6 +239,7 @@ export default {
 
   .contact-point {
     margin-top: $size-5;
+    text-align: center;
     .title {
       font-size: $size-5 * 1.2;
       text-transform: capitalize;
@@ -245,8 +248,8 @@ export default {
   }
 
   .contact-profiles {
-    margin-top: $size-5;
-    display: inline-block;
+    margin: $size-5 auto;
+    display: table;
     .contact-profile {
       display: inline;
       margin: $size-7;
