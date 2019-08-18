@@ -165,8 +165,8 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: $size-2;
-        height: $size-2;
+        width: $size-3;
+        height: $size-3;
         background-color: $light;
         border-radius: 100%;
         color: $dark;
