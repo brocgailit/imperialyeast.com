@@ -25,9 +25,19 @@
       <header>
         <h2>{{ style.category.name }}</h2>
         <h1>{{ style.name }}</h1>
-        <dl class="bjcp-code">
-          <dt><abbr title="Beer Judge Certification Program">BJCP</abbr></dt>
-          <dd>{{ style.bjcp || 'NA' }}</dd>
+        <dl v-if="style.bjcp" class="bjcp-code">
+          <dt><abbr title="Beer Judge Certification Program">BJCP</abbr>:</dt>
+          <dd>
+            <a
+              v-for="code of style.bjcp"
+              :key="code"
+              :href="code | bjcpLink"
+              target="_blank"
+              title="View style on BJCP.org"
+            >
+              {{ code }}
+            </a>
+          </dd>
         </dl>
       </header>
       <div class="style-description" v-html="style.description" />
@@ -74,11 +84,7 @@ export default {
   computed: {
     ...mapState({
       website: state => state.website
-    }),
-    strains() {
-      return this.style.yeast ? this.style.yeast.map(s => s.value) : []
-      // return []
-    }
+    })
   },
   filters: {
     suitability(value) {
@@ -86,6 +92,10 @@ export default {
       if (value === 2) return 'Good Choice'
       if (value === 1) return 'OK, special considerations'
       return 'Bad choice'
+    },
+    bjcpLink(code) {
+      const [parent] = code.match(/(\d+)/)
+      return `http://www.bjcp.org/style/2015/${parent}/${code}/`
     }
   },
   jsonld() {
@@ -121,16 +131,40 @@ export default {
   },
   async asyncData({ params, $axios }) {
     const { slug } = params
-    const [style] = await $axios.$get('/collections/get/beerStyles', {
-      params: {
-        simple: true,
-        limit: 1,
-        populate: 5,
-        'filter[name_slug]': slug,
-        rspc: 1
-      }
+    const [style] = await $axios.$post('/collections/get/beerStyles', {
+      simple: true,
+      limit: 1,
+      populate: 5,
+      filter: {
+        name_slug: slug
+      },
+      rspc: 1
     })
-    return { style }
+
+    const allStrains = await $axios.$post('/collections/get/strains', {
+      simple: true,
+      populate: 2,
+      rspc: 1
+    })
+
+    const suitability = (key, suitability) => {
+      return allStrains
+        .filter(
+          strain => (strain[key] || []).findIndex(s => s._id === style._id) > -1
+        )
+        .map(strain => ({ strain, suitability }))
+    }
+
+    const strains = [
+      ...suitability('styleBest', 3),
+      ...suitability('styleBetter', 2),
+      ...suitability('styleGood', 1)
+    ]
+
+    return {
+      style,
+      strains
+    }
   },
   head() {
     return {

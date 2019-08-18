@@ -166,11 +166,14 @@
         <div v-if="styles.length">
           <h3>Recommended Beer Styles</h3>
           <ul>
-            <li v-for="style of styles" :key="style.id">
+            <li v-for="style of styles" :key="style.style.id">
               <nuxt-link
-                :to="'/organic-yeast-strains/beer-styles/' + style.name_slug"
-                >{{ style.name }}</nuxt-link
+                :to="
+                  '/organic-yeast-strains/beer-styles/' + style.style.name_slug
+                "
               >
+                {{ style.style.name }} {{ style.suitability }}
+              </nuxt-link>
             </li>
           </ul>
         </div>
@@ -270,14 +273,23 @@ export default {
       website: state => state.website
     }),
     styles() {
-      return this.strain.beer_styles
-        ? this.strain.beer_styles.map(s => s.beer_styles_id)
-        : []
+      return [
+        ...(this.strain.styleBest || []).map(style => ({
+          style,
+          suitability: 3
+        })),
+        ...(this.strain.styleBetter || []).map(style => ({
+          style,
+          suitability: 2
+        })),
+        ...(this.strain.styleGood || []).map(style => ({
+          style,
+          suitability: 1
+        }))
+      ]
     },
     similar() {
-      return this.strain.similar_strains
-        ? this.strain.similar_strains.map(s => s.similar_strains_id)
-        : []
+      return this.strain.similar ? this.strain.similar : []
     }
   },
   jsonld() {
@@ -356,13 +368,13 @@ export default {
   },
   async asyncData({ params, $axios }) {
     const { slug } = params
-    const [strain] = await $axios.$get('/collections/get/strains', {
-      params: {
-        simple: true,
-        populate: 2,
-        limit: 1,
-        'filter[name_slug]': slug,
-        rspc: 1
+    const [strain] = await $axios.$post('/collections/get/strains', {
+      simple: true,
+      populate: 2,
+      limit: 1,
+      rspc: 1,
+      filter: {
+        name_slug: slug
       }
     })
     return { strain }
