@@ -245,10 +245,11 @@ module.exports = {
    ** Generate options
    */
   generate: {
+    interval: 100,
     routes: async function() {
       const baseURL = process.env.COCKPIT_URL + '/api/collections/get/'
       const pages = await axios
-        .get(baseURL + 'pages', { params: { simple: true, rspc: 1 } }) // TODO: filter published
+        .get(baseURL + 'pages', { params: { simple: true, rspc: 1 } })
         .then(res => res.data)
       const styles = await axios
         .get(baseURL + 'beerStyles', { params: { simple: true, rspc: 1 } }) // TODO: filter published
@@ -259,7 +260,6 @@ module.exports = {
       const strains = await axios
         .get(baseURL + 'strains', {
           params: {
-            populate: 3,
             'filter[public]': true,
             simple: true,
             rspc: 1
