@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container strain-detail-page">
     <nav class="breadcrumb is-centered is-small" aria-label="breadcrumbs">
       <ul>
         <li>
@@ -41,7 +41,7 @@
         </li>
       </ul>
     </nav>
-    <div class="strain-detail-page">
+    <div class="strain-detail-main">
       <section>
         <header class="container">
           <h2>
@@ -135,6 +135,11 @@
               </b-tag>
             </b-taglist>
           </div>
+          <strain-beer-styles
+            v-if="styles.length"
+            :styles="styles"
+            title="Recommended Beer Styles"
+          />
         </div>
       </section>
       <aside>
@@ -160,20 +165,6 @@
             </li>
             <li v-else>
               Commercial Strain Only
-            </li>
-          </ul>
-        </div>
-        <div v-if="styles.length">
-          <h3>Recommended Beer Styles</h3>
-          <ul>
-            <li v-for="style of styles" :key="style.style.id">
-              <nuxt-link
-                :to="
-                  '/organic-yeast-strains/beer-styles/' + style.style.name_slug
-                "
-              >
-                {{ style.style.name }} {{ style.suitability }}
-              </nuxt-link>
             </li>
           </ul>
         </div>
@@ -253,7 +244,11 @@
 
 <script>
 import { mapState } from 'vuex'
+import StrainBeerStyles from '~/components/StrainBeerStyles.vue'
 export default {
+  components: {
+    StrainBeerStyles
+  },
   filters: {
     celsius: f => Math.round(((f - 32) * 5) / 9),
     flocculation(val) {
@@ -464,177 +459,179 @@ export default {
 @import '~buefy/src/scss/components/_tag';
 
 .strain-detail-page {
-  display: flex;
   padding: 0 $size-7 $size-1;
-  aside {
-    padding: $size-5;
-    margin: 0 $size-5;
-    flex: 0 0 350px;
-    h3 {
-      letter-spacing: 0.1em;
-      font-weight: $weight-bold;
-      text-transform: uppercase;
-      font-size: $size-7;
-    }
-    > *:not(:last-child) {
-      margin-bottom: $size-5;
-    }
-
-    .strain-availability {
-      picture {
-        display: block;
-        text-align: center;
-      }
-    }
-  }
-  section {
-    flex-grow: 1;
-    header {
-      text-align: center;
-      line-height: 1.1;
-      h2 {
-        font-weight: $weight-black;
-        font-size: $size-5;
+  .strain-detail-main {
+    display: flex;
+    aside {
+      padding: $size-5;
+      margin: 0 $size-5;
+      flex: 0 0 350px;
+      h3 {
+        letter-spacing: 0.1em;
+        font-weight: $weight-bold;
         text-transform: uppercase;
+        font-size: $size-7;
       }
-      h1 {
-        font-weight: $weight-black;
-        font-size: $size-2;
-      }
-      @include mobile {
-        h1 {
-          font-size: $size-4;
-        }
-      }
-    }
-
-    .strain-code {
-      $size: 100px;
-      background-color: $black;
-      width: $size;
-      height: $size;
-      margin: 0 auto;
-      border-radius: 100%;
-      color: $white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: $size-3;
-      @include brand-font;
-      border: 5px solid $white;
-    }
-
-    .strain-description-short .strain-description-full {
-      max-width: $readability-width;
-      margin: 0 auto;
-    }
-    .strain-description-short {
-      font-size: $size-5;
-      text-align: center;
-      margin: $size-2 0;
-    }
-    .strain-description-full {
-      font-size: $size-6;
-      p {
+      > *:not(:last-child) {
         margin-bottom: $size-5;
       }
-    }
 
-    .strain-instock {
-      text-align: center;
-      font-weight: $weight-bold;
-      margin-top: $size-5;
-      font-size: $size-5;
+      .strain-availability {
+        picture {
+          display: block;
+          text-align: center;
+        }
+      }
     }
-
-    .strain-profiles-container {
-      margin-top: $size-3;
-      h3 {
-        font-weight: $weight-bold;
+    section {
+      flex-grow: 1;
+      header {
         text-align: center;
-        text-transform: uppercase;
-        margin-bottom: $size-7;
-        line-height: 1;
-      }
-      .strain-profiles {
-        justify-content: center;
-      }
-    }
-
-    .strain-species {
-      margin-top: $size-3;
-      text-align: center;
-      dt {
-        font-weight: $weight-bold;
-        text-align: center;
-        text-transform: uppercase;
-      }
-      dd {
-        font-size: $size-6;
-        font-style: italic;
-      }
-    }
-    .strain-details {
-      margin: $size-5 0;
-      .degrees {
-        &:before {
-          display: inline-block;
-          content: '°';
-          font-size: 90%;
-          font-family: $family-primary;
-          font-weight: $weight-bold;
-          vertical-align: top;
-          padding: 1px 0 0 1px;
-        }
-      }
-      small .degrees:before {
-        font-size: 85%;
-        padding-top: 2px;
-      }
-      .strain-detail {
-        display: inline-block;
-        text-transform: uppercase;
-        color: $grey;
-        @include brand-font;
-        .strain-detail-name,
-        .strain-detail-info {
-          display: inline;
-        }
-
-        &:not(:last-child):after {
-          content: '// ';
-          margin: 0 4px;
-        }
-        @include tablet {
+        line-height: 1.1;
+        h2 {
+          font-weight: $weight-black;
           font-size: $size-5;
+          text-transform: uppercase;
+        }
+        h1 {
+          font-weight: $weight-black;
+          font-size: $size-2;
+        }
+        @include mobile {
+          h1 {
+            font-size: $size-4;
+          }
+        }
+      }
+
+      .strain-code {
+        $size: 100px;
+        background-color: $black;
+        width: $size;
+        height: $size;
+        margin: 0 auto;
+        border-radius: 100%;
+        color: $white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: $size-3;
+        @include brand-font;
+        border: 5px solid $white;
+      }
+
+      .strain-description-short .strain-description-full {
+        max-width: $readability-width;
+        margin: 0 auto;
+      }
+      .strain-description-short {
+        font-size: $size-5;
+        text-align: center;
+        margin: $size-2 0;
+      }
+      .strain-description-full {
+        font-size: $size-6;
+        p {
+          margin-bottom: $size-5;
+        }
+      }
+
+      .strain-instock {
+        text-align: center;
+        font-weight: $weight-bold;
+        margin-top: $size-5;
+        font-size: $size-5;
+      }
+
+      .strain-profiles-container {
+        margin-top: $size-3;
+        h3 {
+          font-weight: $weight-bold;
+          text-align: center;
+          text-transform: uppercase;
+          margin-bottom: $size-7;
+          line-height: 1;
+        }
+        .strain-profiles {
+          justify-content: center;
+        }
+      }
+
+      .strain-species {
+        margin-top: $size-3;
+        text-align: center;
+        dt {
+          font-weight: $weight-bold;
+          text-align: center;
+          text-transform: uppercase;
+        }
+        dd {
+          font-size: $size-6;
+          font-style: italic;
+        }
+      }
+      .strain-details {
+        margin: $size-5 0;
+        .degrees {
+          &:before {
+            display: inline-block;
+            content: '°';
+            font-size: 90%;
+            font-family: $family-primary;
+            font-weight: $weight-bold;
+            vertical-align: top;
+            padding: 1px 0 0 1px;
+          }
+        }
+        small .degrees:before {
+          font-size: 85%;
+          padding-top: 2px;
+        }
+        .strain-detail {
+          display: inline-block;
+          text-transform: uppercase;
+          color: $grey;
+          @include brand-font;
+          .strain-detail-name,
+          .strain-detail-info {
+            display: inline;
+          }
+
+          &:not(:last-child):after {
+            content: '// ';
+            margin: 0 4px;
+          }
+          @include tablet {
+            font-size: $size-5;
+          }
         }
       }
     }
-  }
 
-  @include mobile {
-    flex-wrap: wrap;
-    padding: 0 $size-7;
-    aside {
-      margin: $size-7 0;
-      flex: 1 0 100%;
-    }
-  }
-
-  .social-sharing-container {
-    h3 {
-      text-transform: uppercase;
-      font-weight: $weight-bold;
-      margin-bottom: 4px;
-    }
-    .social-sharing-buttons > * {
-      margin: $size-7 / 2;
-      cursor: pointer;
-      &:first-child {
-        margin-left: 0;
+    @include mobile {
+      flex-wrap: wrap;
+      padding: 0 $size-7;
+      aside {
+        margin: $size-7 0;
+        flex: 1 0 100%;
       }
-      &:last-child {
-        margin-right: 0;
+    }
+
+    .social-sharing-container {
+      h3 {
+        text-transform: uppercase;
+        font-weight: $weight-bold;
+        margin-bottom: 4px;
+      }
+      .social-sharing-buttons > * {
+        margin: $size-7 / 2;
+        cursor: pointer;
+        &:first-child {
+          margin-left: 0;
+        }
+        &:last-child {
+          margin-right: 0;
+        }
       }
     }
   }
