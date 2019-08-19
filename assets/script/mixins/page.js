@@ -110,9 +110,8 @@ export default {
     } else {
       options.filter.name_slug = slug
     }
-    const [page] = await $axios.$post(`collections/get/pages`, {
-      params: options
-    })
+
+    const [page] = await $axios.$post(`collections/get/pages`, options)
 
     return { page }
   }
