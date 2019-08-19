@@ -465,7 +465,7 @@ export default {
 
 .strain-detail-page {
   display: flex;
-  padding-bottom: $size-1;
+  padding: 0 $size-7 $size-1;
   aside {
     padding: $size-5;
     margin: 0 $size-5;
