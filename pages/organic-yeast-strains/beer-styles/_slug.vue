@@ -131,11 +131,11 @@ export default {
   },
   async asyncData({ params, $axios, payload }) {
     const { slug } = params
-    let style;
+    let style
     if (payload) {
       style = payload
     } else {
-      [style] = await $axios.$post('/collections/get/beerStyles', {
+      style = (await $axios.$post('/collections/get/beerStyles', {
         simple: true,
         limit: 1,
         populate: 5,
@@ -143,7 +143,7 @@ export default {
           name_slug: slug
         },
         rspc: 1
-      })
+      }))[0]
     }
 
     const allStrains = await $axios.$post('/collections/get/strains', {

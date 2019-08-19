@@ -83,11 +83,11 @@ export default {
   },
   async asyncData({ params, $axios, payload }) {
     let type
-    if(payload) {
+    if (payload) {
       type = payload
     } else {
       const { category } = params
-      [type] = await $axios.$get('/collections/get/strainTypes', {
+      type = (await $axios.$get('/collections/get/strainTypes', {
         params: {
           simple: true,
           populate: 2,
@@ -95,7 +95,7 @@ export default {
           'filter[name_slug]': category,
           rspc: 1
         }
-      })
+      }))[0]
     }
     const strains = await $axios.$get('/collections/get/strains', {
       params: {
