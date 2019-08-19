@@ -246,13 +246,14 @@ module.exports = {
    */
   generate: {
     interval: 100,
-    routes: async function() {
+    routes: async function () {
       const baseURL = process.env.COCKPIT_URL + '/api/collections/get/'
+      const strainsPath = '/organic-yeast-strains/'
       const pages = await axios
-        .get(baseURL + 'pages', { params: { simple: true, rspc: 1 } })
+        .get(baseURL + 'pages', { params: { simple: true, rspc: 1, populate: 12 } })
         .then(res => res.data)
       const styles = await axios
-        .get(baseURL + 'beerStyles', { params: { simple: true, rspc: 1 } }) // TODO: filter published
+        .get(baseURL + 'beerStyles', { params: { simple: true, rspc: 1, populate: 5 } }) // TODO: filter published
         .then(res => res.data)
       const types = await axios
         .get(baseURL + 'strainTypes', { params: { simple: true, rspc: 1 } })
@@ -260,6 +261,7 @@ module.exports = {
       const strains = await axios
         .get(baseURL + 'strains', {
           params: {
+            populate: 3,
             'filter[public]': true,
             simple: true,
             rspc: 1
@@ -267,17 +269,27 @@ module.exports = {
         })
         .then(res => res.data)
       return [
-        ...pages.map(page => `/${page.slug}`),
+        ...pages.map(page => ({
+          route: `/${page.slug}`,
+          payload: page
+        })),
         ...styles.map(
-          style => `/organic-yeast-strains/beer-styles/${style.name_slug}`
+          style => ({
+            route: `${strainsPath}beer-styles/${style.name_slug}`,
+            payload: style
+          })
         ),
         ...types.map(
-          type => `/organic-yeast-strains/yeast-types/${type.name_slug}`
+          type => ({
+            route: `${strainsPath}yeast-types/${type.name_slug}`,
+            payload: type
+          })
         ),
         ...strains.map(
-          strain =>
-            `/organic-yeast-strains/yeast-types/${strain.type.name_slug}/` +
-            strain.name_slug
+          strain => ({
+            route: `${strainsPath}yeast-types/${strain.type.name_slug}/` + strain.name_slug,
+            payload: strain
+          })
         )
       ]
     }

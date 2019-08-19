@@ -95,20 +95,22 @@ export default {
       ]
     }
   },
-  async asyncData({ params, $axios, store }) {
+  async asyncData({ params, $axios, store, payload }) {
+    if (payload) return { page: payload }
     const { slug } = params
     const options = {
       limit: 1,
       simple: true,
       populate: 12,
-      rspc: 1
+      rspc: 1,
+      filter: {}
     }
     if (!slug) {
-      options['filter[_id]'] = store.state.website.homepage._id
+      options.filter._id = store.state.website.homepage._id
     } else {
-      options['filter[name_slug]'] = slug
+      options.filter.name_slug = slug
     }
-    const [page] = await $axios.$get(`collections/get/pages`, {
+    const [page] = await $axios.$post(`collections/get/pages`, {
       params: options
     })
 

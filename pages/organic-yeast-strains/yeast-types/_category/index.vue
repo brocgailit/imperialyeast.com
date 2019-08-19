@@ -81,18 +81,22 @@ export default {
     }
     return schema
   },
-  async asyncData({ params, $axios }) {
-    const { category } = params
-
-    const [type] = await $axios.$get('/collections/get/strainTypes', {
-      params: {
-        simple: true,
-        populate: 2,
-        limit: 1,
-        'filter[name_slug]': category,
-        rspc: 1
-      }
-    })
+  async asyncData({ params, $axios, payload }) {
+    let type
+    if(payload) {
+      type = payload
+    } else {
+      const { category } = params
+      [type] = await $axios.$get('/collections/get/strainTypes', {
+        params: {
+          simple: true,
+          populate: 2,
+          limit: 1,
+          'filter[name_slug]': category,
+          rspc: 1
+        }
+      })
+    }
     const strains = await $axios.$get('/collections/get/strains', {
       params: {
         simple: true,

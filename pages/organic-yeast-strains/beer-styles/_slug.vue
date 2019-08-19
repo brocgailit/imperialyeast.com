@@ -129,17 +129,22 @@ export default {
     }
     return schema
   },
-  async asyncData({ params, $axios }) {
+  async asyncData({ params, $axios, payload }) {
     const { slug } = params
-    const [style] = await $axios.$post('/collections/get/beerStyles', {
-      simple: true,
-      limit: 1,
-      populate: 5,
-      filter: {
-        name_slug: slug
-      },
-      rspc: 1
-    })
+    let style;
+    if (payload) {
+      style = payload
+    } else {
+      [style] = await $axios.$post('/collections/get/beerStyles', {
+        simple: true,
+        limit: 1,
+        populate: 5,
+        filter: {
+          name_slug: slug
+        },
+        rspc: 1
+      })
+    }
 
     const allStrains = await $axios.$post('/collections/get/strains', {
       simple: true,

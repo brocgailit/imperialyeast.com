@@ -361,8 +361,9 @@ export default {
 
     return [breadcrumb, product]
   },
-  async asyncData({ params, $axios }) {
+  async asyncData({ params, $axios, payload }) {
     const { slug } = params
+    if (payload) return { strain: payload }
     const [strain] = await $axios.$post('/collections/get/strains', {
       simple: true,
       populate: 2,
