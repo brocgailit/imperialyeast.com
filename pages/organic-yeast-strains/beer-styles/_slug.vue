@@ -131,9 +131,10 @@ export default {
   },
   async asyncData({ params, $axios, payload }) {
     const { slug } = params
-    let style
+    let style, allStrains
     if (payload) {
-      style = payload
+      style = payload.style
+      allStrains = payload.strains
     } else {
       style = (await $axios.$post('/collections/get/beerStyles', {
         simple: true,
@@ -144,13 +145,12 @@ export default {
         },
         rspc: 1
       }))[0]
+      allStrains = await $axios.$post('/collections/get/strains', {
+        simple: true,
+        populate: 2,
+        rspc: 1
+      })
     }
-
-    const allStrains = await $axios.$post('/collections/get/strains', {
-      simple: true,
-      populate: 2,
-      rspc: 1
-    })
 
     const suitability = (key, suitability) => {
       return allStrains

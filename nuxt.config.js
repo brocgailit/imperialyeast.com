@@ -245,7 +245,8 @@ module.exports = {
    ** Generate options
    */
   generate: {
-    interval: 100,
+    /* interval: 25,
+    concurrency: 100, */
     routes: async function () {
       const baseURL = process.env.COCKPIT_URL + '/api/collections/get/'
       const strainsPath = '/organic-yeast-strains/'
@@ -276,7 +277,7 @@ module.exports = {
         ...styles.map(
           style => ({
             route: `${strainsPath}beer-styles/${style.name_slug}`,
-            payload: style
+            payload: {style, strains}
           })
         ),
         ...types.map(
