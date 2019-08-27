@@ -1,6 +1,6 @@
 <template>
   <footer class="page-footer">
-    <nav>
+    <nav v-if="menu">
       <ul>
         <li v-for="link of menu.items" :key="link.value.page._id">
           <nuxt-link

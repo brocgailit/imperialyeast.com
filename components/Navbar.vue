@@ -12,7 +12,7 @@
       :class="{ 'is-open': isOpen, 'search-active': showSearch }"
       @click="isOpen = false"
     >
-      <ul id="menu">
+      <ul v-if="menus.main" id="menu">
         <li
           v-for="(item, i) of menus.main.items"
           :key="item.value.page._id + i"
