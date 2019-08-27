@@ -1,8 +1,8 @@
 <template>
   <ul class="downloads">
     <li
-      v-for="attachment of layout.settings.attachments"
-      :key="attachment.value.file._id"
+      v-for="(attachment, a) of layout.settings.attachments"
+      :key="a"
       class="download-attachment"
     >
       <a
