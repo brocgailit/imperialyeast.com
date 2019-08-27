@@ -96,7 +96,9 @@ export default {
     }
   },
   async asyncData({ params, $axios, store, payload }) {
-    if (payload) return { page: payload }
+    if (payload) {
+      return { page: payload }
+    }
     const { slug } = params
     const options = {
       limit: 1,

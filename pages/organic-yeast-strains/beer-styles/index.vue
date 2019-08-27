@@ -62,10 +62,18 @@ export default {
     return schema
   },
   async asyncData({ params, $axios }) {
-    const styles = await $axios.$get('/collections/get/beerStyles', {
-      params: {
-        simple: true,
-        rspc: 1
+    const styles = await $axios.$post('/collections/get/beerStyles', {
+      simple: true,
+      populate: 1,
+      rspc: 1,
+      fields: {
+        name: 1,
+        alternativeNames: 1,
+        description: 1,
+        bjcp: 1,
+        name_slug: 1,
+        _id: 1,
+        category: 1
       }
     })
     return { styles }

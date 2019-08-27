@@ -246,31 +246,64 @@ module.exports = {
    */
   generate: {
     interval: 1,
-    concurrency: 25,
+    concurrency: 20,
     routes: async function() {
       const baseURL = process.env.COCKPIT_URL + '/api/collections/get/'
       const strainsPath = '/organic-yeast-strains/'
       const pages = await axios
-        .get(baseURL + 'pages', {
-          params: { simple: true, populate: 12, rspc: 1 }
-        })
+        .post(baseURL + 'pages', { simple: true, populate: 12, rspc: 1 })
         .then(res => res.data)
       const styles = await axios
-        .get(baseURL + 'beerStyles', {
-          params: { simple: true, populate: 5, rspc: 1 }
+        .post(baseURL + 'beerStyles', {
+          simple: true,
+          populate: 1,
+          rspc: 1,
+          fields: {
+            name: 1,
+            alternativeNames: 1,
+            description: 1,
+            bjcp: 1,
+            name_slug: 1,
+            _id: 1,
+            category: 1
+          }
         }) // TODO: filter published
         .then(res => res.data)
       const types = await axios
-        .get(baseURL + 'strainTypes', { params: { simple: true, rspc: 1 } })
+        .post(baseURL + 'strainTypes', { simple: true, rspc: 1 })
         .then(res => res.data)
       const strains = await axios
-        .get(baseURL + 'strains', {
-          params: {
-            populate: 3,
-            'filter[public]': true,
-            simple: true,
-            rspc: 1
-          }
+        .post(baseURL + 'strains', {
+          populate: 1,
+          filter: {
+            public: true
+          },
+          fields: {
+            productCode: 1,
+            gtin: 1,
+            image: 1,
+            name: 1,
+            shortDescription: 1,
+            fullDescription: 1,
+            temperature: 1,
+            alcoholTolerance: 1,
+            species: 1,
+            profiles: 1,
+            compareTo: 1,
+            price: 1,
+            similar: 1,
+            name_slug: 1,
+            attenuation: 1,
+            flocculation: 1,
+            type: 1,
+            consumer: 1,
+            instock: 1,
+            styleBest: 1,
+            styleGood: 1,
+            styleBetter: 1
+          },
+          simple: true,
+          rspc: 1
         })
         .then(res => res.data)
       return [

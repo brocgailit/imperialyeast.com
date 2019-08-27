@@ -87,23 +87,23 @@ export default {
       type = payload
     } else {
       const { category } = params
-      type = (await $axios.$get('/collections/get/strainTypes', {
-        params: {
-          simple: true,
-          populate: 2,
-          limit: 1,
-          'filter[name_slug]': category,
-          rspc: 1
-        }
-      }))[0]
-    }
-    const strains = await $axios.$get('/collections/get/strains', {
-      params: {
+      type = (await $axios.$post('/collections/get/strainTypes', {
         simple: true,
         populate: 2,
-        'filter[type._id]': type._id,
+        limit: 1,
+        filter: {
+          name_slug: category
+        },
         rspc: 1
-      }
+      }))[0]
+    }
+    const strains = await $axios.$post('/collections/get/strains', {
+      simple: true,
+      populate: 2,
+      filter: {
+        'type._id': type._id
+      },
+      rspc: 1
     })
     return { strains, type }
   },
