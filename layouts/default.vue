@@ -21,11 +21,17 @@
         </button>
       </div>
     </transition>
-    <Navbar />
+    <navbar :menu="mainMenu" />
     <main>
       <nuxt />
     </main>
-    <PageFooter />
+    <page-footer
+      :homepage="website.homepage"
+      :owner="website.organization || website.author"
+      :menu="footerMenu"
+    >
+      <div v-html="website.footer" />
+    </page-footer>
     <div class="scroll-top-container">
       <scroll-top-button />
     </div>
@@ -76,7 +82,9 @@ export default {
     ...mapState({
       notifications: state => state.notifications,
       website: state => state.website,
-      isShaded: state => state.showNavigation
+      isShaded: state => state.showNavigation,
+      mainMenu: state => state.menu.main,
+      footerMenu: state => state.menu.footer
     })
   },
   mounted() {

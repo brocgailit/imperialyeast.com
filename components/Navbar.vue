@@ -12,11 +12,8 @@
       :class="{ 'is-open': isOpen, 'search-active': showSearch }"
       @click="isOpen = false"
     >
-      <ul v-if="menus.main" id="menu">
-        <li
-          v-for="(item, i) of menus.main.items"
-          :key="item.value.page._id + i"
-        >
+      <ul v-if="menu" id="menu">
+        <li v-for="(item, i) of menu.items" :key="item.value.page._id + i">
           <navbar-item :item="item" />
         </li>
         <li>
@@ -59,7 +56,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import Logo from '~/components/Logo.vue'
 import SiteSearch from '~/components/SiteSearch.vue'
 import NavbarItem from '~/components/NavbarItem.vue'
@@ -70,15 +66,18 @@ export default {
     SiteSearch,
     NavbarItem
   },
+  props: {
+    menu: {
+      type: Object,
+      default: () => null
+    }
+  },
   data() {
     return {
       showSearch: false
     }
   },
   computed: {
-    ...mapState({
-      menus: state => state.menu
-    }),
     isOpen: {
       get() {
         return this.$store.state.showNavigation

@@ -6,7 +6,7 @@
           <nuxt-link
             :to="
               '/' +
-                (link.value.page._id !== website.homepage._id
+                (link.value.page._id !== homepage._id
                   ? link.value.page.name_slug + '/'
                   : '')
             "
@@ -15,11 +15,11 @@
         </li>
       </ul>
     </nav>
-    <div v-if="website.organization" class="contact-details">
+    <div v-if="owner && owner.contactPoints" class="contact-details">
       <div class="contact">
         <div class="contact-information">
           <div
-            v-for="(point, p) of website.organization.contactPoints"
+            v-for="(point, p) of owner.contactPoints"
             :key="p"
             class="contact-point"
           >
@@ -41,10 +41,7 @@
       </div>
     </div>
     <ul class="footer-social-media">
-      <li
-        v-for="profile of (website.organization || website.author).profiles"
-        :key="profile.value.platform"
-      >
+      <li v-for="profile of owner.profiles" :key="profile.value.platform">
         <a
           :href="profile.value.url"
           rel="noopener"
@@ -60,15 +57,15 @@
       </li>
     </ul>
     <p class="copyright-notice">
-      &copy; {{ year }} {{ (website.organization || website.author).name }}. All
-      rights reserved.
+      &copy; {{ year }} {{ owner.name }}. All rights reserved.
     </p>
-    <div class="attribution" v-html="website.footer" />
+    <div class="attribution">
+      <slot />
+    </div>
   </footer>
 </template>
 
 <script>
-import { mapState } from 'vuex'
 export default {
   name: 'PageFooter',
   filters: {
@@ -79,16 +76,26 @@ export default {
       return ['(', parts[2], ') ', parts[3], '-', parts[4]].join('')
     }
   },
+  props: {
+    owner: {
+      type: Object,
+      default: () => null
+    },
+    menu: {
+      type: Object,
+      default: () => null
+    },
+    homepage: {
+      type: Object,
+      default: () => null
+    }
+  },
   data() {
     return {
       year: new Date().getFullYear()
     }
   },
   computed: {
-    ...mapState({
-      website: state => state.website,
-      menu: state => state.menu.footer
-    }),
     shouldLinkPhone() {
       return typeof window !== 'undefined'
         ? window.matchMedia('(max-width: 768px)').matches
