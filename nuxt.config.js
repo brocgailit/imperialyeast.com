@@ -245,8 +245,8 @@ module.exports = {
    ** Generate options
    */
   generate: {
-    interval: 500,
-    concurrency: 10,
+    interval: 300,
+    concurrency: 20,
     routes: async function() {
       const baseURL = process.env.COCKPIT_URL + '/api/collections/get/'
       const strainsPath = '/organic-yeast-strains/'
