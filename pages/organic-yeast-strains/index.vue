@@ -173,7 +173,7 @@ export default {
     },
     // Debounce the things
     filteredStrains() {
-      const searched = this.strains.filter(s => {
+      const searched = (this.strains || []).filter(s => {
         const checks = [
           'name',
           'productCode',
