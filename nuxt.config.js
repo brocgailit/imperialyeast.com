@@ -246,7 +246,7 @@ module.exports = {
    */
   generate: {
     interval: 5,
-    /* concurrency: 20, */
+    concurrency: 20,
     routes: async function() {
       const baseURL = process.env.COCKPIT_URL + '/api/collections/get/'
       const strainsPath = '/organic-yeast-strains/'
