@@ -298,9 +298,9 @@ module.exports = {
             type: 1,
             consumer: 1,
             instock: 1,
-            styleBest: 1,
+            /* styleBest: 1,
             styleGood: 1,
-            styleBetter: 1
+            styleBetter: 1 */
           },
           simple: true,
           rspc: 1
