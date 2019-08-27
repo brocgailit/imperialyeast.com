@@ -32,7 +32,21 @@ export const actions = {
     const website = await this.$axios.$post(`/singletons/get/website`, {
       simple: true,
       populate: 3,
-      rspc: 1
+      rspc: 1,
+      fields: {
+        title: 1,
+        canonicalURL: 1,
+        searchAction: 1,
+        organization: 1,
+        homepage: 1,
+        twitter: 1,
+        mainMenu: 1,
+        brand: 1,
+        footer: 1,
+        footerMenu: 1,
+        author: 1,
+        map: 1
+      }
     })
     commit('setWebsite', website)
 
@@ -41,6 +55,11 @@ export const actions = {
       simple: true,
       populate: 6, // include subs
       rspc: 1,
+      fields: {
+        name: 1,
+        items: 1,
+        path: 1
+      },
       filter: {
         $or: [{ _id: website.mainMenu._id }, { _id: website.footerMenu._id }]
       }
@@ -54,6 +73,11 @@ export const actions = {
     const notifications = await this.$axios.$post(
       `/collections/get/notifications`,
       {
+        fields: {
+          name: 1,
+          message: 1,
+          actions: 1
+        },
         simple: true,
         rspc: 1
       }
