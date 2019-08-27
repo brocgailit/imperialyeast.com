@@ -247,14 +247,18 @@ module.exports = {
   generate: {
     /* interval: 25,
     concurrency: 100, */
-    routes: async function () {
+    routes: async function() {
       const baseURL = process.env.COCKPIT_URL + '/api/collections/get/'
       const strainsPath = '/organic-yeast-strains/'
       const pages = await axios
-        .get(baseURL + 'pages', { params: { simple: true, rspc: 1, populate: 12 } })
+        .get(baseURL + 'pages', {
+          params: { simple: true, rspc: 1, populate: 12 }
+        })
         .then(res => res.data)
       const styles = await axios
-        .get(baseURL + 'beerStyles', { params: { simple: true, rspc: 1, populate: 5 } }) // TODO: filter published
+        .get(baseURL + 'beerStyles', {
+          params: { simple: true, rspc: 1, populate: 5 }
+        }) // TODO: filter published
         .then(res => res.data)
       const types = await axios
         .get(baseURL + 'strainTypes', { params: { simple: true, rspc: 1 } })
@@ -274,24 +278,20 @@ module.exports = {
           route: `/${page.slug}`,
           payload: page
         })),
-        ...styles.map(
-          style => ({
-            route: `${strainsPath}beer-styles/${style.name_slug}`,
-            payload: {style, strains}
-          })
-        ),
-        ...types.map(
-          type => ({
-            route: `${strainsPath}yeast-types/${type.name_slug}`,
-            payload: type
-          })
-        ),
-        ...strains.map(
-          strain => ({
-            route: `${strainsPath}yeast-types/${strain.type.name_slug}/` + strain.name_slug,
-            payload: strain
-          })
-        )
+        ...styles.map(style => ({
+          route: `${strainsPath}beer-styles/${style.name_slug}`,
+          payload: { style, strains }
+        })),
+        ...types.map(type => ({
+          route: `${strainsPath}yeast-types/${type.name_slug}`,
+          payload: type
+        })),
+        ...strains.map(strain => ({
+          route:
+            `${strainsPath}yeast-types/${strain.type.name_slug}/` +
+            strain.name_slug,
+          payload: strain
+        }))
       ]
     }
   },
