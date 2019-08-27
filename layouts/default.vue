@@ -4,6 +4,7 @@
       <div v-if="notification" class="notification">
         <div v-html="notification.message" />
         <nuxt-link
+          v-if="notification.action"
           class="button is-danger is-small"
           :to="notification.action.path + '/'"
           :title="notification.action.title"

@@ -76,7 +76,7 @@ export const actions = {
         fields: {
           name: 1,
           message: 1,
-          actions: 1
+          action: 1
         },
         simple: true,
         rspc: 1

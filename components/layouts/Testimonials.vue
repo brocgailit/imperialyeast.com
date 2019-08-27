@@ -9,7 +9,7 @@
       <li
         v-for="testimonial of testimonials"
         :key="testimonial._id"
-        class="testimonial"
+        class="testimonial "
       >
         <testimonial :testimonial="testimonial" />
       </li>
