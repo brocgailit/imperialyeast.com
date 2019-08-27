@@ -196,50 +196,6 @@ export default {
       tab: 'location-map'
     }
   },
-  methods: {
-    handleSearchInput: debounce(async function(query) {
-      this.loadingSearchResults = true
-      const { data: location } = await this.$axios({
-        url: 'functions/geocode',
-        baseURL: '/.netlify/',
-        params: {
-          query
-        }
-      })
-      this.loadingSearchResults = false
-      this.searchResults = location.hits
-    }, 300),
-    getGeolocation() {
-      /* const options = {
-        enableHighAccuracy: false,
-        timeout: Infinity,
-        maximumAge: 1000 * 30
-      } */
-      return new Promise((resolve, reject) =>
-        // navigator.geolocation.getCurrentPosition(resolve, reject, options)
-        navigator.geolocation.getCurrentPosition(resolve, reject)
-      )
-    },
-    async getLocationByGeolocation() {
-      try {
-        const { coords } = await this.getGeolocation()
-        const aroundLatLng = `${coords.latitude},${coords.longitude}`
-        const { data: location } = await this.$axios({
-          url: 'functions/reverse-geocode',
-          baseURL: '/.netlify/',
-          params: {
-            aroundLatLng
-          }
-        })
-        this.location = location.hits[0]
-      } catch (e) {
-        console.warn(e)
-      }
-    },
-    clearLocation() {
-      this.location = null
-    }
-  },
   computed: {
     zoom() {
       const zoom =
@@ -293,6 +249,50 @@ export default {
   mounted() {
     // this.getLocationByGeolocation()
     this.mapComponent = () => import('~/components/Map.vue')
+  },
+  methods: {
+    handleSearchInput: debounce(async function(query) {
+      this.loadingSearchResults = true
+      const { data: location } = await this.$axios({
+        url: 'functions/geocode',
+        baseURL: '/.netlify/',
+        params: {
+          query
+        }
+      })
+      this.loadingSearchResults = false
+      this.searchResults = location.hits
+    }, 300),
+    getGeolocation() {
+      /* const options = {
+        enableHighAccuracy: false,
+        timeout: Infinity,
+        maximumAge: 1000 * 30
+      } */
+      return new Promise((resolve, reject) =>
+        // navigator.geolocation.getCurrentPosition(resolve, reject, options)
+        navigator.geolocation.getCurrentPosition(resolve, reject)
+      )
+    },
+    async getLocationByGeolocation() {
+      try {
+        const { coords } = await this.getGeolocation()
+        const aroundLatLng = `${coords.latitude},${coords.longitude}`
+        const { data: location } = await this.$axios({
+          url: 'functions/reverse-geocode',
+          baseURL: '/.netlify/',
+          params: {
+            aroundLatLng
+          }
+        })
+        this.location = location.hits[0]
+      } catch (e) {
+        console.warn(e)
+      }
+    },
+    clearLocation() {
+      this.location = null
+    }
   }
 }
 </script>

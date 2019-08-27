@@ -29,17 +29,17 @@ export default {
     SiteSearchResults
   },
   watchQuery: ['q'],
-  computed: {
-    ...mapState({
-      website: state => state.website
-    })
-  },
   data() {
     return {
       searchTerm: '',
       results: null,
       loading: false
     }
+  },
+  computed: {
+    ...mapState({
+      website: state => state.website
+    })
   },
   async mounted() {
     const { q } = this.$route.query

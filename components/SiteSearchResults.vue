@@ -3,7 +3,7 @@
     <div v-if="nothingFound" class="site-search-results no-results">
       <span
         >No results were found for
-        <strong>&ldquo;{{ this.term }}&rdquo;</strong>.</span
+        <strong>&ldquo;{{ term }}&rdquo;</strong>.</span
       >
     </div>
     <ul v-if="hasSomeResults" class="site-search-results">

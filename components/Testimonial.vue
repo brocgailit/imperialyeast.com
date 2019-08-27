@@ -113,19 +113,19 @@ export default {
     width: 100%;
     padding: $size-6;
     font-size: $size-7;
-    // text-align: center;
     .content {
       font-size: $size-6 * 1.1;
       opacity: 0.9;
-      // font-style: italic;
     }
   }
-  .quote-footer {
-    display: flex;
-    align-items: center;
-    @include mobile {
-      flex-direction: column;
-      text-align: center;
+
+  @include mobile {
+    flex-direction: column;
+    .quote {
+      padding: 0;
+      .content {
+        font-size: $size-7;
+      }
     }
   }
 }

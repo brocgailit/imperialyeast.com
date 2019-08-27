@@ -81,11 +81,6 @@ export default {
     StrainCard,
     StarRating
   },
-  computed: {
-    ...mapState({
-      website: state => state.website
-    })
-  },
   filters: {
     suitability(value) {
       if (value === 3) return 'Great Choice!'
@@ -97,6 +92,11 @@ export default {
       const [parent] = code.match(/(\d+)/)
       return `http://www.bjcp.org/style/2015/${parent}/${code}/`
     }
+  },
+  computed: {
+    ...mapState({
+      website: state => state.website
+    })
   },
   jsonld() {
     const schema = {
