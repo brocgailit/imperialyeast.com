@@ -245,30 +245,31 @@ module.exports = {
    ** Generate options
    */
   generate: {
-    interval: 50,
-    /* concurrency: 25, */
+    interval: 500,
+    concurrency: 10,
     routes: async function() {
       const baseURL = process.env.COCKPIT_URL + '/api/collections/get/'
       const strainsPath = '/organic-yeast-strains/'
       const pages = await axios
         .get(baseURL + 'pages', {
-          params: { simple: true, populate: 12 }
+          params: { simple: true, populate: 12, rspc: 1 }
         })
         .then(res => res.data)
       const styles = await axios
         .get(baseURL + 'beerStyles', {
-          params: { simple: true, populate: 5 }
+          params: { simple: true, populate: 5, rspc: 1 }
         }) // TODO: filter published
         .then(res => res.data)
       const types = await axios
-        .get(baseURL + 'strainTypes', { params: { simple: true } })
+        .get(baseURL + 'strainTypes', { params: { simple: true, rspc: 1 } })
         .then(res => res.data)
       const strains = await axios
         .get(baseURL + 'strains', {
           params: {
             populate: 3,
             'filter[public]': true,
-            simple: true
+            simple: true,
+            rspc: 1
           }
         })
         .then(res => res.data)
