@@ -261,6 +261,18 @@ module.exports = {
       const pages = await axios
         .post(baseURL + 'pages', { simple: true, populate: 12, rspc: 1 })
         .then(res => res.data)
+      const menus = await axios
+        .post(baseURL + 'menus', {
+          simple: true,
+          populate: 6, // include subs
+          rspc: 1,
+          fields: {
+            name: 1,
+            items: 1,
+            path: 1
+          }
+        })
+        .then(res => res.data)
       const styles = await axios
         .post(baseURL + 'beerStyles', {
           simple: true,
@@ -305,7 +317,7 @@ module.exports = {
             flocculation: 1,
             type: 1,
             consumer: 1,
-            instock: 1,
+            instock: 1
             /* styleBest: 1,
             styleGood: 1,
             styleBetter: 1 */
@@ -315,10 +327,26 @@ module.exports = {
         })
         .then(res => res.data)
       return [
-        ...pages.map(page => ({
-          route: `/${page.name_slug}`,
-          payload: page
-        })),
+        ...menus
+          .reduce((collection, menu) => {
+            return [
+              ...collection,
+              ...menu.items.map(i => [i.value.page.name_slug]),
+              ...menu.items.reduce((acc, i) => {
+                return [
+                  ...acc,
+                  ...(i.value.submenus || []).map(sub => [
+                    i.value.page.name_slug,
+                    sub.value.page.name_slug
+                  ])
+                ]
+              }, [])
+            ]
+          }, [])
+          .map(page => ({
+            route: `/${page.join('/')}`,
+            payload: pages.find(p => p.name_slug === page[page.length - 1])
+          })),
         ...styles.map(style => ({
           route: `${strainsPath}beer-styles/${style.name_slug}`,
           payload: { style, strains }
