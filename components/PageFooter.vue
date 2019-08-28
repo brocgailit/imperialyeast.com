@@ -79,7 +79,7 @@ export default {
   props: {
     owner: {
       type: Object,
-      default: () => null
+      default: () => ({ name: '' })
     },
     menu: {
       type: Object,
