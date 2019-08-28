@@ -124,7 +124,7 @@ $logo-size: 160px;
   background-color: $white;
   position: sticky;
   top: calc(-#{$logo-size} - #{$size-5 * 2});
-  z-index: 1080;
+  z-index: $navbar-fixed-z;
   border-bottom: 1px solid rgba($grey, 0.25);
   padding-top: $size-5;
   .nav-logo {

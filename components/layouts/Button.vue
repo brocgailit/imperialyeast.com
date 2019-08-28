@@ -21,7 +21,7 @@ export default {
 
 <style lang="scss">
 .button-layout {
-  padding: $size-4;
+  padding: $size-6 $size-4 $size-4;
   text-align: center;
 }
 </style>

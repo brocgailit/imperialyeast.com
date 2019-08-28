@@ -142,7 +142,7 @@ export default {
 
 <style lang="scss">
 .notification {
-  z-index: 8675309;
+  z-index: $navbar-z + 10;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -163,7 +163,7 @@ export default {
 
 .scroll-top-container {
   position: fixed;
-  z-index: 8675309;
+  z-index: $navbar-z - 10;
   bottom: $size-1;
   right: $size-5;
 }
@@ -196,7 +196,7 @@ export default {
   height: 100vh;
   background-color: $dark;
   opacity: 0.5;
-  z-index: 1075;
+  z-index: $navbar-z - 10;
 }
 
 .shade-enter-active,

@@ -124,6 +124,8 @@ $navbar-item-active-background-color: darken($white, 5%);
 $navbar-burger-color: $light;
 $navbar-padding-vertical: 1rem;
 $navbar-padding-horizontal: 2rem;
+$navbar-z: 30;
+$navbar-fixed-z: 30;
 
 /* 
 Footer
@@ -141,3 +143,12 @@ https://bulma.io/documentation/layout/section/#variables
 $section-padding: 4rem 1.5rem;
 $section-padding-medium: 9rem 1.5rem;
 $section-padding-large: 18rem 1.5rem;
+
+/*
+Modals
+https://bulma.io/documentation/components/modal/#variables
+*/
+$modal-content-margin-mobile: 0;
+$modal-content-spacing-mobile: 0;
+$modal-content-spacing-tablet: 40px;
+$modal-card-spacing: 0;

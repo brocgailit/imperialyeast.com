@@ -1,5 +1,5 @@
 <template>
-  <div class="business-testimonial">
+  <div class="business-testimonial" :class="{ 'is-vertical': vertical }">
     <a :href="company.url" target="_blank" rel="noopener">
       <figure
         class="image testimonial-logo"
@@ -43,6 +43,10 @@ export default {
     logoWidth: {
       type: Number,
       default: 200
+    },
+    vertical: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -120,6 +124,11 @@ export default {
       font-size: $size-6 * 1.1;
       opacity: 0.9;
     }
+  }
+
+  &.is-vertical {
+    flex-direction: column;
+    padding: 0;
   }
 
   @include mobile {
