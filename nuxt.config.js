@@ -245,7 +245,7 @@ module.exports = {
    ** Generate options
    */
   generate: {
-    concurrency: 10,
+    concurrency: 20,
     fallback: true,
     routes: async function() {
       const baseURL = process.env.COCKPIT_URL + '/api/collections/get/'
