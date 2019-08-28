@@ -109,6 +109,13 @@ module.exports = {
           'scrollBehavior' in document.documentElement.style &&
           window.__forceSmoothScrollPolyfill__ !== true,
         install: smoothscroll => smoothscroll.polyfill()
+      },
+      {
+        require: 'css-scroll-snap-polyfill',
+        detect: () =>
+          'scrollSnapAlign' in document.documentElement.style ||
+          'webkitScrollSnapAlign' in document.documentElement.style ||
+          'msScrollSnapAlign' in document.documentElement.style
       }
     ]
   },
@@ -155,6 +162,7 @@ module.exports = {
               'faArrowToBottom',
               'faChevronUp',
               'faChevronRight',
+              'faChevronLeft',
               'faShippingFast',
               'faLocation',
               'faCommentAltLines',

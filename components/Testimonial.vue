@@ -80,10 +80,13 @@ export default {
 .business-testimonial {
   // border: 1px solid $primary;
   border-radius: $radius;
-  margin: $size-7 0;
+  margin: 0;
   padding: $size-7;
+  min-width: 100%;
+  max-width: 100%;
+  width: 100%;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   .testimonial-logo {
     margin: $size-7;
   }
