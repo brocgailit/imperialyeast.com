@@ -28,10 +28,10 @@ export const mutations = {
   }
 }
 
-function getWebsite(app) {
+async function getWebsite(app) {
   const c = cache.get('website')
   if (c) return Promise.resolve(c)
-  const website = app.$axios.$post(`/singletons/get/website`, {
+  const website = await app.$axios.$post(`/singletons/get/website`, {
     simple: true,
     populate: 3,
     rspc: 1,
@@ -58,7 +58,7 @@ async function getMenus(app) {
   const c = cache.get('menus')
   if (c) return Promise.resolve(c)
   const website = await getWebsite(app)
-  const menus = app.$axios.$post(`/collections/get/menus`, {
+  const menus = await app.$axios.$post(`/collections/get/menus`, {
     simple: true,
     populate: 6, // include subs
     rspc: 1,
@@ -75,18 +75,21 @@ async function getMenus(app) {
   return menus
 }
 
-function getNotifications(app) {
+async function getNotifications(app) {
   const c = cache.get('notifications')
   if (c) return Promise.resolve(c)
-  const notifications = app.$axios.$post(`/collections/get/notifications`, {
-    fields: {
-      name: 1,
-      message: 1,
-      action: 1
-    },
-    simple: true,
-    rspc: 1
-  })
+  const notifications = await app.$axios.$post(
+    `/collections/get/notifications`,
+    {
+      fields: {
+        name: 1,
+        message: 1,
+        action: 1
+      },
+      simple: true,
+      rspc: 1
+    }
+  )
   cache.set('notifications', notifications)
   return notifications
 }
