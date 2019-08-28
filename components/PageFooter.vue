@@ -40,7 +40,7 @@
         </div>
       </div>
     </div>
-    <ul class="footer-social-media">
+    <ul v-if="owner" class="footer-social-media">
       <li v-for="profile of owner.profiles" :key="profile.value.platform">
         <a
           :href="profile.value.url"
