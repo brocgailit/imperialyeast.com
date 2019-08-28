@@ -29,7 +29,7 @@ export const mutations = {
 export const actions = {
   async nuxtServerInit({ commit }, { app }) {
     // get website settings
-    const website = await this.$axios.$post(`/singletons/get/website`, {
+    const website = await app.$axios.$post(`/singletons/get/website`, {
       simple: true,
       populate: 3,
       rspc: 1,
@@ -51,7 +51,7 @@ export const actions = {
     commit('setWebsite', website)
 
     // get main menu
-    const menus = await this.$axios.$post(`/collections/get/menus`, {
+    const menus = await app.$axios.$post(`/collections/get/menus`, {
       simple: true,
       populate: 6, // include subs
       rspc: 1,
@@ -70,7 +70,7 @@ export const actions = {
     })
 
     // get notifications
-    const notifications = await this.$axios.$post(
+    const notifications = await app.$axios.$post(
       `/collections/get/notifications`,
       {
         fields: {
