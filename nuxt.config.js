@@ -308,7 +308,7 @@ module.exports = {
         .then(res => res.data)
       return [
         ...pages.map(page => ({
-          route: `/${page.slug}`,
+          route: `/${page.name_slug}`,
           payload: page
         })),
         ...styles.map(style => ({
