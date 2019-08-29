@@ -54,7 +54,7 @@ $colors: (
 );
 
 $family-sans-serif: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-$family-heading: 'Gothic', $family-sans-serif;
+$family-heading: Gothic, Oswald, Impact, $family-sans-serif;
 $family-primary: $family-sans-serif;
 
 $weight-black: 900;
@@ -103,7 +103,7 @@ Title
 https://bulma.io/documentation/elements/title/#variables
 */
 
-$title-family: 'Gothic', $family-sans-serif;
+$title-family: $family-heading;
 $title-weight: 400;
 $title-size: $size-3;
 $title-line-height: 0.9;
