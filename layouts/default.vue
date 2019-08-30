@@ -69,7 +69,7 @@ export default {
       {
         '@context': 'https://schema.org',
         '@type': 'Website',
-        url: this.website.canonical_url
+        url: this.website.canonicalURL
       }
     ]
   },
