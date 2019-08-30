@@ -25,6 +25,7 @@
         >
           <no-ssr>
             <v-lazy-image
+              :alt="attachment.value.title"
               :src="attachment.value.preview.path | asset({ w: previewWidth })"
               :style="{ width: '100%', height: '100%' }"
             />
