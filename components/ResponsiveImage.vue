@@ -5,7 +5,7 @@
       :sizes="sizes"
       type="image/webp"
     />
-    <source :srcset="path | srcset" sizes="100vw" :type="path | fileType" />
+    <source :srcset="path | srcset" :sizes="sizes" :type="path | fileType" />
     <img :src="path + '?w=375'" :alt="alt" />
   </picture>
   <no-ssr v-else>
@@ -59,7 +59,7 @@ export default {
     },
     sizes: {
       type: String,
-      default: '100vw'
+      default: '75vw'
     },
     width: {
       type: Number,
