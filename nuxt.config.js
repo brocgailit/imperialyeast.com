@@ -290,7 +290,7 @@ module.exports = {
         }) // TODO: filter published
         .then(res => res.data)
       const styleCategories = await axios
-        .post('/collections/get/beerCategories', {
+        .post(baseURL + 'beerCategories', {
           simple: true,
           rspc: true,
           fields: {
