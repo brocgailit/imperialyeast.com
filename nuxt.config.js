@@ -44,16 +44,16 @@ module.exports = {
         as: 'font',
         crossorigin: 'crossorigin'
       },
-      {
+      /* {
         rel: 'preconnect',
         href: '//stats.g.doubleclick.net',
         crossorigin: 'crossorigin'
-      },
-      {
+      }, */
+      /* {
         rel: 'preconnect',
         href: '//www.google-analytics.com',
         crossorigin: 'crossorigin'
-      },
+      }, */
       {
         rel: 'preconnect',
         href: '//content.imperialyeast.com',
