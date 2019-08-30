@@ -10,6 +10,7 @@
     "
     :width="layout.settings.width"
     :height="layout.settings.height"
+    lazy
   />
 </template>
 
