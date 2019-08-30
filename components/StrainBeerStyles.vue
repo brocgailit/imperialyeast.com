@@ -10,7 +10,12 @@
         :size="style.suitability | size"
       >
         <nuxt-link
-          :to="stylePath + style.style.name_slug"
+          :to="
+            stylePath +
+              style.style.category.name_slug +
+              '/' +
+              style.style.name_slug
+          "
           class="has-text-whitex"
         >
           {{ style.style.name }}

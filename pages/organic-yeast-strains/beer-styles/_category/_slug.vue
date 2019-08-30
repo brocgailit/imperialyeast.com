@@ -12,6 +12,16 @@
             >Beer Styles</nuxt-link
           >
         </li>
+        <li>
+          <nuxt-link
+            :to="
+              '/organic-yeast-strains/beer-styles/' +
+                style.category.name_slug +
+                '/'
+            "
+            >{{ style.category.name }}</nuxt-link
+          >
+        </li>
         <li class="is-active">
           <nuxt-link
             :to="'/organic-yeast-strains/beer-styles/' + style.name_slug + '/'"
@@ -119,11 +129,21 @@ export default {
         },
         {
           '@type': 'ListItem',
+          position: 2,
+          name: this.style.category.name,
+          item: `${
+            this.website.canonicalURL
+          }/organic-yeast-strains/beer-styles/${this.style.category.name_slug}`
+        },
+        {
+          '@type': 'ListItem',
           position: 3,
           name: this.style.name,
           item: `${
             this.website.canonicalURL
-          }/organic-yeast-strains/beer-styles/${this.style.slug}`
+          }/organic-yeast-strains/beer-styles/${
+            this.style.category.name_slug
+          }/${this.style.name_slug}/`
         }
       ]
     }
