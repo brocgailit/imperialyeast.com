@@ -366,7 +366,7 @@ module.exports = {
         })),
         ...styleCategories.map(category => ({
           route: `${strainsPath}beer-styles/${category.name_slug}`,
-          payload: { styles }
+          payload: styles
         })),
         ...types.map(type => ({
           route: `${strainsPath}yeast-types/${type.name_slug}`,
