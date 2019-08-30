@@ -5,7 +5,9 @@
     :class="layout.settings.class"
     :style="layout.settings.style"
     :path="layout.settings.image.path"
-    :alt="layout.settings.id"
+    :alt="
+      layout.settings.image.meta ? layout.settings.image.meta.title : 'Image'
+    "
     :width="layout.settings.width"
     :height="layout.settings.height"
   />
