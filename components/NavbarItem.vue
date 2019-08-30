@@ -2,21 +2,32 @@
   <div
     v-if="item.value.submenus"
     ref="item"
-    aria-role="menu"
     class="navbar-item has-dropdown is-hoverable"
   >
     <nuxt-link
+      :id="item.value.page.name_slug"
       role="button"
       class="navbar-link"
+      aria-haspopup="true"
+      :aria-controls="item.value.page.name_slug + '-menu'"
       :to="isHomePage ? '/' : '/' + item.value.page.name_slug + '/'"
     >
       {{ item.value.title }}
     </nuxt-link>
-    <div class="navbar-dropdown" aria-role="menuitem" @click="clearFocus">
+    <div
+      :id="item.value.page.name_slug + '-menu'"
+      class="navbar-dropdown"
+      role="menu"
+      tabindex="-1"
+      :aria-labelledby="item.value.page.name_slug"
+      @click="clearFocus"
+    >
       <nuxt-link
         v-for="(sub, s) of item.value.submenus"
         :key="sub.value.page._id + s"
+        role="menuitem"
         class="navbar-item"
+        tabindex="-1"
         :to="
           '/' + item.value.page.name_slug + '/' + sub.value.page.name_slug + '/'
         "
