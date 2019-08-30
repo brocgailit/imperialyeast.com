@@ -120,26 +120,31 @@ export default {
     }
     return schema
   },
-  async asyncData({ params, $axios }) {
-    console.log(params.category)
-    const styles = await $axios.$post('/collections/get/beerStyles', {
-      simple: true,
-      populate: 1,
-      rspc: true,
-      fields: {
-        name: true,
-        alternativeNames: true,
-        description: true,
-        bjcp: true,
-        name_slug: true,
-        _id: true,
-        category: true
-      }
-    })
+  async asyncData({ params, $axios, payload }) {
+    const { category } = params
+    let styles
+    if (payload) {
+      styles = payload
+    } else {
+      styles = await $axios.$post('/collections/get/beerStyles', {
+        simple: true,
+        populate: 1,
+        rspc: true,
+        fields: {
+          name: true,
+          alternativeNames: true,
+          description: true,
+          bjcp: true,
+          name_slug: true,
+          _id: true,
+          category: true
+        }
+      })
+    }
 
     return {
       styles: styles
-        .filter(s => s.category.name_slug === params.category)
+        .filter(s => s.category.name_slug === category)
         .sort((a, b) => (a.name > b.name ? 1 : a.name < b.name ? -1 : 0))
     }
   }

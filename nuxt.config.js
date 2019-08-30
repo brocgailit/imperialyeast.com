@@ -289,6 +289,17 @@ module.exports = {
           }
         }) // TODO: filter published
         .then(res => res.data)
+      const styleCategories = await axios
+        .post('/collections/get/beerCategories', {
+          simple: true,
+          rspc: true,
+          fields: {
+            name: true,
+            name_slug: true,
+            description: true
+          }
+        })
+        .then(res => res.data)
       const types = await axios
         .post(baseURL + 'strainTypes', { simple: true, rspc: 1 })
         .then(res => res.data)
@@ -348,8 +359,14 @@ module.exports = {
             payload: pages.find(p => p.name_slug === page[page.length - 1])
           })),
         ...styles.map(style => ({
-          route: `${strainsPath}beer-styles/${style.name_slug}`,
+          route: `${strainsPath}beer-styles/${style.category.name_slug}/${
+            style.name_slug
+          }`,
           payload: { style, strains }
+        })),
+        ...styleCategories.map(category => ({
+          route: `${strainsPath}beer-styles/${category.name_slug}`,
+          payload: { styles }
         })),
         ...types.map(type => ({
           route: `${strainsPath}yeast-types/${type.name_slug}`,
