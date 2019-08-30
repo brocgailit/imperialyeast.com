@@ -13,7 +13,7 @@
     :style="layout.settings.style"
   >
     <div
-      v-if="background"
+      v-if="background && isVisible"
       class="background-image"
       :style="{
         'background-image': 'url(' + background + ')',
