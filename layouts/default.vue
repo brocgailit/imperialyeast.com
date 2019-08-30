@@ -46,6 +46,7 @@ import { mapState } from 'vuex'
 import Navbar from '~/components/Navbar.vue'
 import PageFooter from '~/components/PageFooter.vue'
 import ScrollTopButton from '~/components/ScrollTopButton.vue'
+const phonograph = () => import('phonograph')
 
 /* const DAYS_OF_WEEK = [
   'Sunday',
@@ -114,6 +115,7 @@ export default {
       this.$store.dispatch('closeNavigation')
     },
     handleKeys(event) {
+      // EASTER EGGS!
       if (!event.key) return
       const secret = [
         'arrowup',
@@ -132,7 +134,14 @@ export default {
         -secret.length
       )
       if (keybuffer.join('-').indexOf(secret.join('-')) > -1) {
-        window.location = 'https://www.youtube.com/watch?v=-bzWSJG93P8'
+        // window.location = 'https://www.youtube.com/watch?v=-bzWSJG93P8'
+        ;(async function() {
+          const { Clip } = await phonograph()
+          const clip = new Clip({ url: '/audio/Imperial_March.mp3' })
+          clip.buffer().then(() => {
+            clip.play()
+          })
+        })()
       }
       this.keybuffer = keybuffer
     }
