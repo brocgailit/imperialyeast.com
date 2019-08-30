@@ -21,11 +21,14 @@ export default {
   },
   head() {
     if (!this.page) return {}
+    const canonical = `${this.website.canonicalURL}${
+      this.$route.path && this.$route.path !== '/' ? this.$route.path + '/' : ''
+    }`
     return {
       link: [
         {
           rel: 'canonical',
-          href: `${this.website.canonicalURL}${this.$route.path}/`
+          href: canonical
         }
       ],
       title: `${this.page.title} | ${this.website.title}`,
@@ -38,7 +41,7 @@ export default {
         {
           hid: 'open-graph-url',
           property: 'og:url',
-          content: `${this.website.canonicalURL}${this.$route.path}`
+          content: canonical
         },
         {
           hid: 'open-graph-type',
