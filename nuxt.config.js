@@ -167,7 +167,8 @@ module.exports = {
               'faLocation',
               'faCommentAltLines',
               'faMinus',
-              'faPlus'
+              'faPlus',
+              'faCertificate'
             ]
           },
           {

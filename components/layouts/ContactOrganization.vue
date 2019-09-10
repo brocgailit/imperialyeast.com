@@ -188,7 +188,7 @@ export default {
         longitude: this.org.geo.lng
       },
       telephone: this.org.telephone,
-      email: this.org.email, // TODO: add this!
+      email: this.org.email,
       address: {
         '@type': 'PostalAddress',
         streetAddress: this.org.address.streetAddress,

@@ -120,6 +120,7 @@ export default {
     }
     return schema
   },
+  /* TODO: NEED HEAD!!! */
   async asyncData({ params, $axios, payload }) {
     const { category } = params
     let styles

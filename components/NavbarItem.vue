@@ -32,6 +32,11 @@
           '/' + item.value.page.name_slug + '/' + sub.value.page.name_slug + '/'
         "
       >
+        <fa-icon
+          v-if="sub.value.icon"
+          :icon="['fal', sub.value.icon]"
+          class="navbar-item-icon"
+        />
         <span>{{ sub.value.title }}</span>
         <!-- <img
           src="/icon.png"
@@ -46,6 +51,15 @@
     active-class="is-active"
     :to="isHomePage ? '/' : '/' + item.value.page.name_slug + '/'"
   >
+    <fa-icon-layers v-if="item.value.icon" full-width class="navbar-item-icon">
+      <fa-icon :icon="['fal', item.value.icon]" />
+      <fa-icon-layers-text
+        v-if="item.value.iconText"
+        transform="rotate--30 shrink-8"
+        class="has-text-primary"
+        value="NEW!"
+      />
+    </fa-icon-layers>
     {{ item.value.title }}
   </nuxt-link>
 </template>
@@ -76,3 +90,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.navbar-item {
+  .navbar-item-icon {
+    margin-right: $size-7 / 2;
+  }
+}
+</style>
