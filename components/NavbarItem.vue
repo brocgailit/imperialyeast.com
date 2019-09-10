@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="item.value.submenus"
+    v-if="item.value.submenus && item.value.submenus.length"
     ref="item"
     class="navbar-item has-dropdown is-hoverable"
   >
