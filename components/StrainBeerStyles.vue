@@ -4,9 +4,8 @@
     <slot />
     <b-taglist class="styles-list">
       <b-tag
-        v-for="style of styles"
+        v-for="style of styles.slice(0, 3)"
         :key="style.style.id"
-        type="is-primaryx"
         :size="style.suitability | size"
       >
         <nuxt-link
@@ -22,6 +21,36 @@
         </nuxt-link>
       </b-tag>
     </b-taglist>
+    <b-collapse :open="false" :aria-id="strain.name_slug">
+      <div slot="trigger" slot-scope="props" :aria-controls="strain.name_slug">
+        <span>
+          Show more
+        </span>
+        <fa-icon
+          :icon="['fal', 'chevron-right']"
+          :class="{ 'fa-rotate-90': props.open }"
+        />
+      </div>
+      <b-taglist class="styles-list">
+        <b-tag
+          v-for="style of styles.slice(3)"
+          :key="style.style.id"
+          type="is-primaryx"
+          :size="style.suitability | size"
+        >
+          <nuxt-link
+            :to="
+              stylePath +
+                style.style.category.name_slug +
+                '/' +
+                style.style.name_slug
+            "
+          >
+            {{ style.style.name }}
+          </nuxt-link>
+        </b-tag>
+      </b-taglist>
+    </b-collapse>
   </div>
 </template>
 <script>
@@ -29,8 +58,8 @@ export default {
   filters: {
     size(suitability) {
       if (suitability === 1) return 'is-small'
-      if (suitability === 3) return 'is-large'
-      return 'is-medium'
+      if (suitability === 3) return 'is-medium'
+      return 'is-normal'
     }
   },
   props: {
@@ -45,6 +74,10 @@ export default {
     stylePath: {
       type: String,
       default: '/organic-yeast-strains/beer-styles/'
+    },
+    strain: {
+      type: Object,
+      default: () => null
     }
   }
 }

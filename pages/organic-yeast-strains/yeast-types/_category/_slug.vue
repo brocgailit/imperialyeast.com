@@ -138,6 +138,7 @@
           <strain-beer-styles
             v-if="styles.length"
             :styles="styles"
+            :strain="strain"
             title="Recommended Beer Styles"
           />
         </div>
