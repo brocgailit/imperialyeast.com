@@ -21,3 +21,9 @@ export default {
   mixins: [component]
 }
 </script>
+
+<style lang="scss">
+.image-layout {
+  text-align: center;
+}
+</style>
