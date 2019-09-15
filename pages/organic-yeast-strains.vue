@@ -24,7 +24,7 @@
     </div>
     <section class="container">
       <article>
-        <nuxt-child keep-alive :page="page" />
+        <nuxt-child :page="page" />
       </article>
     </section>
   </div>
