@@ -21,10 +21,18 @@
         </nuxt-link>
       </b-tag>
     </b-taglist>
-    <b-collapse :open="false" :aria-id="strain.name_slug">
-      <div slot="trigger" slot-scope="props" :aria-controls="strain.name_slug">
-        <span>
-          Show more
+    <b-collapse
+      v-if="styles.length > 3"
+      :open="false"
+      :aria-id="strain.name_slug + '-styles'"
+    >
+      <div
+        slot="trigger"
+        slot-scope="props"
+        :aria-controls="strain.name_slug + '-styles'"
+      >
+        <span class="trigger-text">
+          Show more recommended styles
         </span>
         <fa-icon
           :icon="['fal', 'chevron-right']"
@@ -95,6 +103,14 @@ export default {
     margin-top: $size-6;
     .tag.is-large {
       font-weight: bold;
+    }
+  }
+
+  .collapse-trigger {
+    font-size: $size-8;
+    cursor: pointer;
+    .trigger-text {
+      margin-right: $size-7;
     }
   }
 }
