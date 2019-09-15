@@ -1,10 +1,6 @@
 <template>
   <div>
-    <strain-filter
-      :strains="strains"
-      :product-variation="['home']"
-      @filter="filteredStrains = $event"
-    />
+    <strain-filter :strains="strains" @filter="updateStrains" />
     <section class="search-filter-results">
       <div class="strains container">
         <article
@@ -44,7 +40,8 @@ export default {
   mixins: [page],
   data() {
     return {
-      productVariation: ['home']
+      productVariation: ['home'],
+      filteredStrains: []
     }
   },
   computed: {
@@ -72,7 +69,13 @@ export default {
         rspc: 1
       }
     })
-    return { strains, filteredStrains: strains }
+    return { strains }
+  },
+  methods: {
+    updateStrains(strains) {
+      console.log('updating strains')
+      this.filteredStrains = strains
+    }
   }
 }
 </script>

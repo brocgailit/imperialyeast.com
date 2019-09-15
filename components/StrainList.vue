@@ -3,7 +3,7 @@
     <slot />
     <transition-group name="flip-list" tag="ul">
       <li v-for="strain of strains" :key="strain._id" class="strain">
-        <strain-card :strain="strain" />
+        <strain-card :strain="strain" :show-icons="showIcons" />
       </li>
     </transition-group>
   </div>
@@ -34,6 +34,10 @@ export default {
     strains: {
       type: Array,
       default: () => []
+    },
+    showIcons: {
+      type: Boolean,
+      default: false
     }
   }
 }

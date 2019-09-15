@@ -2,7 +2,7 @@
   <div>
     <strain-filter
       :strains="strains"
-      :product-variation="['home']"
+      show-commercial
       @filter="filteredStrains = $event"
     />
     <section class="search-filter-results">
@@ -12,7 +12,11 @@
           :key="group.id"
           class="strain-group"
         >
-          <strain-list :strains="group.strains" :header-color="group.color">
+          <strain-list
+            :strains="group.strains"
+            :header-color="group.color"
+            show-icons
+          >
             <nuxt-link
               :to="
                 '/organic-yeast-strains/yeast-types/' + group.name_slug + '/'

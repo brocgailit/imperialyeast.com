@@ -22,6 +22,7 @@ module.exports = {
     'vue/no-v-html': 'off',
     'nuxt/no-cjs-in-config': 'off',
     'no-console': 'off',
-    'camelcase': 'off'
+    'camelcase': 'off',
+    'no-sequences': 'off'
   }
 }
