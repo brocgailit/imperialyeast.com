@@ -156,7 +156,7 @@ $logo-size: 160px;
       a {
         text-transform: uppercase;
         font-weight: $weight-bold;
-        font-size: $size-6;
+        font-size: $size-6 * 1.1;
         transition: 150ms ease-in-out;
       }
       transition: opacity 250ms ease-in-out;

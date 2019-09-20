@@ -72,7 +72,7 @@ export default {
 
 <style lang="scss">
 .downloads {
-  margin-bottom: $size-5;
+  margin-bottom: $size-3;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

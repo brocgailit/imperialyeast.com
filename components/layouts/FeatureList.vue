@@ -4,7 +4,7 @@
     class="feature-list container"
     :class="layout.settings.class"
   >
-    <h3 v-if="layout.settings.title" class="feature-list-heading title">
+    <h3 v-if="layout.settings.title" class="feature-list-heading">
       {{ layout.settings.title }}
     </h3>
     <ul class="features columns">
@@ -24,16 +24,22 @@
             lazy
           />
         </figure>
-        <h4 class="feature-name title is-6">{{ feature.value.name }}</h4>
-        <p class="content">
-          {{ feature.value.description }}
-        </p>
-        <div>
+        <div class="feature-content">
+          <h4 class="feature-name is-4">{{ feature.value.name }}</h4>
+          <div class="content">
+            <p>{{ feature.value.description }}</p>
+          </div>
+        </div>
+        <div
+          v-if="feature.value.action && feature.value.action.path"
+          class="action-container"
+        >
           <d-button
-            type="is-primary"
-            :url="feature.value.path"
-            :label="layout.settings.text"
-            size="is-medium"
+            color="light"
+            class="is-outlined"
+            :url="feature.value.action.path"
+            :label="feature.value.action.label || 'Learn More'"
+            size="is-small"
           />
         </div>
       </li>
@@ -52,10 +58,36 @@ export default {
 <style lang="scss">
 .feature-list {
   .feature-list-heading {
+    font-size: $size-3;
     margin-bottom: $size-3;
   }
-  .content {
+
+  .feature-list-heading,
+  .feature-name {
+    font-family: $family-heading;
+    text-transform: uppercase;
     text-align: center;
+  }
+
+  .feature-name {
+    font-size: $size-4;
+  }
+
+  .feature {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: $size-7;
+    text-align: center;
+    padding-bottom: $size-6;
+    height: 100%;
+    flex-grow: 1;
   }
   .image {
     margin: 0 auto $size-7;
@@ -63,6 +95,9 @@ export default {
       height: 100%;
       object-fit: contain;
     }
+  }
+  .action-container {
+    text-align: center;
   }
 }
 </style>

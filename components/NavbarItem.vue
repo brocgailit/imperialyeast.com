@@ -111,8 +111,9 @@ export default {
     }
   }
   .navbar-dropdown {
-    .navbar-item {
-      font-weight: $weight-normal !important;
+    .navbar-item span {
+      font-weight: $weight-normal;
+      font-size: $size-8;
     }
     @include mobile {
       padding: 0;
