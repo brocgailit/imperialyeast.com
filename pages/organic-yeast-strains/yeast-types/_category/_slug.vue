@@ -77,7 +77,7 @@
             <dl class="strain-detail">
               <dt class="strain-detail-name">Flocculation:</dt>
               <dd class="strain-detail-info">
-                {{ strain.flocculation | flocculation }}
+                {{ strain.flocculation }}
               </dd>
             </dl>
             <dl class="strain-detail">
@@ -252,18 +252,7 @@ export default {
     StrainBeerStyles
   },
   filters: {
-    celsius: f => Math.round(((f - 32) * 5) / 9),
-    flocculation(val) {
-      return [
-        'Very Low',
-        'Low',
-        'Med-Low',
-        'Medium',
-        'Med-High',
-        'High',
-        'Very High'
-      ][val]
-    }
+    celsius: f => Math.round(((f - 32) * 5) / 9)
   },
   computed: {
     ...mapState({
