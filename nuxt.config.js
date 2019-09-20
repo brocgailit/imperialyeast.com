@@ -168,7 +168,8 @@ module.exports = {
               'faCommentAltLines',
               'faMinus',
               'faPlus',
-              'faCertificate'
+              'faCertificate',
+              'faHandHoldingHeart'
             ]
           },
           {

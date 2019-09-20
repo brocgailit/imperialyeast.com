@@ -12,15 +12,30 @@
       >
         <span>{{ strain.productCode }} {{ strain.name }}</span>
       </nuxt-link>
-      <nuxt-link to="/in-stock-or-your-order-ships-free/">
+      <nuxt-link
+        v-if="strain.instock && showIcons"
+        to="/in-stock-or-your-order-ships-free/"
+      >
         <b-tooltip
-          v-if="strain.instock"
           style="vertical-align: middle"
           label="Guaranteed In Stock"
           position="is-top"
           animated
         >
           <fa-icon :icon="['fal', 'shipping-fast']" size="sm" />
+        </b-tooltip>
+      </nuxt-link>
+      <nuxt-link
+        v-if="!strain.consumer && showIcons"
+        to="/in-stock-or-your-order-ships-free/"
+      >
+        <b-tooltip
+          style="vertical-align: middle"
+          label="Special Order"
+          position="is-top"
+          animated
+        >
+          <fa-icon :icon="['fal', 'hand-holding-heart']" size="sm" />
         </b-tooltip>
       </nuxt-link>
     </h3>
@@ -75,6 +90,10 @@ export default {
       default: () => null
     },
     showDetail: {
+      type: Boolean,
+      default: false
+    },
+    showIcons: {
       type: Boolean,
       default: false
     }

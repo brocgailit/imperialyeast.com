@@ -137,7 +137,9 @@
           </div>
           <strain-beer-styles
             v-if="styles.length"
+            class="strain-styles-container"
             :styles="styles"
+            :strain="strain"
             title="Recommended Beer Styles"
           />
         </div>
@@ -547,7 +549,6 @@ export default {
       }
 
       .strain-profiles-container {
-        margin-top: $size-3;
         h3 {
           font-weight: $weight-bold;
           text-align: center;
@@ -558,6 +559,10 @@ export default {
         .strain-profiles {
           justify-content: center;
         }
+      }
+      .strain-profiles-container,
+      .strain-styles-container {
+        margin-top: $size-3;
       }
 
       .strain-species {

@@ -25,6 +25,12 @@
             Probrew
           </b-checkbox>
         </div> -->
+      <span
+        v-show="filteredStrains.length !== strains.length"
+        class="filter-length-text"
+      >
+        Showing {{ filteredStrains.length }} strains
+      </span>
     </div>
     <transition name="fade-filters">
       <div
@@ -105,9 +111,9 @@ export default {
       type: Array,
       default: () => []
     },
-    productVariation: {
-      type: Array,
-      default: () => ['home']
+    showCommercial: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -130,9 +136,8 @@ export default {
     }
   },
   computed: {
-    // Debounce the things
-    filteredStrains() {
-      const searched = this.strains.filter(s => {
+    searchedStrains() {
+      return this.strains.filter(s => {
         const checks = [
           'name',
           'productCode',
@@ -155,11 +160,11 @@ export default {
           })
           .some(match => match)
       })
-
-      const filtered = searched.filter(s => {
-        const home =
-          this.productVariation.some(a => s.consumer === (a === 'home')) ||
-          this.productVariation.length === 0
+    },
+    // Debounce the things
+    filteredStrains() {
+      const filtered = this.searchedStrains.filter(s => {
+        const home = this.showCommercial ? true : s.consumer
         const flocLevel = this.flocculationLabels
           .map(l => l.toLowerCase())
           .indexOf(s.flocculation.toLowerCase())
@@ -174,15 +179,12 @@ export default {
           this.temperature[1] >= s.temperature.min
         return home && floc && atten && temp
       })
-
       this.$emit('filter', filtered)
       return filtered
     }
   },
-  /* created: function() {
-    this.$emit('filter', this.filteredStrains)
-  }, */
   mounted: function() {
+    this.test = this.strains
     this.sliderEventType = window.matchMedia('(max-width: 768px)').matches
       ? 'touch'
       : 'mouse'
@@ -214,6 +216,12 @@ $themeColor: $primary;
   backdrop-filter: blur(3px);
   padding: $size-7;
   margin-bottom: $size-5;
+
+  .filter-length-text {
+    float: right;
+    font-size: $size-8;
+    color: $grey;
+  }
   // margin-top: -$size-4;
   .filters {
     transform-origin: top left;
