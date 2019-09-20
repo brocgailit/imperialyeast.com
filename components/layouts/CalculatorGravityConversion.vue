@@ -13,6 +13,7 @@
         >
           <b-input
             v-model="plato"
+            v-show-decimals="1"
             type="number"
             :step="0.1"
             :min="0"
@@ -28,6 +29,7 @@
         >
           <b-input
             v-model="specificGravity"
+            v-show-decimals="3"
             type="number"
             :step="0.001"
             :min="0"

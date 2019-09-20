@@ -87,6 +87,7 @@ module.exports = {
     { src: '~/plugins/nuxt-jsonld' },
     { src: '~/plugins/responsive-image' },
     { src: '~/plugins/dynamic-button' },
+    { src: '~/plugins/show-decimals' },
     { src: '~/plugins/social-sharing', ssr: true },
     { src: '~/plugins/v-lazy-image', ssr: false },
     { src: '~/plugins/vue-cookie', ssr: false },
