@@ -46,6 +46,7 @@ async function getWebsite(app) {
       brand: 1,
       footer: 1,
       footerMenu: 1,
+      secondaryMenu: 1,
       author: 1,
       map: 1
     }
@@ -68,7 +69,11 @@ async function getMenus(app) {
       path: 1
     },
     filter: {
-      $or: [{ _id: website.mainMenu._id }, { _id: website.footerMenu._id }]
+      $or: [
+        { _id: website.mainMenu._id },
+        { _id: website.footerMenu._id },
+        { _id: website.secondaryMenu._id }
+      ]
     }
   })
   cache.set('menus', menus)
@@ -104,7 +109,8 @@ export const actions = {
       commit('setWebsite', website)
       commit('setMenu', {
         main: menus.find(m => m._id === website.mainMenu._id),
-        footer: menus.find(m => m._id === website.footerMenu._id)
+        footer: menus.find(m => m._id === website.footerMenu._id),
+        secondary: menus.find(m => m._id === website.secondaryMenu._id)
       })
       commit('setNotifications', notifications)
     })

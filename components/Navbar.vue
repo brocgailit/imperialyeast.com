@@ -12,7 +12,7 @@
       :class="{ 'is-open': isOpen, 'search-active': showSearch }"
       @click="isOpen = false"
     >
-      <ul v-if="menu" id="menu">
+      <ul v-if="menu" id="mainMenu" class="menu">
         <li v-for="(item, i) of menu.items" :key="item.value.page._id + i">
           <navbar-item :item="item" />
         </li>
@@ -24,6 +24,14 @@
           >
             <fa-icon :icon="['fal', 'search']" size="lg" />
           </button>
+        </li>
+      </ul>
+      <ul v-if="secondaryMenu" id="secondaryMenu" class="menu">
+        <li
+          v-for="(item, i) of secondaryMenu.items"
+          :key="item.value.page._id + i"
+        >
+          <navbar-item :item="item" secondary />
         </li>
       </ul>
       <site-search
@@ -68,6 +76,10 @@ export default {
   },
   props: {
     menu: {
+      type: Object,
+      default: () => null
+    },
+    secondaryMenu: {
       type: Object,
       default: () => null
     }
@@ -136,33 +148,39 @@ $logo-size: 160px;
     position: relative;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     text-align: center;
     margin: 0 auto;
     max-width: 1200px;
-    #menu {
+    .menu {
+      a {
+        text-transform: uppercase;
+        font-weight: $weight-bold;
+        font-size: $size-6;
+        transition: 150ms ease-in-out;
+      }
       transition: opacity 250ms ease-in-out;
+      width: 100%;
+      flex: 1 0 100%;
       display: flex;
       justify-content: center;
-      li {
-        // padding: $size-7 0;
+    }
+
+    @include desktop {
+      #secondaryMenu {
         a {
+          font-size: $size-7;
           text-transform: uppercase;
-          color: $black;
-          font-weight: $weight-bold;
-          font-size: $size-6;
-          transition: 150ms ease-in-out;
-          &:hover {
-            opacity: 0.75;
-          }
-          &.nuxt-link-active {
-            color: $primary;
-          }
+          font-weight: $weight-light;
+        }
+        .navbar-item {
+          padding-top: 0;
         }
       }
     }
 
     &.search-active {
-      #menu {
+      .menu {
         opacity: 0;
         pointer-events: none;
       }
@@ -283,7 +301,7 @@ $logo-size: 160px;
       // height: 0;
       pointer-events: none;
       overflow: visible;
-      #menu {
+      .menu {
         width: 100%;
         background-color: $white;
         opacity: 0;
@@ -304,10 +322,12 @@ $logo-size: 160px;
         }
       }
 
-      &.is-open #menu {
-        opacity: 1;
-        display: block;
-        transform: translateX(0);
+      &.is-open {
+        .menu {
+          opacity: 1;
+          display: block;
+          transform: translateX(0);
+        }
       }
 
       .site-search {

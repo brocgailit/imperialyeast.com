@@ -3,6 +3,7 @@
     v-if="item.value.submenus && item.value.submenus.length"
     ref="item"
     class="navbar-item has-dropdown is-hoverable"
+    :class="{ 'is-secondary': secondary }"
   >
     <nuxt-link
       :id="item.value.page.name_slug"
@@ -48,6 +49,7 @@
   <nuxt-link
     v-else
     class="navbar-item"
+    :class="{ 'is-secondary': secondary }"
     active-class="is-active"
     :to="isHomePage ? '/' : '/' + item.value.page.name_slug + '/'"
   >
@@ -71,6 +73,10 @@ export default {
     item: {
       type: Object,
       default: () => null
+    },
+    secondary: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -95,6 +101,22 @@ export default {
 .navbar-item {
   .navbar-item-icon {
     margin-right: $size-7 / 2;
+  }
+  &.has-dropdown {
+    .navbar-link {
+      &:after {
+        content: '';
+        display: none;
+      }
+    }
+  }
+  .navbar-dropdown {
+    .navbar-item {
+      font-weight: $weight-normal !important;
+    }
+    @include mobile {
+      padding: 0;
+    }
   }
 }
 </style>

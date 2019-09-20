@@ -21,7 +21,7 @@
         </button>
       </div>
     </transition>
-    <navbar :menu="mainMenu" />
+    <navbar :menu="mainMenu" :secondary-menu="secondaryMenu" />
     <main>
       <nuxt />
     </main>
@@ -85,6 +85,7 @@ export default {
       website: state => state.website,
       isShaded: state => state.showNavigation,
       mainMenu: state => state.menu.main,
+      secondaryMenu: state => state.menu.secondary,
       footerMenu: state => state.menu.footer
     })
   },
