@@ -18,14 +18,14 @@
             :to="'/organic-yeast-strains/yeast-types/' + type.name_slug"
             aria-current="page"
           >
-            <span v-if="type.name_plural">{{ type.name_plural }}</span>
+            <span v-if="type.namePlural">{{ type.namePlural }}</span>
             <span v-else>{{ type.name }}s</span>
           </nuxt-link>
         </li>
       </ul>
     </nav>
     <header class="container" :style="{ color: type.color }">
-      <h1 v-if="type.name_plural">{{ type.name_plural }}</h1>
+      <h1 v-if="type.namePlural">{{ type.namePlural }}</h1>
       <h1 v-else>{{ type.name }}s</h1>
       <h2 class="type-description-short">{{ type.short_description }}</h2>
     </header>

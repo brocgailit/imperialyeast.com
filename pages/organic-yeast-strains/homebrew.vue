@@ -52,7 +52,7 @@ export default {
         } else {
           groups[strain.type.name] = Object.assign({}, strain.type, {
             slug: strain.type.name_slug,
-            name_plural: strain.type.name_plural,
+            namePlural: strain.type.namePlural,
             strains: [strain]
           })
         }
