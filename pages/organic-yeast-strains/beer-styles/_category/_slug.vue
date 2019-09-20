@@ -52,28 +52,50 @@
       </header>
       <div class="style-description" v-html="style.description" />
       <div class="recommended-strains">
-        <h3 class="title">Recommended Yeast Strains</h3>
-        <div class="strain-list">
-          <ul class="">
+        <h3 class="title is-4">Recommended Yeast Strains</h3>
+        <div v-if="strains.best && strains.best.length > 0" class="strain-list">
+          <h4 class="strain-list-title">
+            <span>Great Choice{{ strains.best.length > 1 ? 's' : '' }}</span>
+          </h4>
+          <ul>
             <li
-              v-for="strain of strains"
+              v-for="strain of strains.best"
               :key="strain.strain.name_slug"
               class="strain"
             >
-              <strain-card :strain="strain.strain">
-                <!-- Suitability: -->
-                <div class="strain-suitability">
-                  <star-rating
-                    class="star-rating"
-                    :max="3"
-                    :value="strain.suitability"
-                    color="grey"
-                  />
-                  <span class="suitability-label">
-                    {{ strain.suitability | suitability }}
-                  </span>
-                </div>
-              </strain-card>
+              <strain-card :strain="strain.strain" />
+            </li>
+          </ul>
+        </div>
+        <div
+          v-if="strains.better && strains.better.length > 0"
+          class="strain-list"
+        >
+          <h4 class="strain-list-title">
+            <span>Good Choice{{ strains.better.length > 1 ? 's' : '' }}</span>
+          </h4>
+          <ul>
+            <li
+              v-for="strain of strains.better"
+              :key="strain.strain.name_slug"
+              class="strain"
+            >
+              <strain-card :strain="strain.strain" />
+            </li>
+          </ul>
+        </div>
+
+        <div v-if="strains.good && strains.good.length > 0" class="strain-list">
+          <h4 class="strain-list-title">
+            <span>OK, special considerations</span>
+          </h4>
+          <ul>
+            <li
+              v-for="strain of strains.good"
+              :key="strain.strain.name_slug"
+              class="strain"
+            >
+              <strain-card :strain="strain.strain" />
             </li>
           </ul>
         </div>
@@ -85,19 +107,11 @@
 <script>
 import { mapState } from 'vuex'
 import StrainCard from '~/components/StrainCard.vue'
-import StarRating from '~/components/StarRating.vue'
 export default {
   components: {
-    StrainCard,
-    StarRating
+    StrainCard
   },
   filters: {
-    suitability(value) {
-      if (value === 3) return 'Great Choice!'
-      if (value === 2) return 'Good Choice'
-      if (value === 1) return 'OK, special considerations'
-      return 'Bad choice'
-    },
     bjcpLink(code) {
       const [parent] = code.match(/(\d+)/)
       return `http://www.bjcp.org/style/2015/${parent}/${code}/`
@@ -180,11 +194,11 @@ export default {
         .map(strain => ({ strain, suitability }))
     }
 
-    const strains = [
-      ...suitability('styleBest', 3),
-      ...suitability('styleBetter', 2),
-      ...suitability('styleGood', 1)
-    ]
+    const strains = {
+      best: suitability('styleBest', 3),
+      better: suitability('styleBetter', 2),
+      good: suitability('styleGood', 1)
+    }
 
     return {
       style,
@@ -294,6 +308,7 @@ export default {
   }
 
   .style-description {
+    padding: $size-7;
     h4,
     h5 {
       font-weight: $weight-black;
@@ -311,9 +326,6 @@ export default {
   }
 
   .recommended-strains {
-    h3 {
-      font-size: $size-5;
-    }
     padding-bottom: $size-1;
   }
 
@@ -321,6 +333,32 @@ export default {
     padding: 0 $size-4;
     break-inside: avoid;
     page-break-inside: avoid;
+
+    .strain-list-title {
+      padding-left: $size-7;
+      position: relative;
+      font-weight: $weight-black;
+      font-size: $size-5;
+      text-transform: uppercase;
+      text-align: left;
+      background-color: $white;
+      margin: 0;
+      span {
+        position: relative;
+        z-index: 1;
+        background-color: $white;
+        padding-right: $size-5;
+      }
+      &:after {
+        content: '';
+        position: absolute;
+        left: $size-7;
+        width: calc(100% - #{$size-7 * 2});
+        background-color: rgba($grey, 0.25);
+        height: 2px;
+        top: 50%;
+      }
+    }
     .strain {
       width: 100%;
       flex: 1 0 100%;
