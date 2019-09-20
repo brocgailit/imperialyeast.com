@@ -29,12 +29,6 @@ export default {
 </script>
 
 <style lang="scss">
-.section .image-layout {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: block;
-}
-
 .section .title:not(:first-of-type) {
   margin-top: $size-5;
 }

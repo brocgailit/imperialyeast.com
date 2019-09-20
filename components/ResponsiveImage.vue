@@ -1,5 +1,5 @@
 <template>
-  <picture v-if="!lazy">
+  <picture v-if="!lazy" :style="{ width, height }" class="responsive-image">
     <source
       :srcset="path | srcset({ format: 'webp' })"
       :sizes="sizes"
@@ -8,8 +8,14 @@
     <source :srcset="path | srcset" :sizes="sizes" :type="path | fileType" />
     <img :src="path + '?w=375'" :alt="alt" />
   </picture>
-  <no-ssr v-else>
-    <v-lazy-image use-picture :alt="alt" :src="path + '?w=375'">
+  <client-only v-else>
+    <v-lazy-image
+      use-picture
+      :alt="alt"
+      :src="path + '?w=375'"
+      :style="{ width: width, height }"
+      class="responsive-image"
+    >
       <source
         :srcset="path | srcset({ format: 'webp' })"
         :sizes="sizes"
@@ -17,7 +23,7 @@
       />
       <source :srcset="path | srcset" :sizes="sizes" :type="path | fileType" />
     </v-lazy-image>
-  </no-ssr>
+  </client-only>
 </template>
 
 <script>
@@ -62,11 +68,11 @@ export default {
       default: '75vw'
     },
     width: {
-      type: Number,
+      type: [String, Number],
       default: null
     },
     height: {
-      type: Number,
+      type: [String, Number],
       default: null
     },
     fit: {
@@ -80,3 +86,12 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.responsive-image {
+  img {
+    width: 100%;
+    object-fit: contain;
+  }
+}
+</style>
