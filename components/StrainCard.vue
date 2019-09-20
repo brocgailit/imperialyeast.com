@@ -25,17 +25,14 @@
           <fa-icon :icon="['fal', 'shipping-fast']" size="sm" />
         </b-tooltip>
       </nuxt-link>
-      <nuxt-link
-        v-if="!strain.consumer && showIcons"
-        to="/in-stock-or-your-order-ships-free/"
-      >
+      <nuxt-link v-if="!strain.consumer && showIcons" to="/contact/">
         <b-tooltip
           style="vertical-align: middle"
           label="Special Order"
           position="is-top"
           animated
         >
-          <fa-icon :icon="['fal', 'hand-holding-heart']" size="sm" />
+          <fa-icon :icon="['fal', 'phone']" size="sm" />
         </b-tooltip>
       </nuxt-link>
     </h3>
