@@ -19,6 +19,7 @@ import FAQList from '~/components/layouts/FAQList.vue'
 import CalculatorGravityConversion from '~/components/layouts/CalculatorGravityConversion.vue'
 import CalculatorPitch from '~/components/layouts/CalculatorPitch.vue'
 import Testimonials from '~/components/layouts/Testimonials.vue'
+import FeatureList from '~/components/layouts/FeatureList.vue'
 
 const COMPONENTS = [
   { name: 'image', ref: Image },
@@ -41,7 +42,8 @@ const COMPONENTS = [
   { name: 'faq', ref: FAQList },
   { name: 'gravityConversion', ref: CalculatorGravityConversion },
   { name: 'pitchCalculator', ref: CalculatorPitch },
-  { name: 'testimonials', ref: Testimonials }
+  { name: 'testimonials', ref: Testimonials },
+  { name: 'features', ref: FeatureList }
 ]
 
 export { COMPONENTS }
