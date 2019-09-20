@@ -1,6 +1,6 @@
 <template>
   <section class="resources-home">
-    Redirecting to homebrew
+    Redirecting to commercial strains
   </section>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
   name: 'YeastStrainsDefaultPage',
   fetch({ params, redirect }) {
-    redirect(307, '/organic-yeast-strains/homebrew/')
+    redirect(307, '/organic-yeast-strains/commercial/')
   }
 }
 </script>
