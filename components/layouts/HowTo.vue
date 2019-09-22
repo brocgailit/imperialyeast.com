@@ -6,7 +6,7 @@
         :key="howto._id"
         class="howto"
       >
-        <div>
+        <div class="howto-content">
           <h4 class="howto-name">{{ howto.name }}</h4>
           <h5 class="howto-description">
             {{ howto.description }}
@@ -20,14 +20,24 @@
             >
               <div v-html="step.value.text" />
               <responsive-image
-                v-if="step.value.image"
+                v-if="step.value.image && layout.settings.showStepImages"
                 class="howto-step-image"
                 :path="step.value.image.path"
                 sizes="33vw"
+                width="300px"
                 lazy
               />
             </li>
           </ol>
+        </div>
+        <div class="howto-image">
+          <responsive-image
+            v-if="howto.image && howto.image.path"
+            :path="howto.image.path"
+            sizes="33vw"
+            width="300px"
+            lazy
+          />
         </div>
       </li>
     </ul>
@@ -106,7 +116,22 @@ export default {
 
 <style lang="scss">
 .howto-list {
-  padding: $size-5;
+  .howto {
+    display: flex;
+    flex-wrap: wrap;
+    .howto-content {
+      flex: 0 1 60%;
+    }
+    .howto-image {
+      flex: 0 1 40%;
+    }
+    @include mobile {
+      .howto-content,
+      .howto-image {
+        flex: 1 1 100%;
+      }
+    }
+  }
   .howto-name {
     // font-weight: $weight-bold;
     text-transform: uppercase;
