@@ -25,6 +25,7 @@ export default {
 <style lang="scss">
 .image-layout {
   text-align: center;
+  margin: 0 auto;
   display: flex;
 }
 </style>
