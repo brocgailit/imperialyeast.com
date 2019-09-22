@@ -103,6 +103,9 @@ export default {
       filter: {
         'type._id': type._id
       },
+      sort: {
+        productCode: 1
+      },
       rspc: 1
     })
     return { strains, type }
