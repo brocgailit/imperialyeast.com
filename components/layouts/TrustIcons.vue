@@ -13,6 +13,14 @@
       :icons="layout.settings.icons.slice(4, layout.settings.icons.length)"
       :size="60"
     />
+    <p
+      v-if="layout.settings.action && layout.settings.action.path"
+      class="has-text-centered"
+    >
+      <nuxt-link :to="layout.settings.action.path" class="trust-icons-action">
+        {{ layout.settings.action.label || 'Find out more' }}
+      </nuxt-link>
+    </p>
   </div>
 </template>
 
@@ -40,6 +48,11 @@ export default {
 
   .trust-icons-heading {
     margin-bottom: $size-6;
+  }
+
+  .trust-icons-action {
+    font-size: $size-7;
+    text-transform: uppercase;
   }
 }
 </style>
