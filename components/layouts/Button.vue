@@ -1,12 +1,12 @@
 <template>
   <div class="button-layout container">
     <d-button
-      type="is-primary"
       :url="layout.settings.url"
-      :custom-class="layout.settings.class"
+      :custom-class="
+        layout.settings.class ? layout.settings.class : 'is-primary'
+      "
       :custom-style="layout.settings.style"
       :label="layout.settings.text"
-      size="is-medium"
     />
   </div>
 </template>

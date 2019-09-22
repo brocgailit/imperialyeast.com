@@ -75,7 +75,7 @@ export default {
     },
     color: {
       type: String,
-      default: 'primary'
+      default: null
     },
     size: {
       type: String,
