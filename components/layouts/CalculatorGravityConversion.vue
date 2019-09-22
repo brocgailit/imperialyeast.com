@@ -1,5 +1,5 @@
 <template>
-  <div class="panel">
+  <div class="calculator-gravity panel">
     <div class="panel-heading">
       <h3>{{ layout.settings.title }}</h3>
     </div>
@@ -82,7 +82,8 @@ export default {
 </script>
 
 <style lang="scss">
-.panel {
+.calculator-gravity.panel {
+  margin-bottom: $size-5;
   .panel-heading {
     text-transform: uppercase;
     display: flex;

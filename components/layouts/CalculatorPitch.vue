@@ -1,5 +1,5 @@
 <template>
-  <div class="panel">
+  <div class="calculator-pitch panel">
     <div class="panel-heading panel-subheading">
       <h4>{{ mode === 'home' ? 'Homebrew' : 'Commercial' }}</h4>
     </div>
@@ -241,7 +241,8 @@ export default {
 
 <style lang="scss">
 @import '~buefy/src/scss/components/switch';
-.panel {
+.calculator-pitch.panel {
+  margin-bottom: $size-5;
   .panel-heading,
   .panel-tabs a {
     text-transform: uppercase;
