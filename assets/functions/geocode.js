@@ -87,9 +87,9 @@
 /******/ ({
 
 /***/ "../../node_modules/axios/index.js":
-/*!****************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/index.js ***!
-  \****************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/index.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -98,9 +98,9 @@ module.exports = __webpack_require__(/*! ./lib/axios */ "../../node_modules/axio
 /***/ }),
 
 /***/ "../../node_modules/axios/lib/adapters/http.js":
-/*!****************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/lib/adapters/http.js ***!
-  \****************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/lib/adapters/http.js ***!
+  \*****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -385,9 +385,9 @@ module.exports = function httpAdapter(config) {
 /***/ }),
 
 /***/ "../../node_modules/axios/lib/adapters/xhr.js":
-/*!***************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/lib/adapters/xhr.js ***!
-  \***************************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/lib/adapters/xhr.js ***!
+  \****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -571,9 +571,9 @@ module.exports = function xhrAdapter(config) {
 /***/ }),
 
 /***/ "../../node_modules/axios/lib/axios.js":
-/*!********************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/lib/axios.js ***!
-  \********************************************************************************/
+/*!*********************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/lib/axios.js ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -636,9 +636,9 @@ module.exports.default = axios;
 /***/ }),
 
 /***/ "../../node_modules/axios/lib/cancel/Cancel.js":
-/*!****************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/lib/cancel/Cancel.js ***!
-  \****************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/lib/cancel/Cancel.js ***!
+  \*****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -667,9 +667,9 @@ module.exports = Cancel;
 /***/ }),
 
 /***/ "../../node_modules/axios/lib/cancel/CancelToken.js":
-/*!*********************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/lib/cancel/CancelToken.js ***!
-  \*********************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/lib/cancel/CancelToken.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -736,9 +736,9 @@ module.exports = CancelToken;
 /***/ }),
 
 /***/ "../../node_modules/axios/lib/cancel/isCancel.js":
-/*!******************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/lib/cancel/isCancel.js ***!
-  \******************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/lib/cancel/isCancel.js ***!
+  \*******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -753,9 +753,9 @@ module.exports = function isCancel(value) {
 /***/ }),
 
 /***/ "../../node_modules/axios/lib/core/Axios.js":
-/*!*************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/lib/core/Axios.js ***!
-  \*************************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/lib/core/Axios.js ***!
+  \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -851,9 +851,9 @@ module.exports = Axios;
 /***/ }),
 
 /***/ "../../node_modules/axios/lib/core/InterceptorManager.js":
-/*!**************************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/lib/core/InterceptorManager.js ***!
-  \**************************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/lib/core/InterceptorManager.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -915,9 +915,9 @@ module.exports = InterceptorManager;
 /***/ }),
 
 /***/ "../../node_modules/axios/lib/core/createError.js":
-/*!*******************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/lib/core/createError.js ***!
-  \*******************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/lib/core/createError.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -945,9 +945,9 @@ module.exports = function createError(message, config, code, request, response) 
 /***/ }),
 
 /***/ "../../node_modules/axios/lib/core/dispatchRequest.js":
-/*!***********************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/lib/core/dispatchRequest.js ***!
-  \***********************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/lib/core/dispatchRequest.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1043,9 +1043,9 @@ module.exports = function dispatchRequest(config) {
 /***/ }),
 
 /***/ "../../node_modules/axios/lib/core/enhanceError.js":
-/*!********************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/lib/core/enhanceError.js ***!
-  \********************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/lib/core/enhanceError.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1097,9 +1097,9 @@ module.exports = function enhanceError(error, config, code, request, response) {
 /***/ }),
 
 /***/ "../../node_modules/axios/lib/core/mergeConfig.js":
-/*!*******************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/lib/core/mergeConfig.js ***!
-  \*******************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/lib/core/mergeConfig.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1160,9 +1160,9 @@ module.exports = function mergeConfig(config1, config2) {
 /***/ }),
 
 /***/ "../../node_modules/axios/lib/core/settle.js":
-/*!**************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/lib/core/settle.js ***!
-  \**************************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/lib/core/settle.js ***!
+  \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1197,9 +1197,9 @@ module.exports = function settle(resolve, reject, response) {
 /***/ }),
 
 /***/ "../../node_modules/axios/lib/core/transformData.js":
-/*!*********************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/lib/core/transformData.js ***!
-  \*********************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/lib/core/transformData.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1229,9 +1229,9 @@ module.exports = function transformData(data, headers, fns) {
 /***/ }),
 
 /***/ "../../node_modules/axios/lib/defaults.js":
-/*!***********************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/lib/defaults.js ***!
-  \***********************************************************************************/
+/*!************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/lib/defaults.js ***!
+  \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1339,9 +1339,9 @@ module.exports = defaults;
 /***/ }),
 
 /***/ "../../node_modules/axios/lib/helpers/bind.js":
-/*!***************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/lib/helpers/bind.js ***!
-  \***************************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/lib/helpers/bind.js ***!
+  \****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1362,9 +1362,9 @@ module.exports = function bind(fn, thisArg) {
 /***/ }),
 
 /***/ "../../node_modules/axios/lib/helpers/buildURL.js":
-/*!*******************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/lib/helpers/buildURL.js ***!
-  \*******************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/lib/helpers/buildURL.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1445,9 +1445,9 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 /***/ }),
 
 /***/ "../../node_modules/axios/lib/helpers/combineURLs.js":
-/*!**********************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/lib/helpers/combineURLs.js ***!
-  \**********************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/lib/helpers/combineURLs.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1471,9 +1471,9 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 /***/ }),
 
 /***/ "../../node_modules/axios/lib/helpers/cookies.js":
-/*!******************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/lib/helpers/cookies.js ***!
-  \******************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/lib/helpers/cookies.js ***!
+  \*******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1536,9 +1536,9 @@ module.exports = (
 /***/ }),
 
 /***/ "../../node_modules/axios/lib/helpers/isAbsoluteURL.js":
-/*!************************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/lib/helpers/isAbsoluteURL.js ***!
-  \************************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/lib/helpers/isAbsoluteURL.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1562,9 +1562,9 @@ module.exports = function isAbsoluteURL(url) {
 /***/ }),
 
 /***/ "../../node_modules/axios/lib/helpers/isURLSameOrigin.js":
-/*!**************************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/lib/helpers/isURLSameOrigin.js ***!
-  \**************************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/lib/helpers/isURLSameOrigin.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1642,9 +1642,9 @@ module.exports = (
 /***/ }),
 
 /***/ "../../node_modules/axios/lib/helpers/normalizeHeaderName.js":
-/*!******************************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/lib/helpers/normalizeHeaderName.js ***!
-  \******************************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/lib/helpers/normalizeHeaderName.js ***!
+  \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1666,9 +1666,9 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 /***/ }),
 
 /***/ "../../node_modules/axios/lib/helpers/parseHeaders.js":
-/*!***********************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/lib/helpers/parseHeaders.js ***!
-  \***********************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/lib/helpers/parseHeaders.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1731,9 +1731,9 @@ module.exports = function parseHeaders(headers) {
 /***/ }),
 
 /***/ "../../node_modules/axios/lib/helpers/spread.js":
-/*!*****************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/lib/helpers/spread.js ***!
-  \*****************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/lib/helpers/spread.js ***!
+  \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1770,9 +1770,9 @@ module.exports = function spread(callback) {
 /***/ }),
 
 /***/ "../../node_modules/axios/lib/utils.js":
-/*!********************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/lib/utils.js ***!
-  \********************************************************************************/
+/*!*********************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/lib/utils.js ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2116,9 +2116,9 @@ module.exports = {
 /***/ }),
 
 /***/ "../../node_modules/axios/node_modules/debug/src/browser.js":
-/*!*****************************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/node_modules/debug/src/browser.js ***!
-  \*****************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/node_modules/debug/src/browser.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2322,9 +2322,9 @@ function localstorage() {
 /***/ }),
 
 /***/ "../../node_modules/axios/node_modules/debug/src/debug.js":
-/*!***************************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/node_modules/debug/src/debug.js ***!
-  \***************************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/node_modules/debug/src/debug.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2558,9 +2558,9 @@ function coerce(val) {
 /***/ }),
 
 /***/ "../../node_modules/axios/node_modules/debug/src/index.js":
-/*!***************************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/node_modules/debug/src/index.js ***!
-  \***************************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/node_modules/debug/src/index.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2579,9 +2579,9 @@ if (typeof process === 'undefined' || process.type === 'renderer') {
 /***/ }),
 
 /***/ "../../node_modules/axios/node_modules/debug/src/node.js":
-/*!**************************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/node_modules/debug/src/node.js ***!
-  \**************************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/node_modules/debug/src/node.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2776,9 +2776,9 @@ exports.enable(load());
 /***/ }),
 
 /***/ "../../node_modules/axios/node_modules/follow-redirects/index.js":
-/*!**********************************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/node_modules/follow-redirects/index.js ***!
-  \**********************************************************************************************************/
+/*!***********************************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/node_modules/follow-redirects/index.js ***!
+  \***********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3109,9 +3109,9 @@ module.exports.wrap = wrap;
 /***/ }),
 
 /***/ "../../node_modules/axios/node_modules/is-buffer/index.js":
-/*!***************************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/node_modules/is-buffer/index.js ***!
-  \***************************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/node_modules/is-buffer/index.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -3131,9 +3131,9 @@ module.exports = function isBuffer (obj) {
 /***/ }),
 
 /***/ "../../node_modules/axios/node_modules/ms/index.js":
-/*!********************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/node_modules/ms/index.js ***!
-  \********************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/node_modules/ms/index.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -3294,20 +3294,20 @@ function plural(ms, n, name) {
 /***/ }),
 
 /***/ "../../node_modules/axios/package.json":
-/*!********************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/axios/package.json ***!
-  \********************************************************************************/
+/*!*********************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/axios/package.json ***!
+  \*********************************************************************************************/
 /*! exports provided: _args, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, browser, bugs, bundlesize, dependencies, description, devDependencies, homepage, keywords, license, main, name, repository, scripts, typings, version, default */
 /***/ (function(module) {
 
-module.exports = {"_args":[["axios@0.19.0","/home/broc/Development/imperialyeast.com"]],"_from":"axios@0.19.0","_id":"axios@0.19.0","_inBundle":false,"_integrity":"sha512-1uvKqKQta3KBxIz14F2v06AEHZ/dIoeKfbTRkK1E5oqjDnuEerLmYTgJB5AiQZHJcljpg1TuRzdjDR06qNk0DQ==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"axios@0.19.0","name":"axios","escapedName":"axios","rawSpec":"0.19.0","saveSpec":null,"fetchSpec":"0.19.0"},"_requiredBy":["/@nuxtjs/axios"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.19.0.tgz","_spec":"0.19.0","_where":"/home/broc/Development/imperialyeast.com","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"1.5.10","is-buffer":"^2.0.2"},"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"bundlesize":"^0.17.0","coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.0.2","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^20.1.0","grunt-karma":"^2.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^1.0.18","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^1.3.0","karma-chrome-launcher":"^2.2.0","karma-coverage":"^1.1.1","karma-firefox-launcher":"^1.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-opera-launcher":"^1.0.0","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^1.2.0","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.7","karma-webpack":"^1.7.0","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^5.2.0","sinon":"^4.5.0","typescript":"^2.8.1","url-search-params":"^0.10.0","webpack":"^1.13.1","webpack-dev-server":"^1.14.1"},"homepage":"https://github.com/axios/axios","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test && bundlesize","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","version":"0.19.0"};
+module.exports = {"_args":[["axios@0.19.0","C:\\Users\\Broc\\Documents\\Development\\imperialyeast.com"]],"_from":"axios@0.19.0","_id":"axios@0.19.0","_inBundle":false,"_integrity":"sha512-1uvKqKQta3KBxIz14F2v06AEHZ/dIoeKfbTRkK1E5oqjDnuEerLmYTgJB5AiQZHJcljpg1TuRzdjDR06qNk0DQ==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"axios@0.19.0","name":"axios","escapedName":"axios","rawSpec":"0.19.0","saveSpec":null,"fetchSpec":"0.19.0"},"_requiredBy":["/@nuxtjs/axios"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.19.0.tgz","_spec":"0.19.0","_where":"C:\\Users\\Broc\\Documents\\Development\\imperialyeast.com","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"1.5.10","is-buffer":"^2.0.2"},"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"bundlesize":"^0.17.0","coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.0.2","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^20.1.0","grunt-karma":"^2.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^1.0.18","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^1.3.0","karma-chrome-launcher":"^2.2.0","karma-coverage":"^1.1.1","karma-firefox-launcher":"^1.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-opera-launcher":"^1.0.0","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^1.2.0","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.7","karma-webpack":"^1.7.0","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^5.2.0","sinon":"^4.5.0","typescript":"^2.8.1","url-search-params":"^0.10.0","webpack":"^1.13.1","webpack-dev-server":"^1.14.1"},"homepage":"https://github.com/axios/axios","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test && bundlesize","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","version":"0.19.0"};
 
 /***/ }),
 
 /***/ "../../node_modules/has-flag/index.js":
-/*!*******************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/has-flag/index.js ***!
-  \*******************************************************************************/
+/*!********************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/has-flag/index.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3325,9 +3325,9 @@ module.exports = (flag, argv) => {
 /***/ }),
 
 /***/ "../../node_modules/supports-color/index.js":
-/*!*************************************************************************************!*\
-  !*** /home/broc/Development/imperialyeast.com/node_modules/supports-color/index.js ***!
-  \*************************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** C:/Users/Broc/Documents/Development/imperialyeast.com/node_modules/supports-color/index.js ***!
+  \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
