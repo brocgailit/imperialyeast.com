@@ -61,13 +61,16 @@ export default {
     }
   },
   async asyncData({ params, $axios }) {
-    const strains = await $axios.$get('/collections/get/strains', {
-      params: {
-        simple: true,
-        'filter[public]': true,
-        populate: 2,
-        rspc: 1
-      }
+    const strains = await $axios.$post('/collections/get/strains', {
+      simple: true,
+      filter: {
+        public: true
+      },
+      sort: {
+        productCode: 1
+      },
+      populate: 2,
+      rspc: 1
     })
     return { strains }
   },
