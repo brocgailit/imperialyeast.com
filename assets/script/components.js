@@ -19,7 +19,7 @@ import FAQList from '~/components/layouts/FAQList.vue'
 import CalculatorGravityConversion from '~/components/layouts/CalculatorGravityConversion.vue'
 import CalculatorPitch from '~/components/layouts/CalculatorPitch.vue'
 import Testimonials from '~/components/layouts/Testimonials.vue'
-import FeatureList from '~/components/layouts/FeatureList.vue'
+import FeatureMenu from '~/components/layouts/FeatureMenu.vue'
 import Menu from '~/components/layouts/Menu.vue'
 
 const COMPONENTS = [
@@ -44,7 +44,7 @@ const COMPONENTS = [
   { name: 'gravityConversion', ref: CalculatorGravityConversion },
   { name: 'pitchCalculator', ref: CalculatorPitch },
   { name: 'testimonials', ref: Testimonials },
-  { name: 'features', ref: FeatureList },
+  { name: 'features', ref: FeatureMenu },
   { name: 'menu', ref: Menu }
 ]
 

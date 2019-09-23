@@ -22,12 +22,19 @@
       <aside class="column is-one-third">
         <component
           :is="COMPONENTS.find(c => c.name === layout.component).ref"
-          v-for="(layout, l) of layouts"
+          v-for="(layout, l) of sidebarLayouts"
           :key="l"
           :layout="layout"
         />
       </aside>
     </section>
+
+    <component
+      :is="COMPONENTS.find(c => c.name === layout.component).ref"
+      v-for="(layout, l) of layouts"
+      :key="l"
+      :layout="layout"
+    />
   </div>
 </template>
 
@@ -39,12 +46,17 @@ export default {
   mixins: [page],
   computed: {
     header() {
-      return this.page.layouts.find(
-        l => l.component === 'header' || l.component === 'hero'
+      return this.page.layouts[0]
+    },
+    sidebarLayouts() {
+      return this.page.layouts.filter(
+        l => l.settings.class.indexOf('sidebar') > -1
       )
     },
     layouts() {
-      return this.page.layouts.filter(l => l !== this.header)
+      return this.page.layouts
+        .filter(l => !(l.settings.class.indexOf('sidebar') > -1))
+        .slice(1)
     }
   },
   async asyncData({ params, $axios }) {

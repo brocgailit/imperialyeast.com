@@ -1,44 +1,33 @@
 <template>
   <div
     :id="layout.settings.id"
-    class="feature-list container"
+    class="feature-menu container"
     :class="layout.settings.class"
   >
-    <h3 v-if="layout.settings.title" class="feature-list-heading">
-      {{ layout.settings.title }}
-    </h3>
     <ul class="features columns">
       <li
-        v-for="(feature, f) of layout.settings.features"
+        v-for="(feature, f) of layout.settings.features.items"
         :key="f"
         class="feature column"
       >
-        <figure
-          v-if="feature.value.icon && feature.value.icon.path"
-          class="image is-128x128"
-        >
-          <responsive-image
-            v-if="feature.value.icon"
-            :path="feature.value.icon.path"
-            sizes="33vw"
-            lazy
-          />
-        </figure>
+        <div v-if="feature.value.icon" class="feature-icon">
+          <b-icon :icon="feature.value.icon" />
+        </div>
         <div class="feature-content">
-          <h4 class="feature-name is-4">{{ feature.value.name }}</h4>
+          <h4 class="feature-name is-4">{{ feature.value.title }}</h4>
           <div class="content">
             <p>{{ feature.value.description }}</p>
           </div>
         </div>
         <div
-          v-if="feature.value.action && feature.value.action.path"
+          v-if="feature.value.cta && feature.value.page"
           class="action-container"
         >
           <d-button
             color="light"
             class="is-outlined"
-            :url="feature.value.action.path"
-            :label="feature.value.action.label || 'Learn More'"
+            :url="'/' + feature.value.page.name_slug + '/'"
+            :label="feature.value.cta || 'Learn More'"
             size="is-small"
           />
         </div>
@@ -56,13 +45,13 @@ export default {
 </script>
 
 <style lang="scss">
-.feature-list {
-  .feature-list-heading {
+.feature-menu {
+  .feature-menu-heading {
     font-size: $size-3;
     margin-bottom: $size-3;
   }
 
-  .feature-list-heading,
+  .feature-menu-heading,
   .feature-name {
     font-family: $family-heading;
     text-transform: uppercase;
