@@ -35,6 +35,7 @@
           >
             <nuxt-link
               class="menu-sub-item-link"
+              active-class="is-active"
               :to="
                 '/' +
                   item.value.page.name_slug +
@@ -73,25 +74,51 @@ export default {
     font-family: $family-heading;
     .menu-item-link {
       color: $black;
-      font-size: $size-4;
+      font-size: $size-5;
+      @include desktop {
+        font-size: $size-4;
+      }
     }
   }
   .menu-sub-item {
+    font-size: $size-5;
+    @include desktop {
+      font-size: $size-4;
+    }
     .menu-sub-item-link {
-      font-size: $size-5;
+      color: $primary;
+      display: inline-block;
+      position: relative;
+      line-height: 1.25;
+      &.is-active {
+        color: $dark;
+      }
+      &:hover,
+      &.is-active {
+        &:before {
+          position: absolute;
+          content: '';
+          top: 100%;
+          width: 100%;
+          height: 3px;
+          background-color: $primary;
+        }
+      }
     }
   }
 
-  &.is-horizontal {
-    .menu-sub {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      .menu-sub-item {
-        margin: 0 4px;
-        &:not(:last-child):after {
-          content: '•';
-          margin-left: 4px;
+  @include desktop {
+    &.is-horizontal {
+      .menu-sub {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        .menu-sub-item {
+          margin: 0 4px;
+          &:not(:last-child):after {
+            content: '•';
+            margin-left: 4px;
+          }
         }
       }
     }
