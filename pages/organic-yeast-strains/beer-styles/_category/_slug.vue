@@ -182,7 +182,10 @@ export default {
       allStrains = await $axios.$post('/collections/get/strains', {
         simple: true,
         populate: 2,
-        rspc: 1
+        rspc: 1,
+        filter: {
+          public: true
+        }
       })
     }
 

@@ -101,7 +101,8 @@ export default {
       simple: true,
       populate: 2,
       filter: {
-        'type._id': type._id
+        'type._id': type._id,
+        public: true
       },
       sort: {
         productCode: 1
