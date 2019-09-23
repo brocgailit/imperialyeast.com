@@ -5,6 +5,14 @@
       show-commercial
       @filter="filteredStrains = $event"
     />
+    <div v-if="page && page.layouts">
+      <component
+        :is="COMPONENTS.find(c => c.name === layout.component).ref"
+        v-for="layout of page.layouts"
+        :key="layout.id"
+        :layout="layout"
+      />
+    </div>
     <section class="search-filter-results">
       <div class="strains container">
         <article
@@ -68,6 +76,15 @@ export default {
     }
   },
   async asyncData({ params, $axios }) {
+    const [page] = await $axios.$post(`collections/get/pages`, {
+      filter: {
+        name_slug: 'commercial-strains'
+      },
+      limit: 1,
+      simple: true,
+      populate: 12,
+      rspc: 1
+    })
     const strains = await $axios.$post('/collections/get/strains', {
       simple: true,
       filter: {
@@ -79,7 +96,7 @@ export default {
       populate: 2,
       rspc: 1
     })
-    return { strains, filteredStrains: strains }
+    return { strains, filteredStrains: strains, page }
   }
 }
 </script>

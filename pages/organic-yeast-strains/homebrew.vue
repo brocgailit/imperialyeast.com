@@ -1,6 +1,14 @@
 <template>
   <div>
     <strain-filter :strains="strains" @filter="updateStrains" />
+    <div v-if="page && page.layouts">
+      <component
+        :is="COMPONENTS.find(c => c.name === layout.component).ref"
+        v-for="layout of page.layouts"
+        :key="layout.id"
+        :layout="layout"
+      />
+    </div>
     <section class="search-filter-results">
       <div class="strains container">
         <article
@@ -40,8 +48,7 @@ export default {
   mixins: [page],
   data() {
     return {
-      productVariation: ['home'],
-      filteredStrains: []
+      productVariation: ['home']
     }
   },
   computed: {
@@ -61,6 +68,15 @@ export default {
     }
   },
   async asyncData({ params, $axios }) {
+    const [page] = await $axios.$post(`collections/get/pages`, {
+      filter: {
+        name_slug: 'homebrew-strains'
+      },
+      limit: 1,
+      simple: true,
+      populate: 12,
+      rspc: 1
+    })
     const strains = await $axios.$post('/collections/get/strains', {
       simple: true,
       filter: {
@@ -72,11 +88,10 @@ export default {
       populate: 2,
       rspc: 1
     })
-    return { strains }
+    return { strains, filteredStrains: strains, page }
   },
   methods: {
     updateStrains(strains) {
-      console.log('updating strains')
       this.filteredStrains = strains
     }
   }
