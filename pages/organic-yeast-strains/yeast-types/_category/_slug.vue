@@ -258,6 +258,14 @@ export default {
     ...mapState({
       website: state => state.website
     }),
+    sharingImage() {
+      return (
+        this.strain.image ||
+        (!this.strain.consumer
+          ? this.website.defaultSharingImages.commercial
+          : this.website.defaultSharingImages.home)
+      )
+    },
     styles() {
       return [
         ...(this.strain.styleBest || []).map(style => ({
@@ -410,12 +418,12 @@ export default {
         {
           hid: 'open-graph-image',
           property: 'og:image',
-          content: this.$options.filters.asset(this.strain.image.path)
+          content: this.$options.filters.asset(this.sharingImage.path)
         },
         {
           hid: 'open-graph-image-alt',
           property: 'og:image:alt',
-          content: this.strain.image.title
+          content: this.sharingImage.title
         },
         {
           hid: 'twitter-card',
@@ -440,7 +448,7 @@ export default {
         {
           hid: 'twitter-image',
           property: 'twitter:image',
-          content: this.$options.filters.asset(this.strain.image.path)
+          content: this.$options.filters.asset(this.sharingImage.path)
         }
       ]
     }
