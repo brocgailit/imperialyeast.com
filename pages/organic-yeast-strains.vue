@@ -2,10 +2,8 @@
   <div>
     <div v-if="showRootContent" id="component-container">
       <component
-        :is="COMPONENTS.find(c => c.name === layout.component).ref"
-        v-for="layout of page.layouts"
-        :key="layout.id"
-        :layout="layout"
+        :is="COMPONENTS.find(c => c.name === page.layouts[0].component).ref"
+        :layout="page.layouts[0]"
       />
       <nav class="strain-type-nav container">
         <ul>
@@ -27,6 +25,12 @@
         <nuxt-child :page="page" />
       </article>
     </section>
+    <component
+      :is="COMPONENTS.find(c => c.name === layout.component).ref"
+      v-for="layout of page.layouts.slice(1)"
+      :key="layout.id"
+      :layout="layout"
+    />
   </div>
 </template>
 
