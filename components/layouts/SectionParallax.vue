@@ -76,6 +76,7 @@ export default {
   },
   methods: {
     setScrollParallax() {
+      if (window.matchMedia('(max-width: 768px)').matches) return
       this.parallaxOffset =
         (document.body.scrollTop || document.documentElement.scrollTop) * 0.17
       this.parallaxAnimation = requestAnimationFrame(this.setScrollParallax)
@@ -104,6 +105,12 @@ export default {
     background-repeat: no-repeat;
     background-size: 100%;
     opacity: 0.35;
+    @include mobile {
+      height: 100%;
+      transform: none !important;
+      background-size: cover;
+      background-position: center;
+    }
   }
   .title {
     color: $white;
