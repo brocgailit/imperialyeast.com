@@ -13,8 +13,8 @@
         <div v-if="feature.value.icon" class="feature-icon">
           <b-icon :icon="feature.value.icon" />
         </div>
+        <h4 class="feature-name is-4">{{ feature.value.title }}</h4>
         <div class="feature-content">
-          <h4 class="feature-name is-4">{{ feature.value.title }}</h4>
           <div class="content">
             <p>{{ feature.value.description }}</p>
           </div>
@@ -68,15 +68,18 @@ export default {
     justify-content: space-between;
   }
 
-  .content {
+  .feature-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    flex-grow: 1;
+    height: 100%;
+  }
+
+  .content {
     font-size: $size-7;
     text-align: center;
     padding-bottom: $size-6;
-    height: 100%;
-    flex-grow: 1;
   }
   .image {
     margin: 0 auto $size-7;
