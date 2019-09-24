@@ -274,6 +274,11 @@ export default {
   }
   .panel-block {
     justify-content: center;
+    @include mobile {
+      .container {
+        flex-grow: 0;
+      }
+    }
     input[type='number'],
     .control {
       width: 100%;
