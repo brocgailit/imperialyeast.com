@@ -122,6 +122,7 @@ export default {
       website: state => state.website
     })
   },
+  scrollToTop: true,
   jsonld() {
     const schema = {
       '@context': 'https://schema.org',

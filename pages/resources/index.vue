@@ -14,6 +14,7 @@ import { page } from '~/assets/script/mixins'
 export default {
   name: 'ResourcesDefaultPage',
   mixins: [page],
+  scrollToTop: true,
   async asyncData({ params, $axios }) {
     const slug = 'resources-main-content'
     const [page] = await $axios.$get(`collections/get/pages`, {

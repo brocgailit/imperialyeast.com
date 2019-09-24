@@ -251,6 +251,7 @@ export default {
   components: {
     StrainBeerStyles
   },
+  scrollToTop: true,
   filters: {
     celsius: f => Math.round(((f - 32) * 5) / 9)
   },

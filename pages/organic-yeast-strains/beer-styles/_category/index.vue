@@ -89,6 +89,7 @@ export default {
       return this.page.layouts.find(l => l.component === 'hero')
     }
   },
+  scrollToTop: true,
   jsonld() {
     const schema = {
       '@context': 'https://schema.org',

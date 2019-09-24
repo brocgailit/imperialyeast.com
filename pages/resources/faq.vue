@@ -14,6 +14,7 @@ import { page } from '~/assets/script/mixins'
 export default {
   name: 'FAQPage',
   mixins: [page],
+  scrollToTop: true,
   async asyncData({ params, $axios }) {
     const slug = 'faq'
     const [page] = await $axios.$get(`collections/get/pages`, {
