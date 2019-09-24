@@ -89,6 +89,7 @@ export default {
 
 <style lang="scss">
 .responsive-image {
+  max-width: 100%;
   img {
     width: 100%;
     object-fit: contain;
