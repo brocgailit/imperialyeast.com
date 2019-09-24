@@ -4,7 +4,7 @@
       <h3>{{ layout.settings.title }}</h3>
     </div>
     <div class="panel-block">
-      <form @submit.prevent>
+      <form class="container" @submit.prevent>
         <b-field
           label="Plato"
           data-unit
@@ -94,6 +94,12 @@ export default {
     }
   }
   .panel-block {
+    justify-content: center;
+    input[type='number'],
+    .control {
+      width: 100%;
+      max-width: 250px;
+    }
     @include tablet {
       .field-label {
         flex-grow: 3 !important;

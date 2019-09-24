@@ -31,7 +31,7 @@
       >
     </div>
     <div class="panel-block">
-      <form @submit.prevent>
+      <form class="container" @submit.prevent>
         <b-field
           label="Batch Size"
           data-unit
@@ -282,7 +282,7 @@ export default {
 
     @include tablet {
       .field-label {
-        flex-grow: 2 !important;
+        flex-grow: 3 !important;
       }
     }
   }
