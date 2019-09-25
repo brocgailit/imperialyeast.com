@@ -60,7 +60,7 @@ export default {
   methods: {
     submit() {
       this.loading = true
-      const { fields, url } = this.layout.settings
+      const { fields, url, name } = this.layout.settings
       const [cockpitForm] = this.layout.settings.form
 
       const sendCockpitFormData = () => {
@@ -69,6 +69,7 @@ export default {
             [input.value.name]: input.model
           })
         }, {})
+        form.form = name
         return this.$axios.$post(`forms/submit/${cockpitForm.name}`, { form })
       }
 
