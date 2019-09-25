@@ -24,7 +24,7 @@
             class="contact-point"
           >
             <h5>{{ point.value.contactType }}</h5>
-            <span v-if="!shouldLinkPhone" class="contact-point-phone">{{
+            <span v-if="!mobile" class="contact-point-phone">{{
               point.value.telephone | formatPhone
             }}</span>
             <a
@@ -92,15 +92,12 @@ export default {
   },
   data() {
     return {
-      year: new Date().getFullYear()
+      year: new Date().getFullYear(),
+      mobile: false
     }
   },
-  computed: {
-    shouldLinkPhone() {
-      return typeof window !== 'undefined'
-        ? window.matchMedia('(max-width: 768px)').matches
-        : false
-    }
+  mounted() {
+    this.mobile = window.matchMedia('(max-width: 768px)').matches
   }
 }
 </script>

@@ -52,14 +52,20 @@
         >
           <h3 class="title">{{ point.value.contactType }}</h3>
           <div class="contact-phone">
-            <span>{{ point.value.telephone | formatPhone }}</span>
+            <a
+              class="contact-phone-link"
+              :href="mobile ? 'tel:' + point.value.telephone : '#'"
+              >{{ point.value.telephone | formatPhone }}</a
+            >
 
             <span v-if="point.value.tollFree" class="contact-phone-tollfree">
               — Toll Free
             </span>
           </div>
 
-          <a class="contact-email" href="mailto:">{{ point.value.email }}</a>
+          <a class="contact-email" :href="'mailto:' + point.value.email">{{
+            point.value.email
+          }}</a>
 
           <!-- <dl class="contact-features">
             <dt class="contact-feature-title">Languages:</dt>
@@ -105,6 +111,7 @@ export default {
   mixins: [component],
   data() {
     return {
+      mobile: false,
       daysOfWeek: [
         'Sunday',
         'Monday',
@@ -140,6 +147,9 @@ export default {
         }
       ]
     }
+  },
+  mounted() {
+    this.mobile = window.matchMedia('(max-width: 768px)').matches
   },
   jsonld() {
     return {
@@ -261,6 +271,12 @@ export default {
 
   .contact-phone {
     font-size: $size-5;
+    @include tablet {
+      .contact-phone-link {
+        color: $dark;
+        cursor: default;
+      }
+    }
     .contact-phone-tollfree {
       font-size: 75%;
     }
