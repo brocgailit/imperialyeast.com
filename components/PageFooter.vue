@@ -1,20 +1,5 @@
 <template>
   <footer class="page-footer">
-    <nav v-if="menu">
-      <ul>
-        <li v-for="link of menu.items" :key="link.value.page._id">
-          <nuxt-link
-            :to="
-              '/' +
-                (link.value.page._id !== homepage._id
-                  ? link.value.page.name_slug + '/'
-                  : '')
-            "
-            >{{ link.value.title }}</nuxt-link
-          >
-        </li>
-      </ul>
-    </nav>
     <div v-if="owner && owner.contactPoints" class="contact-details">
       <div class="contact">
         <div class="contact-information">
@@ -23,7 +8,7 @@
             :key="p"
             class="contact-point"
           >
-            <h5>{{ point.value.contactType }}</h5>
+            <h5 class="has-text-grey">{{ point.value.contactType }}</h5>
             <span v-if="!mobile" class="contact-point-phone">{{
               point.value.telephone | formatPhone
             }}</span>
@@ -56,6 +41,21 @@
         </a>
       </li>
     </ul>
+    <nav v-if="menu">
+      <ul>
+        <li v-for="link of menu.items" :key="link.value.page._id">
+          <nuxt-link
+            :to="
+              '/' +
+                (link.value.page._id !== homepage._id
+                  ? link.value.page.name_slug + '/'
+                  : '')
+            "
+            >{{ link.value.title }}</nuxt-link
+          >
+        </li>
+      </ul>
+    </nav>
     <p class="copyright-notice">
       &copy; {{ year }} {{ owner.name }}. All rights reserved.
     </p>
@@ -117,6 +117,7 @@ export default {
     }
   }
   nav {
+    margin-bottom: $size-5;
     ul {
       display: flex;
       flex-wrap: wrap;
@@ -131,11 +132,15 @@ export default {
           white-space: nowrap;
         }
       }
+      @include mobile {
+        flex-direction: column;
+        align-items: center;
+      }
     }
   }
 
   .contact-details {
-    margin: $size-5 auto;
+    margin: 0 auto $size-5;
     text-align: center;
     .contact-point {
       & > * {
