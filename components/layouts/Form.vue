@@ -60,18 +60,47 @@ export default {
   methods: {
     submit() {
       this.loading = true
-      const form = this.layout.settings.fields.reduce((acc, input) => {
-        return Object.assign(acc, {
-          [input.value.name]: input.model
-        })
-      }, {})
-      Promise.all(
-        this.layout.settings.form.map(f =>
-          this.$axios.$post(`forms/submit/${f.name}`, {
-            form
+      const { fields, url } = this.layout.settings
+      const [cockpitForm] = this.layout.settings.form
+
+      const sendCockpitFormData = () => {
+        const form = fields.reduce((acc, input) => {
+          return Object.assign(acc, {
+            [input.value.name]: input.model
           })
-        )
-      )
+        }, {})
+        return this.$axios.$post(`forms/submit/${cockpitForm.name}`, { form })
+      }
+
+      const sendThirdPartyFormData = url => {
+        const payload = new FormData()
+        fields.forEach(input => {
+          if (Array.isArray(input.model)) {
+            input.model.forEach(model => {
+              payload.append(`${input.value.name}[]`, model)
+            })
+          } else if (
+            typeof input.model === 'object' &&
+            typeof input.model.name !== 'string' // Discount files
+          ) {
+            Object.entries(input.model).forEach(([key, value]) => {
+              payload.append(`${input.value.name}_${key}`, value)
+            })
+          } else {
+            payload.append(input.value.name, input.model)
+          }
+        })
+        return this.$axios.$post(url, payload, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+      }
+
+      Promise.all([
+        sendCockpitFormData(),
+        ...(url ? [sendThirdPartyFormData(url)] : [])
+      ])
         .then(res => {
           this.loading = false
           this.showConfirmation = true
