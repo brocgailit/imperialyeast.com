@@ -20,17 +20,19 @@
         </ul>
       </nav>
     </div>
-    <section class="container">
+    <section v-if="page" class="container">
       <article>
         <nuxt-child :page="page" />
       </article>
     </section>
-    <component
-      :is="COMPONENTS.find(c => c.name === layout.component).ref"
-      v-for="layout of page.layouts.slice(1)"
-      :key="layout.id"
-      :layout="layout"
-    />
+    <div v-if="page.layouts.length > 1">
+      <component
+        :is="COMPONENTS.find(c => c.name === layout.component).ref"
+        v-for="layout of page.layouts.slice(1)"
+        :key="layout.id"
+        :layout="layout"
+      />
+    </div>
   </div>
 </template>
 
