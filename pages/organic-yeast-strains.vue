@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="showRootContent" id="component-container">
+    <div v-show="showRootContent" id="component-container">
       <component
         :is="COMPONENTS.find(c => c.name === page.layouts[0].component).ref"
         :layout="page.layouts[0]"
@@ -47,7 +47,7 @@ export default {
       return [
         'organic-yeast-strains/homebrew/',
         'organic-yeast-strains/commercial/'
-      ].some(i => this.$route.path.indexOf(i) >= 0)
+      ].some(i => this.$route.path.indexOf(i) > -1)
     }
   },
   async asyncData({ params, $axios }) {
