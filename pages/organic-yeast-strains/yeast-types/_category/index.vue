@@ -195,6 +195,7 @@ export default {
     text-align: center;
     max-width: $readability-width;
     padding: 0 $size-7;
+    line-height: 1;
     h1 {
       font-weight: $weight-black;
       font-size: $size-1;
@@ -205,7 +206,7 @@ export default {
     }
     @include mobile {
       h1 {
-        font-size: $size-2;
+        font-size: $size-3;
       }
     }
   }
