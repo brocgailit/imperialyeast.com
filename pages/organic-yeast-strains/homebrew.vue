@@ -10,13 +10,13 @@
       <nav class="strain-type-nav container">
         <ul>
           <li>
-            <nuxt-link to="/organic-yeast-strains/homebrew/" class="nav-link">
-              Homebrew
+            <nuxt-link to="/organic-yeast-strains/" class="nav-link">
+              Commercial
             </nuxt-link>
           </li>
           <li>
-            <nuxt-link to="/organic-yeast-strains/commercial/" class="nav-link">
-              Commercial
+            <nuxt-link to="/organic-yeast-strains/homebrew/" class="nav-link">
+              Homebrew
             </nuxt-link>
           </li>
         </ul>
