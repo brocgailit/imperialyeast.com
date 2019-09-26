@@ -19,6 +19,7 @@
 import { mapState } from 'vuex'
 
 export default {
+  name: 'ImageCarousel',
   props: {
     slides: {
       type: Array,

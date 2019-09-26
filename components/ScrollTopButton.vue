@@ -18,6 +18,7 @@
 
 <script>
 export default {
+  name: 'ScrollTopButton',
   data() {
     return {
       scrollPercent: 0

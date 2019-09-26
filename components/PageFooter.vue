@@ -1,70 +1,73 @@
 <template>
   <footer class="page-footer">
-    <nav>
-      <ul>
-        <li v-for="link of footerLinks" :key="link.slug">
-          <nuxt-link
-            :to="'/' + (link.slug !== 'home' ? link.slug + '/' : '')"
-            >{{ link.name }}</nuxt-link
-          >
-        </li>
-      </ul>
-    </nav>
-    <div class="contact-details">
-      <div
-        v-for="contact of website.contacts"
-        :key="contact.id"
-        class="contact"
-      >
+    <div v-if="owner && owner.contactPoints" class="contact-details">
+      <div class="contact">
         <div class="contact-information">
           <div
-            v-for="(point, p) of contact.contact_points"
+            v-for="(point, p) of owner.contactPoints"
             :key="p"
             class="contact-point"
           >
-            <h5>{{ point.contact_type }}</h5>
-            <span v-if="!shouldLinkPhone" class="contact-point-phone">{{
-              point.telephone | formatPhone
+            <h5 class="has-text-grey">{{ point.value.contactType }}</h5>
+            <span v-if="!mobile" class="contact-point-phone">{{
+              point.value.telephone | formatPhone
             }}</span>
             <a
               v-else
               class="contact-point-phone"
-              :href="'tel:' + point.telephone"
-              >{{ point.telephone | formatPhone }}</a
+              :href="'tel:' + point.value.telephone"
+              >{{ point.value.telephone | formatPhone }}</a
             >
-            <a :href="'mailto:' + point.email">
-              {{ point.email }}
+            <a v-if="point.value.email" :href="'mailto:' + point.value.email">
+              {{ point.value.email }}
             </a>
           </div>
         </div>
       </div>
     </div>
-    <ul class="footer-social-media">
-      <li v-for="profile of website.social_profiles" :key="profile.platform">
+    <ul v-if="owner" class="footer-social-media">
+      <li v-for="profile of owner.profiles" :key="profile.value.platform">
         <a
-          :href="profile.url"
+          :href="profile.value.url"
           rel="noopener"
           target="_blank"
-          :aria-label="profile.platform"
+          :aria-label="profile.value.platform"
         >
           <fa-icon
-            :icon="['fab', profile.platform]"
+            :icon="['fab', profile.value.platform]"
             size="lg"
-            :title="profile.platform"
+            :title="profile.value.platform"
           />
         </a>
       </li>
     </ul>
+    <nav v-if="menu">
+      <ul>
+        <li v-for="link of menu.items" :key="link.value.page._id">
+          <nuxt-link
+            :to="
+              '/' +
+                (link.value.page._id !== homepage._id
+                  ? link.value.page.name_slug + '/'
+                  : '')
+            "
+            >{{ link.value.title }}</nuxt-link
+          >
+        </li>
+      </ul>
+    </nav>
     <p class="copyright-notice">
-      &copy; {{ year }} {{ website.name }}. All rights reserved.
+      &copy; {{ year }} {{ owner.name }}. All rights reserved.
     </p>
-    <div class="attribution" v-html="website.footer_attribution" />
+    <div class="attribution">
+      <slot />
+    </div>
   </footer>
 </template>
 
 <script>
-import { mapState } from 'vuex'
 export default {
+  name: 'PageFooter',
   filters: {
     formatPhone(number) {
       const cleaned = ('' + number).replace(/\D/g, '')
@@ -73,24 +76,28 @@ export default {
       return ['(', parts[2], ') ', parts[3], '-', parts[4]].join('')
     }
   },
-  data() {
-    return {
-      year: new Date().getFullYear()
+  props: {
+    owner: {
+      type: Object,
+      default: () => ({ name: '' })
+    },
+    menu: {
+      type: Object,
+      default: () => null
+    },
+    homepage: {
+      type: Object,
+      default: () => null
     }
   },
-  computed: {
-    ...mapState({
-      website: state => state.website,
-      footerLinks: state =>
-        state.pages.filter(
-          page => page.status === 'published' && page.footer_navigation
-        )
-    }),
-    shouldLinkPhone() {
-      return typeof window !== 'undefined'
-        ? window.matchMedia('(max-width: 768px)').matches
-        : false
+  data() {
+    return {
+      year: new Date().getFullYear(),
+      mobile: false
     }
+  },
+  mounted() {
+    this.mobile = window.matchMedia('(max-width: 768px)').matches
   }
 }
 </script>
@@ -110,6 +117,7 @@ export default {
     }
   }
   nav {
+    margin-bottom: $size-5;
     ul {
       display: flex;
       flex-wrap: wrap;
@@ -124,11 +132,15 @@ export default {
           white-space: nowrap;
         }
       }
+      @include mobile {
+        flex-direction: column;
+        align-items: center;
+      }
     }
   }
 
   .contact-details {
-    margin: $size-5 auto;
+    margin: 0 auto $size-5;
     text-align: center;
     .contact-point {
       & > * {
@@ -162,8 +174,8 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: $size-2;
-        height: $size-2;
+        width: $size-3;
+        height: $size-3;
         background-color: $light;
         border-radius: 100%;
         color: $dark;

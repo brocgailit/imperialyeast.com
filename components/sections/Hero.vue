@@ -48,7 +48,7 @@ export default {
     max-width: $readability-width;
   }
   h1 {
-    font-family: 'Gothic', $family-primary;
+    font-family: $title-family;
     font-size: $size-1 * 1.5;
     line-height: 0.85;
     font-weight: $weight-medium;

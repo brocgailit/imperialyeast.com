@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { search } from '~/assets/script/search'
 import { mapState } from 'vuex'
 import SiteSearchResults from '~/components/SiteSearchResults.vue'
 export default {
@@ -28,11 +29,6 @@ export default {
     SiteSearchResults
   },
   watchQuery: ['q'],
-  computed: {
-    ...mapState({
-      website: state => state.website
-    })
-  },
   data() {
     return {
       searchTerm: '',
@@ -40,61 +36,27 @@ export default {
       loading: false
     }
   },
+  computed: {
+    ...mapState({
+      website: state => state.website
+    })
+  },
   async mounted() {
     const { q } = this.$route.query
-
     this.loading = true
-
-    const createFilterString = fields =>
-      fields
-        .map((f, i) => `filter[${f}][logical]=or&filter[${f}][contains]=${q}`)
-        .join('&')
-
-    // search strains
-    const strainFilters = createFilterString([
-      'name',
-      'short_description',
-      'full_description',
-      'compare_to',
-      'profiles'
-    ])
-
-    const strains = await this.$axios
-      .$get(`items/strains?${strainFilters}&filter[status]=published`)
-      .then(res => res.data)
-
-    // search locations
-    const locationFilters = createFilterString([
-      'name',
-      'city',
-      'state',
-      'postal_code',
-      'phone'
-    ])
-    const locations = await this.$axios
-      .$get(
-        `items/purchase_locations?${locationFilters}&filter[status]=published`
-      )
-      .then(res => res.data)
-
-    // search pages
-    const pageFilters = createFilterString(['name', 'layouts.body'])
-    const pages = await this.$axios
-      .$get(
-        `items/pages?fields=*.*,layouts.*&${pageFilters}&filter[status]=published`
-      )
-      .then(res => res.data)
-
     this.searchTerm = q
-    this.results = { strains, pages, locations }
+    this.results = this.results = await this.search(q)
     this.loading = false
+  },
+  methods: {
+    search
   },
   head() {
     return {
       link: [
         {
           rel: 'canonical',
-          href: this.website.canonical_url + this.$route.path + '/'
+          href: this.website.canonicalURL + this.$route.path + '/'
         }
       ],
       title: `Search for Yeast Strains | ${this.website.name}`,
@@ -108,7 +70,7 @@ export default {
         {
           hid: 'open-graph-url',
           property: 'og:url',
-          content: `${this.website.canonical_url}${this.$route.path}`
+          content: `${this.website.canonicalURL}${this.$route.path}`
         },
         {
           hid: 'open-graph-type',
@@ -126,16 +88,16 @@ export default {
           property: 'og:title',
           content: 'Search for Yeast Strains'
         },
-        {
+        /* {
           hid: 'open-graph-image',
           property: 'og:image',
           content: this.website.default_sharing_image.data.url
-        },
-        {
+        }, */
+        /* {
           hid: 'open-graph-image-alt',
           property: 'og:image:alt',
           content: this.website.default_sharing_image.title
-        },
+        }, */
         {
           hid: 'twitter-card',
           property: 'twitter:card',
@@ -144,7 +106,7 @@ export default {
         {
           hid: 'twitter-site',
           property: 'twitter:site',
-          content: `@${this.website.twitter_handle}`
+          content: `@${this.website.twitter}`
         },
         {
           hid: 'twitter-description',
@@ -156,12 +118,12 @@ export default {
           hid: 'twitter-description',
           property: 'twitter:title',
           content: 'Search for Yeast Strains'
-        },
-        {
+        }
+        /* {
           hid: 'twitter-image',
           property: 'twitter:image',
           content: this.website.default_sharing_image.data.url
-        }
+        } */
       ]
     }
   }

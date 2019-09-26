@@ -4,13 +4,13 @@
       <div v-if="notification" class="notification">
         <div v-html="notification.message" />
         <nuxt-link
-          v-for="action of notification.actions"
-          :key="action.id"
+          v-if="notification.action"
           class="button is-danger is-small"
-          :to="action.path + '/'"
+          :to="notification.action.path + '/'"
+          :title="notification.action.title"
           @click="clearNotification(notification)"
         >
-          {{ action.label }}
+          {{ notification.action.label }}
         </nuxt-link>
         <button
           class="delete has-background-grey"
@@ -21,11 +21,17 @@
         </button>
       </div>
     </transition>
-    <Navbar />
+    <navbar :menu="mainMenu" :secondary-menu="secondaryMenu" />
     <main>
       <nuxt />
     </main>
-    <PageFooter />
+    <page-footer
+      :homepage="website.homepage"
+      :owner="website.organization || website.author"
+      :menu="footerMenu"
+    >
+      <div v-html="website.footer" />
+    </page-footer>
     <div class="scroll-top-container">
       <scroll-top-button />
     </div>
@@ -40,6 +46,7 @@ import { mapState } from 'vuex'
 import Navbar from '~/components/Navbar.vue'
 import PageFooter from '~/components/PageFooter.vue'
 import ScrollTopButton from '~/components/ScrollTopButton.vue'
+const phonograph = () => import('phonograph')
 
 /* const DAYS_OF_WEEK = [
   'Sunday',
@@ -62,7 +69,7 @@ export default {
       {
         '@context': 'https://schema.org',
         '@type': 'Website',
-        url: this.website.canonical_url
+        url: this.website.canonicalURL
       }
     ]
   },
@@ -76,7 +83,10 @@ export default {
     ...mapState({
       notifications: state => state.notifications,
       website: state => state.website,
-      isShaded: state => state.showNavigation
+      isShaded: state => state.showNavigation,
+      mainMenu: state => state.menu.main,
+      secondaryMenu: state => state.menu.secondary,
+      footerMenu: state => state.menu.footer
     })
   },
   mounted() {
@@ -87,7 +97,7 @@ export default {
       ','
     )
     this.notification = this.notifications.find(
-      n => !dismissed.some(d => +d === n.id)
+      n => !dismissed.some(d => +d === n._id)
     )
   },
   methods: {
@@ -95,7 +105,7 @@ export default {
       if (this.$cookies) {
         this.$cookies.set(
           'dismissedNotifications',
-          [notification.id],
+          [notification._id],
           60 * 60 * 24 * 30
         )
       }
@@ -106,6 +116,7 @@ export default {
       this.$store.dispatch('closeNavigation')
     },
     handleKeys(event) {
+      // EASTER EGGS!
       if (!event.key) return
       const secret = [
         'arrowup',
@@ -124,7 +135,14 @@ export default {
         -secret.length
       )
       if (keybuffer.join('-').indexOf(secret.join('-')) > -1) {
-        window.location = 'https://www.youtube.com/watch?v=-bzWSJG93P8'
+        // window.location = 'https://www.youtube.com/watch?v=-bzWSJG93P8'
+        ;(async function() {
+          const { Clip } = await phonograph()
+          const clip = new Clip({ url: '/audio/Imperial_March.mp3' })
+          clip.buffer().then(() => {
+            clip.play()
+          })
+        })()
       }
       this.keybuffer = keybuffer
     }
@@ -134,7 +152,7 @@ export default {
 
 <style lang="scss">
 .notification {
-  z-index: 8675309;
+  z-index: $navbar-z + 10;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -155,7 +173,7 @@ export default {
 
 .scroll-top-container {
   position: fixed;
-  z-index: 8675309;
+  z-index: $navbar-z - 10;
   bottom: $size-1;
   right: $size-5;
 }
@@ -188,7 +206,7 @@ export default {
   height: 100vh;
   background-color: $dark;
   opacity: 0.5;
-  z-index: 1075;
+  z-index: $navbar-z - 10;
 }
 
 .shade-enter-active,

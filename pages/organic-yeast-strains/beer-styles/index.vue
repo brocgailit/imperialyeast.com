@@ -1,5 +1,5 @@
 <template>
-  <section class="beer-styles-page">
+  <div class="beer-styles-page">
     <nav class="breadcrumb is-centered is-small" aria-label="breadcrumbs">
       <ul>
         <li>
@@ -16,25 +16,75 @@
         </li>
       </ul>
     </nav>
-    <article>
-      <ul>
-        <li v-for="style of styles" :key="style.id">
-          <nuxt-link :to="'/organic-yeast-strains/beer-styles/' + style.slug">
-            {{ style.name }}
-          </nuxt-link>
-        </li>
-      </ul>
-    </article>
-  </section>
+    <component
+      :is="COMPONENTS.find(c => c.name === header.component).ref"
+      :layout="header"
+    />
+    <section>
+      <div class="container">
+        <ul>
+          <li
+            v-for="category of categories"
+            :key="category._id"
+            class="style-category"
+          >
+            <h3 class="title">
+              <nuxt-link
+                :to="
+                  '/organic-yeast-strains/beer-styles/' +
+                    category.name_slug +
+                    '/'
+                "
+              >
+                {{ category.name }}
+              </nuxt-link>
+            </h3>
+            <div
+              v-if="category.description"
+              class="content category-description"
+              v-html="category.description"
+            />
+            <div class="styles-link">
+              <nuxt-link
+                :to="
+                  '/organic-yeast-strains/beer-styles/' +
+                    category.name_slug +
+                    '/'
+                "
+              >
+                View Styles →
+              </nuxt-link>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <component
+      :is="COMPONENTS.find(c => c.name === layout.component).ref"
+      v-for="layout of page.layouts.filter(
+        l => l.component !== header.component
+      )"
+      :key="layout.id"
+      :layout="layout"
+    />
+  </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import { page } from '~/assets/script/mixins'
 export default {
+  mixins: [page],
   computed: {
     ...mapState({
       website: state => state.website
-    })
+    }),
+    header() {
+      return (
+        this.page.layouts.find(l => l.component === 'hero') ||
+        this.page.layouts[0]
+      )
+    }
   },
   jsonld() {
     const schema = {
@@ -45,14 +95,14 @@ export default {
           '@type': 'ListItem',
           position: 1,
           name: 'Organic Yeast Strains',
-          item: `${this.website.canonical_url}/organic-yeast-strains`
+          item: `${this.website.canonicalURL}/organic-yeast-strains`
         },
         {
           '@type': 'ListItem',
           position: 2,
           name: 'Beer Styles',
           item: `${
-            this.website.canonical_url
+            this.website.canonicalURL
           }/organic-yeast-strains/beer-styles/`
         }
       ]
@@ -60,86 +110,45 @@ export default {
     return schema
   },
   async asyncData({ params, $axios }) {
-    const { data: styles } = await $axios.$get(
-      `items/beer_styles?filter[status]=published&fields=*.*`
-    )
-    return { styles }
-  },
-  head() {
-    return {
-      link: [
-        {
-          rel: 'canonical',
-          href: this.website.canonical_url + this.$route.path + '/'
-        }
-      ],
-      title: `Beer Styles | ${this.website.name}`,
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content:
-            'Imperial Yeast provides strains for all varieties of beer styles.'
-        },
-        {
-          hid: 'open-graph-url',
-          property: 'og:url',
-          content: `${this.website.canonical_url}${this.$route.path}`
-        },
-        {
-          hid: 'open-graph-type',
-          property: 'og:type',
-          content: 'website'
-        },
-        {
-          hid: 'open-graph-description',
-          property: 'og:description',
-          content:
-            'Imperial Yeast provides strains for all varieties of beer styles.'
-        },
-        {
-          hid: 'open-graph-title',
-          property: 'og:title',
-          content: 'Beer Styles'
-        },
-        {
-          hid: 'open-graph-image',
-          property: 'og:image',
-          content: this.website.default_sharing_image.data.url
-        },
-        {
-          hid: 'open-graph-image-alt',
-          property: 'og:image:alt',
-          content: this.website.default_sharing_image.title
-        },
-        {
-          hid: 'twitter-card',
-          property: 'twitter:card',
-          content: 'summary_large_image'
-        },
-        {
-          hid: 'twitter-site',
-          property: 'twitter:site',
-          content: `@${this.website.twitter_handle}`
-        },
-        {
-          hid: 'twitter-description',
-          property: 'twitter:description',
-          content:
-            'Imperial Yeast provides strains for all varieties of beer styles.'
-        },
-        {
-          hid: 'twitter-description',
-          property: 'twitter:title',
-          content: 'Beer Styles'
-        },
-        {
-          hid: 'twitter-image',
-          property: 'twitter:image',
-          content: this.website.default_sharing_image.data.url
-        }
-      ]
-    }
+    const slug = 'beer-styles'
+    const [page] = await $axios.$post(`collections/get/pages`, {
+      filter: {
+        name_slug: slug
+      },
+      limit: 1,
+      simple: true,
+      populate: 12,
+      rspc: true
+    })
+    const categories = await $axios.$post('/collections/get/beerCategories', {
+      simple: true,
+      rspc: true,
+      fields: {
+        name: true,
+        name_slug: true,
+        description: true
+      }
+    })
+    return { categories, page }
   }
 }
 </script>
+
+<style lang="scss">
+.beer-styles-page {
+  .style-category {
+    margin-bottom: $size-5;
+    .title {
+      margin-bottom: 4px;
+    }
+    .category-description {
+      text-align: center;
+      margin: $size-8 0;
+    }
+    .styles-link {
+      text-align: center;
+      font-size: $size-7;
+    }
+  }
+}
+</style>

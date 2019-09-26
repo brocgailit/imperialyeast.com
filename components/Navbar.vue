@@ -12,12 +12,9 @@
       :class="{ 'is-open': isOpen, 'search-active': showSearch }"
       @click="isOpen = false"
     >
-      <ul id="menu">
-        <li v-for="link of primaryLinks" :key="link.slug">
-          <nuxt-link
-            :to="'/' + (link.slug !== 'home' ? link.slug + '/' : '')"
-            >{{ link.name }}</nuxt-link
-          >
+      <ul v-if="menu" id="mainMenu" class="menu">
+        <li v-for="(item, i) of menu.items" :key="item.value.page._id + i">
+          <navbar-item :item="item" />
         </li>
         <li>
           <button
@@ -27,6 +24,14 @@
           >
             <fa-icon :icon="['fal', 'search']" size="lg" />
           </button>
+        </li>
+      </ul>
+      <ul v-if="secondaryMenu" id="secondaryMenu" class="menu">
+        <li
+          v-for="(item, i) of secondaryMenu.items"
+          :key="item.value.page._id + i"
+        >
+          <navbar-item :item="item" secondary />
         </li>
       </ul>
       <site-search
@@ -59,13 +64,25 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import Logo from '~/components/Logo.vue'
 import SiteSearch from '~/components/SiteSearch.vue'
+import NavbarItem from '~/components/NavbarItem.vue'
 export default {
+  name: 'Navbar',
   components: {
     Logo,
-    SiteSearch
+    SiteSearch,
+    NavbarItem
+  },
+  props: {
+    menu: {
+      type: Object,
+      default: () => null
+    },
+    secondaryMenu: {
+      type: Object,
+      default: () => null
+    }
   },
   data() {
     return {
@@ -73,9 +90,6 @@ export default {
     }
   },
   computed: {
-    ...mapState({
-      pages: state => state.pages
-    }),
     isOpen: {
       get() {
         return this.$store.state.showNavigation
@@ -122,7 +136,7 @@ $logo-size: 160px;
   background-color: $white;
   position: sticky;
   top: calc(-#{$logo-size} - #{$size-5 * 2});
-  z-index: 1080;
+  z-index: $navbar-fixed-z;
   border-bottom: 1px solid rgba($grey, 0.25);
   padding-top: $size-5;
   .nav-logo {
@@ -134,32 +148,39 @@ $logo-size: 160px;
     position: relative;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     text-align: center;
-    #menu {
+    margin: 0 auto;
+    max-width: 1200px;
+    .menu {
+      a {
+        text-transform: uppercase;
+        font-weight: $weight-bold;
+        font-size: $size-6 * 1.1;
+        transition: 150ms ease-in-out;
+      }
       transition: opacity 250ms ease-in-out;
+      width: 100%;
+      flex: 1 0 100%;
       display: flex;
       justify-content: center;
-      li {
-        padding: $size-7 0;
+    }
+
+    @include desktop {
+      #secondaryMenu {
         a {
+          font-size: $size-7;
           text-transform: uppercase;
-          color: $black;
-          font-weight: $weight-bold;
-          font-size: $size-6;
-          padding: $size-6 $size-5;
-          transition: 150ms ease-in-out;
-          &:hover {
-            opacity: 0.75;
-          }
-          &.nuxt-link-active {
-            color: $primary;
-          }
+          font-weight: $weight-light;
+        }
+        .navbar-item {
+          padding-top: 0;
         }
       }
     }
 
     &.search-active {
-      #menu {
+      .menu {
         opacity: 0;
         pointer-events: none;
       }
@@ -180,6 +201,9 @@ $logo-size: 160px;
   @include desktop {
     .menu-button {
       display: none;
+    }
+    .global-nav {
+      padding: 0 $size-7;
     }
   }
 
@@ -277,7 +301,7 @@ $logo-size: 160px;
       // height: 0;
       pointer-events: none;
       overflow: visible;
-      #menu {
+      .menu {
         width: 100%;
         background-color: $white;
         opacity: 0;
@@ -298,10 +322,12 @@ $logo-size: 160px;
         }
       }
 
-      &.is-open #menu {
-        opacity: 1;
-        display: block;
-        transform: translateX(0);
+      &.is-open {
+        .menu {
+          opacity: 1;
+          display: block;
+          transform: translateX(0);
+        }
       }
 
       .site-search {
