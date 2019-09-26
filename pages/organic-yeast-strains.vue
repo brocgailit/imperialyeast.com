@@ -34,12 +34,6 @@ export default {
       }
     })
     return { page }
-  },
-  created: function() {
-    this.showRootContent = [
-      'organic-yeast-strains/homebrew/',
-      'organic-yeast-strains/commercial/'
-    ].some(i => this.$route.path.indexOf(i) > -1)
   }
 }
 </script>
