@@ -148,7 +148,11 @@
         <div class="strain-availability">
           <h3>Availability</h3>
           <ul>
-            <li>
+            <li v-if="!strain.consumer">
+              <fa-icon :icon="['fal', 'check']" />
+              Commercial pitches, 10L and larger
+            </li>
+            <li v-else>
               <fa-icon :icon="['fal', 'check']" />
               Commercial pitches, 1L and larger
             </li>
@@ -166,7 +170,9 @@
               />
             </li>
             <li v-else>
-              Commercial Strain Only
+              <fa-icon :icon="['fal', 'phone']" />
+              Commercial —
+              <nuxt-link to="/contact/">Special Order Only</nuxt-link>
             </li>
           </ul>
         </div>
