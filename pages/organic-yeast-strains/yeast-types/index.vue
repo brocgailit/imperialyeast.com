@@ -57,13 +57,13 @@ export default {
           href: this.website.canonicalURL + this.$route.path + '/'
         }
       ],
-      title: `Types of Yeast Strains | ${this.website.name}`,
+      title: `Types of Yeast Strains | ${this.website.title}`,
       meta: [
         {
           hid: 'description',
           name: 'description',
           content: `${
-            this.website.name
+            this.website.title
           } carries a wide variety of yeast strains for home and pro brewers.`
         },
         {
@@ -80,7 +80,7 @@ export default {
           hid: 'open-graph-description',
           property: 'og:description',
           content: `${
-            this.website.name
+            this.website.title
           } carries a wide variety of yeast strains for home and pro brewers.`
         },
         {
@@ -112,7 +112,7 @@ export default {
           hid: 'twitter-description',
           property: 'twitter:description',
           content: `${
-            this.website.name
+            this.website.title
           } carries a wide variety of yeast strains for home and pro brewers.`
         },
         {

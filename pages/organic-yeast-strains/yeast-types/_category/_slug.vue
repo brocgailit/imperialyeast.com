@@ -339,7 +339,7 @@ export default {
       sku: this.strain.productCode,
       brand: {
         '@type': 'Thing',
-        name: this.website.name
+        name: this.website.title
       },
       // TODO: reviews!!!
       // TODO: aggregate ratings!!!
@@ -393,7 +393,7 @@ export default {
       ],
       title: `${this.strain.name} - ${this.strain.productCode} (${
         this.strain.type.name
-      } Yeast) | ${this.website.name}`,
+      } Yeast) | ${this.website.title}`,
       meta: [
         {
           hid: 'description',
@@ -418,7 +418,7 @@ export default {
         {
           hid: 'open-graph-title',
           property: 'og:title',
-          content: `${this.website.name} ${this.strain.productCode} ${
+          content: `${this.website.title} ${this.strain.productCode} ${
             this.strain.name
           }`
         },

@@ -120,7 +120,7 @@ export default {
           href: this.website.canonicalURL + this.$route.path + '/'
         }
       ],
-      title: `${this.type.name} Yeast Strains | ${this.website.name}`,
+      title: `${this.type.name} Yeast Strains | ${this.website.title}`,
       meta: [
         {
           hid: 'description',

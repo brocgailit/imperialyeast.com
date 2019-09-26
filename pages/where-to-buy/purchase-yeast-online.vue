@@ -41,13 +41,13 @@ export default {
           href: this.website.canonicalURL + this.$route.path + '/'
         }
       ],
-      title: `Purchase Yeast Online | ${this.website.name}`,
+      title: `Purchase Yeast Online | ${this.website.title}`,
       meta: [
         {
           hid: 'description',
           name: 'description',
           content: `Find out where to get yeast online.  ${
-            this.website.name
+            this.website.title
           } is available from online homebrew retailers.`
         },
         {
@@ -64,7 +64,7 @@ export default {
           hid: 'open-graph-description',
           property: 'og:description',
           content: `Find out where to get yeast online.  ${
-            this.website.name
+            this.website.title
           } is available from online homebrew retailers.`
         },
         {
@@ -96,7 +96,7 @@ export default {
           hid: 'twitter-description',
           property: 'twitter:description',
           content: `Find out where to get yeast online.  ${
-            this.website.name
+            this.website.title
           } is available from online homebrew retailers.`
         },
         {

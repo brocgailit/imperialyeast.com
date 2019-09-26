@@ -59,7 +59,7 @@ export default {
           href: this.website.canonicalURL + this.$route.path + '/'
         }
       ],
-      title: `Search for Yeast Strains | ${this.website.name}`,
+      title: `Search for Yeast Strains | ${this.website.title}`,
       meta: [
         {
           hid: 'description',
