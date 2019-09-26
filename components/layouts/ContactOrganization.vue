@@ -34,7 +34,7 @@
         </thead>
         <tbody>
           <tr v-for="(day, d) of hours.value.days" :key="d">
-            <th class="contact-hours-day">{{ daysOfWeek[d] }}</th>
+            <th class="contact-hours-day">{{ day }}</th>
             <td v-if="day" class="contact-hours-times">
               {{ hours.value.opens }}—{{ hours.value.closes }}
             </td>
@@ -111,16 +111,7 @@ export default {
   mixins: [component],
   data() {
     return {
-      mobile: false,
-      daysOfWeek: [
-        'Sunday',
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday'
-      ]
+      mobile: false
     }
   },
   computed: {
@@ -265,6 +256,9 @@ export default {
       margin: $size-7;
       &:first-child {
         margin-left: 0;
+      }
+      &:last-child {
+        margin-right: 0;
       }
     }
   }
