@@ -63,7 +63,7 @@
               :key="strain.strain.name_slug"
               class="strain"
             >
-              <strain-card :strain="strain.strain" />
+              <strain-card :strain="strain.strain" show-icons />
             </li>
           </ul>
         </div>
@@ -80,7 +80,7 @@
               :key="strain.strain.name_slug"
               class="strain"
             >
-              <strain-card :strain="strain.strain" />
+              <strain-card :strain="strain.strain" show-icons />
             </li>
           </ul>
         </div>
@@ -95,7 +95,7 @@
               :key="strain.strain.name_slug"
               class="strain"
             >
-              <strain-card :strain="strain.strain" />
+              <strain-card :strain="strain.strain" show-icons />
             </li>
           </ul>
         </div>

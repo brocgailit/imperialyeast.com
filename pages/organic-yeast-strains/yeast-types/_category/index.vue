@@ -35,7 +35,7 @@
       v-html="type.fullDescription"
     />
     <article class="strains container">
-      <strain-list :strains="strains" :header-color="type.color" />
+      <strain-list :strains="strains" :header-color="type.color" show-icons />
     </article>
   </section>
 </template>
