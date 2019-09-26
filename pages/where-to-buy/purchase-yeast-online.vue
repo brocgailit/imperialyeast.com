@@ -7,7 +7,7 @@
         :key="retailer._id"
         class="retailer"
       >
-        <a :href="retailer.website" rel="noopener" target="_blank">{{
+        <a :href="retailer.url" rel="noopener" target="_blank">{{
           retailer.name
         }}</a>
       </li>
