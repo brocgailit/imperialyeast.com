@@ -1,5 +1,27 @@
 <template>
   <div>
+    <div id="component-container">
+      <component
+        :is="
+          COMPONENTS.find(c => c.name === $parent.page.layouts[0].component).ref
+        "
+        :layout="$parent.page.layouts[0]"
+      />
+      <nav class="strain-type-nav container">
+        <ul>
+          <li>
+            <nuxt-link to="/organic-yeast-strains/homebrew/" class="nav-link">
+              Homebrew
+            </nuxt-link>
+          </li>
+          <li>
+            <nuxt-link to="/organic-yeast-strains/commercial/" class="nav-link">
+              Commercial
+            </nuxt-link>
+          </li>
+        </ul>
+      </nav>
+    </div>
     <strain-filter
       :strains="strains"
       show-commercial
