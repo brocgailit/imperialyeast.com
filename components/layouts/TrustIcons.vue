@@ -8,11 +8,8 @@
     <h3 v-if="layout.settings.heading" class="trust-icons-heading">
       {{ layout.settings.heading }}
     </h3>
-    <icon-list :icons="layout.settings.icons.slice(0, 4)" :size="125" />
-    <icon-list
-      :icons="layout.settings.icons.slice(4, layout.settings.icons.length)"
-      :size="60"
-    />
+    <icon-list :icons="layout.settings.icons.slice(0, 4)" :size="90" />
+    <icon-list :icons="layout.settings.icons.slice(4, 9)" :size="90" />
     <p
       v-if="layout.settings.action && layout.settings.action.path"
       class="has-text-centered"

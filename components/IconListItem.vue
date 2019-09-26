@@ -110,5 +110,8 @@ export default {
   &.has-testimonial {
     cursor: pointer;
   }
+  @include mobile {
+    padding: $size-7;
+  }
 }
 </style>
