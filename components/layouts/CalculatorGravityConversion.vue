@@ -76,7 +76,7 @@ export default {
     }
   },
   created() {
-    this.plato = this.layout.settings.default
+    this.plato = this.layout.settings.default.toFixed(1)
   }
 }
 </script>
