@@ -36,7 +36,9 @@
           <tr v-for="(day, d) of hours.value.days" :key="d">
             <th class="contact-hours-day">{{ day }}</th>
             <td v-if="day" class="contact-hours-times">
-              {{ hours.value.opens }}—{{ hours.value.closes }}
+              {{ hours.value.opens | removeLeadingZero }}—{{
+                hours.value.closes | removeLeadingZero
+              }}
             </td>
             <td v-else>
               Closed
@@ -106,6 +108,9 @@ export default {
       const parts = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
       if (!parts) return null
       return ['(', parts[2], ') ', parts[3], '-', parts[4]].join('')
+    },
+    removeLeadingZero(val) {
+      return val.replace(/^0+/, '')
     }
   },
   mixins: [component],
