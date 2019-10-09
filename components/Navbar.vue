@@ -171,7 +171,6 @@ $logo-size: 160px;
         a {
           font-size: $size-7;
           text-transform: uppercase;
-          font-weight: $weight-light;
         }
         .navbar-item {
           padding-top: 0;
