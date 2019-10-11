@@ -1,29 +1,32 @@
 <template>
-  <section class="resources-home">
-    <article v-for="(item, i) of menu.items" :key="i">
-      <nuxt-link :to="item.path + '/'">
-        <h3>
-          <span>{{ item.title }}</span>
-        </h3>
-      </nuxt-link>
-      <div v-html="item.description" />
-    </article>
-  </section>
+  <div class="resources-main-content">
+    <component
+      :is="COMPONENTS.find(c => c.name === layout.component).ref"
+      v-for="layout of page.layouts"
+      :key="layout.id"
+      :layout="layout"
+    />
+  </div>
 </template>
 
 <script>
+import { page } from '~/assets/script/mixins'
 export default {
+  name: 'ResourcesDefaultPage',
+  mixins: [page],
+  scrollToTop: true,
   async asyncData({ params, $axios }) {
-    const slug = 'resources'
-    const fields = ['*.*']
-    const { data: menu } = await $axios.$get(
-      `items/menus?single=1&filter[slug]=${slug}&fields=${fields.join(',')}`
-    )
-
-    return { menu }
-  },
-  fetch({ params, redirect }) {
-    redirect(307, '/resources/faq')
+    const slug = 'resources-main-content'
+    const [page] = await $axios.$get(`collections/get/pages`, {
+      params: {
+        'filter[name_slug]': slug,
+        limit: 1,
+        simple: true,
+        populate: 12,
+        rspc: 1
+      }
+    })
+    return { page }
   }
 }
 </script>

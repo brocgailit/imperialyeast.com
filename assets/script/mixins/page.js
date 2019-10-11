@@ -1,47 +1,37 @@
-<template>
-  <div>
-    <component
-      :is="DYNAMIC_COMPONENTS.find(c => c.name === layout.type).ref"
-      v-for="layout of page.layouts"
-      :key="layout.id"
-      :layout="layout"
-    />
-  </div>
-</template>
-
-<script>
 import { mapState } from 'vuex'
-import { DYNAMIC_COMPONENTS } from '~/assets/script/dynamic-components'
+import { COMPONENTS } from '~/assets/script/components'
+
 export default {
   data() {
     return {
-      DYNAMIC_COMPONENTS
+      COMPONENTS
     }
   },
   computed: {
     ...mapState({
       website: state => state.website
-    })
-  },
-  async asyncData({ params, $axios }) {
-    const { slug } = params
-    const fields = ['*.*', 'layouts.*.*']
-    const page = await $axios
-      .$get(
-        `items/pages?single=1&filter[slug]=${slug}&fields=${fields.join(',')}`
-      )
-      .then(res => res.data)
-    return { page }
+    }),
+    featuredImageURL() {
+      return this.page && this.page.featuredImage
+        ? `${process.env.COCKPIT_CDN}/assets${
+            this.page.featuredImage.path
+          }?q=75&w=1200&h=630&fit=crop`
+        : ''
+    }
   },
   head() {
+    if (!this.page) return {}
+    const canonical = `${this.website.canonicalURL}${
+      this.$route.path && this.$route.path !== '/' ? this.$route.path + '/' : ''
+    }`
     return {
       link: [
         {
           rel: 'canonical',
-          href: this.website.canonical_url + this.$route.path + '/'
+          href: canonical
         }
       ],
-      title: `${this.page.title} | ${this.website.name}`,
+      title: `${this.page.title} | ${this.website.title}`,
       meta: [
         {
           hid: 'description',
@@ -51,7 +41,7 @@ export default {
         {
           hid: 'open-graph-url',
           property: 'og:url',
-          content: `${this.website.canonical_url}${this.$route.path}`
+          content: canonical
         },
         {
           hid: 'open-graph-type',
@@ -71,16 +61,14 @@ export default {
         {
           hid: 'open-graph-image',
           property: 'og:image',
-          content: this.page.social_sharing_image
-            ? this.page.social_sharing_image.data.url
-            : this.website.default_sharing_image.data.url
+          content: this.featuredImageURL
         },
         {
           hid: 'open-graph-image-alt',
           property: 'og:image:alt',
-          content: this.page.social_sharing_image
-            ? this.page.social_sharing_image.title
-            : this.website.default_sharing_image.title
+          content: this.page.featuredImage
+            ? this.page.featuredImage.title
+            : null
         },
         {
           hid: 'twitter-card',
@@ -90,7 +78,7 @@ export default {
         {
           hid: 'twitter-site',
           property: 'twitter:site',
-          content: `@${this.website.twitter_handle}`
+          content: `@${this.website.twitter}`
         },
         {
           hid: 'twitter-description',
@@ -105,12 +93,31 @@ export default {
         {
           hid: 'twitter-image',
           property: 'twitter:image',
-          content: this.page.social_sharing_image
-            ? this.page.social_sharing_image.data.url
-            : this.website.default_sharing_image.data.url
+          content: this.featuredImageURL
         }
       ]
     }
+  },
+  async asyncData({ params, $axios, store, payload }) {
+    if (payload) {
+      return { page: payload }
+    }
+    const { slug } = params
+    const options = {
+      limit: 1,
+      simple: true,
+      populate: 12,
+      rspc: 1,
+      filter: {}
+    }
+    if (!slug) {
+      options.filter._id = store.state.website.homepage._id
+    } else {
+      options.filter.name_slug = slug
+    }
+
+    const [page] = await $axios.$post(`collections/get/pages`, options)
+
+    return { page }
   }
 }
-</script>

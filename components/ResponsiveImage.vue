@@ -1,57 +1,63 @@
 <template>
-  <picture v-if="!lazy">
+  <picture v-if="!lazy" :style="{ width, height }" class="responsive-image">
     <source
-      :srcset="file | srcset({ format: 'webp' })"
+      :srcset="path | srcset({ format: 'webp' })"
       :sizes="sizes"
       type="image/webp"
     />
-    <source :srcset="file | srcset" :sizes="sizes" :type="file.type" />
-    <img
-      :src="file.data.thumbnails.find(t => t.width === 375).url"
-      :alt="alt || file.title"
-    />
+    <source :srcset="path | srcset" :sizes="sizes" :type="path | fileType" />
+    <img :src="path + '?w=375'" :alt="alt" />
   </picture>
-  <no-ssr v-else>
+  <client-only v-else>
     <v-lazy-image
-      style="min-height: 1px;"
       use-picture
-      :alt="alt || file.title"
-      :src="file.data.thumbnails.find(t => t.width === 375).url"
+      :alt="alt"
+      :src="path + '?w=375'"
+      :style="{ width: width, height }"
+      class="responsive-image"
     >
       <source
-        :srcset="file | srcset({ format: 'webp' })"
+        :srcset="path | srcset({ format: 'webp' })"
         :sizes="sizes"
         type="image/webp"
       />
-      <source :srcset="file | srcset" :sizes="sizes" :type="file.type" />
+      <source :srcset="path | srcset" :sizes="sizes" :type="path | fileType" />
     </v-lazy-image>
-  </no-ssr>
+  </client-only>
 </template>
 
 <script>
 const DEFAULT_BREAKPOINTS = [375, 768, 1024, 1280, 1920]
 export default {
+  name: 'ResponsiveImage',
   filters: {
+    fileType(path) {
+      const extension = path.split('.').pop()
+      const format = extension === 'jpg' ? 'jpeg' : extension
+      if (!['jpeg', 'png', 'gif', 'webp'].includes(format))
+        throw new Error('Not a valid file type.')
+      return `image/${format}`
+    },
     srcset(image, options = {}) {
       const { format, breakpoints, quality, fit } = options
       return (breakpoints || DEFAULT_BREAKPOINTS)
         .map(w => {
-          const { width, height } = image.data.thumbnails.find(
-            t => t.width === w
-          ) // TODO: find nearest breakpoint
-          const path = `${
-            process.env.DIRECTUS_URL
-          }/thumbnail/_/${width}/${height}/${fit || 'contain'}/${quality ||
-            'better'}/${image.filename}`
-          return path + (format ? `?format=${format}` : '') + ` ${width}w`
+          // TODO: use set width/heights or ratio based on such
+          const prefix =
+            image.indexOf('http') !== 0
+              ? `${process.env.COCKPIT_CDN}/assets`
+              : ''
+          const path = `${prefix}${image}?w=${w}&fit=${fit ||
+            'clip'}&q=${quality || 90}`
+          return path + (format ? `&fm=${format}` : '') + ` ${w}w`
         })
         .join(',')
     }
   },
   props: {
-    file: {
-      type: Object,
-      default: () => null
+    path: {
+      type: String,
+      default: null
     },
     alt: {
       type: String,
@@ -59,11 +65,19 @@ export default {
     },
     sizes: {
       type: String,
-      default: '100vw'
+      default: '75vw'
+    },
+    width: {
+      type: [String, Number],
+      default: null
+    },
+    height: {
+      type: [String, Number],
+      default: null
     },
     fit: {
       type: String,
-      default: 'contain'
+      default: 'clip'
     },
     lazy: {
       type: Boolean,
@@ -72,3 +86,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.responsive-image {
+  max-width: 100%;
+  img {
+    width: 100%;
+    object-fit: contain;
+  }
+}
+</style>

@@ -15,27 +15,27 @@
         </li>
         <li class="is-active">
           <nuxt-link
-            :to="'/organic-yeast-strains/yeast-types/' + type.slug"
+            :to="'/organic-yeast-strains/yeast-types/' + type.name_slug"
             aria-current="page"
           >
-            <span v-if="type.name_plural">{{ type.name_plural }}</span>
+            <span v-if="type.namePlural">{{ type.namePlural }}</span>
             <span v-else>{{ type.name }}s</span>
           </nuxt-link>
         </li>
       </ul>
     </nav>
-    <header class="container" :style="{ color: type.packaging_color }">
-      <h1 v-if="type.name_plural">{{ type.name_plural }}</h1>
+    <header class="container" :style="{ color: type.color }">
+      <h1 v-if="type.namePlural">{{ type.namePlural }}</h1>
       <h1 v-else>{{ type.name }}s</h1>
       <h2 class="type-description-short">{{ type.short_description }}</h2>
     </header>
     <div
-      v-if="type.full_description"
+      v-if="type.fullDescription"
       class="type-description-full container"
-      v-html="type.full_description"
+      v-html="type.fullDescription"
     />
     <article class="strains container">
-      <strain-list :strains="strains" :header-color="type.packaging_color" />
+      <strain-list :strains="strains" :header-color="type.color" show-icons />
     </article>
   </section>
 </template>
@@ -52,6 +52,7 @@ export default {
       website: state => state.website
     })
   },
+  scrollToTop: true,
   jsonld() {
     const schema = {
       '@context': 'https://schema.org',
@@ -61,38 +62,54 @@ export default {
           '@type': 'ListItem',
           position: 1,
           name: 'Organic Yeast Strains',
-          item: `${this.website.canonical_url}/organic-yeast-strains`
+          item: `${this.website.canonicalURL}/organic-yeast-strains`
         },
         {
           '@type': 'ListItem',
           position: 2,
           name: 'Yeast Types',
-          item: `${
-            this.website.canonical_url
-          }/organic-yeast-strains/yeast-types`
+          item: `${this.website.canonicalURL}/organic-yeast-strains/yeast-types`
         },
         {
           '@type': 'ListItem',
           position: 3,
           name: this.type.name,
           item: `${
-            this.website.canonical_url
-          }/organic-yeast-strains/beer-styles/${this.type.slug}`
+            this.website.canonicalURL
+          }/organic-yeast-strains/beer-styles/${this.type.name_slug}`
         }
       ]
     }
     return schema
   },
-  async asyncData({ params, $axios }) {
-    const { category } = params
-    const { data: type } = await $axios.$get(
-      `items/strain_types?single=1&filter[slug]=${category}`
-    )
-    const { data: strains } = await $axios.$get(
-      `items/strains?filter[status]=published&filter[strain_type]=${
-        type.id
-      }&fields=*.*,beer_styles.*.*`
-    )
+  async asyncData({ params, $axios, payload }) {
+    let type
+    if (payload) {
+      type = payload
+    } else {
+      const { category } = params
+      type = (await $axios.$post('/collections/get/strainTypes', {
+        simple: true,
+        populate: 2,
+        limit: 1,
+        filter: {
+          name_slug: category
+        },
+        rspc: 1
+      }))[0]
+    }
+    const strains = await $axios.$post('/collections/get/strains', {
+      simple: true,
+      populate: 2,
+      filter: {
+        'type._id': type._id,
+        public: true
+      },
+      sort: {
+        productCode: 1
+      },
+      rspc: 1
+    })
     return { strains, type }
   },
   head() {
@@ -100,20 +117,20 @@ export default {
       link: [
         {
           rel: 'canonical',
-          href: this.website.canonical_url + this.$route.path + '/'
+          href: this.website.canonicalURL + this.$route.path + '/'
         }
       ],
-      title: `${this.type.name} Yeast Strains | ${this.website.name}`,
+      title: `${this.type.name} Yeast Strains | ${this.website.title}`,
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: this.type.short_description
+          content: this.type.shortDescription
         },
         {
           hid: 'open-graph-url',
           property: 'og:url',
-          content: `${this.website.canonical_url}${this.$route.path}`
+          content: `${this.website.canonicalURL}${this.$route.path}`
         },
         {
           hid: 'open-graph-type',
@@ -123,23 +140,23 @@ export default {
         {
           hid: 'open-graph-description',
           property: 'og:description',
-          content: this.type.short_description
+          content: this.type.shortDescription
         },
         {
           hid: 'open-graph-title',
           property: 'og:title',
           content: `${this.type.name} Yeast Strains`
         },
-        {
+        /* {
           hid: 'open-graph-image',
           property: 'og:image',
           content: this.website.default_sharing_image.data.url
-        },
-        {
+        }, */
+        /* {
           hid: 'open-graph-image-alt',
           property: 'og:image:alt',
           content: this.website.default_sharing_image.title
-        },
+        }, */
         {
           hid: 'twitter-card',
           property: 'twitter:card',
@@ -148,23 +165,23 @@ export default {
         {
           hid: 'twitter-site',
           property: 'twitter:site',
-          content: `@${this.website.twitter_handle}`
+          content: `@${this.website.twitter}`
         },
         {
           hid: 'twitter-description',
           property: 'twitter:description',
-          content: this.type.short_description
+          content: this.type.shortDescription
         },
         {
           hid: 'twitter-description',
           property: 'twitter:title',
           content: `${this.type.name} Yeast Strains`
-        },
-        {
+        }
+        /* {
           hid: 'twitter-image',
           property: 'twitter:image',
           content: this.website.default_sharing_image.data.url
-        }
+        } */
       ]
     }
   }
@@ -178,6 +195,7 @@ export default {
     text-align: center;
     max-width: $readability-width;
     padding: 0 $size-7;
+    line-height: 1;
     h1 {
       font-weight: $weight-black;
       font-size: $size-1;
@@ -188,7 +206,7 @@ export default {
     }
     @include mobile {
       h1 {
-        font-size: $size-2;
+        font-size: $size-3;
       }
     }
   }

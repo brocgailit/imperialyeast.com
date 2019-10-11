@@ -1,3 +1,16 @@
+:root {
+    --primary: #{$primary};
+    --crown: #{$crown};
+    --black: #{$black};
+    --grey: #{$grey};
+    --dark: #{$dark};
+    --link: #{$link};
+    --danger: #{$danger};
+    --info: #{$info};
+    --warning: #{$warning};
+    --success: #{$success};
+}
+
 .button {
     text-transform: uppercase;
     font-weight: $weight-bold;
@@ -13,6 +26,16 @@ select::-moz-focus-inner,
 input[type="file"] > input[type="button"]::-moz-focus-inner {
     outline: none !important;
 }
+
+input[type=number] {
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    -moz-appearance: textfield;
+}
+
 a {
     border: none;
 }
@@ -28,4 +51,18 @@ abbr {
 .has-text-primary {
     // Primary in color array is darker... this is mostly for logo consistancy
     color: $primary !important;
+}
+
+.title, .subtitle {
+    text-transform: uppercase;
+}
+
+.title, .subtitle {
+    text-align: center;
+}
+
+.title + .title {
+    margin-top: -1.25rem;
+    font-family: $family-primary;
+    font-size: 1.5em;
 }

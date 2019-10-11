@@ -4,10 +4,10 @@
     <ul class="retailer-list">
       <li
         v-for="retailer of onlineRetailers"
-        :key="retailer.id"
+        :key="retailer._id"
         class="retailer"
       >
-        <a :href="retailer.website" rel="noopener" target="_blank">{{
+        <a :href="retailer.url" rel="noopener" target="_blank">{{
           retailer.name
         }}</a>
       </li>
@@ -18,6 +18,7 @@
 <script>
 import { mapState } from 'vuex'
 export default {
+  name: 'WhereToBuyOnlinePage',
   props: {
     locations: {
       type: Array,
@@ -26,7 +27,7 @@ export default {
   },
   computed: {
     onlineRetailers() {
-      return this.locations.filter(l => l.online_retailer)
+      return this.locations.filter(l => l.onlineRetailer)
     },
     ...mapState({
       website: state => state.website
@@ -37,22 +38,22 @@ export default {
       link: [
         {
           rel: 'canonical',
-          href: this.website.canonical_url + this.$route.path + '/'
+          href: this.website.canonicalURL + this.$route.path + '/'
         }
       ],
-      title: `Purchase Yeast Online | ${this.website.name}`,
+      title: `Purchase Yeast Online | ${this.website.title}`,
       meta: [
         {
           hid: 'description',
           name: 'description',
           content: `Find out where to get yeast online.  ${
-            this.website.name
+            this.website.title
           } is available from online homebrew retailers.`
         },
         {
           hid: 'open-graph-url',
           property: 'og:url',
-          content: `${this.website.canonical_url}${this.$route.path}`
+          content: `${this.website.canonicalURL}${this.$route.path}`
         },
         {
           hid: 'open-graph-type',
@@ -63,7 +64,7 @@ export default {
           hid: 'open-graph-description',
           property: 'og:description',
           content: `Find out where to get yeast online.  ${
-            this.website.name
+            this.website.title
           } is available from online homebrew retailers.`
         },
         {
@@ -71,16 +72,16 @@ export default {
           property: 'og:title',
           content: 'Purchase Yeast Online'
         },
-        {
+        /* {
           hid: 'open-graph-image',
           property: 'og:image',
           content: this.website.default_sharing_image.data.url
-        },
-        {
+        }, */
+        /* {
           hid: 'open-graph-image-alt',
           property: 'og:image:alt',
           content: this.website.default_sharing_image.title
-        },
+        }, */
         {
           hid: 'twitter-card',
           property: 'twitter:card',
@@ -89,25 +90,25 @@ export default {
         {
           hid: 'twitter-site',
           property: 'twitter:site',
-          content: `@${this.website.twitter_handle}`
+          content: `@${this.website.twitter}`
         },
         {
           hid: 'twitter-description',
           property: 'twitter:description',
           content: `Find out where to get yeast online.  ${
-            this.website.name
+            this.website.title
           } is available from online homebrew retailers.`
         },
         {
           hid: 'twitter-description',
           property: 'twitter:title',
           content: 'Purchase Yeast Online'
-        },
-        {
+        }
+        /* {
           hid: 'twitter-image',
           property: 'twitter:image',
           content: this.website.default_sharing_image.data.url
-        }
+        } */
       ]
     }
   }

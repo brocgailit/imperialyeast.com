@@ -83,19 +83,19 @@
       >
         <li
           v-for="retailer of retailersNearLocation"
-          :key="retailer.id"
+          :key="retailer._id"
           class="retailer"
-          :class="{ 'is-selected': selected === retailer.id }"
-          @click="selected = retailer.id"
+          :class="{ 'is-selected': selected === retailer._id }"
+          @click="selected = retailer._id"
         >
           <b-collapse
-            :open="selected === retailer.id"
-            :aria-id="'location-' + retailer.id"
+            :open="selected === retailer._id"
+            :aria-id="'location-' + retailer._id"
           >
             <div
               slot="trigger"
               role="button"
-              :aria-controls="'location-' + retailer.id"
+              :aria-controls="'location-' + retailer._id"
             >
               <div class="retailer-name">
                 <span class="retailer-distance">
@@ -104,7 +104,8 @@
                 {{ retailer.name }}
               </div>
               <address class="retailer-address">
-                {{ retailer.address }} &bull; {{ retailer.city }}
+                {{ retailer.address.streetAddress }} &bull;
+                {{ retailer.address.addressLocality }}
               </address>
             </div>
             <div class="retailer-actions">
@@ -113,18 +114,18 @@
                 target="_blank"
                 :href="
                   'https://www.google.com/maps/dir/?api=1&destination=' +
-                    retailer.geolocation.lat +
+                    retailer.geo.lat +
                     ',' +
-                    retailer.geolocation.lng
+                    retailer.geo.lng
                 "
                 class="button is-primary is-small"
                 >Directions</a
               >
               <a
-                v-if="retailer.website"
+                v-if="retailer.url"
                 rel="noopener"
                 target="_blank"
-                :href="retailer.website"
+                :href="retailer.url"
                 class="button is-primary is-small"
                 >Website</a
               >
@@ -147,11 +148,6 @@
 
 <script>
 import debounce from 'lodash/debounce'
-import { Button as BButton } from 'buefy/dist/components/button'
-import { Field as BField } from 'buefy/dist/components/field'
-import { Autocomplete as BAutocomplete } from 'buefy/dist/components/autocomplete'
-import { Collapse as BCollapse } from 'buefy/dist/components/collapse'
-import { RadioButton as BRadioButton } from 'buefy/dist/components/radio'
 import MapLoader from '~/components/MapLoader.vue'
 
 const distance = (a, b) => {
@@ -173,12 +169,8 @@ const distance = (a, b) => {
 }
 
 export default {
+  name: 'WhereToBuyDetailPage',
   components: {
-    BButton,
-    BField,
-    BAutocomplete,
-    BCollapse,
-    BRadioButton,
     MapLoader
   },
   filters: {
@@ -203,6 +195,60 @@ export default {
       radius: 50, // miles
       tab: 'location-map'
     }
+  },
+  computed: {
+    zoom() {
+      const zoom =
+        typeof window !== 'undefined' &&
+        window.matchMedia('(max-width: 768px)').matches
+          ? 3
+          : 4
+      return this.center && this.location ? 8 : zoom
+    },
+    center() {
+      return this.location
+        ? [this.location._geoloc.lat, this.location._geoloc.lng]
+        : [39.5, -98.35]
+    },
+    retailersNearLocation() {
+      if (!this.locations || !this.location) return null
+      return this.locations
+        .filter(l => l.geo)
+        .map(l =>
+          Object.assign({}, l, {
+            distance: distance(l.geo, this.location._geoloc)
+          })
+        )
+        .filter(l => l.distance < this.radius)
+        .sort((a, b) => {
+          return a.distance > b.distance ? 1 : a.distance < b.distance ? -1 : 0
+        })
+    },
+    markers() {
+      return (this.retailersNearLocation || this.locations).map(location => {
+        const { name, address, geo, url } = location
+        const { lat, lng } = geo || [0, 0]
+        const { streetAddress, addressLocality } = address
+        return {
+          id: location._id,
+          coords: [lat, lng],
+          popup: {
+            title: name,
+            content: `
+                <address>
+                  ${streetAddress} &bull; ${addressLocality}
+                </address>
+                <a rel="noopener" target="_blank" href="https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}" class="button is-primary is-small">Directions</a>
+                <a rel="noopener" target="_blank" href="${url}" class="button is-primary is-small">Website</a>
+              `
+          }
+        }
+      })
+    }
+  },
+  mounted() {
+    // this.getLocationByGeolocation()
+    this.mapComponent = () => import('~/components/Map.vue')
   },
   methods: {
     handleSearchInput: debounce(async function(query) {
@@ -247,59 +293,6 @@ export default {
     clearLocation() {
       this.location = null
     }
-  },
-  computed: {
-    zoom() {
-      const zoom =
-        typeof window !== 'undefined' &&
-        window.matchMedia('(max-width: 768px)').matches
-          ? 3
-          : 4
-      return this.center && this.location ? 8 : zoom
-    },
-    center() {
-      return this.location
-        ? [this.location._geoloc.lat, this.location._geoloc.lng]
-        : [39.5, -98.35]
-    },
-    retailersNearLocation() {
-      if (!this.locations || !this.location) return null
-      return this.locations
-        .filter(l => l.geolocation)
-        .map(l =>
-          Object.assign({}, l, {
-            distance: distance(l.geolocation, this.location._geoloc)
-          })
-        )
-        .filter(l => l.distance < this.radius)
-        .sort((a, b) => {
-          return a.distance > b.distance ? 1 : a.distance < b.distance ? -1 : 0
-        })
-    },
-    markers() {
-      return (this.retailersNearLocation || this.locations).map(location => {
-        const { name, address, city, geolocation, website } = location
-        const { lat, lng } = geolocation || [0, 0]
-        return {
-          id: location.id,
-          coords: [lat, lng],
-          popup: {
-            title: name,
-            content: `
-                <address>
-                  ${address} &bull; ${city}
-                </address>
-                <a rel="noopener" target="_blank" href="https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}" class="button is-primary is-small">Directions</a>
-                <a rel="noopener" target="_blank" href="${website}" class="button is-primary is-small">Website</a>
-              `
-          }
-        }
-      })
-    }
-  },
-  mounted() {
-    // this.getLocationByGeolocation()
-    this.mapComponent = () => import('~/components/Map.vue')
   }
 }
 </script>
