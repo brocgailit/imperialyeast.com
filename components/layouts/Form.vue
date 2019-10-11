@@ -75,6 +75,7 @@ export default {
 
       const sendThirdPartyFormData = url => {
         const payload = new FormData()
+        payload.push('form', name)
         fields.forEach(input => {
           if (Array.isArray(input.model)) {
             input.model.forEach(model => {
