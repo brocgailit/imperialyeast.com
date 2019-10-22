@@ -2,9 +2,13 @@
   functions = "./assets/functions"
 [[redirects]]
   from = "/faq"
-  to = "/resources/faq"
+  to = "/resources/faq/"
   status = 301
 [[redirects]]
   from = "/contact-2"
-  to = "/contact"
+  to = "/contact/"
+  status = 301
+[[redirects]]
+  from = "/stock"
+  to = "/in-stock-or-your-order-ships-free/"
   status = 301
