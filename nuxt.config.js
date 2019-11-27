@@ -222,7 +222,7 @@ module.exports = {
     filter({ routes }) {
       const filters = ['/home', '/resources']
       return routes
-        .filter(route => route.url && filters.every(f => f !== route.url))
+        .filter(route => filters.every(f => f !== route.url))
         .map(route => {
           if (route.url !== '/') {
             route.url = `${route.url}/`
