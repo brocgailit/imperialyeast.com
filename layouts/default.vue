@@ -97,7 +97,7 @@ export default {
       ','
     )
     this.notification = this.notifications.find(
-      n => !dismissed.some(d => +d === n._id)
+      n => !dismissed.some(d => d === n._id)
     )
   },
   methods: {
