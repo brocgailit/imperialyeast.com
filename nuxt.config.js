@@ -128,7 +128,6 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    '@nuxtjs/sitemap',
     '@nuxtjs/style-resources',
     [
       '@nuxtjs/google-tag-manager',
@@ -187,7 +186,8 @@ module.exports = {
       }
     ],
     'nuxt-polyfill',
-    'nuxt-buefy'
+    'nuxt-buefy',
+    '@nuxtjs/sitemap'
   ],
 
   /*
@@ -222,14 +222,14 @@ module.exports = {
     filter({ routes }) {
       const filters = ['/home', '/resources']
       return routes
-        .filter(route => filters.every(f => f !== route.url))
+        .filter(route => route.url && filters.every(f => f !== route.url))
         .map(route => {
           if (route.url !== '/') {
             route.url = `${route.url}/`
-            return route.url
           } else {
-            return ''
+            route.url = ''
           }
+          return route
         })
     }
   },
@@ -405,6 +405,12 @@ module.exports = {
    ** Build configuration
    */
   build: {
+    html: {
+      minify: {
+        minifyJS: false,
+        minifyCSS: false
+      }
+    },
     postcss: {
       preset: {
         features: {
