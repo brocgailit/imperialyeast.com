@@ -150,16 +150,16 @@
           <ul>
             <!-- TODO: Add a flag in CMS -->
             <li
-              v-if="
-                !strain.consumer && !strain.type.name_slug !== 'gluten-free'
-              "
+              v-if="!strain.consumer && strain.type.name_slug !== 'gluten-free'"
             >
-              <fa-icon :icon="['fal', 'check']" />
-              Commercial pitches, 10L and larger
-            </li>
-            <li v-else>
-              <fa-icon :icon="['fal', 'check']" />
-              Commercial pitches, 1L and larger
+              <span v-if="!strain.consumer">
+                <fa-icon :icon="['fal', 'check']" />
+                Commercial pitches, 10L and larger
+              </span>
+              <span v-else>
+                <fa-icon :icon="['fal', 'check']" />
+                Commercial pitches, 1L and larger
+              </span>
             </li>
             <li v-if="strain.consumer">
               <fa-icon :icon="['fal', 'check']" />
