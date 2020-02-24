@@ -148,7 +148,12 @@
         <div class="strain-availability">
           <h3>Availability</h3>
           <ul>
-            <li v-if="!strain.consumer">
+            <!-- TODO: Add a flag in CMS -->
+            <li
+              v-if="
+                !strain.consumer && !strain.type.name_slug !== 'gluten-free'
+              "
+            >
               <fa-icon :icon="['fal', 'check']" />
               Commercial pitches, 10L and larger
             </li>
