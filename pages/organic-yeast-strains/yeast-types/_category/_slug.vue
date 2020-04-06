@@ -149,18 +149,18 @@
           <h3>Availability</h3>
           <ul>
             <!-- TODO: Add a flag in CMS -->
-            <li
-              v-if="!strain.consumer && strain.type.name_slug !== 'gluten-free'"
-            >
-              <span v-if="!strain.consumer">
-                <fa-icon :icon="['fal', 'check']" />
-                Commercial pitches, 10L and larger
-              </span>
-              <span v-else>
+            <template v-if="strain.type.name_slug !== 'gluten-free'">
+              <li v-if="!strain.consumer">
+                <span v-if="!strain.consumer">
+                  <fa-icon :icon="['fal', 'check']" />
+                  Commercial pitches, 10L and larger
+                </span>
+              </li>
+              <li v-else>
                 <fa-icon :icon="['fal', 'check']" />
                 Commercial pitches, 1L and larger
-              </span>
-            </li>
+              </li>
+            </template>
             <li v-if="strain.consumer">
               <fa-icon :icon="['fal', 'check']" />
               Pitch Right Home Brew Pouches
